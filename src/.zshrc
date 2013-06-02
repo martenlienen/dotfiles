@@ -40,3 +40,10 @@ source $ZSH/oh-my-zsh.sh
 # Initialize rbenv
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# IntelliJ
+alias idea=~/IDEA12.1/bin/idea.sh
+
+# Android SDK
+export PATH=/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$PATH
+
