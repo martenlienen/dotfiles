@@ -36,3 +36,7 @@ plugins=(git bundler)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
+
+# Initialize rbenv
+PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
