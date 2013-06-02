@@ -26,13 +26,15 @@ def copy_files
   dotfiles("src").each do |file|
     puts "Copying #{file}"
 
-    `cp src/#{file} ~`
+    `cp src/#{file} ~/#{file}`
   end
 end
 
-# Return all dotfiles in dir, relative to dir and without . and ..
+# Return all dotfiles in dir and subdirectries, relative to dir and without . and ..
 def dotfiles dir
-  Dir.chdir(dir) do
-    Dir.glob("*", File::FNM_DOTMATCH) - [".", ".."]
+  files = Dir.chdir(dir) do
+    Dir.glob("**/*", File::FNM_DOTMATCH) - [".", ".."]
   end
+
+  files.select { |file| File.file? dir + "/" + file }
 end
