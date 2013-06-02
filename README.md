@@ -3,6 +3,7 @@
 At the moment this contains configuration for
 
 - zsh
+- tmux
 
 ## Installation
 
