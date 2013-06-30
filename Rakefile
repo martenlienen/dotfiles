@@ -3,6 +3,8 @@ task :install do
 
   install_oh_my_zsh
 
+  install_vundle
+
   copy_files
 end
 
@@ -19,6 +21,16 @@ def install_oh_my_zsh
   else
     puts "Installing oh-my-zsh"
     `git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh`
+  end
+end
+
+def install_vundle
+  if Dir.exists? "#{Dir.home}/.vim/bundle/vundle"
+    puts "Updating vundle"
+    `(cd ~/.vim/bundle/vundle && git pull)`
+  else
+    puts "Installing vundle"
+    `git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
   end
 end
 
