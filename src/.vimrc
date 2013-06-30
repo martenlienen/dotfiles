@@ -56,6 +56,7 @@ Bundle 'gmarik/vundle'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'tpope/vim-rails.git'
+Bundle 'kchmck/vim-coffee-script'
 
 filetype plugin indent on " required!
 
