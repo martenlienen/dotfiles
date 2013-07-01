@@ -2,7 +2,14 @@ function collapse_pwd {
   if [ $HOME = `pwd` ]; then
     echo "~"
   else
-    echo $(pwd | sed -e "s,^${HOME:0:${#HOME} - 1},~,")
+    # Remove trailing /
+    normalized_home=$HOME
+    
+    if [ $HOME[${#HOME}] = "/" ]; then
+      normalized_home=${HOME:0:${#HOME} - 1}
+    fi
+
+    echo $(pwd | sed -e "s,^$normalized_home,~,")
   fi
 }
 
