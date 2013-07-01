@@ -1,5 +1,9 @@
 function collapse_pwd {
-  echo $(pwd | sed -e "s,^$HOME,~,")
+  if [ $HOME = `pwd` ]; then
+    echo "~"
+  else
+    echo $(pwd | sed -e "s,^${HOME:0:${#HOME} - 1},~,")
+  fi
 }
 
 PROMPT='
