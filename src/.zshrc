@@ -26,3 +26,6 @@ export PATH=/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$PATH
 
 # Set editor
 EDITOR="vim"
+
+# Use vi for command line editing
+bindkey -v
