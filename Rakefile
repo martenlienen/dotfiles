@@ -38,6 +38,10 @@ def copy_files
   dotfiles("src").each do |file|
     puts "Copying #{file}"
 
+    if File.dirname(file)
+      `mkdir -p ~/#{File.dirname(file)}`
+    end
+    
     `cp src/#{file} ~/#{file}`
   end
 end

@@ -49,10 +49,10 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
 Bundle 'gmarik/vundle'
 
 " My bundles
+Bundle 'Lokaltog/powerline'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'tpope/vim-rails.git'
@@ -61,6 +61,15 @@ Bundle 'gkz/vim-ls'
 Bundle 'tpope/vim-haml'
 
 filetype plugin indent on " required!
+
+" Activate powerline
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
+" Enable special characters in powerline
+let g:Powerline_symbols = 'fancy'
+
+" Hide the now reduntant mode display (e.g. --INSERT--)
+set noshowmode
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -261,7 +270,7 @@ set viminfo^=%
 set laststatus=2
 
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
