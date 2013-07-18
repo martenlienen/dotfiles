@@ -1,15 +1,5 @@
 # My dot files
 
-At the moment this contains configuration for
+## Installing
 
-- zsh
-- tmux
-
-## Installation
-
-```sh
-rake install
-```
-
-Be aware of the fact that this will just move all files in src to your home directory and overwrite existing files.
-
+Install `zsh`, `git`, switch shell to `zsh` and then exec `install.sh`.
