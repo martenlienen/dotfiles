@@ -4,6 +4,9 @@
 # Which ruby version to install
 RUBY_VERSION="2.0.0-p247"
 
+# Which gems to install
+GEMS="pry awesome_print"
+
 # Indents all output that is piped through it.
 indent () {
   sed "s/^/  /"
@@ -81,6 +84,13 @@ install_dotfiles () {
   find src -maxdepth 1 -mindepth 1 -exec cp --recursive {} $HOME \;
 }
 
+install_gems () {
+  for gem in $GEMS; do
+    log "Install $gem"
+    gem install "$gem" | indent
+  done
+}
+
 install_dotfiles
 log
 install_rbenv
@@ -92,6 +102,8 @@ log
 install_oh_my_zsh
 log
 install_vundle
+log
+install_gems
 log
 
 log "Please restart your shell"
