@@ -78,6 +78,11 @@ let g:Powerline_symbols = 'fancy'
 set noshowmode
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mappings
+
+inoremap jj <Esc>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
