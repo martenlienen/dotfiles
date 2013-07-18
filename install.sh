@@ -81,6 +81,8 @@ install_dotfiles () {
   find src -maxdepth 1 -mindepth 1 -exec cp --recursive {} $HOME \;
 }
 
+install_dotfiles
+log
 install_rbenv
 log
 install_ruby_build
@@ -90,8 +92,6 @@ log
 install_oh_my_zsh
 log
 install_vundle
-log
-install_dotfiles
 log
 
 log "Please restart your shell"
