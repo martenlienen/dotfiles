@@ -57,8 +57,14 @@ Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'tpope/vim-rails.git'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'gkz/vim-ls'
 Bundle 'tpope/vim-haml'
+
+" Livescript
+Bundle 'gkz/vim-ls'
+
+" Clojure
+Bundle 'tpope/vim-fireplace'
+Bundle 'guns/vim-clojure-static'
 
 filetype plugin indent on " required!
 
