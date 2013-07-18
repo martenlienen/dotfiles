@@ -5,7 +5,7 @@
 RUBY_VERSION="2.0.0-p247"
 
 # Which gems to install
-GEMS="pry awesome_print"
+GEMS="pry pry-rails awesome_print"
 
 # Indents all output that is piped through it.
 indent () {
