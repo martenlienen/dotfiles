@@ -85,9 +85,15 @@ install_dotfiles () {
 }
 
 install_gems () {
+  echo "Install gems"
+
   for gem in $GEMS; do
-    log "Install $gem"
-    gem install "$gem" | indent
+    if gem query --installed --name-matches "$gem" > /dev/null; then
+      echo "Already installed $gem"
+    else
+      log "Install $gem"
+      gem install "$gem" | indent
+    fi
   done
 }
 
