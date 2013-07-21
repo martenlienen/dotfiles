@@ -38,7 +38,10 @@ set noshowmode
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let mapleader = " "
+
 inoremap jj <Esc>
+inoremap <Esc> <Nop>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -47,13 +50,7 @@ inoremap jj <Esc>
 " Sets how many lines of history VIM has to remember
 set history=700
 
-" Set to auto read when a file is changed from the outside
-set autoread
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -107,8 +104,6 @@ set mat=2
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
-set t_vb=
-set tm=500
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -135,25 +130,24 @@ set nobackup
 set nowb
 set noswapfile
 
+" Reload files when changed from outside vim
+set autoread
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
+" => Text formatting/editing
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
 set expandtab
-
-" Be smart when using tabs ;)
 set smarttab
 
 " 1 tab == 2 spaces
 set shiftwidth=2
 set tabstop=2
 
-" Linebreak on 500 characters
-set lbr
-set tw=500
+set autoindent
+set smartindent
 
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
+" Do not wrap lines
+set nowrap
 
