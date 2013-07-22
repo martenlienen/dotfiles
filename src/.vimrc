@@ -1,6 +1,7 @@
 set nocompatible " be iMproved
 filetype off     " required!
 
+" Load vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -49,8 +50,6 @@ inoremap <Esc> <Nop>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
 set history=700
-
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
