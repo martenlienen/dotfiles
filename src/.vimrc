@@ -11,6 +11,7 @@ Bundle 'gmarik/vundle'
 " My bundles
 " Statusline
 Bundle 'Lokaltog/powerline'
+Bundle 'altercation/vim-colors-solarized'
 
 " Handling files
 Bundle 'wincent/Command-T'
@@ -128,8 +129,13 @@ set novisualbell
 " Enable syntax highlighting
 syntax enable
 
-colorscheme desert
+" Manually enable 256 colors in gnome-terminal
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+
 set background=dark
+colorscheme solarized
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
