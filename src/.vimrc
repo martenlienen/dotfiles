@@ -53,6 +53,8 @@ let mapleader = " "
 inoremap jj <Esc>
 inoremap <Esc> <Nop>
 
+nnoremap , :
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
