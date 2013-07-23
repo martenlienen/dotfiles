@@ -76,6 +76,10 @@ install_oh_my_zsh () {
 
 install_vundle () {
   manage_git_repository "vundle" "$HOME/.vim/bundle/vundle" "https://github.com/gmarik/vundle.git"
+
+  log
+  log "Install bundles"
+  vim +BundleInstall +qall
 }
 
 # Copies the dotfiles from src to the home directory.

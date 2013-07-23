@@ -9,11 +9,20 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My bundles
+" Statusline
 Bundle 'Lokaltog/powerline'
-Bundle 'L9'
-Bundle 'FuzzyFinder'
+
+" Handling files
+Bundle 'wincent/Command-T'
+let g:CommandTAlwaysShowDotFiles = 1
+
+" Rails
 Bundle 'tpope/vim-rails.git'
+
+" Coffeescript
 Bundle 'kchmck/vim-coffee-script'
+
+" HAML
 Bundle 'tpope/vim-haml'
 
 " Livescript
