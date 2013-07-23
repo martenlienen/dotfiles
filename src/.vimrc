@@ -64,6 +64,9 @@ set history=700
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Make VIM use utf-8 characters
+set encoding=utf8
+
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
@@ -123,12 +126,6 @@ syntax enable
 colorscheme desert
 set background=dark
 
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
-
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -140,6 +137,12 @@ set noswapfile
 
 " Reload files when changed from outside vim
 set autoread
+
+" Use unix line endings
+set fileformats=unix,dos,mac
+
+" Save files in utf-8
+set fileencoding=utf-8
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
