@@ -69,6 +69,9 @@ set history=700
 " Make VIM use utf-8 characters
 set encoding=utf8
 
+" Show line numbers
+set number
+
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
