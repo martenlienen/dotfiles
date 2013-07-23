@@ -95,6 +95,13 @@ install_gems () {
       gem install "$gem" | indent
     fi
   done
+
+  rehash_rbenv
+}
+
+rehash_rbenv () {
+  echo "Rehash rbenv"
+  rbenv rehash | indent
 }
 
 install_dotfiles
