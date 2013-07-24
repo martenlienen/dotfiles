@@ -15,6 +15,7 @@ Bundle 'altercation/vim-colors-solarized'
 
 " General editing
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-endwise'
 
 " VCS
 Bundle 'tpope/vim-fugitive'
