@@ -16,6 +16,9 @@ Bundle 'altercation/vim-colors-solarized'
 " General editing
 Bundle 'tpope/vim-surround'
 
+" VCS
+Bundle 'tpope/vim-fugitive'
+
 " Handling files
 Bundle 'wincent/Command-T'
 let g:CommandTAlwaysShowDotFiles = 1
