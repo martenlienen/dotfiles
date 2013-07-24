@@ -13,6 +13,9 @@ Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/powerline'
 Bundle 'altercation/vim-colors-solarized'
 
+" General editing
+Bundle 'tpope/vim-surround'
+
 " Handling files
 Bundle 'wincent/Command-T'
 let g:CommandTAlwaysShowDotFiles = 1
