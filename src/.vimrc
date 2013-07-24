@@ -9,7 +9,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My bundles
-" Statusline
+" UI
 Bundle 'Lokaltog/powerline'
 Bundle 'altercation/vim-colors-solarized'
 
@@ -35,6 +35,9 @@ Bundle 'guns/vim-clojure-static'
 
 filetype plugin indent on " required!
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Status line
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Activate powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
@@ -43,6 +46,9 @@ let g:Powerline_symbols = 'fancy'
 
 " Hide the now reduntant mode display (e.g. --INSERT--)
 set noshowmode
+
+" Always show status line
+set laststatus=2
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -81,9 +87,6 @@ set wildmenu
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
-
-"Always show current position
-set ruler
 
 " Height of the command bar
 set cmdheight=1
