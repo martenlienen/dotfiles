@@ -21,6 +21,7 @@ Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 
 " Handling files
+Bundle 'scrooloose/nerdtree'
 Bundle 'wincent/Command-T'
 let g:CommandTAlwaysShowDotFiles = 1
 
@@ -68,6 +69,8 @@ inoremap jj <Esc>
 inoremap <Esc> <Nop>
 
 nnoremap , :
+
+noremap <C-n> :NERDTreeToggle<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
