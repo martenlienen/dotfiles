@@ -73,17 +73,6 @@ nnoremap , :
 
 noremap <C-n> :NERDTreeToggle<CR>
 
-" Move motion keys one position to the right, so that my fingers really never
-" have to leave the home row.
-nnoremap j h
-nnoremap k j
-nnoremap l k
-nnoremap ö l
-vnoremap j h
-vnoremap k j
-vnoremap l k
-vnoremap ö l
-
 " Move through windows
 noremap <C-h> :wincmd h<CR>
 noremap <C-j> :wincmd j<CR>
