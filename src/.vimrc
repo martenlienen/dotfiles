@@ -26,7 +26,8 @@ Bundle 'wincent/Command-T'
 let g:CommandTAlwaysShowDotFiles = 1
 
 " Rails
-Bundle 'tpope/vim-rails.git'
+Bundle 'tpope/vim-rails'
+Bundle 'thoughtbot/vim-rspec'
 
 " Coffeescript
 Bundle 'kchmck/vim-coffee-script'
