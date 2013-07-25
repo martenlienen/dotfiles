@@ -20,6 +20,7 @@ Bundle 'Lokaltog/vim-easymotion'
 
 " VCS
 Bundle 'tpope/vim-fugitive'
+Bundle 'gregsexton/gitv'
 
 " Handling files
 Bundle 'scrooloose/nerdtree'
@@ -79,11 +80,6 @@ noremap <C-j> :wincmd j<CR>
 noremap <C-k> :wincmd k<CR>
 noremap <C-l> :wincmd l<CR>
 
-" Move windows
-map <C-S-h> :wincmd H<cr>
-map <C-S-j> :wincmd K<cr>
-map <C-S-k> :wincmd L<cr>
-map <C-S-l> :wincmd J<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
