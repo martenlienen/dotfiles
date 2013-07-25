@@ -1,6 +1,3 @@
-set nocompatible " be iMproved
-filetype off     " required!
-
 " Load vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -17,6 +14,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'tomtom/tcomment_vim'
 
 " VCS
 Bundle 'tpope/vim-fugitive'
