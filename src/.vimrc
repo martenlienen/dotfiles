@@ -84,6 +84,17 @@ vnoremap k j
 vnoremap l k
 vnoremap ö l
 
+" Move through windows
+noremap <C-h> :wincmd h<CR>
+noremap <C-j> :wincmd j<CR>
+noremap <C-k> :wincmd k<CR>
+noremap <C-l> :wincmd l<CR>
+
+" Move windows
+map <C-S-h> :wincmd H<cr>
+map <C-S-j> :wincmd K<cr>
+map <C-S-k> :wincmd L<cr>
+map <C-S-l> :wincmd J<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
