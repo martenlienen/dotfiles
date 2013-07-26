@@ -19,6 +19,9 @@ Bundle 'tomtom/tcomment_vim'
 " Completion
 Bundle 'Valloric/YouCompleteMe'
 
+" Linting
+Bundle 'scrooloose/syntastic'
+
 " VCS
 Bundle 'tpope/vim-fugitive'
 Bundle 'gregsexton/gitv'
