@@ -16,6 +16,9 @@ Bundle 'tpope/vim-endwise'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tomtom/tcomment_vim'
 
+" Completion
+Bundle 'Valloric/YouCompleteMe'
+
 " VCS
 Bundle 'tpope/vim-fugitive'
 Bundle 'gregsexton/gitv'
