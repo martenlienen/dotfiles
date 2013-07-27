@@ -92,6 +92,10 @@ noremap <C-l> :wincmd l<CR>
 " Sets how many lines of history VIM has to remember
 set history=700
 
+" Enable local .vimrcs
+set exrc
+set secure
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
