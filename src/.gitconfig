@@ -1,0 +1,5 @@
+[core]
+  excludesfile = ~/.gitignore
+[user]
+  name = "Marten Lienen"
+  email = "marten.lienen@gmail.com"
