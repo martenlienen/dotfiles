@@ -86,8 +86,8 @@ noremap <C-k> :wincmd k<CR>
 noremap <C-l> :wincmd l<CR>
 
 " Move through tabs
-noremap <C-H> :tabp<CR>
-noremap <C-L> :tabn<CR>
+noremap <C-Left> :tabp<CR>
+noremap <C-Right> :tabn<CR>
 
 " Run rspec
 nnoremap <Leader>s :call RunCurrentSpecFile()<CR>
