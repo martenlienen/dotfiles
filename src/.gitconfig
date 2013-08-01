@@ -1,5 +1,8 @@
 [core]
   excludesfile = ~/.gitignore
+  editor = vim
 [user]
   name = "Marten Lienen"
   email = "marten.lienen@gmail.com"
+[push]
+  default = simple
