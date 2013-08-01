@@ -85,6 +85,10 @@ noremap <C-j> :wincmd j<CR>
 noremap <C-k> :wincmd k<CR>
 noremap <C-l> :wincmd l<CR>
 
+" Run rspec
+nnoremap <Leader>s :call RunCurrentSpecFile()<CR>
+nnoremap <Leader>a :call RunAllSpecs()<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
