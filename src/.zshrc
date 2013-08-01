@@ -29,3 +29,6 @@ EDITOR="vim"
 
 # Use vi for command line editing
 bindkey -v
+
+# Do not get in my way, when I type
+unsetopt correct
