@@ -5,7 +5,7 @@
 RUBY_VERSION="2.0.0-p247"
 
 # Which gems to install
-GEMS="pry pry-rails awesome_print bundler"
+GEMS="pry pry-rails awesome_print bundler gem-ctags"
 
 # Indents all output that is piped through it.
 indent () {
@@ -48,6 +48,10 @@ install_rbenv () {
 
 install_ruby_build () {
   manage_git_repository "ruby-build" "$HOME/.rbenv/plugins/ruby-build" "https://github.com/sstephenson/ruby-build.git"
+}
+
+install_rbenv_ctags () {
+  manage_git_repository "rbenv-ctags" "$HOME/.rbenv/plugins/rbenv-ctags" "https://github.com/tpope/rbenv-ctags.git"
 }
 
 install_ruby_version () {
@@ -113,6 +117,8 @@ log
 install_rbenv
 log
 install_ruby_build
+log
+install_rbenv_ctags
 log
 install_ruby_version
 log

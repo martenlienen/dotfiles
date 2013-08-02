@@ -32,8 +32,10 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'wincent/Command-T'
 let g:CommandTAlwaysShowDotFiles = 1
 
-" Rails
+" Ruby and Rails
 Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-rake'
+Bundle 'tpope/vim-bundler'
 Bundle 'thoughtbot/vim-rspec'
 
 " Coffeescript
