@@ -16,6 +16,9 @@ Bundle 'tpope/vim-endwise'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tomtom/tcomment_vim'
 
+" VIM enhancements
+Bundle 'tpope/vim-dispatch'
+
 " Completion
 Bundle 'Valloric/YouCompleteMe'
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -37,6 +40,7 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-bundler'
 Bundle 'thoughtbot/vim-rspec'
+let g:rspec_command = 'Dispatch rspec {spec}'
 
 " Coffeescript
 Bundle 'kchmck/vim-coffee-script'
@@ -93,8 +97,10 @@ noremap <C-Left> :tabp<CR>
 noremap <C-Right> :tabn<CR>
 
 " Run rspec
-nnoremap <Leader>s :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>a :call RunAllSpecs()<CR>
+nnoremap <Leader>f :call RunNearestSpec()<CR>
+nnoremap <Leader>d :call RunCurrentSpecFile()<CR>
+nnoremap <Leader>r :call RunLastSpec()<CR>
+nnoremap <Leader>g :call RunAllSpecs()<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
