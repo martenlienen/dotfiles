@@ -18,6 +18,7 @@ Bundle 'tomtom/tcomment_vim'
 
 " Completion
 Bundle 'Valloric/YouCompleteMe'
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 " Linting
 Bundle 'scrooloose/syntastic'
