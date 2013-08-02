@@ -32,3 +32,6 @@ bindkey -v
 
 # Do not get in my way, when I type
 unsetopt correct
+
+# Do not block on Ctrl-S
+stty -ixon
