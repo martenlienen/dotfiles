@@ -15,6 +15,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tomtom/tcomment_vim'
+Bundle 'rking/ag.vim'
 
 " VIM enhancements
 Bundle 'tpope/vim-dispatch'
