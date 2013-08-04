@@ -214,9 +214,6 @@ set smarttab
 set shiftwidth=2
 set tabstop=2
 
-set autoindent
-set smartindent
-
 " Do not wrap lines
 set nowrap
 
