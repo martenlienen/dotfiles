@@ -16,6 +16,7 @@ Bundle 'tpope/vim-endwise'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'rking/ag.vim'
+Bundle 'matchit.zip'
 
 " VIM enhancements
 Bundle 'tpope/vim-dispatch'
@@ -43,11 +44,14 @@ Bundle 'tpope/vim-bundler'
 Bundle 'thoughtbot/vim-rspec'
 let g:rspec_command = 'Dispatch rspec {spec}'
 
-" Coffeescript
-Bundle 'kchmck/vim-coffee-script'
+" HTML
+Bundle 'mattn/zencoding-vim'
 
 " HAML
 Bundle 'tpope/vim-haml'
+
+" Coffeescript
+Bundle 'kchmck/vim-coffee-script'
 
 " Livescript
 Bundle 'gkz/vim-ls'
