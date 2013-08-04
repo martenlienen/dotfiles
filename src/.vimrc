@@ -217,3 +217,8 @@ set tabstop=2
 " Do not wrap lines
 set nowrap
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" HTML
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tags that are not indented by default
+let g:html_indent_inctags = 'html,head,body,title'
