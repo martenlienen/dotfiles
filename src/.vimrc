@@ -17,6 +17,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'rking/ag.vim'
 Bundle 'matchit.zip'
+Bundle 'Raimondi/delimitMate'
 
 " VIM enhancements
 Bundle 'tpope/vim-dispatch'
