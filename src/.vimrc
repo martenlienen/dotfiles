@@ -181,7 +181,7 @@ syntax enable
 
 " Manually enable 256 colors in gnome-terminal
 if $COLORTERM == 'gnome-terminal'
-  set t_Co=256
+  set t_Co=16
 endif
 
 set background=dark
