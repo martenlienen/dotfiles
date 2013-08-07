@@ -18,6 +18,7 @@ Bundle 'tomtom/tcomment_vim'
 Bundle 'rking/ag.vim'
 Bundle 'matchit.zip'
 Bundle 'Raimondi/delimitMate'
+Bundle 'kana/vim-textobj-user'
 
 " VIM enhancements
 Bundle 'tpope/vim-dispatch'
@@ -44,6 +45,7 @@ Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-bundler'
 Bundle 'thoughtbot/vim-rspec'
 let g:rspec_command = 'Dispatch rspec {spec}'
+Bundle 'nelstrom/vim-textobj-rubyblock'
 
 " HTML
 Bundle 'mattn/zencoding-vim'
