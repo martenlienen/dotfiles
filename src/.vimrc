@@ -181,7 +181,11 @@ syntax enable
 
 " Manually enable 256 colors in gnome-terminal
 if $COLORTERM == 'gnome-terminal'
-  set t_Co=16
+  set t_Co=256
+
+  " Use the colorscheme's background color to fill empty space
+  " instead of the terminal's bg color
+  set t_ut=
 endif
 
 set background=dark
