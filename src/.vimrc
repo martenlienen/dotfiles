@@ -104,6 +104,9 @@ noremap <C-l> :wincmd l<CR>
 noremap <C-Left> :tabp<CR>
 noremap <C-Right> :tabn<CR>
 
+" Search for word under cursor in current directory
+nnoremap <Leader># :Ag<CR>
+
 " Run rspec
 nnoremap <Leader>f :call RunNearestSpec()<CR>
 nnoremap <Leader>d :call RunCurrentSpecFile()<CR>
