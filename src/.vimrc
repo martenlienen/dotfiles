@@ -101,10 +101,10 @@ noremap <C-k> :wincmd k<CR>
 noremap <C-l> :wincmd l<CR>
 
 " Resize windows
-nnoremap <C-Up> :wincmd +<CR>
-nnoremap <C-Down> :wincmd -<CR>
-nnoremap <C-Left> :wincmd <<CR>
-nnoremap <C-Right> :wincmd ><CR>
+nnoremap <Up> :wincmd +<CR>
+nnoremap <Down> :wincmd -<CR>
+nnoremap <Left> :wincmd <<CR>
+nnoremap <Right> :wincmd ><CR>
 
 " Search for word under cursor in current directory
 nnoremap <Leader># :Ag<CR>
