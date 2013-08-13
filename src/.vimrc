@@ -100,9 +100,11 @@ noremap <C-j> :wincmd j<CR>
 noremap <C-k> :wincmd k<CR>
 noremap <C-l> :wincmd l<CR>
 
-" Move through tabs
-noremap <C-Left> :tabp<CR>
-noremap <C-Right> :tabn<CR>
+" Resize windows
+nnoremap <C-Up> :wincmd +<CR>
+nnoremap <C-Down> :wincmd -<CR>
+nnoremap <C-Left> :wincmd <<CR>
+nnoremap <C-Right> :wincmd ><CR>
 
 " Search for word under cursor in current directory
 nnoremap <Leader># :Ag<CR>
