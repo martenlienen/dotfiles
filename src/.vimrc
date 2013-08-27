@@ -136,6 +136,12 @@ set encoding=utf8
 " Show line numbers
 set number
 
+" Show relative line numbers in normal mode and absolute ones
+" in insert mode
+set relativenumber
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+
 " Highlight the current line
 set cursorline
 
