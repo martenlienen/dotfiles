@@ -115,8 +115,9 @@ nnoremap <Leader>rf :call RunCurrentSpecFile()<CR>
 nnoremap <Leader>rr :call RunLastSpec()<CR>
 nnoremap <Leader>rg :call RunAllSpecs()<CR>
 
-" Git commit
+" Git
 nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gc :Gcommit -a<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
