@@ -111,10 +111,12 @@ nnoremap <Leader># :Ag<CR>
 
 " Run rspec
 nnoremap <Leader>f :call RunNearestSpec()<CR>
-nnoremap <Leader>d :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>r :call RunLastSpec()<CR>
-nnoremap <Leader>g :call RunAllSpecs()<CR>
+nnoremap <Leader>rf :call RunCurrentSpecFile()<CR>
+nnoremap <Leader>rr :call RunLastSpec()<CR>
+nnoremap <Leader>rg :call RunAllSpecs()<CR>
 
+" Git commit
+nnoremap <Leader>gs :Gstatus<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
