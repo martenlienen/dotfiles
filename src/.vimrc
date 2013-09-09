@@ -16,6 +16,8 @@ Bundle 'tpope/vim-endwise'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'rking/ag.vim'
+let g:agprg = "ag --column --smart-case"
+let g:aghighlight = 1
 Bundle 'matchit.zip'
 Bundle 'Raimondi/delimitMate'
 Bundle 'kana/vim-textobj-user'
