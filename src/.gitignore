@@ -3,3 +3,6 @@
 
 # tags files
 tags
+
+# Ignore files
+.agignore
