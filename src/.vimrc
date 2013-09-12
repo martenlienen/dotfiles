@@ -55,6 +55,9 @@ Bundle 'mattn/zencoding-vim'
 " HAML
 Bundle 'tpope/vim-haml'
 
+" Jade
+Bundle 'digitaltoad/vim-jade'
+
 " Coffeescript
 Bundle 'kchmck/vim-coffee-script'
 
