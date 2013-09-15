@@ -58,6 +58,9 @@ Bundle 'tpope/vim-haml'
 " Jade
 Bundle 'digitaltoad/vim-jade'
 
+" LESS
+Bundle 'groenewege/vim-less'
+
 " Coffeescript
 Bundle 'kchmck/vim-coffee-script'
 
