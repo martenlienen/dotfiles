@@ -42,6 +42,7 @@ Bundle 'wincent/Command-T'
 let g:CommandTAlwaysShowDotFiles = 1
 
 " Ruby and Rails
+autocmd BufRead,BufNewFile *.json_builder set filetype=ruby
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-bundler'
