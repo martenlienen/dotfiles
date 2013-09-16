@@ -9,7 +9,8 @@
     paredit
     rainbow-delimiters
     color-theme-solarized
-    markdown-mode))
+    markdown-mode
+    icicles))
 
 (defun ensure-package-installed (package)
   (when (not (package-installed-p package))
@@ -29,6 +30,11 @@
 
 ; Disable menu bar
 (menu-bar-mode -1)
+
+
+;; Enhancing emacs
+
+(icicle-mode)
 
 
 ;; Backups
