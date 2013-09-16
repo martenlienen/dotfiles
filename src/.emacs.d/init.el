@@ -31,6 +31,10 @@
 ; Disable menu bar
 (menu-bar-mode -1)
 
+; Show line numbers
+(setq linum-format "%3d ")
+(global-linum-mode t)
+
 
 ;; Enhancing emacs
 
@@ -44,11 +48,7 @@
 (setq auto-save-default nil)
 
 
-;; Editing
-
-; Automatically indent
-(electric-indent-mode 1)
-
+;; Enable lisp mode hooks
 (autoload 'enable-paredit-mode "paredit" "Slurp those parens" t)
 (defvar my-lisp-mode-hooks
   '(emacs-lisp-mode-hook
