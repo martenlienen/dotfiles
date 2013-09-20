@@ -10,7 +10,8 @@
     rainbow-delimiters
     color-theme-solarized
     markdown-mode
-    icicles))
+    icicles
+    magit))
 
 (defun ensure-package-installed (package)
   (when (not (package-installed-p package))
