@@ -3,15 +3,29 @@
 (package-initialize)
 
 (defvar my-packages
-  '(clojure-mode
+  '(; UI
+    color-theme-solarized
+
+    ; Editing
+    evil
+    ace-jump-mode
+    key-chord
+
+    ; Git wrapper
+    magit
+
+    ; Autocomplete
+    icicles
+
+    ; Markdown
+    markdown-mode
+
+    ; Lisp stuff
+    clojure-mode
     clojure-test-mode
     nrepl
     paredit
-    rainbow-delimiters
-    color-theme-solarized
-    markdown-mode
-    icicles
-    magit))
+    rainbow-delimiters))
 
 (defun ensure-package-installed (package)
   (when (not (package-installed-p package))
@@ -40,6 +54,13 @@
 ;; Enhancing emacs
 
 (icicle-mode)
+(evil-mode)
+(key-chord-mode t)
+
+
+;; Evil
+
+(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
 
 ;; Backups
