@@ -1,4 +1,4 @@
-require 'package)
+(require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
@@ -75,7 +75,13 @@ require 'package)
 (define-key evil-visual-state-map (kbd "c") 'comment-or-uncomment-region)
 
 ; Magit
+(require 'magit)
+(defun cqql/magit-commit-all ()
+  (interactive)
+  (magit-commit-internal "commit" '("--all")))
+
 (define-key evil-normal-state-map (kbd "SPC g s") 'magit-status)
+(define-key evil-normal-state-map (kbd "SPC g c") 'cqql/magit-commit-all)
 
 ;; Backups
 
