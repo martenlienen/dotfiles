@@ -50,9 +50,13 @@
 
 ;; Enable lisp mode hooks
 (autoload 'enable-paredit-mode "paredit" "Slurp those parens" t)
+(defun my-indent-on-enter ()
+  (local-set-key (kbd "RET") 'newline-and-indent))
+
 (defvar my-lisp-mode-hooks
   '(emacs-lisp-mode-hook
     clojure-mode-hook
     nrepl-mode-hook))
 (mapc (lambda (hook) (add-hook hook #'enable-paredit-mode)) my-lisp-mode-hooks)
 (mapc (lambda (hook) (add-hook hook #'turn-on-eldoc-mode)) my-lisp-mode-hooks)
+(mapc (lambda (hook) (add-hook hook 'my-indent-on-enter)) my-lisp-mode-hooks)
