@@ -58,6 +58,6 @@
   '(emacs-lisp-mode-hook
     clojure-mode-hook
     nrepl-mode-hook))
-(mapc (lambda (hook) (add-hook hook #'enable-paredit-mode)) my-lisp-mode-hooks)
-(mapc (lambda (hook) (add-hook hook #'turn-on-eldoc-mode)) my-lisp-mode-hooks)
+(mapc (lambda (hook) (add-hook hook 'enable-paredit-mode)) my-lisp-mode-hooks)
+(mapc (lambda (hook) (add-hook hook 'turn-on-eldoc-mode)) my-lisp-mode-hooks)
 (mapc (lambda (hook) (add-hook hook 'my-indent-on-enter)) my-lisp-mode-hooks)
