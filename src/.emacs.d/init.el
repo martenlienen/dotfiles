@@ -1,4 +1,4 @@
-(require 'package)
+require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
@@ -60,8 +60,22 @@
 
 ;; Evil
 
+; Remap jk to ESC
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
+; , is much easier to type when your fingers are on the motion keys
+(define-key evil-normal-state-map (kbd ",") 'evil-ex)
+
+; Ace jump
+(define-key evil-normal-state-map (kbd "SPC w") 'ace-jump-word-mode)
+(define-key evil-normal-state-map (kbd "SPC h") 'ace-jump-char-mode)
+(define-key evil-normal-state-map (kbd "SPC j") 'ace-jump-line-mode)
+
+; Toggle comments
+(define-key evil-visual-state-map (kbd "c") 'comment-or-uncomment-region)
+
+; Magit
+(define-key evil-normal-state-map (kbd "SPC g s") 'magit-status)
 
 ;; Backups
 
