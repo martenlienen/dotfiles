@@ -124,6 +124,7 @@ nnoremap <Leader>rg :call RunAllSpecs()<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gc :Gcommit -a<CR>
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -242,6 +243,7 @@ set tabstop=2
 
 " Do not wrap lines
 set nowrap
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " HTML
