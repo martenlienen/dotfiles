@@ -69,6 +69,9 @@
 ; , is much easier to type when your fingers are on the motion keys
 (define-key evil-normal-state-map (kbd ",") 'evil-ex)
 
+; Open files
+(define-key evil-normal-state-map (kbd "SPC t") 'find-file-in-repository)
+
 ; Ace jump
 (define-key evil-normal-state-map (kbd "SPC w") 'ace-jump-word-mode)
 (define-key evil-normal-state-map (kbd "SPC h") 'ace-jump-char-mode)
