@@ -91,6 +91,18 @@
 (define-key evil-normal-state-map (kbd "SPC g s") 'magit-status)
 (define-key evil-normal-state-map (kbd "SPC g c") 'cqql/magit-commit-all)
 
+; Paredit
+(define-key evil-normal-state-map (kbd "M-l") 'paredit-forward-slurp-sexp)
+(define-key evil-normal-state-map (kbd "M-h") 'paredit-forward-barf-sexp)
+(define-key evil-normal-state-map (kbd "M-k") 'paredit-split-sexp)
+(define-key evil-normal-state-map (kbd "M-j") 'paredit-join-sexps)
+(define-key evil-normal-state-map (kbd "M-n") 'paredit-splice-sexp)
+(define-key evil-normal-state-map (kbd "M-m") 'paredit-raise-sexp)
+(define-key evil-normal-state-map (kbd "M-[") 'paredit-wrap-square)
+(define-key evil-normal-state-map (kbd "M-{") 'paredit-wrap-curly)
+(define-key evil-normal-state-map (kbd "M-(") 'paredit-wrap-round)
+
+
 ;; Backups
 
 ; Disable backups and autosaves
@@ -100,6 +112,7 @@
 
 ;; Enable lisp mode hooks
 (autoload 'enable-paredit-mode "paredit" "Slurp those parens" t)
+
 (defun cqql/indent-on-enter ()
   (local-set-key (kbd "RET") 'newline-and-indent))
 
@@ -107,6 +120,7 @@
   '(emacs-lisp-mode-hook
     clojure-mode-hook
     nrepl-mode-hook))
+
 (mapc (lambda (hook) (add-hook hook 'enable-paredit-mode)) cqql/lisp-mode-hooks)
 (mapc (lambda (hook) (add-hook hook 'turn-on-eldoc-mode)) cqql/lisp-mode-hooks)
 (mapc (lambda (hook) (add-hook hook 'cqql/indent-on-enter)) cqql/lisp-mode-hooks)
