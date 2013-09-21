@@ -14,6 +14,9 @@
     ; Git wrapper
     magit
 
+    ; Searching
+    ag
+
     ; Autocomplete
     icicles
 
@@ -73,6 +76,11 @@
 
 ; Toggle comments
 (define-key evil-visual-state-map (kbd "c") 'comment-or-uncomment-region)
+
+; Searching with ag
+(require 'ag)
+(add-to-list 'ag-arguments "--hidden")
+(define-key evil-normal-state-map (kbd "SPC \\") 'ag-project)
 
 ; Magit
 (require 'magit)
