@@ -2,7 +2,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
-(defvar my-packages
+(defvar cqql/packages
   '(; UI
     color-theme-solarized
 
@@ -34,7 +34,7 @@
 (when (null package-archive-contents)
 	(package-refresh-contents))
 
-(mapc 'ensure-package-installed my-packages)
+(mapc 'ensure-package-installed cqql/packages)
 
 ;; UI
 
@@ -92,13 +92,13 @@
 
 ;; Enable lisp mode hooks
 (autoload 'enable-paredit-mode "paredit" "Slurp those parens" t)
-(defun my-indent-on-enter ()
+(defun cqql/indent-on-enter ()
   (local-set-key (kbd "RET") 'newline-and-indent))
 
-(defvar my-lisp-mode-hooks
+(defvar cqql/lisp-mode-hooks
   '(emacs-lisp-mode-hook
     clojure-mode-hook
     nrepl-mode-hook))
-(mapc (lambda (hook) (add-hook hook 'enable-paredit-mode)) my-lisp-mode-hooks)
-(mapc (lambda (hook) (add-hook hook 'turn-on-eldoc-mode)) my-lisp-mode-hooks)
-(mapc (lambda (hook) (add-hook hook 'my-indent-on-enter)) my-lisp-mode-hooks)
+(mapc (lambda (hook) (add-hook hook 'enable-paredit-mode)) cqql/lisp-mode-hooks)
+(mapc (lambda (hook) (add-hook hook 'turn-on-eldoc-mode)) cqql/lisp-mode-hooks)
+(mapc (lambda (hook) (add-hook hook 'cqql/indent-on-enter)) cqql/lisp-mode-hooks)
