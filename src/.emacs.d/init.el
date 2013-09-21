@@ -1,3 +1,6 @@
+; Disable splash screen
+(setq inhibit-startup-message t)
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
