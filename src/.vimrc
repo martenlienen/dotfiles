@@ -68,10 +68,6 @@ Bundle 'kchmck/vim-coffee-script'
 " Livescript
 Bundle 'gkz/vim-ls'
 
-" Clojure
-Bundle 'tpope/vim-fireplace'
-Bundle 'guns/vim-clojure-static'
-
 filetype plugin indent on " required!
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
