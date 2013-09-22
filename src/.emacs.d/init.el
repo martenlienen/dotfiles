@@ -22,6 +22,8 @@
 
     ; Autocomplete
     icicles
+    auto-complete
+    ac-nrepl
 
     ; Markdown
     markdown-mode
@@ -33,14 +35,14 @@
     paredit
     rainbow-delimiters))
 
-(defun ensure-package-installed (package)
+(defun cqql/ensure-package-installed (package)
   (when (not (package-installed-p package))
     (package-install package)))
 
 (when (null package-archive-contents)
-	(package-refresh-contents))
+  (package-refresh-contents))
 
-(mapc 'ensure-package-installed cqql/packages)
+(mapc 'cqql/ensure-package-installed cqql/packages)
 
 ;; UI
 
@@ -59,9 +61,18 @@
 
 ;; Enhancing emacs
 
+(require 'auto-complete)
 (icicle-mode)
+(global-auto-complete-mode)
 (evil-mode)
 (key-chord-mode t)
+
+
+;; nrepl
+
+(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+(add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
+(add-to-list 'ac-modes 'nrepl-mode)
 
 
 ;; Evil
