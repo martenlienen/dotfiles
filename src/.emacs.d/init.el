@@ -47,6 +47,7 @@
 
 (mapc 'cqql/ensure-package-installed cqql/packages)
 
+
 ;; UI
 
 (load-theme 'solarized-dark t)
