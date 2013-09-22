@@ -121,7 +121,7 @@ nnoremap <Leader>rr :call RunLastSpec()<CR>
 nnoremap <Leader>rg :call RunAllSpecs()<CR>
 
 " Git
-nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gg :Gstatus<CR>
 nnoremap <Leader>gc :Gcommit -a<CR>
 
 
