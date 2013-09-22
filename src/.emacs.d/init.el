@@ -94,7 +94,7 @@
   (interactive)
   (magit-commit-internal "commit" '("--all")))
 
-(define-key evil-normal-state-map (kbd "SPC g s") 'magit-status)
+(define-key evil-normal-state-map (kbd "SPC g g") 'magit-status)
 (define-key evil-normal-state-map (kbd "SPC g c") 'cqql/magit-commit-all)
 
 ; Paredit
