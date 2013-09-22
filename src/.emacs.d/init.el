@@ -89,6 +89,10 @@
 ; Remap jk to ESC
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
+; Do not overload RET and SPC
+(define-key evil-insert-state-map (kbd "RET") nil)
+(define-key evil-insert-state-map (kbd "SPC") nil)
+
 ; , is much easier to type when your fingers are on the motion keys
 (define-key evil-normal-state-map (kbd ",") 'evil-ex)
 
@@ -159,4 +163,4 @@
 
 (mapc (lambda (hook) (add-hook hook 'enable-paredit-mode)) cqql/lisp-mode-hooks)
 (mapc (lambda (hook) (add-hook hook 'turn-on-eldoc-mode)) cqql/lisp-mode-hooks)
-(mapc (lambda (hook) (add-hook hook 'cqql/indent-on-enter)) cqql/lisp-mode-hooks)
+(mapc (lambda (hook) (add-hook hook 'cqql/indent-on-enter)) '(emacs-lisp-mode-hook clojure-mode-hook))
