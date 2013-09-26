@@ -102,7 +102,7 @@
 (define-key evil-normal-state-map (kbd ",") 'evil-ex)
 
 ; Open files
-(define-key evil-normal-state-map (kbd "SPC t") 'icicle-locate-file)
+(define-key evil-normal-state-map (kbd "SPC t") 'projectile-find-file)
 
 ; Ace jump
 (define-key evil-normal-state-map (kbd "SPC w") 'ace-jump-word-mode)
