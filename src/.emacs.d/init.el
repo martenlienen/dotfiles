@@ -67,6 +67,13 @@
 (global-linum-mode t)
 
 
+;; Editing
+
+; Indent with 2 spaces
+(setq-default indent-tabs-mode nil)
+(setq tab-width 2)
+
+
 ;; Enhancing emacs
 
 (require 'auto-complete)
