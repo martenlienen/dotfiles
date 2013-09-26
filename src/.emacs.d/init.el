@@ -21,7 +21,8 @@
     ag
 
     ; Autocomplete
-    icicles
+    projectile
+    flx-ido
     auto-complete
     ac-nrepl
 
@@ -66,7 +67,11 @@
 ;; Enhancing emacs
 
 (require 'auto-complete)
-(icicle-mode)
+(require 'flx-ido)
+(ido-mode t)
+(ido-everywhere t)
+(flx-ido-mode t)
+(projectile-global-mode)
 (global-auto-complete-mode)
 (evil-mode)
 (key-chord-mode t)
