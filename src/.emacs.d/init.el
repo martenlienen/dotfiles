@@ -97,12 +97,11 @@
 (define-key evil-normal-state-map (kbd ",") 'evil-ex)
 
 ; Open files
-(define-key evil-normal-state-map (kbd "SPC t") 'find-file-in-repository)
+(define-key evil-normal-state-map (kbd "SPC t") 'icicle-locate-file)
 
 ; Ace jump
 (define-key evil-normal-state-map (kbd "SPC w") 'ace-jump-word-mode)
 (define-key evil-normal-state-map (kbd "SPC h") 'ace-jump-char-mode)
-(define-key evil-normal-state-map (kbd "SPC j") 'ace-jump-line-mode)
 
 ; Toggle comments
 (define-key evil-visual-state-map (kbd "c") 'comment-or-uncomment-region)
