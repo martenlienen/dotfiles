@@ -1,6 +1,9 @@
 ; Disable splash screen
 (setq inhibit-startup-message t)
 
+; Only GC every 20 MB
+(setq gc-cons-threshold 20000000)
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
