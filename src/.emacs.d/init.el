@@ -101,6 +101,10 @@
 
 ;; Evil
 
+; Toggle evil mode
+(define-key evil-normal-state-map (kbd "M-^") 'evil-mode)
+(global-set-key (kbd "M-^") 'evil-mode)
+
 ; Remap jk to ESC
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
