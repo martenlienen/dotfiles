@@ -151,8 +151,8 @@
 (define-key evil-normal-state-map (kbd "C-M-j") 'evil-window-down)
 (define-key evil-normal-state-map (kbd "C-M-k") 'evil-window-up)
 (define-key evil-normal-state-map (kbd "C-M-l") 'evil-window-right)
-(define-key evil-normal-state-map (kbd "M-z") 'split-window-horizontally)
-(define-key evil-normal-state-map (kbd "M-x") 'split-window-vertically)
+(define-key evil-normal-state-map (kbd "M-c") 'split-window-horizontally)
+(define-key evil-normal-state-map (kbd "M-s") 'split-window-vertically)
 
 
 ;; Backups
