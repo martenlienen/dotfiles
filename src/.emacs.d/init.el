@@ -24,6 +24,7 @@
     ag
 
     ; Autocomplete
+    icicles
     projectile
     flx-ido
     auto-complete
@@ -83,6 +84,7 @@
 (flx-ido-mode t)
 (projectile-global-mode)
 (global-auto-complete-mode)
+(icy-mode t)
 (evil-mode)
 (key-chord-mode t)
 
