@@ -96,6 +96,12 @@
 ;; ruby-mode
 
 (add-hook 'ruby-mode-hook 'robe-mode)
+(require 'rspec-mode)
+(setq rspec-use-rake-when-possible nil)
+(define-key evil-normal-state-map (kbd "SPC f") 'rspec-verify-single)
+(define-key evil-normal-state-map (kbd "SPC r r") 'rspec-rerun)
+(define-key evil-normal-state-map (kbd "SPC r f") 'rspec-verify)
+(define-key evil-normal-state-map (kbd "SPC r g") 'rspec-verify-all)
 
 
 ;; company-mode
