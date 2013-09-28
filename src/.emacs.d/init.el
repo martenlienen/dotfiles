@@ -29,6 +29,7 @@
     flx-ido
     auto-complete
     ac-nrepl
+    company
 
     ; Syntax checking
     flycheck
@@ -41,7 +42,12 @@
     clojure-test-mode
     nrepl
     paredit
-    rainbow-delimiters))
+    rainbow-delimiters
+
+    ; Ruby stuff
+    robe
+    company-inf-ruby
+    rspec-mode))
 
 (defun cqql/ensure-package-installed (package)
   (when (not (package-installed-p package))
@@ -51,7 +57,6 @@
   (package-refresh-contents))
 
 (mapc 'cqql/ensure-package-installed cqql/packages)
-
 
 ;; UI
 
@@ -83,15 +88,27 @@
 (ido-everywhere t)
 (flx-ido-mode t)
 (projectile-global-mode)
-(global-auto-complete-mode)
 (icy-mode t)
 (evil-mode)
 (key-chord-mode t)
 
 
+;; ruby-mode
+
+(add-hook 'ruby-mode-hook 'robe-mode)
+
+
+;; company-mode
+
+(add-hook 'after-init-hook 'global-company-mode)
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-robe))
+
+
 ;; nrepl
 
 (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+(add-hook 'nrepl-mode-hook 'auto-complete-mode)
 (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
 (add-to-list 'ac-modes 'nrepl-mode)
 
