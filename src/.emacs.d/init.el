@@ -16,6 +16,7 @@
     evil
     ace-jump-mode
     key-chord
+    multiple-cursors
 
     ; Git wrapper
     magit
