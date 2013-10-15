@@ -45,7 +45,10 @@
     ; Ruby stuff
     robe
     company-inf-ruby
-    rspec-mode))
+    rspec-mode
+
+    ; LaTeX
+    auctex))
 
 (defun cqql/ensure-package-installed (package)
   (when (not (package-installed-p package))
