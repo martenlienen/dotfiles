@@ -32,9 +32,6 @@
     ac-nrepl
     company
 
-    ; Syntax checking
-    flycheck
-
     ; Markdown
     markdown-mode
 
@@ -118,11 +115,6 @@
 (add-hook 'nrepl-mode-hook 'auto-complete-mode)
 (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
 (add-to-list 'ac-modes 'nrepl-mode)
-
-
-;; flycheck
-
-(add-hook 'after-init-hook 'global-flycheck-mode)
 
 
 ;; Evil
