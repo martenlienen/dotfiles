@@ -32,6 +32,9 @@
     ac-nrepl
     company
 
+    ; Snippets
+    yasnippet
+
     ; Markdown
     markdown-mode
 
@@ -114,6 +117,10 @@
 (add-hook 'after-init-hook 'global-company-mode)
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-robe))
+
+
+;; yasnippet
+(yas-global-mode t)
 
 
 ;; nrepl
