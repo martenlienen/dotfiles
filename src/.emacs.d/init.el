@@ -139,7 +139,7 @@
 (require 'ac-math)
 (defun ac-latex-mode-setup ()
   (setq ac-sources
-        (append '(ac-source-math-latex ac-source-latex-commands)
+        (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
                 ac-sources)))
 (add-to-list 'ac-modes 'latex-mode)
 (add-hook 'LaTeX-mode-hook 'auto-complete-mode)
