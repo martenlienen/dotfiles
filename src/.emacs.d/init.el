@@ -53,14 +53,21 @@
     ; LaTeX
     auctex))
 
-(defun cqql/ensure-package-installed (package)
-  (when (not (package-installed-p package))
-    (package-install package)))
+(require 'cl)
+(defun cqql/missing-packages (packages)
+ (cl-reduce
+  (lambda (acc package)
+    (if (package-installed-p package)
+      acc
+      (cons package acc)))
+  packages
+  :initial-value '()))
 
-(when (null package-archive-contents)
-  (package-refresh-contents))
+(let ((missing (cqql/missing-packages cqql/packages)))
+ (when missing
+   (package-refresh-contents)
+   (mapc 'package-install missing)))
 
-(mapc 'cqql/ensure-package-installed cqql/packages)
 
 ;; UI
 
