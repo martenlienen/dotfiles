@@ -1,4 +1,4 @@
-; Disable splash screen
+;te Disable splash screen
 (setq inhibit-startup-message t)
 
 ; Only GC every 20 MB
@@ -129,6 +129,7 @@
 
 ;; yasnippet
 (require 'yasnippet)
+(add-hook 'snippet-mode (lambda () (setq require-final-newline nil)))
 (yas/load-directory "~/.emacs.d/snippets")
 (yas-global-mode t)
 
