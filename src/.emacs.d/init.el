@@ -30,6 +30,7 @@
     flx-ido
     auto-complete
     ac-nrepl
+    ac-math
     company
 
     ; Snippets
@@ -128,6 +129,19 @@
 
 ;; yasnippet
 (yas-global-mode t)
+
+
+;; LaTeX
+
+(require 'ac-math)
+(defun ac-latex-mode-setup ()
+  (setq ac-sources
+        (append '(ac-source-math-unicode ac-source-math-latex ac-source-latex-commands)
+                ac-sources)))
+(add-to-list 'ac-modes 'latex-mode)
+(add-hook 'tex-mode-hook 'auto-complete-mode)
+(add-hook 'tex-mode-hook (lambda () (company-mode nil)))
+(add-hook 'tex-mode-hook 'ac-latex-mode-setup)
 
 
 ;; nrepl
