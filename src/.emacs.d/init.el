@@ -145,8 +145,10 @@
 (add-hook 'LaTeX-mode-hook 'auto-complete-mode)
 (add-hook 'LaTeX-mode-hook (lambda () (company-mode nil)))
 (add-hook 'LaTeX-mode-hook 'ac-latex-mode-setup)
+(add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (setq TeX-electric-sub-and-superscript t)
+(setq TeX-PDF-mode t)
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
 
