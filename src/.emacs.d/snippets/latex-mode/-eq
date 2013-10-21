@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: One line equation
-# key: eq
+# key: -eq
 # --
 \begin{equation}
   $0
