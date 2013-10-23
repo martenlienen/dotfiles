@@ -129,6 +129,7 @@
 
 ;; yasnippet
 (require 'yasnippet)
+(setq yas-fallback-behavior 'call-other-command)
 (add-hook 'snippet-mode (lambda () (setq require-final-newline nil)))
 (yas/load-directory "~/.emacs.d/snippets")
 (yas-global-mode t)
