@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Math script
+# name: \mathscr
 # key: scr
 # --
 \mathscr{$1}$0
