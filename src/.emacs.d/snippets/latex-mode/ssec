@@ -2,4 +2,5 @@
 # name: Subsection
 # key: ssec
 # --
-\subsection{$0}
+\subsection{$1}
+$0
