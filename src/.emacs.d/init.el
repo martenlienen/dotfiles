@@ -1,4 +1,4 @@
-;te Disable splash screen
+; Disable splash screen
 (setq inhibit-startup-message t)
 
 ; Only GC every 20 MB
@@ -23,6 +23,10 @@
 
     ; Searching
     ag
+
+    ; Libraries
+    dash
+    s
 
     ; Autocomplete
     icicles
@@ -54,7 +58,10 @@
     ; LaTeX
     auctex))
 
-(require 'cl)
+(require 'cl-lib)
+(require 'dash)
+(require 's)
+
 (defun cqql/missing-packages (packages)
  (cl-reduce
   (lambda (acc package)
@@ -247,3 +254,13 @@
 (mapc (lambda (hook) (add-hook hook 'enable-paredit-mode)) cqql/lisp-mode-hooks)
 (mapc (lambda (hook) (add-hook hook 'turn-on-eldoc-mode)) cqql/lisp-mode-hooks)
 (mapc (lambda (hook) (add-hook hook 'cqql/indent-on-enter)) '(emacs-lisp-mode-hook clojure-mode-hook))
+
+;; Load config files
+
+(defun cqql/load-files (directory)
+  (mapc
+   (lambda (file)
+     (load file))
+   (-filter (lambda (file) (not (s-ends-with? "." file))) (directory-files directory t))))
+
+(cqql/load-files "~/.emacs.d/configs")
