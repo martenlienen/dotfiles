@@ -59,8 +59,6 @@
     auctex))
 
 (require 'cl-lib)
-(require 'dash)
-(require 's)
 
 (defun cqql/missing-packages (packages)
  (cl-reduce
@@ -75,6 +73,9 @@
  (when missing
    (package-refresh-contents)
    (mapc 'package-install missing)))
+
+(require 'dash)
+(require 's)
 
 
 ;; UI
@@ -99,6 +100,13 @@
 (setq tab-width 2)
 
 
+;; Backups
+
+; Disable backups and autosaves
+(setq backup-inhibited t)
+(setq auto-save-default nil)
+
+
 ;; Enhancing emacs
 
 (require 'auto-complete)
@@ -110,73 +118,6 @@
 (icy-mode t)
 (evil-mode)
 (key-chord-mode t)
-
-
-;; Evil
-
-; Toggle evil mode
-(define-key evil-normal-state-map (kbd "M-^") 'evil-mode)
-(global-set-key (kbd "M-^") 'evil-mode)
-
-; Remap jk to ESC
-(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-
-; Do not overload RET and SPC
-(define-key evil-insert-state-map (kbd "RET") nil)
-(define-key evil-insert-state-map (kbd "SPC") nil)
-
-; , is much easier to type when your fingers are on the motion keys
-(define-key evil-normal-state-map (kbd ",") 'evil-ex)
-
-; Open files
-(define-key evil-normal-state-map (kbd "SPC t") 'projectile-find-file)
-
-; Ace jump
-(define-key evil-normal-state-map (kbd "SPC w") 'ace-jump-word-mode)
-(define-key evil-normal-state-map (kbd "SPC h") 'ace-jump-char-mode)
-
-; Toggle comments
-(define-key evil-visual-state-map (kbd "c") 'comment-or-uncomment-region)
-
-; Searching with ag
-(require 'ag)
-(add-to-list 'ag-arguments "--hidden")
-(define-key evil-normal-state-map (kbd "SPC \\") 'ag-project)
-
-; Magit
-(require 'magit)
-(defun cqql/magit-commit-all ()
-  (interactive)
-  (magit-commit-internal "commit" '("--all")))
-
-(define-key evil-normal-state-map (kbd "SPC g g") 'magit-status)
-(define-key evil-normal-state-map (kbd "SPC g c") 'cqql/magit-commit-all)
-
-; Paredit
-(define-key evil-normal-state-map (kbd "M-l") 'paredit-forward-slurp-sexp)
-(define-key evil-normal-state-map (kbd "M-h") 'paredit-forward-barf-sexp)
-(define-key evil-normal-state-map (kbd "M-k") 'paredit-split-sexp)
-(define-key evil-normal-state-map (kbd "M-j") 'paredit-join-sexps)
-(define-key evil-normal-state-map (kbd "M-n") 'paredit-splice-sexp)
-(define-key evil-normal-state-map (kbd "M-m") 'paredit-raise-sexp)
-(define-key evil-normal-state-map (kbd "M-[") 'paredit-wrap-square)
-(define-key evil-normal-state-map (kbd "M-{") 'paredit-wrap-curly)
-(define-key evil-normal-state-map (kbd "M-(") 'paredit-wrap-round)
-
-; Window management
-(define-key evil-normal-state-map (kbd "C-M-h") 'evil-window-left)
-(define-key evil-normal-state-map (kbd "C-M-j") 'evil-window-down)
-(define-key evil-normal-state-map (kbd "C-M-k") 'evil-window-up)
-(define-key evil-normal-state-map (kbd "C-M-l") 'evil-window-right)
-(define-key evil-normal-state-map (kbd "M-c") 'split-window-horizontally)
-(define-key evil-normal-state-map (kbd "M-s") 'split-window-vertically)
-
-
-;; Backups
-
-; Disable backups and autosaves
-(setq backup-inhibited t)
-(setq auto-save-default nil)
 
 
 ;; Enable lisp mode hooks
