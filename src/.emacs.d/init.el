@@ -70,9 +70,9 @@
   :initial-value '()))
 
 (let ((missing (cqql/missing-packages cqql/packages)))
- (when missing
-   (package-refresh-contents)
-   (mapc 'package-install missing)))
+  (when missing
+    (package-refresh-contents)
+    (mapc 'package-install missing)))
 
 (require 'dash)
 (require 's)
