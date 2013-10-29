@@ -78,14 +78,6 @@ install_oh_my_zsh () {
   manage_git_repository "oh-my-zsh" "$HOME/.oh-my-zsh" "git://github.com/robbyrussell/oh-my-zsh.git"
 }
 
-install_vundle () {
-  manage_git_repository "vundle" "$HOME/.vim/bundle/vundle" "https://github.com/gmarik/vundle.git"
-
-  log
-  log "Install bundles"
-  vim +BundleInstall +qall
-}
-
 # Copies the dotfiles from src to the home directory.
 install_dotfiles () {
   log "Install dotfiles"
@@ -123,8 +115,6 @@ log
 install_ruby_version
 log
 install_oh_my_zsh
-log
-install_vundle
 log
 install_gems
 log
