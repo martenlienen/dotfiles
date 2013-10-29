@@ -112,47 +112,6 @@
 (key-chord-mode t)
 
 
-;; ruby-mode
-
-(add-hook 'ruby-mode-hook 'robe-mode)
-
-
-;; rspec-mode
-
-(require 'rspec-mode)
-(setq rspec-use-rake-when-possible nil)
-(evil-define-key 'normal rspec-mode-keymap (kbd "SPC f") 'rspec-verify-single)
-(evil-define-key 'normal rspec-mode-keymap (kbd "SPC r r") 'rspec-rerun)
-(evil-define-key 'normal rspec-mode-keymap (kbd "SPC r f") 'rspec-verify)
-(evil-define-key 'normal rspec-mode-keymap (kbd "SPC r g") 'rspec-verify-all)
-
-
-;; company-mode
-
-(add-hook 'after-init-hook 'global-company-mode)
-(eval-after-load 'company
-  '(add-to-list 'company-backends 'company-robe))
-
-
-;; yasnippet
-(require 'yasnippet)
-(setq yas-fallback-behavior 'call-other-command)
-(define-key yas-minor-mode-map (kbd "TAB") nil)
-(define-key yas-minor-mode-map (kbd ";") 'yas-expand)
-; Don't append newlines to snippet files
-(add-hook 'snippet-mode (lambda () (setq require-final-newline nil)))
-(yas/load-directory "~/.emacs.d/snippets")
-(yas-global-mode t)
-
-
-;; nrepl
-
-(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
-(add-hook 'nrepl-mode-hook 'auto-complete-mode)
-(add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
-(add-to-list 'ac-modes 'nrepl-mode)
-
-
 ;; Evil
 
 ; Toggle evil mode
