@@ -46,7 +46,7 @@
     ; Lisp stuff
     clojure-mode
     clojure-test-mode
-    nrepl
+    cider
     paredit
     rainbow-delimiters
 
@@ -110,22 +110,6 @@
 (setq auto-save-default nil)
 
 
-;; Enable lisp mode hooks
-(autoload 'enable-paredit-mode "paredit" "Slurp those parens" t)
-
-(defun cqql/indent-on-enter ()
-  (local-set-key (kbd "RET") 'newline-and-indent))
-
-(defvar cqql/lisp-mode-hooks
-  '(emacs-lisp-mode-hook
-    clojure-mode-hook
-    nrepl-mode-hook))
-
-(mapc (lambda (hook) (add-hook hook 'enable-paredit-mode)) cqql/lisp-mode-hooks)
-(mapc (lambda (hook) (add-hook hook 'turn-on-eldoc-mode)) cqql/lisp-mode-hooks)
-(mapc (lambda (hook) (add-hook hook 'cqql/indent-on-enter)) '(emacs-lisp-mode-hook clojure-mode-hook))
-
-
 ;; Load config files
 
 (defun cqql/load-files (directory)
@@ -134,4 +118,4 @@
      (load file))
    (-filter (lambda (file) (not (s-ends-with? "." file))) (directory-files directory t))))
 
-(cqql/load-files "~/.emacs.d/configs")
+;; (cqql/load-files "~/.emacs.d/configs")

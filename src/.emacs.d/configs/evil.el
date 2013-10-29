@@ -1,3 +1,4 @@
+(evil-mode)
 ; Toggle evil mode
 (define-key evil-normal-state-map (kbd "M-^") 'evil-mode)
 (global-set-key (kbd "M-^") 'evil-mode)
@@ -54,5 +55,3 @@
 (define-key evil-normal-state-map (kbd "C-M-l") 'evil-window-right)
 (define-key evil-normal-state-map (kbd "M-c") 'split-window-horizontally)
 (define-key evil-normal-state-map (kbd "M-s") 'split-window-vertically)
-
-(evil-mode)
