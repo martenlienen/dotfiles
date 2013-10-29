@@ -74,6 +74,9 @@
     (package-refresh-contents)
     (mapc 'package-install missing)))
 
+
+;; Global requires
+
 (require 'dash)
 (require 's)
 
@@ -105,14 +108,6 @@
 ; Disable backups and autosaves
 (setq backup-inhibited t)
 (setq auto-save-default nil)
-
-
-;; Enhancing emacs
-
-(require 'auto-complete)
-(projectile-global-mode)
-(icy-mode t)
-(key-chord-mode t)
 
 
 ;; Enable lisp mode hooks
