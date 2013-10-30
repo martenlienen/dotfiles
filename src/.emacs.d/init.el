@@ -17,6 +17,7 @@
     ace-jump-mode
     key-chord
     multiple-cursors
+    smartparens
 
     ; Git wrapper
     magit
@@ -47,7 +48,6 @@
     clojure-mode
     clojure-test-mode
     cider
-    paredit
     rainbow-delimiters
 
     ; Ruby stuff

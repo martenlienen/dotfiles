@@ -37,17 +37,6 @@
 (define-key evil-normal-state-map (kbd "SPC g g") 'magit-status)
 (define-key evil-normal-state-map (kbd "SPC g c") 'cqql/magit-commit-all)
 
-; Paredit
-(define-key evil-normal-state-map (kbd "M-l") 'paredit-forward-slurp-sexp)
-(define-key evil-normal-state-map (kbd "M-h") 'paredit-forward-barf-sexp)
-(define-key evil-normal-state-map (kbd "M-k") 'paredit-split-sexp)
-(define-key evil-normal-state-map (kbd "M-j") 'paredit-join-sexps)
-(define-key evil-normal-state-map (kbd "M-n") 'paredit-splice-sexp)
-(define-key evil-normal-state-map (kbd "M-m") 'paredit-raise-sexp)
-(define-key evil-normal-state-map (kbd "M-[") 'paredit-wrap-square)
-(define-key evil-normal-state-map (kbd "M-{") 'paredit-wrap-curly)
-(define-key evil-normal-state-map (kbd "M-(") 'paredit-wrap-round)
-
 ; Window management
 (define-key evil-normal-state-map (kbd "C-M-h") 'evil-window-left)
 (define-key evil-normal-state-map (kbd "C-M-j") 'evil-window-down)
