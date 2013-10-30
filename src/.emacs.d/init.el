@@ -118,4 +118,4 @@
      (load file))
    (-filter (lambda (file) (not (s-ends-with? "." file))) (directory-files directory t))))
 
-;; (cqql/load-files "~/.emacs.d/configs")
+(cqql/load-files "~/.emacs.d/configs")
