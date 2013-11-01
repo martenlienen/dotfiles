@@ -128,6 +128,7 @@
          (hash (cqql/body-to-hash body))
          (settings (gethash :settings hash))
          (evil-keys (gethash :evil-keys hash))
+         (global-evil-keys (gethash :global-evil-keys hash))
          (hooks (gethash :hooks hash))
          (files (gethash :files hash)))
     `(progn
@@ -144,6 +145,10 @@
                 (lambda (key) `(evil-define-key ',(car key) ,evil-keymap (kbd ,(cadr key)) ',(caddr key)))
                 evil-keys)
              (add-hook ',hook-name ',evil-mode-name)))
+       ,@(when global-evil-keys
+           (-map
+            (lambda (key) `(define-key ,(intern (concat "evil-" (symbol-name (car key)) "-state-map")) (kbd ,(cadr key)) ,(caddr key)))
+           global-evil-keys))
        ,@(when hooks
            (-map
             (lambda (hook) `(add-hook ',hook-name ',hook))

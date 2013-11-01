@@ -1,1 +1,2 @@
-(add-hook 'ruby-mode-hook 'robe-mode)
+(defconfig ruby
+  :hooks (robe-mode))

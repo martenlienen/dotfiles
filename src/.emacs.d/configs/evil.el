@@ -29,15 +29,6 @@
 (add-to-list 'ag-arguments "--hidden")
 (define-key evil-normal-state-map (kbd "SPC \\") 'ag-project)
 
-; Magit
-(require 'magit)
-(defun cqql/magit-commit-all ()
-  (interactive)
-  (magit-commit-internal "commit" '("--all")))
-
-(define-key evil-normal-state-map (kbd "SPC g g") 'magit-status)
-(define-key evil-normal-state-map (kbd "SPC g c") 'cqql/magit-commit-all)
-
 ; Window management
 (define-key evil-normal-state-map (kbd "C-M-h") 'evil-window-left)
 (define-key evil-normal-state-map (kbd "C-M-j") 'evil-window-down)
