@@ -1,4 +1,5 @@
 (evil-mode)
+
 ; Toggle evil mode
 (define-key evil-normal-state-map (kbd "M-^") 'evil-mode)
 (global-set-key (kbd "M-^") 'evil-mode)

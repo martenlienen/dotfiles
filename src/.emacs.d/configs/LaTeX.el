@@ -16,3 +16,10 @@
 (setq TeX-PDF-mode t) ; Produce PDFs
 (setq TeX-save-query nil) ; Autosave files before compilation
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
+
+'(defconfig LaTeX-mode
+  :hooks '(auto-complete-mode ac-latex-mode-setup TeX-souce-correlate-mode LaTeX-math-mode)
+  :settings ((TeX-electric-sub-and-superscript t)
+             (TeX-PDF-mode t)
+             (TeX-save-query nil))
+  :file-suffixes (".tex"))
