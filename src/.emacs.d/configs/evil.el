@@ -4,7 +4,8 @@
 (setq evil-insert-state-map (make-sparse-keymap))
 
 (defconfig evil
-  :global-evil-keys ((normal "," 'evil-ex)
+  :global-evil-keys ((insert "<return>" 'newline-and-indent)
+                     (normal "," 'evil-ex)
                      (visual "c" 'comment-or-uncomment-region)))
 
 ; Remap jk to Esc
