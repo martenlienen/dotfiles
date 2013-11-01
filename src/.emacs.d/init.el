@@ -18,6 +18,7 @@
     key-chord
     multiple-cursors
     smartparens
+    expand-region
 
                                         ; Git wrapper
     magit

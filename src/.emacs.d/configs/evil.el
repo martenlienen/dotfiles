@@ -1,9 +1,10 @@
 (evil-mode)
 
+; Unbind all insert mode keys
+(setq evil-insert-state-map (make-sparse-keymap))
+
 (defconfig evil
-  :global-evil-keys ((insert "RET" nil)
-                     (insert "SPC" nil)
-                     (normal "," 'evil-ex)
+  :global-evil-keys ((normal "," 'evil-ex)
                      (visual "c" 'comment-or-uncomment-region)))
 
 ; Remap jk to Esc
