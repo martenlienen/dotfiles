@@ -12,24 +12,24 @@
   '(; UI
     color-theme-solarized
 
-    ; Editing
+                                        ; Editing
     evil
     ace-jump-mode
     key-chord
     multiple-cursors
     smartparens
 
-    ; Git wrapper
+                                        ; Git wrapper
     magit
 
-    ; Searching
+                                        ; Searching
     ag
 
-    ; Libraries
+                                        ; Libraries
     dash
     s
 
-    ; Autocomplete
+                                        ; Autocomplete
     icicles
     projectile
     flx-ido
@@ -38,36 +38,36 @@
     ac-math
     company
 
-    ; Snippets
+                                        ; Snippets
     yasnippet
 
-    ; Markdown
+                                        ; Markdown
     markdown-mode
 
-    ; Lisp stuff
+                                        ; Lisp stuff
     clojure-mode
     clojure-test-mode
     cider
     rainbow-delimiters
 
-    ; Ruby stuff
+                                        ; Ruby stuff
     robe
     company-inf-ruby
     rspec-mode
 
-    ; LaTeX
+                                        ; LaTeX
     auctex))
 
 (require 'cl-lib)
 
 (defun cqql/missing-packages (packages)
- (cl-reduce
-  (lambda (acc package)
-    (if (package-installed-p package)
-      acc
-      (cons package acc)))
-  packages
-  :initial-value '()))
+  (cl-reduce
+   (lambda (acc package)
+     (if (package-installed-p package)
+         acc
+       (cons package acc)))
+   packages
+   :initial-value '()))
 
 (let ((missing (cqql/missing-packages cqql/packages)))
   (when missing
@@ -85,30 +85,73 @@
 
 (load-theme 'solarized-dark t)
 
-; Color nested parens rainbow-like
+                                        ; Color nested parens rainbow-like
 (global-rainbow-delimiters-mode)
 
-; Disable menu bar
+                                        ; Disable menu bar
 (menu-bar-mode -1)
 
-; Show line numbers
+                                        ; Show line numbers
 (setq linum-format "%3d ")
 (global-linum-mode t)
 
 
 ;; Editing
 
-; Indent with 2 spaces
+                                        ; Indent with 2 spaces
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 
 
 ;; Backups
 
-; Disable backups and autosaves
+                                        ; Disable backups and autosaves
 (setq backup-inhibited t)
 (setq auto-save-default nil)
 
+;; Macros
+(defun cqql/body-to-hash (body)
+  (let ((parts (-partition 2 body))
+        (settings (make-hash-table)))
+    (-map
+     (lambda (tuple) (puthash (car tuple) (cadr tuple) settings))
+     parts)
+    settings))
+
+(defmacro defconfig (mode &rest body)
+  "A macro to configure modes"
+  (let* ((mode-symbol (intern (concat (symbol-name mode) "-mode")))
+         (evil-mode-name (intern (concat "evil-" (symbol-name mode) "-mode")))
+         (evil-keymap (intern (concat (symbol-name evil-mode-name) "-map")))
+         (evil-hook-name (intern (concat (symbol-name evil-mode-name) "-hook")))
+         (hook-name (intern (concat (symbol-name mode) "-mode-hook")))
+         (hash (cqql/body-to-hash body))
+         (settings (gethash :settings hash))
+         (evil-keys (gethash :evil-keys hash))
+         (hooks (gethash :hooks hash))
+         (files (gethash :files hash)))
+    `(progn
+       ,@(when settings
+           (-map
+            (lambda (setting) `(setq ,(car setting) ,(cadr setting)))
+            settings))
+       ,(when evil-keys
+          `(progn
+             (define-minor-mode ,evil-mode-name
+               ,(concat "Evil mode bindings for " (symbol-name mode))
+               :keymap (make-sparse-keymap))
+             ,@(-map
+                (lambda (key) `(evil-define-key ',(car key) ,evil-keymap (kbd ,(cadr key)) ',(caddr key)))
+                evil-keys)
+             (add-hook ',hook-name ',evil-mode-name)))
+       ,@(when hooks
+           (-map
+            (lambda (hook) `(add-hook ',hook-name ',hook))
+            hooks))
+       ,@(when files
+           (-map
+            (lambda (regex) `(add-to-list 'auto-mode-alist '(,regex . ,mode-symbol)))
+            files)))))
 
 ;; Load config files
 
