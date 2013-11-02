@@ -1,6 +1,13 @@
 ; Disable splash screen
 (setq inhibit-startup-message t)
 
+; Disable visual stuff
+(menu-bar-mode -1)
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
+
 ; Only GC every 20 MB
 (setq gc-cons-threshold 20000000)
 
