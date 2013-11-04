@@ -1,6 +1,7 @@
 (require 'yasnippet)
 
 (setq yas-fallback-behavior 'call-other-command)
+(define-key yas-minor-mode-map (kbd "<tab>") nil)
 (define-key yas-minor-mode-map (kbd "TAB") nil)
 (define-key yas-minor-mode-map (kbd ";") 'yas-expand)
 ; Don't append newlines to snippet files
