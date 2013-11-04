@@ -13,13 +13,12 @@ ZSH_THEME="cqql"
 # plugins=(rails git textmate ruby lighthouse)
 plugins=(git gitfast bundler)
 
-source $ZSH/oh-my-zsh.sh
-
-# Customize to your needs...
-
 # Initialize rbenv
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# Load omz after initializing PATH
+source $ZSH/oh-my-zsh.sh
 
 # IntelliJ
 alias idea=~/IDEA12.1/bin/idea.sh
