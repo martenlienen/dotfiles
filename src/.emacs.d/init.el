@@ -150,7 +150,7 @@
                ,(concat "Evil mode bindings for " (symbol-name mode))
                :keymap (make-sparse-keymap))
              ,@(-map
-                (lambda (key) `(evil-define-key ',(car key) ,evil-keymap (kbd ,(cadr key)) ',(caddr key)))
+                (lambda (key) `(evil-define-key ',(car key) ,evil-keymap (kbd ,(cadr key)) ,(caddr key)))
                 evil-keys)
              (add-hook ',hook-name ',evil-mode-name)))
        ,(when global-evil-keys
