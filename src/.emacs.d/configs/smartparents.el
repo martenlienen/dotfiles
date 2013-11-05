@@ -2,6 +2,7 @@
 (require 'smartparens-config)
 
 (smartparens-global-mode t)
+(smartparens-strict-mode t)
 (show-smartparens-global-mode t)
 
 (defconfig smartparens
@@ -11,7 +12,18 @@
               (insert "C-M-S-b" 'sp-previous-sexp)
               (insert "C-M-n" 'sp-down-sexp)
               (insert "C-M-S-n" 'sp-backward-down-sexp)
-              (insert "C-M-p" 'sp-up-sexp)
+              (insert ")" 'sp-up-sexp)
               (insert "C-M-S-p" 'sp-backward-up-sexp)
               (insert "C-M-a" 'sp-beginning-of-sexp)
-              (insert "C-M-e" 'sp-end-of-sexp)))
+              (insert "C-M-e" 'sp-end-of-sexp)
+
+              (insert "C-M-k" 'sp-kill-sexp)
+              (insert "C-M-S-k" 'sp-backward-kill-sexp)
+              (insert "C-M-w" 'sp-copy-sexp)
+              (insert "C-M-t" 'sp-transpose-sexp)
+              (insert "C-M-h" 'sp-backward-slurp-sexp)
+              (insert "C-M-S-h" 'sp-backward-barf-sexp)
+              (insert "C-M-l" 'sp-forward-slurp-sexp)
+              (insert "C-M-S-l" 'sp-forward-barf-sexp)
+              (insert "C-M-j" 'sp-splice-sexp)
+              (insert "C-M-S-j" 'sp-raise-sexp)))
