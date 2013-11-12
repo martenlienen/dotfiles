@@ -177,3 +177,13 @@
    (-filter (lambda (file) (not (s-ends-with? "." file))) (directory-files directory t))))
 
 (cqql/load-files "~/.emacs.d/configs")
+
+(defun cqql/go-to-beginning-of-line-dwim ()
+  (interactive)
+  "Toggle point between beginning of line and first non-whitespace character"
+  (let ((prev-pos (point)))
+    (back-to-indentation)
+    (when (= prev-pos (point))
+      (move-beginning-of-line nil))))
+
+(global-set-key (kbd "C-a") 'cqql/go-to-beginning-of-line-dwim)
