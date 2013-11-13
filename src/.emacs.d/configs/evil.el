@@ -1,3 +1,5 @@
+(setq evil-default-state 'insert)
+
 (evil-mode)
 
 ; Unbind all insert mode keys
