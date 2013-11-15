@@ -200,4 +200,4 @@
     (next-line)))
 
 (global-set-key (kbd "C-a") 'cqql/go-to-beginning-of-line-dwim)
-(global-set-key (kbd "M-S-d") 'cqql/duplicate-line)
+(global-set-key (kbd "M-D") 'cqql/duplicate-line)
