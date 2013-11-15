@@ -186,4 +186,18 @@
     (when (= prev-pos (point))
       (move-beginning-of-line nil))))
 
+(defun cqql/duplicate-line ()
+  (interactive)
+  "Duplicate the current line and move point down"
+  (let ((pos (point)))
+    (move-beginning-of-line nil)
+    (kill-line)
+    (yank)
+    (open-line 1)
+    (next-line)
+    (yank)
+    (goto-char pos)
+    (next-line)))
+
 (global-set-key (kbd "C-a") 'cqql/go-to-beginning-of-line-dwim)
+(global-set-key (kbd "M-S-d") 'cqql/duplicate-line)
