@@ -1,6 +1,13 @@
 ; Disable splash screen
 (setq inhibit-startup-message t)
 
+; y and n instead of yes and no
+(fset 'yes-or-no-p 'y-or-n-p)
+
+; Create new files and buffers without confirmation
+(setq confirm-nonexistent-file-or-buffer nil)
+(setq ido-create-new-buffer 'always)
+
 ; Disable visual stuff
 (menu-bar-mode -1)
 (when (fboundp 'tool-bar-mode)
