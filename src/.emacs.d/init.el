@@ -124,6 +124,7 @@
 (setq backup-inhibited t)
 (setq auto-save-default nil)
 
+
 ;; Macros
 (defun cqql/body-to-hash (body)
   (let ((parts (-partition 2 body))
@@ -206,5 +207,71 @@
     (goto-char pos)
     (next-line)))
 
-(global-set-key (kbd "C-a") 'cqql/go-to-beginning-of-line-dwim)
-(global-set-key (kbd "M-D") 'cqql/duplicate-line)
+(defun cqql/magit-commit-all ()
+  (interactive)
+  (magit-commit-internal "commit" '("--all")))
+
+(defmacro cqql/define-global-keys (&rest bindings)
+  `(progn
+     ,@(-map
+        (lambda (binding) `(global-set-key (kbd ,(car binding)) ,(cadr binding)))
+        bindings)))
+
+(defmacro cqql/define-global-evil-keys (mode &rest bindings)
+  (let ((keymap (intern (format "evil-%s-state-map" mode))))
+    `(progn
+       ,@(-map
+          (lambda (binding) `(define-key ,keymap (kbd ,(car binding)) ,(cadr binding)))
+          bindings))))
+
+(cqql/define-global-keys
+ ("C-a" 'cqql/go-to-beginning-of-line-dwim)
+ ("M-D" 'cqql/duplicate-line)
+ ("M-^" 'evil-mode)
+ ("C->" 'mc/mark-next-like-this)
+ ("C-M->" 'mc/skip-to-next-like-this)
+ ("C-<" 'mc/unmark-next-like-this)
+ ("M-n" 'mc/mark-all-like-this)
+ ("C-M-n" 'mc/edit-lines))
+
+(cqql/define-global-evil-keys insert
+ ("<return>" 'newline-and-indent)
+ ("C-m" 'er/expand-region)
+ ("C-M-m" 'er/contract-region)
+ ("C-x C-f" 'projectile-find-file)
+ ("C-M-f" 'sp-next-sexp)
+ ("C-M-S-f" 'sp-forward-sexp)
+ ("C-M-b" 'sp-backward-sexp)
+ ("C-M-S-b" 'sp-previous-sexp)
+ ("C-M-n" 'sp-down-sexp)
+ ("C-M-S-n" 'sp-backward-down-sexp)
+ (")" 'sp-up-sexp)
+ ("C-M-S-p" 'sp-backward-up-sexp)
+ ("C-M-a" 'sp-beginning-of-sexp)
+ ("C-M-e" 'sp-end-of-sexp)
+ ("C-M-k" 'sp-kill-sexp)
+ ("C-M-S-k" 'sp-backward-kill-sexp)
+ ("C-M-w" 'sp-copy-sexp)
+ ("C-M-t" 'sp-transpose-sexp)
+ ("C-M-h" 'sp-backward-slurp-sexp)
+ ("C-M-S-h" 'sp-backward-barf-sexp)
+ ("C-M-l" 'sp-forward-slurp-sexp)
+ ("C-M-S-l" 'sp-forward-barf-sexp)
+ ("C-M-j" 'sp-splice-sexp)
+ ("C-M-S-j" 'sp-raise-sexp))
+
+(cqql/define-global-evil-keys normal
+ ("," 'evil-ex)
+ ("SPC \\" 'ag-project)
+ ("SPC g g" 'magit-status)
+ ("SPC g c" 'cqql/magit-commit-all)
+ ("SPC w" 'ace-jump-word-mode)
+ ("SPC h" 'ace-jump-char-mode)
+ ("SPC t" 'projectile-find-file)
+ ("SPC f" 'rspec-verify-single)
+ ("SPC r r" 'rspec-rerun)
+ ("SPC r f" 'rspec-verify)
+ ("SPC r g" 'rspec-verify-all))
+
+(cqql/define-global-evil-keys visual
+ ("c" 'comment-or-uncomment-region))
