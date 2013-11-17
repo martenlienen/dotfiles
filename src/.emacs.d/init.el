@@ -211,6 +211,12 @@
   (interactive)
   (magit-commit-internal "commit" '("--all")))
 
+(defmacro cqql/define-keys (keymap &rest bindings)
+  `(progn
+     ,@(-map
+        (lambda (binding) `(define-key ,keymap (kbd ,(car binding)) ,(cadr binding)))
+        bindings)))
+
 (defmacro cqql/define-global-keys (&rest bindings)
   `(progn
      ,@(-map
@@ -219,10 +225,7 @@
 
 (defmacro cqql/define-global-evil-keys (mode &rest bindings)
   (let ((keymap (intern (format "evil-%s-state-map" mode))))
-    `(progn
-       ,@(-map
-          (lambda (binding) `(define-key ,keymap (kbd ,(car binding)) ,(cadr binding)))
-          bindings))))
+    `(cqql/define-keys ,keymap ,@bindings)))
 
 (cqql/define-global-keys
  ("C-a" 'cqql/go-to-beginning-of-line-dwim)
