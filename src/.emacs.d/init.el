@@ -235,12 +235,12 @@
  ("C-M->" 'mc/skip-to-next-like-this)
  ("C-<" 'mc/unmark-next-like-this)
  ("M-n" 'mc/mark-all-like-this)
- ("C-M-n" 'mc/edit-lines))
+ ("C-M-n" 'mc/edit-lines)
+ ("M-m" 'er/expand-region)
+ ("M-M" 'er/contract-region))
 
 (cqql/define-global-evil-keys insert
  ("<return>" 'newline-and-indent)
- ("C-m" 'er/expand-region)
- ("C-M-m" 'er/contract-region)
  ("C-x C-f" 'projectile-find-file)
  ("C-M-f" 'sp-next-sexp)
  ("C-M-S-f" 'sp-forward-sexp)
