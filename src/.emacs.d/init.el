@@ -275,6 +275,3 @@
  ("SPC r r" 'rspec-rerun)
  ("SPC r f" 'rspec-verify)
  ("SPC r g" 'rspec-verify-all))
-
-(cqql/define-global-evil-keys visual
- ("c" 'comment-or-uncomment-region))
