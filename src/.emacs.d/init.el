@@ -66,6 +66,8 @@
     rainbow-delimiters
 
                                         ; Ruby stuff
+    ruby-additional
+    ruby-electric
     robe
     company-inf-ruby
     rspec-mode
