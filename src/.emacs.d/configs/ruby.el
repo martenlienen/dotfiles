@@ -1,2 +1,3 @@
 (defconfig ruby
-  :hooks (robe-mode))
+  :hooks (robe-mode)
+  :files ("Gemfile" "\\.gemspec\\'"))
