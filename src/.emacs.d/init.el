@@ -242,7 +242,6 @@
  ("M-M" 'er/contract-region))
 
 (cqql/define-global-evil-keys insert
- ("<return>" 'newline-and-indent)
  ("C-x C-f" 'projectile-find-file)
  ("C-M-f" 'sp-next-sexp)
  ("C-M-S-f" 'sp-forward-sexp)
