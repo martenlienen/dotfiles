@@ -23,10 +23,7 @@
 (package-initialize)
 
 (defvar cqql/packages
-  '(; UI
-    color-theme-solarized
-
-                                        ; Editing
+  '(                                    ; Editing
     evil
     ace-jump-mode
     key-chord
@@ -100,7 +97,9 @@
 
 ;; UI
 
-(load-theme 'solarized-dark t)
+(require 'color-theme)
+(load "~/.emacs.d/wombat.el")
+(load-theme 'wombat t)
 
                                         ; Color nested parens rainbow-like
 (global-rainbow-delimiters-mode)
