@@ -241,7 +241,8 @@
  ("M-n" 'mc/mark-all-like-this)
  ("C-M-n" 'mc/edit-lines)
  ("M-m" 'er/expand-region)
- ("M-M" 'er/contract-region))
+ ("M-M" 'er/contract-region)
+ ("C-c C-a" 'ag-project))
 
 (cqql/define-global-evil-keys insert
  ("C-x C-f" 'projectile-find-file)
