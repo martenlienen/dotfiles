@@ -70,6 +70,7 @@
     company-inf-ruby
     rspec-mode
     haml-mode
+    scss-mode
 
                                         ; LaTeX
     auctex))
