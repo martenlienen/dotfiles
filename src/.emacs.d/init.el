@@ -69,6 +69,7 @@
     robe
     company-inf-ruby
     rspec-mode
+    haml-mode
 
                                         ; LaTeX
     auctex))
