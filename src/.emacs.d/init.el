@@ -127,7 +127,7 @@
                                         ; Disable backups and autosaves
 (setq backup-inhibited t)
 (setq auto-save-default nil)
-
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Macros
 (defun cqql/body-to-hash (body)
