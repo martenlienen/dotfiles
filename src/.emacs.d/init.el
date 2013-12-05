@@ -121,7 +121,7 @@
 
                                         ; Indent with 2 spaces
 (setq-default indent-tabs-mode nil)
-(setq tab-width 2)
+(setq-default tab-width 2)
 
 
 ;; Backups
