@@ -72,6 +72,8 @@
     haml-mode
     scss-mode
 
+    coffee-mode
+
                                         ; LaTeX
     auctex))
 
@@ -167,7 +169,7 @@
              (add-hook ',hook-name ',evil-mode-name)))
        ,(when global-evil-keys
           `(eval-after-load "evil"
-             '(progn 
+             '(progn
                 ,@(-map
                    (lambda (key) `(define-key ,(intern (concat "evil-" (symbol-name (car key)) "-state-map")) (kbd ,(cadr key)) ,(caddr key)))
                    global-evil-keys))))
