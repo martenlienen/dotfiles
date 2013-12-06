@@ -71,6 +71,7 @@
     rspec-mode
     haml-mode
     scss-mode
+    jade-mode
 
     coffee-mode
 
