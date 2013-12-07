@@ -72,6 +72,7 @@
     haml-mode
     scss-mode
     jade-mode
+    less-css-mode
 
     coffee-mode
 
