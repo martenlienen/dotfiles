@@ -6,3 +6,6 @@ tags
 
 # Ignore files
 .agignore
+
+# Emacs backups
+.#*
