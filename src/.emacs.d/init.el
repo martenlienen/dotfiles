@@ -1,61 +1,14 @@
 (push "~/.emacs.d" load-path)
+
+;; Load/install packages
 (require 'packages)
 
-;; Disable splash screen
-(setq inhibit-startup-message t)
-
-;; y and n instead of yes and no
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; Create new files and buffers without confirmation
-(setq confirm-nonexistent-file-or-buffer nil)
-(setq ido-create-new-buffer 'always)
-
-;; Disable visual stuff
-(menu-bar-mode -1)
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
-
-;; Only GC every 20 MB
-(setq gc-cons-threshold 20000000)
+;; Set global/emacs-wide settings
+(require 'globals)
 
 ;; Global requires
-
 (require 'dash)
 (require 's)
-
-
-;; UI
-
-(require 'color-theme)
-(load "~/.emacs.d/wombat.el")
-(load-theme 'wombat t)
-
-;; Color nested parens rainbow-like
-(global-rainbow-delimiters-mode)
-
-;; Disable menu bar
-(menu-bar-mode -1)
-
-;; Show line numbers
-(setq linum-format "%3d ")
-(global-linum-mode t)
-
-
-;; Editing
-
-;; Indent with 2 spaces
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
-(setq js-indent-level 2)
-
-;; Backups
-;; Disable backups and autosaves
-(setq backup-inhibited t)
-(setq auto-save-default nil)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Macros
 (defun cqql/body-to-hash (body)
@@ -159,51 +112,4 @@
   (let ((keymap (intern (format "evil-%s-state-map" mode))))
     `(cqql/define-keys ,keymap ,@bindings)))
 
-(cqql/define-global-keys
- ("C-a" 'cqql/go-to-beginning-of-line-dwim)
- ("M-D" 'cqql/duplicate-line)
- ("M-^" 'evil-mode)
- ("C->" 'mc/mark-next-like-this)
- ("C-M->" 'mc/skip-to-next-like-this)
- ("C-<" 'mc/unmark-next-like-this)
- ("M-n" 'mc/mark-all-like-this)
- ("C-M-n" 'mc/edit-lines)
- ("M-m" 'er/expand-region)
- ("M-M" 'er/contract-region)
- ("C-c C-a" 'ag-project))
-
-(cqql/define-global-evil-keys insert
-                              ("C-x C-f" 'projectile-find-file)
-                              ("C-M-f" 'sp-next-sexp)
-                              ("C-M-S-f" 'sp-forward-sexp)
-                              ("C-M-b" 'sp-backward-sexp)
-                              ("C-M-S-b" 'sp-previous-sexp)
-                              ("C-M-n" 'sp-down-sexp)
-                              ("C-M-S-n" 'sp-backward-down-sexp)
-                              (")" 'sp-up-sexp)
-                              ("C-M-S-p" 'sp-backward-up-sexp)
-                              ("C-M-a" 'sp-beginning-of-sexp)
-                              ("C-M-e" 'sp-end-of-sexp)
-                              ("C-M-k" 'sp-kill-sexp)
-                              ("C-M-S-k" 'sp-backward-kill-sexp)
-                              ("C-M-w" 'sp-copy-sexp)
-                              ("C-M-t" 'sp-transpose-sexp)
-                              ("C-M-h" 'sp-backward-slurp-sexp)
-                              ("C-M-S-h" 'sp-backward-barf-sexp)
-                              ("C-M-l" 'sp-forward-slurp-sexp)
-                              ("C-M-S-l" 'sp-forward-barf-sexp)
-                              ("C-M-j" 'sp-splice-sexp)
-                              ("C-M-S-j" 'sp-raise-sexp))
-
-(cqql/define-global-evil-keys normal
-                              ("," 'evil-ex)
-                              ("SPC \\" 'ag-project)
-                              ("SPC g g" 'magit-status)
-                              ("SPC g c" 'cqql/magit-commit-all)
-                              ("SPC w" 'ace-jump-word-mode)
-                              ("SPC h" 'ace-jump-char-mode)
-                              ("SPC t" 'projectile-find-file)
-                              ("SPC f" 'rspec-verify-single)
-                              ("SPC r r" 'rspec-rerun)
-                              ("SPC r f" 'rspec-verify)
-                              ("SPC r g" 'rspec-verify-all))
+(require 'bindings)
