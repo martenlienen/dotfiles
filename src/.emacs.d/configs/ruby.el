@@ -1,6 +1,8 @@
 (require 'ruby-additional)
 (require 'ruby-electric)
 
-(defconfig ruby
-  :hooks (robe-mode ruby-electric-mode)
-  :files ("Gemfile" "\\.gemspec\\'"))
+(add-hook 'ruby-mode-hook 'robe-mode)
+(add-hook 'ruby-mode-hook 'ruby-electric-mode)
+
+(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))

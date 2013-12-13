@@ -1,2 +1,1 @@
-(defconfig emacs-lisp
-  :hooks (eldoc-mode))
+(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
