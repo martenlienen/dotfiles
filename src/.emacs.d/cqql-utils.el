@@ -25,10 +25,6 @@
     (goto-char pos)
     (next-line)))
 
-(defun cqql/magit-commit-all ()
-  (interactive)
-  (magit-commit-internal "commit" '("--all")))
-
 (defmacro cqql/define-keys (keymap &rest bindings)
   `(progn
      ,@(-map

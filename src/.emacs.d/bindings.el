@@ -36,7 +36,6 @@
                               ("," 'evil-ex)
                               ("SPC \\" 'ag-project)
                               ("SPC g g" 'magit-status)
-                              ("SPC g c" 'cqql/magit-commit-all)
                               ("SPC w" 'ace-jump-word-mode)
                               ("SPC h" 'ace-jump-char-mode)
                               ("SPC t" 'projectile-find-file)
