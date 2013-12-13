@@ -25,6 +25,20 @@
     (goto-char pos)
     (next-line)))
 
+(defun cqql/open-line ()
+  (interactive)
+  "Create a new line below and put point into it"
+  (move-end-of-line nil)
+  (newline-and-indent))
+
+(defun cqql/open-line-above ()
+  (interactive)
+  "Create a new line above point and move point into it"
+  (move-beginning-of-line nil)
+  (newline)
+  (previous-line)
+  (indent-according-to-mode))
+
 (defmacro cqql/define-keys (keymap &rest bindings)
   `(progn
      ,@(-map

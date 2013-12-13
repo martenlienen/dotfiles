@@ -9,6 +9,8 @@
  ("C-M-n" 'mc/edit-lines)
  ("M-m" 'er/expand-region)
  ("M-M" 'er/contract-region)
+ ("C-o" 'cqql/open-line)
+ ("C-S-o" 'cqql/open-line-above)
  ("C-c C-a" 'ag-project)
  ("C-x C-f" 'projectile-find-file)
  ("<M-return>" 'magit-status)
