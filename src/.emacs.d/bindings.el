@@ -11,6 +11,7 @@
  ("M-M" 'er/contract-region)
  ("C-c C-a" 'ag-project)
  ("C-x C-f" 'projectile-find-file)
+ ("<M-return>" 'magit-status)
  ("C-M-f" 'sp-next-sexp)
  ("C-M-S-f" 'sp-forward-sexp)
  ("C-M-b" 'sp-backward-sexp)
