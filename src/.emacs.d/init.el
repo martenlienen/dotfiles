@@ -1,3 +1,6 @@
+(push "~/.emacs.d" load-path)
+(require 'packages)
+
 ;; Disable splash screen
 (setq inhibit-startup-message t)
 
@@ -17,84 +20,6 @@
 
 ;; Only GC every 20 MB
 (setq gc-cons-threshold 20000000)
-
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(package-initialize)
-(setq package-enable-at-startup nil)
-
-(defvar cqql/packages
-  '(                                   ;; Editing
-    evil
-    ace-jump-mode
-    key-chord
-    multiple-cursors
-    smartparens
-    expand-region
-
-    ;; Git wrapper
-    magit
-
-    ;; Searching
-    ag
-
-    ;; Libraries
-    dash
-    s
-
-    ;; Autocomplete
-    icicles
-    projectile
-    flx-ido
-    auto-complete
-    ac-nrepl
-    ac-math
-    company
-
-    ;; Snippets
-    yasnippet
-
-    ;; Markdown
-    markdown-mode
-
-    ;; Lisp stuff
-    clojure-mode
-    clojure-test-mode
-    cider
-    rainbow-delimiters
-
-    ;; Ruby stuff
-    ruby-additional
-    ruby-electric
-    robe
-    company-inf-ruby
-    rspec-mode
-    haml-mode
-    scss-mode
-    jade-mode
-    less-css-mode
-
-    coffee-mode
-
-    ;; LaTeX
-    auctex))
-
-(require 'cl-lib)
-
-(defun cqql/missing-packages (packages)
-  (cl-reduce
-   (lambda (acc package)
-     (if (package-installed-p package)
-         acc
-       (cons package acc)))
-   packages
-   :initial-value '()))
-
-(let ((missing (cqql/missing-packages cqql/packages)))
-  (when missing
-    (package-refresh-contents)
-    (mapc 'package-install missing)))
-
 
 ;; Global requires
 
