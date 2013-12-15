@@ -50,10 +50,6 @@ install_ruby_build () {
   manage_git_repository "ruby-build" "$HOME/.rbenv/plugins/ruby-build" "https://github.com/sstephenson/ruby-build.git"
 }
 
-install_rbenv_ctags () {
-  manage_git_repository "rbenv-ctags" "$HOME/.rbenv/plugins/rbenv-ctags" "https://github.com/tpope/rbenv-ctags.git"
-}
-
 install_ruby_version () {
   is_ruby_version_installed $RUBY_VERSION
 
@@ -109,8 +105,6 @@ log
 install_rbenv
 log
 install_ruby_build
-log
-install_rbenv_ctags
 log
 install_ruby_version
 log
