@@ -40,6 +40,7 @@
 ;; Disable backups and autosaves
 (setq backup-inhibited t)
 (setq auto-save-default nil)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(add-hook 'before-save-hook 'cqql/trim-whitespace)
 
 (provide 'globals)

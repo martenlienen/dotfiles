@@ -35,6 +35,11 @@
  ("C-M-j" 'sp-splice-sexp)
  ("C-M-S-j" 'sp-raise-sexp))
 
+(cqql/define-keys yas-minor-mode-map
+                  ("<tab>" nil)
+                  ("TAB" nil)
+                  (";" 'yas-expand))
+
 (cqql/define-global-evil-keys normal
                               ("," 'evil-ex)
                               ("SPC \\" 'ag-project)

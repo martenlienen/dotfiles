@@ -39,6 +39,13 @@
   (previous-line)
   (indent-according-to-mode))
 
+(defvar cqql/no-trimming-modes '()
+  "A list of modes, that should not be whitespace-trimmed")
+
+(defun cqql/trim-whitespace ()
+  (when (not (-contains? cqql/no-trimming-modes major-mode))
+    (delete-trailing-whitespace)))
+
 (defmacro cqql/define-keys (keymap &rest bindings)
   `(progn
      ,@(-map
