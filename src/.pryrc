@@ -11,9 +11,9 @@ Pry.commands.alias_command "n", "next" rescue nil
 Pry.prompt = [proc { |obj, nest_level, _| "#{RUBY_VERSION} (#{obj}):#{nest_level} > " }, proc { |obj, nest_level, _| "#{RUBY_VERSION} (#{obj}):#{nest_level} * " }]
 
 # === Listing config ===
-# Better colors - by default the headings for methods are too 
+# Better colors - by default the headings for methods are too
 # similar to method name colors leading to a "soup"
-# These colors are optimized for use with Solarized scheme 
+# These colors are optimized for use with Solarized scheme
 # for your terminal
 Pry.config.ls.heading_color = :magenta
 Pry.config.ls.public_method_color = :green
@@ -87,7 +87,7 @@ end
 
 # === COLOR CUSTOMIZATION ===
 # Everything below this line is for customizing colors, you have to use the ugly
-# color codes, but such is life. 
+# color codes, but such is life.
 CodeRay.scan("example", :ruby).term # just to load necessary files
 # Token colors pulled from: https://github.com/rubychan/coderay/blob/master/lib/coderay/encoders/terminal.rb
 TERM_TOKEN_COLORS = {
@@ -152,20 +152,9 @@ TERM_TOKEN_COLORS = {
         :type => "1;34",
         :value => "36",
         :variable => "34",
-        
+
         :insert => "42",
         :delete => "41",
         :change => "44",
         :head => "45"
 }
-
-module CodeRay
-    module Encoders
-        class Terminal < Encoder
-            # override old colors
-            TERM_TOKEN_COLORS.each_pair do |key, value|
-                TOKEN_COLORS[key] = value
-            end
-        end
-    end
-end
