@@ -20,9 +20,6 @@
 ;; UI
 (cqql/add-packages smart-mode-line)
 
-;; Syntax checking
-(cqql/add-packages flycheck)
-
 ;; Snippets
 (cqql/add-packages yasnippet)
 
