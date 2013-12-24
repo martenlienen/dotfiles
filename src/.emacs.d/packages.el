@@ -17,6 +17,9 @@
                    smartparens
                    expand-region)
 
+;; UI
+(cqql/add-packages smart-mode-line)
+
 ;; Syntax checking
 (cqql/add-packages flycheck)
 
