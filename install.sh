@@ -2,7 +2,7 @@
 
 # Configuration
 # Which ruby version to install
-RUBY_VERSION="2.0.0-p247"
+RUBY_VERSION="2.1.0-rc1"
 
 # Which gems to install
 GEMS="pry pry-rails awesome_print bundler spring spring-commands-rspec"
@@ -38,7 +38,20 @@ manage_git_repository () {
     (cd $2 && git pull | indent)
   else
     log "Clone $1"
+
+    # Allow cloning into existing directories
+    name=$(mktemp -u)
+
+    if [[ -d $2 ]]; then
+      mv $2 $name
+    fi
+
     git clone $3 $2 | indent
+
+    if [[ -d $name ]]; then
+      cp -r $name/* $2
+      rm -r $name
+    fi
   fi
 }
 
