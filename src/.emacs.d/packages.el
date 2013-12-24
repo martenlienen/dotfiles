@@ -18,7 +18,8 @@
                    expand-region)
 
 ;; UI
-(cqql/add-packages smart-mode-line)
+(cqql/add-packages color-theme
+		   smart-mode-line)
 
 ;; Snippets
 (cqql/add-packages yasnippet)
