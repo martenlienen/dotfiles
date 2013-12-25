@@ -50,8 +50,7 @@
                    rainbow-delimiters)
 
 ;; Ruby
-(cqql/add-packages ruby-additional
-                   ruby-electric
+(cqql/add-packages enh-ruby-mode
                    robe
                    company-inf-ruby
                    rspec-mode)
