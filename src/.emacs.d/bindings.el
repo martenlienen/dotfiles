@@ -20,7 +20,7 @@
  ("C-M-S-b" 'sp-previous-sexp)
  ("C-M-n" 'sp-down-sexp)
  ("C-M-S-n" 'sp-backward-down-sexp)
- (")" 'sp-up-sexp)
+ ("C-M-p" 'sp-up-sexp)
  ("C-M-S-p" 'sp-backward-up-sexp)
  ("C-M-a" 'sp-beginning-of-sexp)
  ("C-M-e" 'sp-end-of-sexp)
