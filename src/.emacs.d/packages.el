@@ -15,7 +15,8 @@
                    key-chord
                    multiple-cursors
                    smartparens
-                   expand-region)
+                   expand-region
+                   wrap-region)
 
 ;; UI
 (cqql/add-packages color-theme
