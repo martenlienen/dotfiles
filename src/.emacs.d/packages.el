@@ -36,7 +36,6 @@
 
 ;; Searching
 (cqql/add-packages ag
-                   icicles
                    projectile
                    flx-ido)
 

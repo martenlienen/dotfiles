@@ -13,7 +13,7 @@
  ("C-S-o" 'cqql/open-line-above)
  ("C-x C-a" 'ag-project)
  ("C-x C-f" 'projectile-find-file)
- ("M-S" 'ace-jump-word-mode)
+ ("M-s" 'ace-jump-word-mode)
  ("<M-return>" 'magit-status))
 
 (cqql/define-keys smartparens-mode-map
