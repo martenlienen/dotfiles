@@ -37,7 +37,8 @@
 ;; Searching
 (cqql/add-packages ag
                    projectile
-                   flx-ido)
+                   helm
+                   helm-projectile)
 
 ;; Markdown
 (cqql/add-packages markdown-mode)
