@@ -49,8 +49,7 @@
                    rainbow-delimiters)
 
 ;; Ruby
-(cqql/add-packages enh-ruby-mode
-                   robe
+(cqql/add-packages robe
                    company-inf-ruby
                    rspec-mode)
 
