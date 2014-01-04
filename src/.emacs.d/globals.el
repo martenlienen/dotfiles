@@ -33,9 +33,10 @@
 (setq gc-cons-threshold 20000000)
 
 ;; Indent with 2 spaces
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
-(setq js-indent-level 2)
+(setq-default indent-tabs-mode nil
+              tab-width 2
+              js-indent-level 2
+              css-indent-offset 2)
 
 ;; Disable backups and autosaves
 (setq backup-inhibited t)
