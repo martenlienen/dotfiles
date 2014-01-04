@@ -1,4 +1,5 @@
 (cqql/define-global-keys
+ ("M-/" 'hippie-expand)
  ("C-a" 'cqql/go-to-beginning-of-line-dwim)
  ("M-D" 'cqql/duplicate-line)
  ("M-^" 'evil-mode)
