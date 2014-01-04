@@ -13,7 +13,7 @@
  ("C-o" 'cqql/open-line)
  ("C-S-o" 'cqql/open-line-above)
  ("C-x C-a" 'ag-project)
- ("C-x C-f" 'projectile-find-file)
+ ("C-x C-f" 'helm-projectile)
  ("M-s" 'ace-jump-word-mode)
  ("<M-return>" 'magit-status))
 
