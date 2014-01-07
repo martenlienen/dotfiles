@@ -87,6 +87,15 @@ install_oh_my_zsh () {
   manage_git_repository "oh-my-zsh" "$HOME/.oh-my-zsh" "git://github.com/robbyrussell/oh-my-zsh.git"
 }
 
+install_cask () {
+  manage_git_repository "cask" "$HOME/.cask" "git://github.com/cask/cask.git"
+}
+
+install_emacs_packages () {
+  log "Install emacs packages"
+  (cd "$HOME/.emacs.d" && cask)
+}
+
 # Copies the dotfiles from src to the home directory.
 install_dotfiles () {
   log "Install dotfiles"
@@ -122,6 +131,10 @@ log
 install_ruby_version
 log
 install_oh_my_zsh
+log
+install_cask
+log
+install_emacs_packages
 log
 install_gems
 log

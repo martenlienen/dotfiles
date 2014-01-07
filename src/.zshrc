@@ -17,6 +17,9 @@ plugins=(git gitfast bundler)
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - --no-rehash)"
 
+# Initialize cask
+PATH="$HOME/.cask/bin:$PATH"
+
 # Load omz after initializing PATH
 source $ZSH/oh-my-zsh.sh
 
