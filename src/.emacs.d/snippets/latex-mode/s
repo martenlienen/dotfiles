@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Set
+# key: s
+# --
+\\{ $0 \\}
