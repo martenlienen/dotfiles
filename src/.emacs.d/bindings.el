@@ -50,6 +50,12 @@
                   ("TAB" nil)
                   (";" 'yas-expand))
 
+(cqql/define-keys LaTeX-mode-map
+                  ("C-c u" (lambda () (interactive) (insert "ü")))
+                  ("C-c a" (lambda () (interactive) (insert "ä")))
+                  ("C-c o" (lambda () (interactive) (insert "ö")))
+                  ("C-c s" (lambda () (interactive) (insert "ß"))))
+
 (cqql/define-global-evil-keys normal ("," 'evil-ex))
 
 (provide 'bindings)
