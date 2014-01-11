@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: List labeled a, b, c, ...
+# key: ablist
+# --
+\begin{enumerate}[label={\alph*)}]
+  $0
+\end{enumerate}
