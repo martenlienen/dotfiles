@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: R^n
+# key: rn
+# --
+\mathbb{R}^{n}
