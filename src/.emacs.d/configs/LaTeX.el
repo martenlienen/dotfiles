@@ -12,7 +12,8 @@
 (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
 
 (setq TeX-electric-sub-and-superscript t
-      TeX-save-query nil)
+      TeX-save-query nil
+      TeX-view-program-selection '((output-pdf "Okular")))
 
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
