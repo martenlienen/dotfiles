@@ -1,6 +1,9 @@
+;; Workaround for smartparens overwriting `
+(require 'smartparens-latex)
+
+(require 'latex)
 (require 'tex-site)
 (require 'ac-math)
-(require 'latex)
 
 (add-hook 'LaTeX-mode-hook 'auto-complete-mode)
 (add-hook 'LaTeX-mode-hook 'ax-latex-mode-setup)
