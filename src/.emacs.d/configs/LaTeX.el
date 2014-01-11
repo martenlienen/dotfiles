@@ -9,9 +9,9 @@
 (add-hook 'LaTeX-mode-hook 'ax-latex-mode-setup)
 (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
 
 (setq TeX-electric-sub-and-superscript t
-      TeX-PDF-mode t
       TeX-save-query nil)
 
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
