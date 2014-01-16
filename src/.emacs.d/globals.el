@@ -10,7 +10,7 @@
 
 (require 'color-theme)
 (load "wombat.el")
-(load-theme 'wombat t)
+(load-theme 'brin t)
 
 ;; Color nested parens rainbow-like
 (global-rainbow-delimiters-mode)

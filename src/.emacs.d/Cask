@@ -16,6 +16,7 @@
 
 ;; UI
 (depends-on "color-theme")
+(depends-on "sublime-themes")
 (depends-on "smart-mode-line")
 
 ;; Snippets
