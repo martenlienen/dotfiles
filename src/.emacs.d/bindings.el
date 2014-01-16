@@ -15,7 +15,8 @@
  ("C-x C-a" 'ag-project)
  ("C-x C-f" 'projectile-find-file)
  ("M-s" 'ace-jump-word-mode)
- ("<M-return>" 'magit-status))
+ ("<M-return>" 'magit-status)
+ ("M-x" 'smex))
 
 (cqql/define-keys smartparens-mode-map
                   ("C-M-f" 'sp-next-sexp)

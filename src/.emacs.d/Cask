@@ -18,6 +18,7 @@
 (depends-on "color-theme")
 (depends-on "sublime-themes")
 (depends-on "smart-mode-line")
+(depends-on "smex")
 
 ;; Snippets
 (depends-on "yasnippet")
