@@ -2,4 +2,4 @@
 # name: R^n
 # key: rn
 # --
-\mathbb{R}^{n}
+\mathbb{R}^{${1:n}}$0
