@@ -41,10 +41,10 @@
                   ("C-M-S-j" 'sp-raise-sexp))
 
 (cqql/define-keys ruby-mode-map
-                  ("C-c C-f" 'rspec-verify-single)
-                  ("C-c C-r C-r" 'rspec-rerun)
-                  ("C-c C-r C-f" 'rspec-verify)
-                  ("C-c C-r C-g" 'rspec-verify-all))
+                  ("C-c f" 'rspec-verify-single)
+                  ("C-c r r" 'rspec-rerun)
+                  ("C-c r f" 'rspec-verify)
+                  ("C-c r g" 'rspec-verify-all))
 
 (cqql/define-keys yas-minor-mode-map
                   ("<tab>" nil)
