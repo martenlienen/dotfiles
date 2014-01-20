@@ -1,4 +1,5 @@
 (require 'ruby-mode)
+(require 'ruby-electric)
 
 (setf ruby-deep-indent-paren nil
       ruby-insert-encoding-magic-comment nil)
