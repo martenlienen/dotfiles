@@ -1,8 +1,8 @@
-(push "~/.emacs.d" load-path)
-
 ;; Load/install packages
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
+
+(push "~/.emacs.d" load-path)
 
 (require 'cqql-utils)
 
