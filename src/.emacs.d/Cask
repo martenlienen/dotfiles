@@ -53,6 +53,7 @@
 (depends-on "robe")
 (depends-on "company-inf-ruby")
 (depends-on "rspec-mode")
+(depends-on "yard-mode")
 
 ;; HTML replacements
 (depends-on "haml-mode")
