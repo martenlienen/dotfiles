@@ -51,7 +51,6 @@
 (depends-on "rainbow-delimiters")
 
 ;; Ruby
-(depends-on "ruby-mode")
 (depends-on "robe")
 (depends-on "company-inf-ruby")
 (depends-on "rspec-mode")
