@@ -18,8 +18,8 @@
  ("M-x" 'smex))
 
 (cqql/define-keys smartparens-mode-map
-                  ("C-M-f" 'sp-next-sexp)
-                  ("C-M-S-f" 'sp-forward-sexp)
+                  ("C-M-f" 'sp-forward-sexp)
+                  ("C-M-S-f" 'sp-next-sexp)
                   ("C-M-b" 'sp-backward-sexp)
                   ("C-M-S-b" 'sp-previous-sexp)
                   ("C-M-n" 'sp-down-sexp)
