@@ -19,16 +19,15 @@
 (depends-on "color-theme")
 (depends-on "sublime-themes")
 (depends-on "smart-mode-line")
+(depends-on "rainbow-delimiters")
 (depends-on "smex")
 
 ;; Snippets
 (depends-on "yasnippet")
 
 ;; Autocomplete
-(depends-on "auto-complete")
-(depends-on "ac-nrepl")
-(depends-on "ac-math")
 (depends-on "company")
+(depends-on "company-cider")
 
 ;; VCS
 (depends-on "magit")
@@ -46,7 +45,6 @@
 (depends-on "clojure-mode")
 (depends-on "clojure-test-mode")
 (depends-on "cider")
-(depends-on "rainbow-delimiters")
 
 ;; Ruby
 (depends-on "robe")
