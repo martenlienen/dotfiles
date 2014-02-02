@@ -1,6 +1,6 @@
 (cqql/define-global-keys
- ("M-r" 'hippie-expand)
- ("M-i" 'company-complete)
+ ("M-/" 'hippie-expand)
+ ("C-M-SPC" 'company-complete)
  ("C-a" 'cqql/go-to-beginning-of-line-dwim)
  ("M-D" 'cqql/duplicate-line)
  ("C->" 'mc/mark-next-like-this)
