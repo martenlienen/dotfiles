@@ -2,7 +2,6 @@
  ("M-/" 'hippie-expand)
  ("C-a" 'cqql/go-to-beginning-of-line-dwim)
  ("M-D" 'cqql/duplicate-line)
- ("M-^" 'evil-mode)
  ("C->" 'mc/mark-next-like-this)
  ("C-M->" 'mc/skip-to-next-like-this)
  ("C-<" 'mc/unmark-next-like-this)
@@ -59,7 +58,5 @@
                   ("C-c o" (lambda () (interactive) (insert "ö")))
                   ("C-c O" (lambda () (interactive) (insert "Ö")))
                   ("C-c s" (lambda () (interactive) (insert "ß"))))
-
-(cqql/define-global-evil-keys normal ("," 'evil-ex))
 
 (provide 'bindings)

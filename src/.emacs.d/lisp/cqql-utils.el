@@ -58,8 +58,4 @@
         (lambda (binding) `(global-set-key (kbd ,(car binding)) ,(cadr binding)))
         bindings)))
 
-(defmacro cqql/define-global-evil-keys (mode &rest bindings)
-  (let ((keymap (intern (format "evil-%s-state-map" mode))))
-    `(cqql/define-keys ,keymap ,@bindings)))
-
 (provide 'cqql-utils)

@@ -9,9 +9,7 @@
 (depends-on "editorconfig")
 
 ;; General editing
-(depends-on "evil")
 (depends-on "ace-jump-mode")
-(depends-on "key-chord")
 (depends-on "multiple-cursors")
 (depends-on "smartparens")
 (depends-on "expand-region")
