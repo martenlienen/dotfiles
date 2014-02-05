@@ -14,6 +14,7 @@
  ("C-S-o" 'cqql/open-line-above)
  ("C-x C-a" 'ag-project)
  ("C-x C-f" 'projectile-find-file)
+ ("C-x C-S-f" 'find-file)
  ("M-s" 'ace-jump-word-mode)
  ("<M-return>" 'magit-status)
  ("M-x" 'smex))
