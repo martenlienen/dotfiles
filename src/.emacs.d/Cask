@@ -35,6 +35,7 @@
 ;; Searching
 (depends-on "ag")
 (depends-on "projectile")
+(depends-on "helm")
 (depends-on "ido-ubiquitous")
 (depends-on "flx-ido")
 
