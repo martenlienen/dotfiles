@@ -1,7 +1,6 @@
 (require 'ruby-mode)
 
-(setf ruby-deep-indent-paren nil
-      ruby-insert-encoding-magic-comment nil)
+(setf ruby-insert-encoding-magic-comment nil)
 
 (add-hook 'ruby-mode-hook 'robe-mode)
 (add-hook 'ruby-mode-hook 'ruby-electric-mode)
