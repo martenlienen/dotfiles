@@ -23,9 +23,6 @@ PATH="$HOME/.cask/bin:$PATH"
 # Load omz after initializing PATH
 source $ZSH/oh-my-zsh.sh
 
-# IntelliJ
-alias idea=~/IDEA12.1/bin/idea.sh
-
 # Android SDK
 export PATH=/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$PATH
 
