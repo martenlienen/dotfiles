@@ -64,5 +64,8 @@
 ;; Javascript replacements
 (depends-on "coffee-mode")
 
+;; YAML
+(depends-on "yaml-mode")
+
 ;; LaTeX
 (depends-on "auctex")
