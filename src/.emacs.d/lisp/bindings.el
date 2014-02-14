@@ -17,7 +17,8 @@
  ("C-x C-S-f" 'find-file)
  ("M-s" 'ace-jump-word-mode)
  ("<M-return>" 'magit-status)
- ("M-x" 'smex))
+ ("M-x" 'smex)
+ ("C-z" popwin:keymap))
 
 (cqql/define-keys emacs-lisp-mode-map
                   ("C-h C-f" 'find-function))
