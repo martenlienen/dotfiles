@@ -12,6 +12,8 @@
 (load "wombat.el")
 (load-theme 'brin t)
 
+(setq-default cursor-type 'bar)
+
 ;; Color nested parens rainbow-like
 (global-rainbow-delimiters-mode)
 
