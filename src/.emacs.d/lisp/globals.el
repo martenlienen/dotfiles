@@ -24,6 +24,9 @@
 (setq linum-format "%3d ")
 (global-linum-mode t)
 
+;; Show column numbers
+(column-number-mode t)
+
 ;; y and n instead of yes and no
 (fset 'yes-or-no-p 'y-or-n-p)
 
