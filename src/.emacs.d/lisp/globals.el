@@ -41,6 +41,9 @@
               css-indent-offset 2
               sh-indentation 2)
 
+;; Line breaks at 80 characters
+(setq-default fill-column 80)
+
 ;; Disable backups and autosaves
 (setq backup-inhibited t)
 (setq auto-save-default nil)
