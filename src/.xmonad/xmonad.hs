@@ -5,7 +5,8 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 
-main = do
-    xmonad $ defaultConfig {
+main = xmonad =<< xmobar myConfig
+
+myConfig = defaultConfig {
         modMask = mod4Mask
     }
