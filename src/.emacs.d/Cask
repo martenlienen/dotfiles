@@ -42,6 +42,9 @@
 ;; Markdown
 (depends-on "markdown-mode")
 
+;; Haskell
+(depends-on "haskell-mode")
+
 ;; Clojure
 (depends-on "clojure-mode")
 (depends-on "clojure-test-mode")
