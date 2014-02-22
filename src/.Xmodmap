@@ -1,0 +1,2 @@
+! Make the menu key my "right" super key
+keysym Menu = Super_L
