@@ -1,0 +1,13 @@
+Config { alignSep = "}{",
+         commands = [ Run BatteryP ["BAT0", "BAT1", "BAT2"]
+                                   ["-t", "<acstatus> <left>% <timeleft>",
+                                    "--",
+                                    "-O", "Charging",
+                                    "-o", "Draining"]
+                                   10,
+                      Run Date "%d.%m.%Y %H:%M" "datetime" 600,
+                      Run Network "enp2s0" ["-t", "<dev>"] 10,
+                      Run Wireless "wlp1s0" ["-t", "<essid>"] 10
+                    ],
+         template = "%battery% } %datetime% { Network: %enp2s0% %wlp1s0wi%"
+       }
