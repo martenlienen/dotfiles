@@ -39,6 +39,12 @@
   (previous-line)
   (indent-according-to-mode))
 
+(defun cqql/kill-line ()
+  (interactive)
+  "Kill the current line"
+  (move-beginning-of-line nil)
+  (kill-line 1))
+
 (defvar cqql/no-trimming-modes '()
   "A list of modes, that should not be whitespace-trimmed")
 
