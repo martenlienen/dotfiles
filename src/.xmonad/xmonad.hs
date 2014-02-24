@@ -9,9 +9,8 @@ main = xmonad =<< bar myConfig
   where
     bar = statusBar "xmobar" myPP toggleXmobarKey
 
-myConfig = defaultConfig {
-        modMask = mod4Mask
-    }
+myConfig = defaultConfig { modMask = mod4Mask
+                         }
 
 myPP = defaultPP { ppCurrent = xmobarColor "white" "" . wrap "<" ">",
                    ppHidden = xmobarColor "gray" "",
