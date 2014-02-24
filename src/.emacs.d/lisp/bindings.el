@@ -18,6 +18,7 @@
  ("C-x C-f" 'projectile-find-file)
  ("C-x f" 'find-file)
  ("M-s" 'ace-jump-word-mode)
+ ("M-S" 'ace-jump-char-mode)
  ("<M-return>" 'magit-status)
  ("M-x" 'smex)
  ("C-z" popwin:keymap))
