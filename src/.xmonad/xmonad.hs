@@ -13,8 +13,8 @@ myConfig = defaultConfig { modMask = mod4Mask
                          }
 
 myPP = defaultPP { ppCurrent = xmobarColor "white" "" . wrap "<" ">",
-                   ppHidden = xmobarColor "gray" "",
-                   ppHiddenNoWindows = xmobarColor "gray" "",
+                   ppHidden = xmobarColor "#3E5247" "",
+                   ppHiddenNoWindows = xmobarColor "#3E5247" "",
                    ppUrgent = xmobarColor "red" "",
                    ppLayout = xmobarColor "blue" "",
                    ppTitle = xmobarColor "green" "" . shorten 80,
