@@ -2,13 +2,16 @@ Config { alignSep = "}{",
          commands = [ Run BatteryP ["BAT0", "BAT1", "BAT2"]
                                    ["-t", "<acstatus> <left>% <timeleft>",
                                     "--",
-                                    "-O", "Charging",
-                                    "-i", "Charged",
-                                    "-o", "Draining"]
+                                    "-O", "+",
+                                    "-i", "=",
+                                    "-o", "-"]
                                    10,
+                      Run MultiCpu ["-t", "CPU: <total>%"] 10,
                       Run Date "%d.%m.%Y %H:%M" "datetime" 600,
                       Run Network "enp2s0" ["-t", "<dev>"] 10,
-                      Run Wireless "wlp1s0" ["-t", "<essid>"] 10
+                      Run Wireless "wlp1s0" ["-t", "<essid>"] 10,
+                      Run Kbd [],
+                      Run StdinReader
                     ],
-         template = "%battery% } %datetime% { %enp2s0% %wlp1s0wi%"
+         template = "%StdinReader% } %datetime% { %kbd% # %multicpu% # %battery% # %enp2s0% %wlp1s0wi%"
        }
