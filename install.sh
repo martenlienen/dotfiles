@@ -5,7 +5,7 @@
 RUBY_VERSION="2.1.0"
 
 # Which gems to install
-GEMS="pry pry-rails awesome_print bundler spring spring-commands-rspec"
+GEMS="pry awesome_print bundler"
 
 # Indents all output that is piped through it.
 indent () {
