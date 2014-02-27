@@ -96,6 +96,15 @@ install_emacs_packages () {
   (cd "$HOME/.emacs.d" && cask)
 }
 
+install_vundle () {
+  manage_git_repository "vundle" "$HOME/.vim/bundle/vundle" "https://github.com/gmarik/vundle.git"
+}
+
+install_vundle_packages () {
+  log "Install vundles"
+  vim +BundleInstall +qall
+}
+
 # Copies the dotfiles from src to the home directory.
 install_dotfiles () {
   log "Install dotfiles"
@@ -135,6 +144,10 @@ log
 install_cask
 log
 install_emacs_packages
+log
+install_vundle
+log
+install_vundle_packages
 log
 install_gems
 log
