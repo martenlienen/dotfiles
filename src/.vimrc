@@ -7,7 +7,6 @@ Bundle 'gmarik/vundle'
 
 " My bundles
 " UI
-Bundle 'Lokaltog/powerline'
 Bundle 'altercation/vim-colors-solarized'
 
 " General editing
@@ -25,19 +24,7 @@ Bundle 'kana/vim-textobj-user'
 " VIM enhancements
 Bundle 'tpope/vim-dispatch'
 
-" Completion
-Bundle 'Valloric/YouCompleteMe'
-let g:ycm_collect_identifiers_from_tags_files = 1
-
-" Linting
-Bundle 'scrooloose/syntastic'
-
-" VCS
-Bundle 'tpope/vim-fugitive'
-Bundle 'gregsexton/gitv'
-
 " Handling files
-Bundle 'scrooloose/nerdtree'
 Bundle 'wincent/Command-T'
 let g:CommandTAlwaysShowDotFiles = 1
 
@@ -73,12 +60,6 @@ filetype plugin indent on " required!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Status line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Activate powerline
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-
-" Enable special characters in powerline
-let g:Powerline_symbols = 'fancy'
-
 " Hide the now reduntant mode display (e.g. --INSERT--)
 set noshowmode
 
@@ -170,7 +151,7 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
