@@ -8,7 +8,6 @@
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
-(require 'color-theme)
 (load "wombat.el")
 (load-theme 'zenburn t)
 

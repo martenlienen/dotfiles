@@ -17,7 +17,6 @@
 (depends-on "centimacro")
 
 ;; UI
-(depends-on "color-theme")
 (depends-on "sublime-themes")
 (depends-on "zenburn-theme")
 (depends-on "smart-mode-line")
