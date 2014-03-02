@@ -10,7 +10,7 @@
 
 (require 'color-theme)
 (load "wombat.el")
-(load-theme 'brin t)
+(load-theme 'zenburn t)
 
 (setq-default cursor-type 'bar)
 
