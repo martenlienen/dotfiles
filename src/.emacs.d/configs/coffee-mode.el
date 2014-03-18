@@ -1,3 +1,3 @@
 (require 'coffee-mode)
 
-(add-hook 'ruby-mode-hook 'subword-mode)
+(add-hook 'coffee-mode-hook 'subword-mode)
