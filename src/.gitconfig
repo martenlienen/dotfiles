@@ -1,6 +1,7 @@
 [core]
   excludesfile = ~/.gitignore
   editor = vim
+  pager = "less -F -X"
 [user]
   name = "Marten Lienen"
   email = "marten.lienen@gmail.com"
