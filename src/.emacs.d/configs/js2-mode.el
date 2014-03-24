@@ -10,3 +10,5 @@
 (setf js2-highlight-level 3)
 
 (js2r-add-keybindings-with-prefix "C-c r")
+
+(add-hook 'js2-mode-hook 'subword-mode)
