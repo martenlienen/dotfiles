@@ -7,3 +7,5 @@
   email = "marten.lienen@gmail.com"
 [push]
   default = simple
+[format]
+  pretty = oneline
