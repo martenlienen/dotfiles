@@ -9,3 +9,5 @@
   default = simple
 [format]
   pretty = oneline
+[log]
+  abbrevCommit = true
