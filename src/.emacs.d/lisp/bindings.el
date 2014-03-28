@@ -15,7 +15,7 @@
  ("C-S-o" 'cqql/open-line-above)
  ("C-x C-a" 'ag-project-regexp)
  ("C-x M-a" 'ag-regexp)
- ("C-x C-f" 'projectile-find-file)
+ ("C-x C-f" 'helm-projectile)
  ("C-x f" 'find-file)
  ("M-s" 'ace-jump-word-mode)
  ("M-S" 'ace-jump-char-mode)

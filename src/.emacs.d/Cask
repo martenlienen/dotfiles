@@ -36,8 +36,9 @@
 
 ;; Searching
 (depends-on "ag")
-(depends-on "projectile")
 (depends-on "helm")
+(depends-on "projectile")
+(depends-on "helm-projectile")
 (depends-on "flx-ido")
 
 ;; Markdown
