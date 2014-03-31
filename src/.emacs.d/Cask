@@ -23,6 +23,7 @@
 (depends-on "rainbow-delimiters")
 (depends-on "smex")
 (depends-on "popwin")
+(depends-on "rainbow-mode")
 
 ;; Snippets
 (depends-on "yasnippet")
