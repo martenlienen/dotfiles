@@ -1,1 +1,2 @@
-xterm*eightBitInput: false
+XTerm*eightBitInput: false
+XTerm*locale: true
