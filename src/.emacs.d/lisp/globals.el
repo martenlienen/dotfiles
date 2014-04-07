@@ -8,6 +8,8 @@
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
+(setf ring-bell-function 'ignore)
+
 (load "wombat.el")
 (load-theme 'zenburn t)
 
