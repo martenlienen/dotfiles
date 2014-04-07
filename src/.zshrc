@@ -46,4 +46,4 @@ export RUBY_GC_MALLOC_LIMIT=90000000
 export RUBY_GC_HEAP_FREE_SLOTS=200000
 
 # Load SSH keys
-eval `keychain --eval --quiet cqql`
+eval `keychain --eval --quiet`
