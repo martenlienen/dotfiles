@@ -2,7 +2,7 @@
 
 # Configuration
 # Which ruby version to install
-RUBY_VERSION="2.1.0"
+RUBY_VERSION="2.1.1"
 
 # Which gems to install
 GEMS="pry awesome_print bundler"
