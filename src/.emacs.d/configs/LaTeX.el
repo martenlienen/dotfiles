@@ -3,6 +3,7 @@
 
 (require 'latex)
 (require 'tex-site)
+(require 'preview)
 
 (add-hook 'LaTeX-mode-hook 'ax-latex-mode-setup)
 (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
