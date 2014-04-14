@@ -66,6 +66,10 @@
                   ("C-c A" (lambda () (interactive) (insert "Ä")))
                   ("C-c o" (lambda () (interactive) (insert "ö")))
                   ("C-c O" (lambda () (interactive) (insert "Ö")))
-                  ("C-c s" (lambda () (interactive) (insert "ß"))))
+                  ("C-c s" (lambda () (interactive) (insert "ß")))
+                  ("<f6>" 'preview-section)
+                  ("S-<f6>" 'preview-clearout-section)
+                  ("<f7>" 'preview-buffer)
+                  ("S-<f7>" 'preview-clearout-buffer))
 
 (provide 'bindings)
