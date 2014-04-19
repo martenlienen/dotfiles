@@ -1,9 +1,13 @@
+(source org)
 (source gnu)
 (source melpa)
 
 ;; Libaries
 (depends-on "dash")
 (depends-on "s")
+
+;; Planning
+(depends-on "org-plus-contrib")
 
 ;; Loading project specific settings
 (depends-on "editorconfig")

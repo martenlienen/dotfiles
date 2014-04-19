@@ -21,7 +21,9 @@
  ("M-S" 'ace-jump-char-mode)
  ("<M-return>" 'magit-status)
  ("M-x" 'smex)
- ("C-z" popwin:keymap))
+ ("C-z" popwin:keymap)
+ ("C-c a" 'org-agenda)
+ ("C-c c" 'org-capture))
 
 (cqql/define-keys emacs-lisp-mode-map
                   ("C-h C-f" 'find-function))
