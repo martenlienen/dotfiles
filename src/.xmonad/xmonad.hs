@@ -13,8 +13,10 @@ main = xmonad =<< bar config
 myConfig = defaultConfig { modMask = mod4Mask
                          }
 
-myKeys = [ ("<XF86AudioRaiseVolume>", spawn "amixer -c 0 -- sset Master '2.00dB+'" )
-         , ("<XF86AudioLowerVolume>", spawn "amixer -c 0 -- sset Master '1.00dB-'" ) ]
+myKeys = [ ("<XF86AudioRaiseVolume>", spawn "amixer -c 0 -- sset Master '2.00dB+'")
+         , ("<XF86AudioLowerVolume>", spawn "amixer -c 0 -- sset Master '1.00dB-'")
+         , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 10 -time 0")
+         , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 10 -time 0") ]
 
 myPP = defaultPP { ppCurrent = xmobarColor "white" "" . wrap "<" ">",
                    ppHidden = xmobarColor "#3E5247" "",
