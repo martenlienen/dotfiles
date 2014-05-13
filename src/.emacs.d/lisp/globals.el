@@ -53,6 +53,9 @@
 (setq backup-inhibited t)
 (setq auto-save-default nil)
 
+;; Yank at point instead of position of cursor
+(setf mouse-yank-at-point t)
+
 (add-hook 'before-save-hook 'cqql/trim-whitespace)
 
 (provide 'globals)
