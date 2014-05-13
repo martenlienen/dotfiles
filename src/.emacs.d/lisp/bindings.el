@@ -1,4 +1,5 @@
 (cqql/define-global-keys
+ ("C-x C-b" 'ibuffer)
  ("M-/" 'hippie-expand)
  ("C-M-SPC" 'company-complete)
  ("C-a" 'cqql/go-to-beginning-of-line-dwim)
