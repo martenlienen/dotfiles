@@ -18,8 +18,9 @@
 ;; Color nested parens rainbow-like
 (global-rainbow-delimiters-mode)
 
-;; Disable menu bar
-(menu-bar-mode -1)
+;; Enable X clipboards
+(setf x-select-enable-clipboard t
+      x-select-enable-primary t)
 
 ;; Show line numbers
 (setq linum-format "%3d ")
@@ -51,6 +52,9 @@
 ;; Disable backups and autosaves
 (setq backup-inhibited t)
 (setq auto-save-default nil)
+
+;; Yank at point instead of position of cursor
+(setf mouse-yank-at-point t)
 
 (add-hook 'before-save-hook 'cqql/trim-whitespace)
 
