@@ -30,6 +30,7 @@
 (depends-on "popwin")
 (depends-on "rainbow-mode")
 (depends-on "golden-ratio")
+(depends-on "color-identifiers-mode")
 
 ;; Snippets
 (depends-on "yasnippet")
