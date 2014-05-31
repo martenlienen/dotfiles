@@ -55,6 +55,10 @@ manage_git_repository () {
   fi
 }
 
+install_pyenv () {
+  manage_git_repository "pyenv" "$HOME/.pyenv" "https://github.com/yyuu/pyenv.git"
+}
+
 install_rbenv () {
   manage_git_repository "rbenv" "$HOME/.rbenv" "https://github.com/sstephenson/rbenv.git"
 }
@@ -132,6 +136,8 @@ rehash_rbenv () {
 }
 
 install_dotfiles
+log
+install_pyenv
 log
 install_rbenv
 log

@@ -20,6 +20,11 @@ plugins=(git gitfast bundler archlinux)
 PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - --no-rehash)"
 
+# Initialize pyenv
+PYENV_ROOT="$HOME/.pyenv"
+PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - --no-rehash)"
+
 # Initialize cask
 PATH="$HOME/.cask/bin:$PATH"
 
