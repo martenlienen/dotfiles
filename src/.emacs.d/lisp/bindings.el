@@ -11,6 +11,8 @@
  ("C-M-n" 'mc/edit-lines)
  ("M-m" 'er/expand-region)
  ("M-M" 'er/contract-region)
+ ("C-S-p" 'move-text-up)
+ ("C-S-n" 'move-text-down)
  ("C-S-k" 'cqql/kill-line)
  ("C-o" 'cqql/open-line)
  ("C-S-o" 'cqql/open-line-above)

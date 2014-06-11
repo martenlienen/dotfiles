@@ -20,6 +20,7 @@
 (depends-on "expand-region")
 (depends-on "wrap-region")
 (depends-on "centimacro")
+(depends-on "move-text")
 
 ;; UI
 (depends-on "sublime-themes")
