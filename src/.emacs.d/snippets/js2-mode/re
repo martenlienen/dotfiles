@@ -1,9 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: React class
+# name: Require node.js module
 # key: re
 # --
-React.createClass({
-  render: function () {
-    return $0;
-  }
-})
+var $1 = require("$2");
+$0

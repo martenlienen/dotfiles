@@ -1,6 +1,0 @@
-# -*- mode: snippet; require-final-newline: nil -*-
-# name: Require node.js module
-# key: req
-# --
-var $1 = require("$2");
-$0
