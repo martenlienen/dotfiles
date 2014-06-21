@@ -1,0 +1,9 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: React class
+# key: re
+# --
+React.createClass({
+  render: function () {
+    return $0;
+  }
+})
