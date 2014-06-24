@@ -8,5 +8,6 @@
 ;; Don't remove whitespace in yasnippets
 (add-to-list 'cqql/no-trimming-modes 'snippet-mode)
 
-(yas/load-directory "~/.emacs.d/snippets")
+(setf yas-snippet-dirs '("~/.emacs.d/snippets"))
+
 (yas-global-mode t)
