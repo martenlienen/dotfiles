@@ -28,7 +28,8 @@
  ("M-x" 'smex)
  ("C-z" popwin:keymap)
  ("C-c a" 'org-agenda)
- ("C-c c" 'org-capture))
+ ("C-c c" 'org-capture)
+ ("C-h C-m" 'discover-my-major))
 
 (cqql/define-keys emacs-lisp-mode-map
                   ("C-h C-f" 'find-function))

@@ -32,6 +32,7 @@
 (depends-on "rainbow-mode")
 (depends-on "golden-ratio")
 (depends-on "color-identifiers-mode")
+(depends-on "discover-my-major")
 
 ;; Snippets
 (depends-on "yasnippet")
