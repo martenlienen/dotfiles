@@ -1,3 +1,7 @@
+;; Put this at the top, so that themes will be treated as safe, when they are
+;; loaded
+(custom-set-variables)
+
 ;; Load/install packages
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
