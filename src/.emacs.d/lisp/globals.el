@@ -10,7 +10,6 @@
 
 (setf ring-bell-function 'ignore)
 
-(load "wombat.el")
 (load-theme 'zenburn t)
 
 (setq-default cursor-type 'bar)
