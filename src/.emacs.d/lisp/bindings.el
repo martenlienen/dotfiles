@@ -56,11 +56,12 @@
                   ("C-M-j" 'sp-splice-sexp)
                   ("C-M-S-j" 'sp-raise-sexp))
 
-(cqql/define-keys ruby-mode-map
-                  ("C-c f" 'rspec-verify-single)
-                  ("C-c r r" 'rspec-rerun)
-                  ("C-c r f" 'rspec-verify)
-                  ("C-c r g" 'rspec-verify-all))
+(cqql/after-load 'ruby-mode
+  (cqql/define-keys ruby-mode-map
+                    ("C-c f" 'rspec-verify-single)
+                    ("C-c r r" 'rspec-rerun)
+                    ("C-c r f" 'rspec-verify)
+                    ("C-c r g" 'rspec-verify-all)))
 
 (cqql/define-keys yas-minor-mode-map
                   ("<tab>" nil)
