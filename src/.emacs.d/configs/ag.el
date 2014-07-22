@@ -1,5 +1,4 @@
-(require 'ag)
+(cqql/after-load 'ag
+  (add-to-list 'ag-arguments "--hidden")
 
-(add-to-list 'ag-arguments "--hidden")
-
-(setf ag-highlight-search t)
+  (setf ag-highlight-search t))

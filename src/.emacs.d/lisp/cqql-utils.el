@@ -52,6 +52,12 @@
   (when (not (-contains? cqql/no-trimming-modes major-mode))
     (delete-trailing-whitespace)))
 
+(defmacro cqql/after-load (feature &rest body)
+  "After FEATURE is loaded, evaluate BODY."
+  (declare (indent defun))
+  `(eval-after-load ,feature
+     '(progn ,@body)))
+
 (defmacro cqql/define-keys (keymap &rest bindings)
   `(progn
      ,@(-map
