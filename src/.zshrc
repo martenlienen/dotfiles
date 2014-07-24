@@ -37,6 +37,9 @@ export PATH=/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$PATH
 # Set editor
 export EDITOR="vim"
 
+# Use emacs for gems
+export BUNDLER_EDITOR="emacs"
+
 # Use emacs bindings on the command line
 bindkey -e
 
