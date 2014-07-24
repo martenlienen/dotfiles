@@ -17,16 +17,16 @@ DISABLE_AUTO_UPDATE="true"
 plugins=(git gitfast bundler archlinux)
 
 # Initialize rbenv
-PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - --no-rehash)"
 
 # Initialize pyenv
-PYENV_ROOT="$HOME/.pyenv"
-PATH="$PYENV_ROOT/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - --no-rehash)"
 
 # Initialize cask
-PATH="$HOME/.cask/bin:$PATH"
+export PATH="$HOME/.cask/bin:$PATH"
 
 # Load omz after initializing PATH
 source $ZSH/oh-my-zsh.sh
@@ -35,7 +35,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$PATH
 
 # Set editor
-EDITOR="vim"
+export EDITOR="vim"
 
 # Use emacs bindings on the command line
 bindkey -e
