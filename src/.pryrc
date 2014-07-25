@@ -1,10 +1,13 @@
 # === EDITOR ===
 Pry.editor = "vim"
 
-# == Pry-Nav - Using pry as a debugger ==
-Pry.commands.alias_command "c", "continue" rescue nil
-Pry.commands.alias_command "s", "step" rescue nil
-Pry.commands.alias_command "n", "next" rescue nil
+# == pry-debugger - Using pry as a debugger ==
+if defined?(PryDebugger)
+  Pry.commands.alias_command "c", "continue"
+  Pry.commands.alias_command "s", "step"
+  Pry.commands.alias_command "f", "finish"
+  Pry.commands.alias_command "n", "next"
+end
 
 # === CUSTOM PROMPT ===
 # This prompt shows the ruby version (useful for RVM)
