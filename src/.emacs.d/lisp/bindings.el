@@ -20,7 +20,7 @@
  ("C-x C-a" 'ag-project-regexp)
  ("C-x M-a" 'ag-regexp)
  ("C-x C-f" 'helm-projectile)
- ("C-x f" 'find-file)
+ ("C-x f" 'helm-find-files)
  ("M-s" 'ace-jump-word-mode)
  ("M-S" 'ace-jump-char-mode)
  ("M-i" 'ace-window)
