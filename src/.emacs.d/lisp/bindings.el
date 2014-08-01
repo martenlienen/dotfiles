@@ -1,4 +1,5 @@
 (cqql/define-global-keys
+ ("M-y" 'helm-show-kill-ring)
  ("C-x b" 'helm-mini)
  ("C-x C-b" 'ibuffer)
  ("M-/" 'hippie-expand)
