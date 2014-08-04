@@ -21,6 +21,7 @@
 (depends-on "wrap-region")
 (depends-on "centimacro")
 (depends-on "move-text")
+(depends-on "visual-regexp")
 
 ;; UI
 (depends-on "color-theme")
