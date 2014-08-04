@@ -85,7 +85,8 @@
                   ("<f7>" 'preview-buffer)
                   ("S-<f7>" 'preview-clearout-buffer))
 
-(cqql/define-keys helm-swoop-map
-                  ("M-o" 'helm-multi-swoop-all-from-helm-swoop))
+(cqql/after-load 'helm-swoop
+  (cqql/define-keys helm-swoop-map
+                    ("M-o" 'helm-multi-swoop-all-from-helm-swoop)))
 
 (provide 'bindings)
