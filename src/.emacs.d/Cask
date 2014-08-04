@@ -48,6 +48,7 @@
 ;; Searching
 (depends-on "ag")
 (depends-on "helm")
+(depends-on "helm-swoop")
 (depends-on "projectile")
 (depends-on "helm-projectile")
 (depends-on "flx-ido")

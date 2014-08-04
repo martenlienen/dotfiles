@@ -25,7 +25,7 @@
  ("M-s" 'ace-jump-word-mode)
  ("M-S" 'ace-jump-char-mode)
  ("M-i" 'ace-window)
- ("M-o" 'helm-occur)
+ ("M-o" 'helm-swoop)
  ("<M-return>" 'magit-status)
  ("M-x" 'smex)
  ("C-z" popwin:keymap)
@@ -82,5 +82,8 @@
                   ("S-<f6>" 'preview-clearout-section)
                   ("<f7>" 'preview-buffer)
                   ("S-<f7>" 'preview-clearout-buffer))
+
+(cqql/define-keys helm-swoop-map
+                  ("M-o" 'helm-multi-swoop-all-from-helm-swoop))
 
 (provide 'bindings)
