@@ -2,5 +2,5 @@
 # name: Require node.js module
 # key: re
 # --
-var $1 = require("$2");
+var $1 = require("$2${1:$(s-snake-case yas-text)}");
 $0
