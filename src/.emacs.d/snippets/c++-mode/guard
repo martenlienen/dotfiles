@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: header guard
+# key: guard
+# --
+#ifndef `(s-upcase (s-snake-case (f-filename (buffer-file-name))))`
+#define `(s-upcase (s-snake-case (f-filename (buffer-file-name))))`
+
+$0
+
+#endif // `(s-upcase (s-snake-case (f-filename (buffer-file-name))))`
