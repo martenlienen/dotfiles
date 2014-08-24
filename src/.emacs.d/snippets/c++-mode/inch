@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: #include ".h"
+# key: inch
+# --
+#include "$0.h"
