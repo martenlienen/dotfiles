@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: context
+# key: con
+# --
+context "$1" do
+  $0
+end
