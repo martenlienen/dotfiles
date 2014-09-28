@@ -13,9 +13,6 @@
 
 (setq-default cursor-type 'bar)
 
-;; Color nested parens rainbow-like
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-
 ;; Enable X clipboards
 (setf x-select-enable-clipboard t
       x-select-enable-primary t)
