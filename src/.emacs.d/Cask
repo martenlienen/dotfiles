@@ -34,6 +34,7 @@
 (depends-on "popwin")
 (depends-on "rainbow-mode")
 (depends-on "color-identifiers-mode")
+(depends-on "highlight-symbol")
 (depends-on "discover-my-major")
 
 ;; Snippets
