@@ -9,7 +9,8 @@
 
 (setf ring-bell-function 'ignore)
 
-(load-theme 'zenburn t)
+;; Color theme
+(load-theme 'smyx t)
 
 (setq-default cursor-type 'bar)
 
