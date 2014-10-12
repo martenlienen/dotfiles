@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: prototype.method
+# key: p
+# --
+$1.prototype.$2 = function ($3) {
+  $0
+};
