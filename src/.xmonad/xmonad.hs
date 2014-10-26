@@ -1,9 +1,10 @@
+import System.IO
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeysP)
-import System.IO
+import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.Paste (pasteString)
+import XMonad.Util.Run (spawnPipe)
 
 main = xmonad =<< bar config
   where
