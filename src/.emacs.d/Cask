@@ -43,7 +43,6 @@
 
 ;; Autocomplete
 (depends-on "company")
-(depends-on "company-cider")
 
 ;; VCS
 (depends-on "magit")
