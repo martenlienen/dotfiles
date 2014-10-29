@@ -47,6 +47,9 @@
 ;; VCS
 (depends-on "magit")
 
+;; Syntax checking
+(depends-on "flycheck")
+
 ;; Searching
 (depends-on "ag")
 (depends-on "helm")
