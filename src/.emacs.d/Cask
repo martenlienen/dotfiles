@@ -77,7 +77,6 @@
 
 ;; HTML replacements
 (depends-on "haml-mode")
-(depends-on "jade-mode")
 
 ;; CSS replacements
 (depends-on "scss-mode")
