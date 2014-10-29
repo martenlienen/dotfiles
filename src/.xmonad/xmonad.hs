@@ -2,6 +2,7 @@ import System.IO
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.SetWMName
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Paste (pasteString)
 import XMonad.Util.Run (spawnPipe)
@@ -11,8 +12,8 @@ main = xmonad =<< bar config
     config = myConfig `additionalKeysP` myKeys
     bar = statusBar "xmobar" myPP toggleXmobarKey
 
-myConfig = defaultConfig { modMask = mod4Mask
-                         }
+-- Set WM name, so that java swing applications work
+myConfig = defaultConfig { modMask = mod4Mask, startupHook = setWMName "LG3D" }
 
 myKeys = [ ("<XF86AudioRaiseVolume>", spawn "amixer -c 0 -- sset Master '2.00dB+'")
          , ("<XF86AudioLowerVolume>", spawn "amixer -c 0 -- sset Master '1.00dB-'")
