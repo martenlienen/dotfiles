@@ -60,6 +60,9 @@
 
 ;; Haskell
 (depends-on "haskell-mode")
+(depends-on "shm")
+(depends-on "ghc")
+(depends-on "ghci-completion")
 
 ;; Clojure
 (depends-on "clojure-mode")
