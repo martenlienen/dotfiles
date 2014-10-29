@@ -16,6 +16,9 @@ DISABLE_AUTO_UPDATE="true"
 # plugins=(rails git textmate ruby lighthouse)
 plugins=(git gitfast bundler archlinux)
 
+# Add installed haskell binaries to PATH
+export PATH="$HOME/.cabal/bin:$PATH"
+
 # Initialize rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - --no-rehash)"
