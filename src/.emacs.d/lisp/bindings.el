@@ -24,7 +24,7 @@
  ("C-x f" 'helm-find-files)
  ("M-s" 'ace-jump-word-mode)
  ("M-S" 'ace-jump-char-mode)
- ("C-M-z" 'ace-jump-zap-to-char)
+ ("M-z" 'ace-jump-zap-to-char)
  ("M-i" 'ace-window)
  ("M-o" 'helm-swoop)
  ("<M-return>" 'magit-status)
