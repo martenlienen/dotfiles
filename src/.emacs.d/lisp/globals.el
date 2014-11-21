@@ -54,4 +54,7 @@
 
 (add-hook 'before-save-hook 'cqql/trim-whitespace)
 
+(when (memq window-system '(x))
+  (exec-path-from-shell-initialize))
+
 (provide 'globals)
