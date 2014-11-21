@@ -8,8 +8,9 @@
   (end-of-buffer)
   (dired-next-line -1))
 
-(define-key dired-mode-map
-  [remap beginning-of-buffer] 'cqql/dired-jump-to-first-file)
+(cqql/after-load 'dired
+  (define-key dired-mode-map
+    [remap beginning-of-buffer] 'cqql/dired-jump-to-first-file)
 
-(define-key dired-mode-map
-  [remap end-of-buffer] 'cqql/dired-jump-to-last-file)
+  (define-key dired-mode-map
+    [remap end-of-buffer] 'cqql/dired-jump-to-last-file))
