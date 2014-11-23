@@ -4,4 +4,4 @@
 # --
 ${1:name}: function ($2) {
   $0
-}
+}`(unless (save-excursion (re-search-forward "[^[:space:][:cntrl:]]") (looking-back "}")) ",")`
