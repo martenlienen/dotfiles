@@ -5,7 +5,10 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(horizontal-scroll-bar-mode -1)
+
+;; Disable horizontal scrollbars in emacs 25
+(when (fboundp 'horizontal-scoll-bar-mode)
+  (horizontal-scroll-bar-mode -1))
 
 (setf ring-bell-function 'ignore)
 
