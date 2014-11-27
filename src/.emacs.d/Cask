@@ -100,3 +100,6 @@
 
 ;; LaTeX
 (depends-on "auctex")
+
+;; Nice HTTP interface
+(depends-on "restclient")
