@@ -1,2 +1,3 @@
 XTerm*eightBitInput: false
 XTerm*locale: true
+XTerm*faceSize: 14
