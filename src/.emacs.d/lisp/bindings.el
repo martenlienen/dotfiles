@@ -74,18 +74,19 @@
                   ("TAB" nil)
                   (";" 'yas-expand))
 
-(cqql/define-keys LaTeX-mode-map
-                  ("C-c u" (lambda () (interactive) (insert "ü")))
-                  ("C-c U" (lambda () (interactive) (insert "Ü")))
-                  ("C-c a" (lambda () (interactive) (insert "ä")))
-                  ("C-c A" (lambda () (interactive) (insert "Ä")))
-                  ("C-c o" (lambda () (interactive) (insert "ö")))
-                  ("C-c O" (lambda () (interactive) (insert "Ö")))
-                  ("C-c s" (lambda () (interactive) (insert "ß")))
-                  ("<f6>" 'preview-section)
-                  ("S-<f6>" 'preview-clearout-section)
-                  ("<f7>" 'preview-buffer)
-                  ("S-<f7>" 'preview-clearout-buffer))
+(cqql/after-load 'latex
+  (cqql/define-keys LaTeX-mode-map
+                    ("C-c u" (lambda () (interactive) (insert "ü")))
+                    ("C-c U" (lambda () (interactive) (insert "Ü")))
+                    ("C-c a" (lambda () (interactive) (insert "ä")))
+                    ("C-c A" (lambda () (interactive) (insert "Ä")))
+                    ("C-c o" (lambda () (interactive) (insert "ö")))
+                    ("C-c O" (lambda () (interactive) (insert "Ö")))
+                    ("C-c s" (lambda () (interactive) (insert "ß")))
+                    ("<f6>" 'preview-section)
+                    ("S-<f6>" 'preview-clearout-section)
+                    ("<f7>" 'preview-buffer)
+                    ("S-<f7>" 'preview-clearout-buffer)))
 
 (cqql/after-load 'helm-swoop
   (cqql/define-keys helm-swoop-map

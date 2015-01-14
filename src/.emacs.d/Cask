@@ -2,6 +2,9 @@
 (source gnu)
 (source melpa)
 
+;; Package configuration
+(depends-on "use-package")
+
 ;; Libaries
 (depends-on "dash")
 (depends-on "s")

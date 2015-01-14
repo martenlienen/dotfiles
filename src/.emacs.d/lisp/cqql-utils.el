@@ -1,9 +1,3 @@
-(defun cqql/load-files (directory)
-  (mapc
-   (lambda (file)
-     (load file))
-   (-filter (lambda (file) (not (s-ends-with? "." file))) (directory-files directory t))))
-
 (defun cqql/go-to-beginning-of-line-dwim ()
   (interactive)
   "Toggle point between beginning of line and first non-whitespace character"
@@ -57,11 +51,6 @@
   (declare (indent defun))
   `(eval-after-load ,feature
      '(progn ,@body)))
-
-(defun cqql/add-auto-mode (mode &rest patterns)
-  "Add entries to `auto-mode-alist' to use `MODE' for all given file `PATTERNS'."
-  (dolist (pattern patterns)
-    (add-to-list 'auto-mode-alist (cons pattern mode))))
 
 (defmacro cqql/define-keys (keymap &rest bindings)
   `(progn
