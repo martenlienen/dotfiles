@@ -154,8 +154,9 @@
                   try-expand-line
                   try-complete-lisp-symbol)))
 
-(use-package sh-mode
-  :mode "PKGBUILD\\'")
+(use-package sh-script
+  :mode ("PKGBUILD\\'" . sh-mode)
+  :config  (setq-default sh-basic-offset 2))
 
 (use-package flx-ido
   :disabled t
