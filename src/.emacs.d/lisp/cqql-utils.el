@@ -14,10 +14,10 @@
     (kill-line)
     (yank)
     (open-line 1)
-    (next-line)
+    (forward-line)
     (yank)
     (goto-char pos)
-    (next-line)))
+    (forward-line)))
 
 (defun cqql/open-line ()
   (interactive)
@@ -30,7 +30,7 @@
   "Create a new line above point and move point into it"
   (move-beginning-of-line nil)
   (newline)
-  (previous-line)
+  (forward-line -1)
   (indent-according-to-mode))
 
 (defun cqql/kill-line ()

@@ -197,12 +197,12 @@
 
 (defun cqql/dired-jump-to-first-file ()
   (interactive)
-  (beginning-of-buffer)
+  (goto-char (point-min))
   (dired-next-line 4))
 
 (defun cqql/dired-jump-to-last-file ()
   (interactive)
-  (end-of-buffer)
+  (goto-char (point-max))
   (dired-next-line -1))
 
 (use-package dired
