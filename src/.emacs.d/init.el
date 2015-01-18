@@ -1,8 +1,10 @@
 ;; Load/install packages
 (require 'cask "~/.cask/cask.el")
-(cask-initialize)
 
-(push "~/.emacs.d/lisp" load-path)
+(eval-and-compile
+  (cask-initialize)
+
+  (push "~/.emacs.d/lisp" load-path))
 
 (require 'cqql-utils)
 
