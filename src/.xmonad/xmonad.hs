@@ -28,9 +28,9 @@ myKeys = [ ("<XF86AudioRaiseVolume>", spawn "amixer -c 0 -- sset Master '2.00dB+
          , ("M-<F12>", spawn (dbusMsg "Suspend"))
          , ("M-s", spawn (maim ""))
          , ("M-S-s", spawn (maim "-s"))
-         , ("C-M-e", spawn "emacs")
-         , ("C-M-c", spawn "chromium")
-         , ("C-M-f", spawn "firefox") ]
+         , ("M-S-e", spawn "emacs")
+         , ("M-S-c", spawn "chromium")
+         , ("M-S-f", spawn "firefox") ]
 
 myPP = defaultPP { ppCurrent = xmobarColor "white" "" . wrap "<" ">",
                    ppHidden = xmobarColor "#3E5247" "",
