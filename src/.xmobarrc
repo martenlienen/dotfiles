@@ -1,4 +1,6 @@
 Config { alignSep = "}{",
+         bgColor = "#1e1e1e",
+         fgColor = "#a7a7a7",
          commands = [ Run BatteryP ["BAT0", "BAT1", "BAT2"]
                                    ["-t", "<acstatus> <left>% <timeleft>",
                                     "--",

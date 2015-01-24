@@ -33,12 +33,12 @@ myKeys = [ ("<XF86AudioRaiseVolume>", spawn "amixer -c 0 -- sset Master '2.00dB+
          , ("M-S-f", spawn "firefox") ]
 
 myPP = defaultPP { ppCurrent = xmobarColor "white" "" . wrap "<" ">",
-                   ppHidden = xmobarColor "#3E5247" "",
-                   ppHiddenNoWindows = xmobarColor "#3E5247" "",
+                   ppHidden = xmobarColor "#a7a7a7" "",
+                   ppHiddenNoWindows = xmobarColor "#323537" "",
                    ppUrgent = xmobarColor "red" "",
-                   ppLayout = xmobarColor "blue" "",
-                   ppTitle = xmobarColor "green" "" . shorten 80,
-                   ppSep = xmobarColor "purple" "" " # "
+                   ppLayout = xmobarColor "#f9ee98" "",
+                   ppTitle = xmobarColor "#afc4db" "" . shorten 80,
+                   ppSep = xmobarColor "#5f5a60" "" " / "
                  }
 
 toggleXmobarKey :: XConfig t -> (KeyMask, KeySym)
