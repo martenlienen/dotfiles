@@ -1,13 +1,13 @@
 #!/bin/sh
 
+# Set background
+feh --bg-fill ~/.wallpaper.jpg &
+
+# Start pulseaudio
+start-pulseaudio-x11 &
+
 # Load Xresources
 xrdb -merge ~/.Xresources
 
 # Load mod-key mappings
 xmodmap ~/.Xmodmap
-
-# Start pulseaudio
-start-pulseaudio-x11 &
-
-# Set background
-feh --bg-fill ~/.wallpaper.jpg &
