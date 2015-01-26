@@ -7,6 +7,7 @@ import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Paste (pasteString)
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Layout.Spacing (smartSpacing)
+import XMonad.Layout.NoBorders (smartBorders)
 
 main = xmonad =<< bar config
   where
@@ -22,7 +23,7 @@ myConfig = defaultConfig { modMask = mod4Mask,
                            layoutHook = layouts
                          }
 
-layouts = tiled ||| Mirror tiled ||| Full
+layouts = smartBorders $ tiled ||| Mirror tiled ||| Full
     where
       tiled = smartSpacing 7 $ Tall nmaster delta ratio
 
