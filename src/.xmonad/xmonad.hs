@@ -13,7 +13,13 @@ main = xmonad =<< bar config
     bar = statusBar "xmobar" myPP toggleXmobarKey
 
 -- Set WM name, so that java swing applications work
-myConfig = defaultConfig { modMask = mod4Mask, startupHook = setWMName "LG3D" }
+myConfig = defaultConfig { modMask = mod4Mask,
+                           startupHook = setWMName "LG3D",
+                           focusedBorderColor = "#8f9d6a",
+                           normalBorderColor = "#323537",
+                           borderWidth = 2,
+                           layoutHook = layouts
+                         }
 
 dbusMsg msg = "dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 \"org.freedesktop.login1.Manager." ++ msg ++ "\" boolean:true > /home/cqql/log"
 

@@ -15,5 +15,5 @@ Config { alignSep = "}{",
                       Run Kbd [],
                       Run StdinReader
                     ],
-         template = "%StdinReader% } %datetime% { %kbd% # %multicpu% # %battery% # %enp2s0% %wlp1s0wi%"
+         template = "%StdinReader% } %datetime% { %kbd% <fc=#5f5a60>/</fc> %multicpu% <fc=#5f5a60>/</fc> %battery% <fc=#5f5a60>/</fc> %enp2s0% %wlp1s0wi%"
        }
