@@ -5,3 +5,6 @@ xrdb -merge ~/.Xresources
 
 # Load mod-key mappings
 xmodmap ~/.Xmodmap
+
+# Start pulseaudio
+start-pulseaudio-x11 &
