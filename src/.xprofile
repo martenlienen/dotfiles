@@ -8,3 +8,6 @@ xmodmap ~/.Xmodmap
 
 # Start pulseaudio
 start-pulseaudio-x11 &
+
+# Set background
+feh --bg-fill ~/.wallpaper.jpg &
