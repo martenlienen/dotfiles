@@ -36,7 +36,7 @@ layouts = smartBorders $ tiled ||| Mirror tiled ||| Full
       -- Percent of screen to increment by when resizing panes
       delta = 3 / 100
 
-dbusMsg msg = "dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 \"org.freedesktop.login1.Manager." ++ msg ++ "\" boolean:true > /home/cqql/log"
+dbusMsg msg = "dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 \"org.freedesktop.login1.Manager." ++ msg ++ "\" boolean:true"
 
 maim opts = "maim " ++ opts ++ " ~/$(date +%F-%T).png"
 
