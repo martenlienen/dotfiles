@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Load Xresources
+xrdb -merge ~/.Xresources
+
+# Load mod-key mappings
+xmodmap ~/.Xmodmap

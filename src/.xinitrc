@@ -1,9 +1,6 @@
 #!/bin/sh
 
-# Load Xresources
-xrdb ~/.Xresources
-
-# Load mod-key mappings
-xmodmap ~/.Xmodmap
+# LightDM only reads .xprofile, but others like startx or SLiM use .xinitrc
+source ~/.xprofile
 
 exec xmonad
