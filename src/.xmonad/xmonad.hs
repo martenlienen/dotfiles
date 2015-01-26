@@ -6,6 +6,7 @@ import XMonad.Hooks.SetWMName
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Paste (pasteString)
 import XMonad.Util.Run (spawnPipe)
+import XMonad.Layout.Spacing (smartSpacing)
 
 main = xmonad =<< bar config
   where
@@ -20,6 +21,19 @@ myConfig = defaultConfig { modMask = mod4Mask,
                            borderWidth = 2,
                            layoutHook = layouts
                          }
+
+layouts = tiled ||| Mirror tiled ||| Full
+    where
+      tiled = smartSpacing 7 $ Tall nmaster delta ratio
+
+      -- The default number of windows in the master pane
+      nmaster = 1
+
+      -- Default proportion of screen occupied by master pane
+      ratio = 1 / 2
+
+      -- Percent of screen to increment by when resizing panes
+      delta = 3 / 100
 
 dbusMsg msg = "dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 \"org.freedesktop.login1.Manager." ++ msg ++ "\" boolean:true > /home/cqql/log"
 
