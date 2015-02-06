@@ -1,3 +1,9 @@
+;;; init.el --- My configuration
+
+;;; Commentary:
+
+;;; Code:
+
 ;; Load/install packages
 (require 'cask "~/.cask/cask.el")
 
@@ -262,3 +268,6 @@
                                        TeX-command-extra-options "-shell-escape")))))
 
 (require 'bindings)
+
+(provide 'init)
+;;; init.el ends here
