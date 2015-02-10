@@ -30,6 +30,7 @@
 (depends-on "move-text")
 (depends-on "visual-regexp")
 (depends-on "key-chord")
+(depends-on "hydra")
 
 ;; UI
 (depends-on "color-theme")

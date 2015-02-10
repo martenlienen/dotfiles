@@ -272,6 +272,8 @@
   (progn
     (key-chord-mode t)))
 
+(use-package hydra)
+
 (require 'bindings)
 
 (provide 'init)
