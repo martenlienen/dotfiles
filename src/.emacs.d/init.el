@@ -267,6 +267,11 @@
                                        ;; Otherwise minted can't find pygments
                                        TeX-command-extra-options "-shell-escape")))))
 
+(use-package key-chord
+  :config
+  (progn
+    (key-chord-mode t)))
+
 (require 'bindings)
 
 (provide 'init)
