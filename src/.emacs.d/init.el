@@ -92,7 +92,9 @@
   (progn
     (require 'helm-projectile)
 
-    (projectile-global-mode)))
+    (projectile-global-mode)
+
+    (helm-projectile-toggle 1)))
 
 (use-package popwin
   :config
