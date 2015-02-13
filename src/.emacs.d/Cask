@@ -105,5 +105,8 @@
 ;; LaTeX
 (depends-on "auctex")
 
+;; R, Julia
+(depends-on "ess")
+
 ;; Nice HTTP interface
 (depends-on "restclient")
