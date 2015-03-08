@@ -11,3 +11,6 @@ xrdb -merge ~/.Xresources
 
 # Load mod-key mappings
 xmodmap ~/.Xmodmap
+
+# Disable screensaver
+xset s off
