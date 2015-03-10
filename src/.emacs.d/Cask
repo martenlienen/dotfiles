@@ -85,6 +85,9 @@
 (depends-on "rspec-mode")
 (depends-on "yard-mode")
 
+;; Web development
+(depends-on "web-mode")
+
 ;; HTML replacements
 (depends-on "haml-mode")
 

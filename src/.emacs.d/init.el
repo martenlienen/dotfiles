@@ -246,6 +246,9 @@
     (smartparens-strict-mode t)
     (show-smartparens-global-mode t)))
 
+(use-package web-mode
+  :mode "\\.erb\\'")
+
 (use-package tex-mode
   :mode ("\\.tex\\'" . LaTeX-mode)
   :config
