@@ -80,7 +80,8 @@
 (use-package company
   :config
   (progn
-    (add-to-list 'company-backends 'company-robe)
+    (setf company-idle-delay 0
+          company-dabbrev-downcase nil)
 
     (global-company-mode t)))
 
