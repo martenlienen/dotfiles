@@ -12,6 +12,11 @@
 (setf initial-scratch-message ""
       initial-major-mode 'emacs-lisp-mode)
 
+(setf initial-buffer-choice (lambda ()
+                              (org-agenda-list)
+                              (delete-other-windows)
+                              org-agenda-buffer))
+
 ;; Enable X clipboards
 (setf x-select-enable-clipboard t
       x-select-enable-primary t)
