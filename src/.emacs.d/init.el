@@ -224,12 +224,46 @@
       [remap end-of-buffer] 'cqql/dired-jump-to-last-file)))
 
 (use-package org
-  :config (setf org-enforce-todo-dependencies t
-                org-enforce-todo-checkbox-dependencies t
-                org-agenda-start-on-weekday nil
-                org-capture-templates '(("g" "General work" entry (file+headline "work.org" "General") "* TODO %?")
-                                        ("q" "Qualify EU" entry (file+headline "work.org" "Qualify") "* TODO %?")
-                                        ("s" "Server Administration" entry (file+headline "work.org" "Server Administration") "* TODO %?"))))
+  :config
+  (progn
+    (require 'org-crypt)
+    (org-crypt-use-before-save-magic)
+
+    (setf org-directory "~/notes"
+          org-agenda-files (list org-directory)
+          org-default-notes-file "inbox.org"
+          org-crypt-key nil
+          org-tags-exclude-from-inheritance (list "crypt")
+          org-startup-indented t
+          org-M-RET-may-split-line nil
+          org-enforce-todo-dependencies t
+          org-enforce-todo-checkbox-dependencies t
+          org-agenda-start-on-weekday nil
+          org-capture-templates
+          '(("n" "Note" entry (file+headline "inbox.org" "Inbox")
+             "* %?")
+            ("i" "Idea" entry (file+headline "ideas.org" "Ideas")
+             "* %?")
+            ("v" "vitakid")
+            ("vw" "Web" entry (file+headline "vitakid.org" "Web")
+             "* %?")
+            ("vs" "Servers" entry (file+headline "vitakid.org" "Servers")
+             "* %?")
+            ("va" "Apps" entry (file+headline "vitakid.org" "Apps")
+             "* %?")
+            ("vq" "QuaLiFY" entry (file+headline "vitakid.org" "QuaLiFY")
+             "* %?")
+            ("p" "Passwords")
+            ("pp" "Personal Password" entry
+             (file+headline "passwords.org" "Personal")
+             "* %^{Service Name (e.g. gmail)} :crypt:
+User: %^{User}
+Password: %^{Password}")
+            ("pv" "vitakid Password" entry
+             (file+headline "passwords.org" "vitakid")
+             "* %^{Service Name (e.g. gmail)} :crypt:
+User: %^{User}
+Password: %^{Password}")))))
 
 (use-package smart-mode-line
   :config
