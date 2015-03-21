@@ -25,6 +25,9 @@
 (setq linum-format "%3d ")
 (global-linum-mode t)
 
+;; Put more information into the frame title
+(setf frame-title-format '("" invocation-name ": %b - " mode-name))
+
 ;; Show column numbers
 (column-number-mode t)
 
