@@ -28,6 +28,9 @@
 ;; Put more information into the frame title
 (setf frame-title-format '("" invocation-name ": %b - " mode-name))
 
+;; Enable all commands
+(mapatoms (lambda (s) (when (get s 'disabled) (put s 'disabled nil))))
+
 ;; Show column numbers
 (column-number-mode t)
 
