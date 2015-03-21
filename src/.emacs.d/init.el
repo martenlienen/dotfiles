@@ -22,6 +22,14 @@
 (require 's)
 
 (require 'use-package)
+
+(use-package savehist
+  :config
+  (progn
+    (setf history-length 200)
+
+    (savehist-mode)))
+
 (use-package ag
   :config
   (progn
