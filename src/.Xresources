@@ -3,6 +3,11 @@ XTerm*utf8: 3
 XTerm*locale: true
 XTerm*faceSize: 14
 
+Emacs.menuBar: off
+Emacs.toolBar: off
+Emacs.verticalScrollBars: off
+Emacs.horizontalScrollBars: off
+
 #define base00 #1e1e1e
 #define base01 #323537
 #define base02 #464b50
