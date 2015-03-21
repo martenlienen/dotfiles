@@ -92,7 +92,19 @@
   :config
   (progn
     (setf company-idle-delay 0
-          company-dabbrev-downcase nil)
+          company-minimum-prefix-length 2
+          company-show-numbers t
+          company-selection-wrap-around t
+          company-dabbrev-ignore-case t
+          company-dabbrev-ignore-invisible t
+          company-dabbrev-downcase nil
+          company-backends (list #'company-css
+                                 #'company-clang
+                                 #'company-capf
+                                 (list #'company-dabbrev-code
+                                       #'company-keywords)
+                                 #'company-files
+                                 #'company-dabbrev))
 
     (global-company-mode t)))
 
