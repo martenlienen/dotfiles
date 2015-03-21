@@ -30,6 +30,9 @@
 
     (savehist-mode)))
 
+(use-package eldoc
+  :config (setf eldoc-idle-delay 0.2))
+
 (use-package ag
   :config
   (progn
