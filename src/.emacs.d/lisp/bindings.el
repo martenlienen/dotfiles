@@ -35,7 +35,9 @@
  ("C-c c" 'org-capture)
  ("C-h C-m" 'discover-my-major)
  ("M-3" 'vr/replace)
- ("M-#" 'vr/query-replace))
+ ("M-#" 'vr/query-replace)
+ ("<f6>" (lambda () (interactive) (find-name-dired org-directory "*.org")))
+ ("<f7>" (lambda () (interactive) (dired "~/.dotfiles") (helm-projectile))))
 
 (cqql/define-keys emacs-lisp-mode-map
                   ("C-h C-f" 'find-function))
