@@ -33,6 +33,15 @@
 (use-package eldoc
   :config (setf eldoc-idle-delay 0.2))
 
+(use-package whitespace
+  :config
+  (progn
+    (setf whitespace-line-column 80
+          ;; I also like the other styles, but they are too performance heavy
+          whitespace-style '(face lines))
+
+    (global-whitespace-mode)))
+
 (use-package ag
   :config
   (progn
@@ -197,13 +206,14 @@
   :config (flx-ido-mode t))
 
 (defun cqql/disable-ruby-lint-checker ()
+  "Disable the ruby-lint checker."
   (cqql/after-load 'flycheck
     (let* ((checkers (flycheck-checker-next-checkers 'ruby-rubocop))
            (filtered (-filter (lambda (e) (not (eq 'ruby-rubylint (cdr e)))) checkers)))
       (put 'ruby-rubocop 'flycheck-next-checkers filtered))))
 
 (use-package ruby-mode
-  :mode (("Rakefile\\'" . ruby-mode) ("Capfile\\'" . ruby-rubocop)
+  :mode (("Rakefile\\'" . ruby-mode) ("Capfile\\'" . ruby-mode)
          ("Vagrantfile\\'" . ruby-mode) ("Berksfile\\'" . ruby-mode)
          (".gemspec\\'" . ruby-mode) (".json_builder\\'" . ruby-mode)
          ("Gemfile\\'" . ruby-mode))
