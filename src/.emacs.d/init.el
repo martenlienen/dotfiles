@@ -40,7 +40,7 @@
           ;; I also like the other styles, but they are too performance heavy
           whitespace-style '(face lines))
 
-    (global-whitespace-mode)))
+    (add-hook 'prog-mode-hook #'whitespace-mode)))
 
 (use-package ag
   :config
