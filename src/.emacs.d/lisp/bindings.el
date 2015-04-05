@@ -1,3 +1,21 @@
+(defhydra cqql/org-hydra (:exit t)
+  "Quick-Access to Org-Files"
+  ("n"
+   (lambda () (interactive) (find-file (f-join org-directory "inbox.org")))
+   "Notes")
+  ("i"
+   (lambda () (interactive) (find-file (f-join org-directory "ideas.org")))
+   "Ideas")
+  ("u"
+   (lambda () (interactive) (find-file (f-join org-directory "uni.org")))
+   "University")
+  ("v"
+   (lambda () (interactive) (find-file (f-join org-directory "vitakid.org")))
+   "vitakid")
+  ("p"
+   (lambda () (interactive) (find-file (f-join org-directory "passwords.org")))
+   "Passwords"))
+
 (cqql/define-global-keys
  ("M-y" 'helm-show-kill-ring)
  ("C-x b" 'helm-mini)
@@ -36,8 +54,7 @@
  ("C-h C-m" 'discover-my-major)
  ("M-3" 'vr/replace)
  ("M-#" 'vr/query-replace)
- ("<f6>" (lambda () (interactive) (find-name-dired org-directory "*.org")))
- ("<f7>" (lambda () (interactive) (dired "~/.dotfiles") (helm-projectile))))
+ ("<f6>" 'cqql/org-hydra/body))
 
 (cqql/define-keys emacs-lisp-mode-map
                   ("C-h C-f" 'find-function))
