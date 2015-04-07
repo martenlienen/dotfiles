@@ -1,4 +1,4 @@
-RUBY_VERSION = "2.1.1"
+RUBY_VERSION = "2.3.0-dev"
 
 all: dotfiles pyenv rbenv ruby-build ruby oh-my-zsh cask emacs-packages \
 	compile-elisp vundle vundle-packages
