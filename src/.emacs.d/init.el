@@ -104,7 +104,7 @@
           company-minimum-prefix-length 2
           company-show-numbers t
           company-selection-wrap-around t
-          company-dabbrev-ignore-case t
+          company-dabbrev-ignore-case 'keep-prefix
           company-dabbrev-ignore-invisible t
           company-dabbrev-downcase nil
           company-backends (list #'company-css
