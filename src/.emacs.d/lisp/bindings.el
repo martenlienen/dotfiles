@@ -46,7 +46,6 @@
  ("M-Z" 'ace-jump-zap-up-to-char)
  ("M-i" 'ace-window)
  ("M-o" 'helm-swoop)
- ("<M-return>" 'magit-status)
  ("M-x" 'smex)
  ("C-z" popwin:keymap)
  ("C-c a" 'org-agenda)
@@ -54,6 +53,7 @@
  ("C-h C-m" 'discover-my-major)
  ("M-3" 'vr/replace)
  ("M-#" 'vr/query-replace)
+ ("<f2>" 'magit-status)
  ("<f6>" 'cqql/org-hydra/body))
 
 (cqql/define-keys emacs-lisp-mode-map
