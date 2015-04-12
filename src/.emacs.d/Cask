@@ -54,6 +54,7 @@
 
 ;; VCS
 (depends-on "magit")
+(depends-on "git-timemachine")
 
 ;; Syntax checking
 (depends-on "flycheck")
