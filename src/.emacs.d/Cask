@@ -23,7 +23,7 @@
 (depends-on "ace-window")
 (depends-on "ace-jump-zap")
 (depends-on "multiple-cursors")
-(depends-on "smartparens" :git "git@github.com:Fuco1/smartparens.git" :ref "6b9b415b3655ac92631c8c5ca1247eebc68b7110")
+(depends-on "smartparens")
 (depends-on "expand-region")
 (depends-on "wrap-region")
 (depends-on "centimacro")
