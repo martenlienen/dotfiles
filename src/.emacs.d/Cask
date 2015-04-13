@@ -112,6 +112,3 @@
 ;; R, Julia
 (depends-on "ess")
 (depends-on "julia-mode")
-
-;; Nice HTTP interface
-(depends-on "restclient")
