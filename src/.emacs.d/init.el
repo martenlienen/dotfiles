@@ -182,6 +182,11 @@
 (use-package haskell-mode
   :config (add-hook 'haskell-mode-hook 'structured-haskell-mode))
 
+(use-package magit
+  :config
+  (progn
+    (setq magit-last-seen-setup-instructions "1.4.0")))
+
 (use-package highlight-symbol
   :config
   (progn
