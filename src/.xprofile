@@ -14,3 +14,7 @@ xmodmap ~/.Xmodmap
 
 # Disable screensaver
 xset s off
+
+# Load zshrc so that my amended PATH is available to dmenu and other X
+# applications
+source ~/.zshrc
