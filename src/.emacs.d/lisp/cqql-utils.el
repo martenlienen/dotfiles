@@ -9,15 +9,19 @@
 (defun cqql/duplicate-line ()
   (interactive)
   "Duplicate the current line and move point down"
-  (let ((pos (point)))
-    (move-beginning-of-line nil)
-    (kill-line)
-    (yank)
-    (open-line 1)
-    (forward-line)
-    (yank)
-    (goto-char pos)
-    (forward-line)))
+  (let* ((pos (point))
+         (line-start (save-excursion
+                       (beginning-of-line)
+                       (point)))
+         (line-end (save-excursion
+                     (end-of-line)
+                     (point)))
+         (line (buffer-substring line-start line-end))
+         (new-pos (+ pos (length line) 1)))
+    (end-of-line)
+    (insert "\n")
+    (insert line)
+    (setf (point) new-pos)))
 
 (defun cqql/open-line ()
   (interactive)
