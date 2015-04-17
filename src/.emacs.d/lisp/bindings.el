@@ -23,7 +23,7 @@
  ("M-/" 'hippie-expand)
  ("C-M-SPC" 'company-complete)
  ("C-a" 'cqql/go-to-beginning-of-line-dwim)
- ("M-D" 'cqql/duplicate-line)
+ ("M-D" 'cqql/duplicate-text)
  ("C->" 'mc/mark-next-like-this)
  ("C-M->" 'mc/skip-to-next-like-this)
  ("C-<" 'mc/unmark-next-like-this)

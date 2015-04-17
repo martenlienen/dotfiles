@@ -6,22 +6,32 @@
     (when (= prev-pos (point))
       (move-beginning-of-line nil))))
 
-(defun cqql/duplicate-line (times)
+(defun cqql/duplicate-text (times)
   (interactive "p")
-  "Duplicate the current line TIMES times"
-  (let* ((pos (point))
-         (line-start (save-excursion
+  "Duplicate the current line or region TIMES times
+
+If the region is active, it duplicates from the start of the
+first line of the region to the end of the last."
+  (let* ((region? (use-region-p))
+         (pos (point))
+         (text-start (save-excursion
+                       (if region?
+                           (setf (point) (region-beginning)))
                        (beginning-of-line)
                        (point)))
-         (line-end (save-excursion
+         (text-end (save-excursion
+                     (if region?
+                         (setf (point) (region-end)))
                      (end-of-line)
                      (point)))
-         (line (buffer-substring line-start line-end))
-         (new-pos (+ pos (* times (length line)) 1)))
+         (text (buffer-substring text-start text-end))
+         (new-pos (+ pos (* times (length text)) 1)))
+    (if region?
+        (setf (point) text-end))
     (dotimes (i times)
       (end-of-line)
       (insert "\n")
-      (insert line))
+      (insert text))
     (setf (point) new-pos)))
 
 (defun cqql/open-line ()
