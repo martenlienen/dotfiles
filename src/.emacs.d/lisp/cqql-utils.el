@@ -6,9 +6,9 @@
     (when (= prev-pos (point))
       (move-beginning-of-line nil))))
 
-(defun cqql/duplicate-line ()
-  (interactive)
-  "Duplicate the current line and move point down"
+(defun cqql/duplicate-line (times)
+  (interactive "p")
+  "Duplicate the current line TIMES times"
   (let* ((pos (point))
          (line-start (save-excursion
                        (beginning-of-line)
@@ -17,10 +17,11 @@
                      (end-of-line)
                      (point)))
          (line (buffer-substring line-start line-end))
-         (new-pos (+ pos (length line) 1)))
-    (end-of-line)
-    (insert "\n")
-    (insert line)
+         (new-pos (+ pos (* times (length line)) 1)))
+    (dotimes (i times)
+      (end-of-line)
+      (insert "\n")
+      (insert line))
     (setf (point) new-pos)))
 
 (defun cqql/open-line ()
