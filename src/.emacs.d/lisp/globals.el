@@ -21,10 +21,6 @@
 (setf x-select-enable-clipboard t
       x-select-enable-primary t)
 
-;; Show line numbers
-(setq linum-format "%3d ")
-(global-linum-mode t)
-
 ;; Put more information into the frame title
 (setf frame-title-format '("" invocation-name ": %b - " mode-name))
 
