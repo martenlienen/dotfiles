@@ -46,7 +46,7 @@
  ("M-Z" 'ace-jump-zap-up-to-char)
  ("M-i" 'ace-window)
  ("M-o" 'helm-swoop)
- ("M-x" 'smex)
+ ("M-x" 'helm-M-x)
  ("C-z" popwin:keymap)
  ("C-c a" 'org-agenda)
  ("C-c c" 'org-capture)

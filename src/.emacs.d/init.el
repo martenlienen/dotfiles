@@ -70,9 +70,6 @@
   :config (setf uniquify-buffer-name-style 'forward
                 uniquify-strip-common-suffix t))
 
-(use-package smex
-  :config (smex-initialize))
-
 (use-package wrap-region
   :config (wrap-region-global-mode t))
 
