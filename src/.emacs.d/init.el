@@ -252,6 +252,8 @@
 (use-package dired
   :config
   (progn
+    (setf dired-listing-switches "-lahv")
+
     (define-key dired-mode-map
       [remap beginning-of-buffer] 'cqql/dired-jump-to-first-file)
 
