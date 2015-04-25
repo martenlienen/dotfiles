@@ -33,5 +33,5 @@ compile-elisp: dotfiles
 vundle:
 	./manage-git-repo "$$HOME/.vim/bundle/vundle" "https://github.com/gmarik/vundle.git"
 
-vundle-packages:
+vundle-packages: dotfiles
 	vim +BundleInstall +qall
