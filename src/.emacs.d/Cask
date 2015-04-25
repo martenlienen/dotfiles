@@ -31,6 +31,7 @@
 (depends-on "visual-regexp")
 (depends-on "key-chord")
 (depends-on "hydra")
+(depends-on "hungry-delete")
 
 ;; UI
 (depends-on "color-theme")
