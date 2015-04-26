@@ -66,3 +66,9 @@ antigen apply
 # Use substring search
 bindkey -M emacs "^P" history-substring-search-up
 bindkey -M emacs "^N" history-substring-search-down
+
+# Aliases
+alias grb="git rebase"
+alias grbs="git rebase --skip"
+alias t="bundle exec translations"
+alias s="bundle exec spring"
