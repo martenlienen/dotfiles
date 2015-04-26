@@ -1,6 +1,6 @@
 RUBY_VERSION = "2.3.0-dev"
 
-all: dotfiles pyenv rbenv ruby-build ruby oh-my-zsh cask emacs-packages \
+all: dotfiles pyenv rbenv ruby-build ruby antigen cask emacs-packages	\
 	compile-elisp vundle vundle-packages
 
 dotfiles:
@@ -13,13 +13,14 @@ rbenv:
 	./manage-git-repo "$$HOME/.rbenv" "https://github.com/sstephenson/rbenv.git"
 
 ruby-build: rbenv
-	./manage-git-repo "$$HOME/.rbenv/plugins/ruby-build" "https://github.com/sstephenson/ruby-build.git"
+	./manage-git-repo "$$HOME/.rbenv/plugins/ruby-build" \
+                    "https://github.com/sstephenson/ruby-build.git"
 
 ruby: ruby-build
 	./install-ruby $(RUBY_VERSION)
 
-oh-my-zsh:
-	./manage-git-repo "$$HOME/.oh-my-zsh" "git://github.com/robbyrussell/oh-my-zsh.git"
+antigen:
+	./manage-git-repo "$$HOME/.antigen" "git://github.com/zsh-users/antigen.git"
 
 cask:
 	./manage-git-repo "$$HOME/.cask" "git://github.com/cask/cask.git"

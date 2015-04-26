@@ -1,22 +1,5 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
-
 # Enable 256 color support
 TERM="xterm-256color"
-
-# Set name of the theme to load. Look in ~/.oh-my-zsh/themes/ Optionally, if you
-# set this to "random", it'll load a random theme each time that oh-my-zsh is
-# loaded.
-ZSH_THEME="cqql"
-
-# omz should not update itself
-DISABLE_AUTO_UPDATE="true"
-
-# Which plugins would you like to load? (plugins can be found in
-# ~/.oh-my-zsh/plugins/*) Custom plugins may be added to
-# ~/.oh-my-zsh/custom/plugins/ Example format: plugins=(rails git textmate ruby
-# lighthouse)
-plugins=(git gitfast bundler archlinux)
 
 # Add installed haskell binaries to PATH
 export PATH="$HOME/.cabal/bin:$PATH"
@@ -35,9 +18,6 @@ export PATH="$HOME/.cask/bin:$PATH"
 
 # Make my utilities available on PATH
 export PATH="$HOME/bin:$PATH"
-
-# Load omz after initializing PATH
-source $ZSH/oh-my-zsh.sh
 
 # Android SDK
 export PATH=/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$PATH
@@ -60,3 +40,19 @@ stty -ixon
 # Improve performance in ruby dev environment
 export RUBY_GC_MALLOC_LIMIT=90000000
 export RUBY_GC_HEAP_FREE_SLOTS=200000
+
+. ~/.antigen/antigen.zsh
+
+# omz should not update itself
+DISABLE_AUTO_UPDATE="true"
+
+antigen use oh-my-zsh
+
+antigen bundle git
+antigen bundle gitfast
+antigen bundle bundler
+antigen bundle archlinux
+
+antigen theme git@github.com:cqql/dotfiles src/.oh-my-zsh/themes/cqql
+
+antigen apply
