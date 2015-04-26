@@ -1,8 +1,9 @@
-XTerm*eightBitInput: false
-XTerm*utf8: 3
-XTerm*locale: true
-XTerm*faceName: Source Code Pro
-XTerm*faceSize: 11
+URxvt*jumpScroll: False
+URxvt*font: xft:Source Code Pro:size=11
+URxvt*scrollBar: False
+URxvt*scollTtyOutput: False
+URxvt*scollWithBuffer: True
+URxvt*scollTtyKeypress: True
 
 Emacs.menuBar: off
 Emacs.toolBar: off

@@ -20,7 +20,8 @@ myConfig = defaultConfig { modMask = mod4Mask,
                            focusedBorderColor = "#8f9d6a",
                            normalBorderColor = "#323537",
                            borderWidth = 2,
-                           layoutHook = layouts
+                           layoutHook = layouts,
+                           terminal = "urxvt"
                          }
 
 layouts = smartBorders $ tiled ||| Mirror tiled ||| Full
