@@ -49,10 +49,10 @@ DISABLE_AUTO_UPDATE="true"
 antigen use oh-my-zsh
 
 antigen bundle git
-antigen bundle gitfast
 antigen bundle bundler
 antigen bundle archlinux
 
-antigen theme git@github.com:cqql/dotfiles src/.oh-my-zsh/themes/cqql
+# Actually a theme
+antigen bundle sindresorhus/pure
 
 antigen apply
