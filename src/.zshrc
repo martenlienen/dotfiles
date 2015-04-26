@@ -41,6 +41,9 @@ stty -ixon
 export RUBY_GC_MALLOC_LIMIT=90000000
 export RUBY_GC_HEAP_FREE_SLOTS=200000
 
+# Uniquify history
+setopt HIST_IGNORE_ALL_DUPS
+
 . ~/.antigen/antigen.zsh
 
 # omz should not update itself
