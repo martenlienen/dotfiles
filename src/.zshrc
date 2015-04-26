@@ -53,8 +53,13 @@ antigen bundle bundler
 antigen bundle archlinux
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-history-substring-search
 
 # Actually a theme
 antigen bundle sindresorhus/pure
 
 antigen apply
+
+# Use substring search
+bindkey -M emacs "^P" history-substring-search-up
+bindkey -M emacs "^N" history-substring-search-down
