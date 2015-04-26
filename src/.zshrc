@@ -1,3 +1,23 @@
+. ~/.antigen/antigen.zsh
+
+# omz should not update itself
+DISABLE_AUTO_UPDATE="true"
+
+antigen use oh-my-zsh
+
+antigen bundle git
+antigen bundle bundler
+antigen bundle archlinux
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-history-substring-search
+
+# Actually a theme
+antigen bundle sindresorhus/pure
+
+# Ensure all dependencies are installed
+antigen apply
+
 # Enable 256 color support
 TERM="xterm-256color"
 
@@ -43,25 +63,6 @@ export RUBY_GC_HEAP_FREE_SLOTS=200000
 
 # Uniquify history
 setopt HIST_IGNORE_ALL_DUPS
-
-. ~/.antigen/antigen.zsh
-
-# omz should not update itself
-DISABLE_AUTO_UPDATE="true"
-
-antigen use oh-my-zsh
-
-antigen bundle git
-antigen bundle bundler
-antigen bundle archlinux
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-history-substring-search
-
-# Actually a theme
-antigen bundle sindresorhus/pure
-
-antigen apply
 
 # Use substring search
 bindkey -M emacs "^P" history-substring-search-up
