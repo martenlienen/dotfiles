@@ -52,6 +52,7 @@ antigen bundle git
 antigen bundle bundler
 antigen bundle archlinux
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-completions
 
 # Actually a theme
 antigen bundle sindresorhus/pure
