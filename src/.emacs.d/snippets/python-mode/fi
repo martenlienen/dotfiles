@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: from . import .
+# key: fi
+# --
+from $1 import ${2:*}$0

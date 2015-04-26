@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: method
+# key: d
+# --
+def $1(`(isnip-python-self-if-in-class)`${3:$$(isnip-python-maybe-prepend-comma yas-text)}):
+    ${4:pass}$0

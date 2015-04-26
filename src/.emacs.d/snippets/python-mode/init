@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: __init__
+# key: init
+# --
+def __init__(self${1:$$(isnip-python-maybe-prepend-comma yas-text)}):
+    ${1:$(isnip-python-args-to-assignments yas-text)}$0
