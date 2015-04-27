@@ -212,6 +212,11 @@
   :disabled t
   :config (flx-ido-mode t))
 
+(use-package py-yapf
+  :config
+  (progn
+    (add-hook 'python-mode-hook 'py-yapf-enable-on-save)))
+
 (defun cqql/disable-ruby-lint-checker ()
   "Disable the ruby-lint checker."
   (cqql/after-load 'flycheck

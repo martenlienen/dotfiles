@@ -80,6 +80,9 @@
 (depends-on "clojure-mode")
 (depends-on "cider")
 
+;; Python
+(depends-on "py-yapf")
+
 ;; Ruby
 (depends-on "robe")
 (depends-on "inf-ruby")
