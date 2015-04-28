@@ -54,6 +54,7 @@
  ("M-3" 'vr/replace)
  ("M-#" 'vr/query-replace)
  ("<f2>" 'magit-status)
+ ("C-c g" 'git-timemachine)
  ("<f6>" 'cqql/org-hydra/body))
 
 (cqql/define-keys emacs-lisp-mode-map
