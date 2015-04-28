@@ -126,13 +126,12 @@
 
     (helm-projectile-toggle 1)))
 
-(use-package popwin
+(use-package shackle
   :config
   (progn
-    (push '(ag-mode) popwin:special-display-config)
-    (push '("\*.+compilation\*" :regexp t) popwin:special-display-config)
+    (setq shackle-rules '((t :select t)))
 
-    (popwin-mode t)))
+    (shackle-mode)))
 
 (use-package rainbow-mode
   :config (add-hook 'after-change-major-mode-hook 'rainbow-mode))

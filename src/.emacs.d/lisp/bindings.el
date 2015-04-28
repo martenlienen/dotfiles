@@ -47,7 +47,6 @@
  ("M-i" 'ace-window)
  ("M-o" 'helm-swoop)
  ("M-x" 'helm-M-x)
- ("C-z" popwin:keymap)
  ("C-c a" 'org-agenda)
  ("C-c c" 'org-capture)
  ("C-h C-m" 'discover-my-major)
