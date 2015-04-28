@@ -42,11 +42,6 @@
 
     (add-hook 'prog-mode-hook #'whitespace-mode)))
 
-(use-package hungry-delete
-  :config
-  (progn
-    (global-hungry-delete-mode)))
-
 (use-package ag
   :config
   (progn
