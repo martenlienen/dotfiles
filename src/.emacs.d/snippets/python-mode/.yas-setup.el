@@ -12,6 +12,12 @@
         text)
     (concat ", " text)))
 
+(defun isnip-python-maybe-prepend-comma-in-class (text)
+  "Maybe prepend a comma, if the def is inside a class."
+  (if (isnip-python-inside-class?)
+      (isnip-python-maybe-prepend-comma text)
+    text))
+
 (defun isnip-python-args-to-assignments (text)
   "Convert a string of arguments to a string of self assignments."
   (if (string= text "")
