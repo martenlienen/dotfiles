@@ -2,6 +2,6 @@
 # name: class
 # key: c
 # --
-class ${1:`(s-upper-camel-case (f-filename (f-no-ext (buffer-file-name))))`}
+class ${1:`(isnip-ruby-guess-class-name)`}
   $0
 end
