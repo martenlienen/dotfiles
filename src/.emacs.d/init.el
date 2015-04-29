@@ -211,6 +211,11 @@
   (progn
     (add-hook 'python-mode-hook 'py-yapf-enable-on-save)))
 
+(use-package jedi
+  :config
+  (progn
+    (add-hook 'python-mode-hook 'jedi:setup)))
+
 (defun cqql/disable-ruby-lint-checker ()
   "Disable the ruby-lint checker."
   (cqql/after-load 'flycheck

@@ -81,6 +81,7 @@
 
 ;; Python
 (depends-on "py-yapf")
+(depends-on "jedi")
 
 ;; Ruby
 (depends-on "robe")
