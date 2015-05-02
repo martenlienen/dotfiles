@@ -15,9 +15,6 @@
 ;; Load PATH from shell, even when emacs is not started from one
 (depends-on "exec-path-from-shell")
 
-;; Loading project specific settings
-(depends-on "editorconfig")
-
 ;; General editing
 (depends-on "ace-jump-mode")
 (depends-on "ace-window")
