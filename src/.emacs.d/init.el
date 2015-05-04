@@ -129,7 +129,8 @@
 (use-package shackle
   :config
   (progn
-    (setq shackle-rules '((t :select t)))
+    (setq shackle-rules '(("*magit-commit*" :select nil)
+                          (t :select t)))
 
     (shackle-mode)))
 
