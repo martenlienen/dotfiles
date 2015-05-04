@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Multi-line equation with number
+# key: meq
+# --
+\begin{align}
+  $0
+\end{align}

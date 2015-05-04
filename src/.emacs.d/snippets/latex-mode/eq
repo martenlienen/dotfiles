@@ -2,6 +2,6 @@
 # name: One line equation
 # key: eq
 # --
-\begin{equation}
+\begin{equation*}
   $0
-\end{equation}
+\end{equation*}
