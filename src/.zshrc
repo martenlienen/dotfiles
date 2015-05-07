@@ -18,9 +18,6 @@ antigen bundle sindresorhus/pure
 # Ensure all dependencies are installed
 antigen apply
 
-# Enable 256 color support
-TERM="xterm-256color"
-
 # Add installed haskell binaries to PATH
 export PATH="$HOME/.cabal/bin:$PATH"
 
