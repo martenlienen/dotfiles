@@ -130,6 +130,7 @@
   :config
   (progn
     (setq shackle-rules '(("*magit-commit*" :select nil)
+                          ("\*Flycheck.+\*" :select nil :regexp t)
                           (t :select t)))
 
     (shackle-mode)))
