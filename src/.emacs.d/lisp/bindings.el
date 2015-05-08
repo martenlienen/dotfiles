@@ -16,6 +16,23 @@
    (lambda () (interactive) (find-file (f-join org-directory "passwords.org")))
    "Passwords"))
 
+(defhydra cqql/multiple-cursors-hydra (:hint nil)
+  "
+     ^Up^            ^Down^        ^Miscellaneous^
+----------------------------------------------
+[_p_]   Next    [_n_]   Next    [_l_] Edit lines
+[_P_]   Skip    [_N_]   Skip    [_a_] Mark all
+[_M-p_] Unmark  [_M-n_] Unmark  [_q_] Quit"
+  ("l" mc/edit-lines :exit t)
+  ("a" mc/mark-all-like-this :exit t)
+  ("n" mc/mark-next-like-this)
+  ("N" mc/skip-to-next-like-this)
+  ("M-n" mc/unmark-next-like-this)
+  ("p" mc/mark-previous-like-this)
+  ("P" mc/skip-to-previous-like-this)
+  ("M-p" mc/unmark-previous-like-this)
+  ("q" nil))
+
 (cqql/define-global-keys
  ("M-y" 'helm-show-kill-ring)
  ("C-x b" 'helm-mini)
@@ -24,11 +41,7 @@
  ("C-M-SPC" 'company-complete)
  ("C-a" 'cqql/go-to-beginning-of-line-dwim)
  ("M-D" 'cqql/duplicate-text)
- ("C->" 'mc/mark-next-like-this)
- ("C-M->" 'mc/skip-to-next-like-this)
- ("C-<" 'mc/unmark-next-like-this)
- ("M-n" 'mc/mark-all-like-this)
- ("C-M-n" 'mc/edit-lines)
+ ("M-n" 'cqql/multiple-cursors-hydra/body)
  ("M-m" 'er/expand-region)
  ("M-M" 'er/contract-region)
  ("C-S-p" 'move-text-up)
