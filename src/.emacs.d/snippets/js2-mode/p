@@ -1,7 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: prototype.method
+# name: Class property
 # key: p
 # --
-$1.prototype.$2 = function ($3) {
-  $0
-};
+${1:name}: $0`(unless (isnip-js-end-of-object?) ",")`
