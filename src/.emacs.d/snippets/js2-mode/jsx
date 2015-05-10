@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: @jsx-Pragma
+# key: jsx
+# --
+/** @jsx React.DOM */
