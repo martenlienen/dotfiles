@@ -12,8 +12,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-history-substring-search
 
-# Actually a theme
-antigen bundle sindresorhus/pure
+antigen theme steeef
 
 # Ensure all dependencies are installed
 antigen apply
