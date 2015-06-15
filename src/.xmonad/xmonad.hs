@@ -17,8 +17,8 @@ main = xmonad =<< bar config
 -- Set WM name, so that java swing applications work
 myConfig = defaultConfig { modMask = mod4Mask,
                            startupHook = setWMName "LG3D",
-                           focusedBorderColor = "#8f9d6a",
-                           normalBorderColor = "#323537",
+                           focusedBorderColor = "#81d4fa",
+                           normalBorderColor = "#263238",
                            borderWidth = 2,
                            layoutHook = layouts,
                            terminal = "urxvt"

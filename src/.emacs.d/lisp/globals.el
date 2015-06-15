@@ -4,7 +4,7 @@
 (setf ring-bell-function 'ignore)
 
 ;; Color theme
-(load-theme 'smyx t)
+(load-theme 'material t)
 
 (setq-default cursor-type 'bar)
 
