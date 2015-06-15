@@ -51,8 +51,12 @@ first line of the region to the end of the last."
 (defun cqql/kill-line ()
   (interactive)
   "Kill the current line"
-  (move-beginning-of-line nil)
-  (kill-line 1))
+  (let ((pos (point)))
+    (move-beginning-of-line nil)
+    (kill-line 1)
+    (move-end-of-line nil)
+    (when (< pos (point))
+      (setf (point) pos))))
 
 (defvar cqql/no-trimming-modes '()
   "A list of modes, that should not be whitespace-trimmed")
