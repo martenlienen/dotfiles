@@ -11,6 +11,7 @@
 
 ;; Planning
 (depends-on "org-plus-contrib")
+(depends-on "org-bullets")
 
 ;; Load PATH from shell, even when emacs is not started from one
 (depends-on "exec-path-from-shell")

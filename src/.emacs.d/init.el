@@ -359,6 +359,10 @@ Password: %^{Password}")))
   (require 'org-crypt)
   (org-crypt-use-before-save-magic))
 
+(use-package org-bullets
+  :config
+  (add-hook 'org-mode-hook 'org-bullets-mode))
+
 (use-package smart-mode-line
   :config
   (setf sml/theme 'dark
