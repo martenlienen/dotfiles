@@ -16,7 +16,7 @@
 (depends-on "exec-path-from-shell")
 
 ;; General editing
-(depends-on "ace-jump-mode")
+(depends-on "avy")
 (depends-on "ace-window")
 (depends-on "multiple-cursors")
 (depends-on "smartparens")
