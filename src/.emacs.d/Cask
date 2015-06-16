@@ -18,7 +18,6 @@
 ;; General editing
 (depends-on "ace-jump-mode")
 (depends-on "ace-window")
-(depends-on "ace-jump-zap")
 (depends-on "multiple-cursors")
 (depends-on "smartparens")
 (depends-on "expand-region")
