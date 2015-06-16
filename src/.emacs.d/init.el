@@ -12,8 +12,6 @@
 
   (push "~/.emacs.d/lisp" load-path))
 
-(require 'cqql-utils)
-
 ;; Set global/emacs-wide settings
 (require 'globals)
 
@@ -41,6 +39,13 @@
 
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer))
+
+(use-package cqql
+  :bind (("C-a" . cqql-go-to-beginning-of-line-dwim)
+         ("M-D" . cqql-duplicate-text)
+         ("C-S-k" . cqql-kill-line)
+         ("C-o" . cqql-open-line)
+         ("C-S-o" . cqql-open-line-above)))
 
 (use-package discover-my-major
   :bind ("C-h C-m" . discover-my-major))
@@ -71,8 +76,9 @@
   :bind ("M-i" . ace-window))
 
 (use-package yasnippet
-  :bind (";" . yas-expand)
+  :commands (yas-expand)
   :config
+  (bind-key ";" 'yas-expand yas-minor-mode-map)
   (bind-key "<tab>" nil yas-minor-mode-map)
   (bind-key "TAB" nil yas-minor-mode-map)
 
@@ -82,7 +88,7 @@
   (add-hook 'snippet-mode (lambda () (setq require-final-newline nil)))
 
   ;; Don't remove whitespace in yasnippets
-  (add-to-list 'cqql/no-trimming-modes 'snippet-mode)
+  (add-to-list 'cqql-no-trimming-modes 'snippet-mode)
 
   (setf yas-snippet-dirs '("~/.emacs.d/snippets"))
 
@@ -99,10 +105,10 @@
   :bind (("M-m" . er/expand-region)
          ("M-M" . er/contract-region))
   :config
-  (cqql/after-load 'ruby-mode
+  (cqql-after-load 'ruby-mode
     (require 'ruby-mode-expansions))
 
-  (cqql/after-load 'latex-mode
+  (cqql-after-load 'latex-mode
     (require 'latex-mode-expansions)))
 
 (use-package helm
@@ -249,9 +255,9 @@
   :config
   (add-hook 'python-mode-hook 'jedi:setup))
 
-(defun cqql/disable-ruby-lint-checker ()
+(defun cqql-disable-ruby-lint-checker ()
   "Disable the ruby-lint checker."
-  (cqql/after-load 'flycheck
+  (cqql-after-load 'flycheck
     (let* ((checkers (flycheck-checker-next-checkers 'ruby-rubocop))
            (filtered (-filter (lambda (e) (not (eq 'ruby-rubylint (cdr e)))) checkers)))
       (put 'ruby-rubocop 'flycheck-next-checkers filtered))))
@@ -266,7 +272,7 @@
          (".json_builder\\'" . ruby-mode)
          ("Gemfile\\'" . ruby-mode))
   :config
-  (cqql/define-keys ruby-mode-map
+  (cqql-define-keys ruby-mode-map
     ("C-c f" 'rspec-verify-single)
     ("C-c r r" 'rspec-rerun)
     ("C-c r f" 'rspec-verify)
@@ -280,21 +286,21 @@
   (add-hook 'ruby-mode-hook 'eldoc-mode)
   (add-hook 'ruby-mode-hook 'subword-mode)
   (add-hook 'ruby-mode-hook 'flycheck-mode)
-  (add-hook 'ruby-mode-hook 'cqql/disable-ruby-lint-checker))
+  (add-hook 'ruby-mode-hook 'cqql-disable-ruby-lint-checker))
 
 (use-package rspec-mode
   :config
-  (cqql/after-load 'ruby-mode
+  (cqql-after-load 'ruby-mode
     (require 'rspec-mode)
 
     (setq rspec-use-rake-when-possible nil)))
 
-(defun cqql/dired-jump-to-first-file ()
+(defun cqql-dired-jump-to-first-file ()
   (interactive)
   (goto-char (point-min))
   (dired-next-line 4))
 
-(defun cqql/dired-jump-to-last-file ()
+(defun cqql-dired-jump-to-last-file ()
   (interactive)
   (goto-char (point-max))
   (dired-next-line -1))
@@ -304,10 +310,10 @@
   (setf dired-listing-switches "-lahv")
 
   (define-key dired-mode-map
-    [remap beginning-of-buffer] 'cqql/dired-jump-to-first-file)
+    [remap beginning-of-buffer] 'cqql-dired-jump-to-first-file)
 
   (define-key dired-mode-map
-    [remap end-of-buffer] 'cqql/dired-jump-to-last-file))
+    [remap end-of-buffer] 'cqql-dired-jump-to-last-file))
 
 (use-package org
   :bind (("C-c a" . org-agenda)
@@ -364,7 +370,7 @@ Password: %^{Password}")))
   :config
   (require 'smartparens-config)
 
-  (cqql/define-keys smartparens-mode-map
+  (cqql-define-keys smartparens-mode-map
     ("C-M-f" 'sp-forward-sexp)
     ("C-M-S-f" 'sp-next-sexp)
     ("C-M-b" 'sp-backward-sexp)
@@ -403,7 +409,7 @@ Password: %^{Password}")))
   (require 'tex-site)
   (require 'preview)
 
-  (cqql/define-keys LaTeX-mode-map
+  (cqql-define-keys LaTeX-mode-map
     ("C-c u" (lambda () (interactive) (insert "ü")))
     ("C-c U" (lambda () (interactive) (insert "Ü")))
     ("C-c a" (lambda () (interactive) (insert "ä")))

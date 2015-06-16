@@ -1,4 +1,4 @@
-(defhydra cqql/org-hydra (:exit t)
+(defhydra cqql-org-hydra (:exit t)
   "Quick-Access to Org-Files"
   ("n"
    (lambda () (interactive) (find-file (f-join org-directory "inbox.org")))
@@ -16,7 +16,7 @@
    (lambda () (interactive) (find-file (f-join org-directory "passwords.org")))
    "Passwords"))
 
-(defhydra cqql/multiple-cursors-hydra (:hint nil)
+(defhydra cqql-multiple-cursors-hydra (:hint nil)
   "
      ^Up^            ^Down^        ^Miscellaneous^
 ----------------------------------------------
@@ -33,13 +33,8 @@
   ("M-p" mc/unmark-previous-like-this)
   ("q" nil))
 
-(cqql/define-global-keys
-  ("C-a" 'cqql/go-to-beginning-of-line-dwim)
-  ("M-D" 'cqql/duplicate-text)
-  ("M-n" 'cqql/multiple-cursors-hydra/body)
-  ("C-S-k" 'cqql/kill-line)
-  ("C-o" 'cqql/open-line)
-  ("C-S-o" 'cqql/open-line-above)
-  ("<f6>" 'cqql/org-hydra/body))
+(cqql-define-global-keys
+  ("M-n" 'cqql-multiple-cursors-hydra/body)
+  ("<f6>" 'cqql-org-hydra/body))
 
 (provide 'bindings)

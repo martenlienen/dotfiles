@@ -61,7 +61,7 @@
 ;; Yank at point instead of position of cursor
 (setf mouse-yank-at-point t)
 
-(add-hook 'before-save-hook 'cqql/trim-whitespace)
+(add-hook 'before-save-hook 'cqql-trim-whitespace)
 
 (when (memq window-system '(x))
   (exec-path-from-shell-initialize))
