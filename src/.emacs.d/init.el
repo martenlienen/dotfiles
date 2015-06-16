@@ -39,7 +39,19 @@
 
   (add-hook 'prog-mode-hook #'whitespace-mode))
 
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer))
+
+(use-package discover-my-major
+  :bind ("C-h C-m" . discover-my-major))
+
+(use-package visual-regexp
+  :bind (("M-3" . vr/replace)
+         ("M-#" . vr/query-replace)))
+
 (use-package ag
+  :bind (("C-x C-a" . ag-project-regexp)
+         ("C-x M-a" . ag-regexp))
   :config
   ;; Search in hidden files
   (add-to-list 'ag-arguments "--hidden")
@@ -47,8 +59,23 @@
   ;; Highlight matches
   (setf ag-highlight-search t))
 
+(use-package move-text
+  :bind (("C-S-p" . move-text-up)
+         ("C-S-n" . move-text-down)))
+
+(use-package avy
+  :bind (("M-s" . avy-goto-word-or-subword-1)
+         ("M-S" . avy-goto-char-2)))
+
+(use-package ace-window
+  :bind ("M-i" . ace-window))
+
 (use-package yasnippet
+  :bind (";" . yas-expand)
   :config
+  (bind-key "<tab>" nil yas-minor-mode-map)
+  (bind-key "TAB" nil yas-minor-mode-map)
+
   (setq yas-fallback-behavior 'call-other-command)
 
   ;; Don't append newlines to snippet files
@@ -69,6 +96,8 @@
   :config (wrap-region-global-mode t))
 
 (use-package expand-region
+  :bind (("M-m" . er/expand-region)
+         ("M-M" . er/contract-region))
   :config
   (cqql/after-load 'ruby-mode
     (require 'ruby-mode-expansions))
@@ -77,7 +106,16 @@
     (require 'latex-mode-expansions)))
 
 (use-package helm
+  :bind (("M-y" . helm-show-kill-ring)
+         ("C-x b" . helm-mini)
+         ("C-x f" . helm-find-files)
+         ("M-x" . helm-M-x))
   :config (helm-mode t))
+
+(use-package helm-swoop
+  :bind ("M-o" . helm-swoop)
+  :config
+  (bind-key "M-o" 'helm-multi-swoop-all-from-helm-swoop helm-swoop-map))
 
 (use-package clojure-mode
   :config
@@ -88,7 +126,8 @@
   (add-hook 'clojure-mode-hook 'smartparens-strict-mode))
 
 (use-package company
-  :config
+  :bind ("C-M-SPC" . company-complete)
+  :init
   (setf company-idle-delay 0
         company-minimum-prefix-length 2
         company-show-numbers t
@@ -103,13 +142,14 @@
                                      #'company-keywords)
                                #'company-files
                                #'company-dabbrev))
-
+  :config
   (global-company-mode t))
 
 (use-package color-identifiers-mode
   :config (setf color-identifiers:num-colors 6))
 
 (use-package projectile
+  :bind ("C-x C-f" . helm-projectile)
   :config
   (require 'helm-projectile)
 
@@ -160,6 +200,8 @@
 (use-package lisp-mode
   :mode ("Cask\\'" . emacs-lisp-mode)
   :config
+  (bind-key "C-h C-f" 'find-function emacs-lisp-mode-map)
+
   (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
   (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
   (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode))
@@ -168,8 +210,12 @@
   :config (add-hook 'haskell-mode-hook 'structured-haskell-mode))
 
 (use-package magit
-  :config
+  :bind ("<f2>" . magit-status)
+  :init
   (setq magit-last-seen-setup-instructions "1.4.0"))
+
+(use-package git-timemachine
+  :bind ("C-c g" . git-timemachine))
 
 (use-package highlight-symbol
   :config
@@ -178,7 +224,8 @@
   (setf highlight-symbol-idle-delay 0))
 
 (use-package hippie-exp
-  :config
+  :bind ("M-/" . hippie-expand)
+  :init
   (setf hippie-expand-try-functions-list
         '(try-expand-dabbrev-visible
           try-expand-dabbrev
@@ -210,11 +257,21 @@
       (put 'ruby-rubocop 'flycheck-next-checkers filtered))))
 
 (use-package ruby-mode
-  :mode (("Rakefile\\'" . ruby-mode) ("Capfile\\'" . ruby-mode)
-         ("Vagrantfile\\'" . ruby-mode) ("Berksfile\\'" . ruby-mode)
-         (".gemspec\\'" . ruby-mode) (".json_builder\\'" . ruby-mode)
+  :commands (rspec-verify-single rspec-rerun rspec-verify rspec-verify-all)
+  :mode (("Rakefile\\'" . ruby-mode)
+         ("Capfile\\'" . ruby-mode)
+         ("Vagrantfile\\'" . ruby-mode)
+         ("Berksfile\\'" . ruby-mode)
+         (".gemspec\\'" . ruby-mode)
+         (".json_builder\\'" . ruby-mode)
          ("Gemfile\\'" . ruby-mode))
   :config
+  (cqql/define-keys ruby-mode-map
+    ("C-c f" 'rspec-verify-single)
+    ("C-c r r" 'rspec-rerun)
+    ("C-c r f" 'rspec-verify)
+    ("C-c r g" 'rspec-verify-all))
+
   (setf ruby-insert-encoding-magic-comment nil)
 
   (add-hook 'ruby-mode-hook 'robe-mode)
@@ -253,10 +310,9 @@
     [remap end-of-buffer] 'cqql/dired-jump-to-last-file))
 
 (use-package org
-  :config
-  (require 'org-crypt)
-  (org-crypt-use-before-save-magic)
-
+  :bind (("C-c a" . org-agenda)
+         ("C-c c" . org-capture))
+  :init
   (setf org-directory "~/notes"
         org-agenda-files (list org-directory)
         org-default-notes-file "inbox.org"
@@ -291,7 +347,11 @@ Password: %^{Password}")
            (file+headline "passwords.org" "vitakid")
            "* %^{Service Name (e.g. gmail)} :crypt:
 User: %^{User}
-Password: %^{Password}"))))
+Password: %^{Password}")))
+
+  :config
+  (require 'org-crypt)
+  (org-crypt-use-before-save-magic))
 
 (use-package smart-mode-line
   :config
@@ -303,6 +363,28 @@ Password: %^{Password}"))))
 (use-package smartparens
   :config
   (require 'smartparens-config)
+
+  (cqql/define-keys smartparens-mode-map
+    ("C-M-f" 'sp-forward-sexp)
+    ("C-M-S-f" 'sp-next-sexp)
+    ("C-M-b" 'sp-backward-sexp)
+    ("C-M-S-b" 'sp-previous-sexp)
+    ("C-M-n" 'sp-down-sexp)
+    ("C-M-S-n" 'sp-backward-down-sexp)
+    ("C-M-p" 'sp-up-sexp)
+    ("C-M-S-p" 'sp-backward-up-sexp)
+    ("C-M-a" 'sp-beginning-of-sexp)
+    ("C-M-e" 'sp-end-of-sexp)
+    ("C-M-k" 'sp-kill-sexp)
+    ("C-M-S-k" 'sp-backward-kill-sexp)
+    ("C-M-w" 'sp-copy-sexp)
+    ("C-M-t" 'sp-transpose-sexp)
+    ("C-M-h" 'sp-backward-slurp-sexp)
+    ("C-M-S-h" 'sp-backward-barf-sexp)
+    ("C-M-l" 'sp-forward-slurp-sexp)
+    ("C-M-S-l" 'sp-forward-barf-sexp)
+    ("C-M-j" 'sp-splice-sexp)
+    ("C-M-S-j" 'sp-raise-sexp))
 
   (smartparens-global-mode t)
   (smartparens-strict-mode t)
@@ -320,6 +402,19 @@ Password: %^{Password}"))))
   (require 'latex)
   (require 'tex-site)
   (require 'preview)
+
+  (cqql/define-keys LaTeX-mode-map
+    ("C-c u" (lambda () (interactive) (insert "ü")))
+    ("C-c U" (lambda () (interactive) (insert "Ü")))
+    ("C-c a" (lambda () (interactive) (insert "ä")))
+    ("C-c A" (lambda () (interactive) (insert "Ä")))
+    ("C-c o" (lambda () (interactive) (insert "ö")))
+    ("C-c O" (lambda () (interactive) (insert "Ö")))
+    ("C-c s" (lambda () (interactive) (insert "ß")))
+    ("<f6>" 'preview-section)
+    ("S-<f6>" 'preview-clearout-section)
+    ("<f7>" 'preview-buffer)
+    ("S-<f7>" 'preview-clearout-buffer))
 
   (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)

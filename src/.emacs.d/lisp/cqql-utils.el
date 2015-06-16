@@ -72,12 +72,14 @@ first line of the region to the end of the last."
      '(progn ,@body)))
 
 (defmacro cqql/define-keys (keymap &rest bindings)
+  (declare (indent defun))
   `(progn
      ,@(-map
         (lambda (binding) `(define-key ,keymap (kbd ,(car binding)) ,(cadr binding)))
         bindings)))
 
 (defmacro cqql/define-global-keys (&rest bindings)
+  (declare (indent defun))
   `(progn
      ,@(-map
         (lambda (binding) `(global-set-key (kbd ,(car binding)) ,(cadr binding)))
