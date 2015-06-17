@@ -76,7 +76,6 @@
   :bind ("M-i" . ace-window))
 
 (use-package yasnippet
-  :commands (yas-expand)
   :config
   (bind-key ";" 'yas-expand yas-minor-mode-map)
   (bind-key "<tab>" nil yas-minor-mode-map)
