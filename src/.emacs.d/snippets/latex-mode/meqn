@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: Multi-line equation with number
-# key: meq
+# key: meqn
 # --
 \begin{align}
   $0
