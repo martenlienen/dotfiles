@@ -86,9 +86,6 @@
   ;; Don't append newlines to snippet files
   (add-hook 'snippet-mode (lambda () (setq require-final-newline nil)))
 
-  ;; Don't remove whitespace in yasnippets
-  (add-to-list 'cqql-no-trimming-modes 'snippet-mode)
-
   (setf yas-snippet-dirs '("~/.emacs.d/snippets"))
 
   (yas-global-mode t))
@@ -215,12 +212,14 @@
   :config (add-hook 'haskell-mode-hook 'structured-haskell-mode))
 
 (use-package magit
-  :bind ("<f2>" . magit-status)
+  :bind (("<f2>" . magit-status)
+         ("C-c g b" . magit-blame-mode)
+         ("C-c g l" . magit-file-log))
   :init
   (setq magit-last-seen-setup-instructions "1.4.0"))
 
 (use-package git-timemachine
-  :bind ("C-c g" . git-timemachine))
+  :bind ("C-c g t" . git-timemachine))
 
 (use-package highlight-symbol
   :config
