@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: rm font
+# key: rm
+# --
+\mathrm{$1}$0
