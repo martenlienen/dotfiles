@@ -245,6 +245,13 @@
   :disabled t
   :config (flx-ido-mode t))
 
+(use-package python
+  :config
+  (when (executable-find "ipython")
+    (setq python-shell-interpreter "ipython"))
+
+  (add-hook 'python-mode-hook 'eldoc-mode))
+
 (use-package py-yapf
   :config
   (add-hook 'python-mode-hook 'py-yapf-enable-on-save))
