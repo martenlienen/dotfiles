@@ -163,6 +163,7 @@
   :config
   (setq shackle-rules '(("*magit-commit*" :select nil)
                         ("\*Flycheck.+\*" :select nil :regexp t)
+                        ("\*ag.+\*" :select t :regexp t)
                         (t :select t)))
 
   (shackle-mode))
@@ -362,7 +363,17 @@ Password: %^{Password}")))
 
   :config
   (require 'org-crypt)
-  (org-crypt-use-before-save-magic))
+  (org-crypt-use-before-save-magic)
+
+  ;; Configure org-babel
+  (setf org-src-fontify-natively t
+        org-babel-load-languages '((emacs-lisp . t)
+                                   (python . t)))
+
+  ;; Load language support
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   org-babel-load-languages))
 
 (use-package org-bullets
   :config
