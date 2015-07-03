@@ -12,10 +12,7 @@
 (setf initial-scratch-message ""
       initial-major-mode 'emacs-lisp-mode)
 
-(setf initial-buffer-choice (lambda ()
-                              (org-agenda-list)
-                              (delete-other-windows)
-                              org-agenda-buffer))
+(setf initial-buffer-choice "~/notes/notes.org")
 
 ;; Enable X clipboards
 (setf x-select-enable-clipboard t

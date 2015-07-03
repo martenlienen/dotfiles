@@ -327,7 +327,7 @@
   :init
   (setf org-directory "~/notes"
         org-agenda-files (list org-directory)
-        org-default-notes-file "inbox.org"
+        org-default-notes-file "notes.org"
         org-crypt-key nil
         org-tags-exclude-from-inheritance (list "crypt")
         org-startup-indented t
@@ -336,27 +336,27 @@
         org-enforce-todo-checkbox-dependencies t
         org-agenda-start-on-weekday nil
         org-capture-templates
-        '(("n" "Note" entry (file+headline "inbox.org" "Inbox")
+        '(("n" "Note" entry (file+olp "notes.org" "Inbox")
            "* %?")
-          ("i" "Idea" entry (file+headline "ideas.org" "Ideas")
+          ("i" "Idea" entry (file+olp "notes.org" "Ideas")
            "* %?")
           ("v" "vitakid")
-          ("vw" "Web" entry (file+headline "vitakid.org" "Web")
+          ("vw" "Web" entry (file+olp "notes.org" "vitakid" "Web")
            "* %?")
-          ("vs" "Servers" entry (file+headline "vitakid.org" "Servers")
+          ("vs" "Servers" entry (file+olp "notes.org" "vitakid" "Servers")
            "* %?")
-          ("va" "Apps" entry (file+headline "vitakid.org" "Apps")
+          ("va" "Apps" entry (file+olp "notes.org" "vitakid" "Apps")
            "* %?")
-          ("vq" "QuaLiFY" entry (file+headline "vitakid.org" "QuaLiFY")
+          ("vq" "QuaLiFY" entry (file+olp "notes.org" "vitakid" "QuaLiFY")
            "* %?")
           ("p" "Passwords")
           ("pp" "Personal Password" entry
-           (file+headline "passwords.org" "Personal")
+           (file+olp "notes.org" "Passwords" "Personal")
            "* %^{Service Name (e.g. gmail)} :crypt:
 User: %^{User}
 Password: %^{Password}")
           ("pv" "vitakid Password" entry
-           (file+headline "passwords.org" "vitakid")
+           (file+olp "notes.org" "Passwords" "vitakid")
            "* %^{Service Name (e.g. gmail)} :crypt:
 User: %^{User}
 Password: %^{Password}")))
