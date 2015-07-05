@@ -214,7 +214,7 @@
 
 (use-package magit
   :bind (("<f2>" . magit-status)
-         ("C-c g b" . magit-blame-mode)
+         ("C-c g b" . magit-blame)
          ("C-c g l" . magit-file-log))
   :init
   (setq magit-last-seen-setup-instructions "1.4.0"))
