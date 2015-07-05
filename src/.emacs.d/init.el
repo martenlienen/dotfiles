@@ -217,7 +217,8 @@
          ("C-c g b" . magit-blame)
          ("C-c g l" . magit-log-buffer-file))
   :init
-  (setq magit-last-seen-setup-instructions "1.4.0"))
+  (setq magit-last-seen-setup-instructions "1.4.0"
+        magit-commit-ask-to-stage nil))
 
 (use-package git-timemachine
   :bind ("C-c g t" . git-timemachine))
