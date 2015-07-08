@@ -8,6 +8,10 @@
 
 (setq-default cursor-type 'bar)
 
+;; Use dejavu to display greek symbols (Source Code Pro has really weird greek
+;; characters)
+(set-fontset-font "fontset-default" 'greek "DejaVu Sans Mono")
+
 ;; Configure the *scratch* buffer
 (setf initial-scratch-message ""
       initial-major-mode 'emacs-lisp-mode)
