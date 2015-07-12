@@ -322,9 +322,17 @@
   (define-key dired-mode-map
     [remap end-of-buffer] 'cqql-dired-jump-to-last-file))
 
+(defun cqql-open-notes-file ()
+  "Open the default org file."
+  (interactive)
+  (find-file (concat org-directory
+                     "/"
+                     org-default-notes-file)))
+
 (use-package org
   :bind (("C-c a" . org-agenda)
-         ("C-c c" . org-capture))
+         ("C-c c" . org-capture)
+         ("<f6>" . cqql-open-notes-file))
   :init
   (setf org-directory "~/notes"
         org-agenda-files (list org-directory)

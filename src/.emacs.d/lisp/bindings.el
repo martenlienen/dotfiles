@@ -1,21 +1,3 @@
-(defhydra cqql-org-hydra (:exit t)
-  "Quick-Access to Org-Files"
-  ("n"
-   (lambda () (interactive) (find-file (f-join org-directory "inbox.org")))
-   "Notes")
-  ("i"
-   (lambda () (interactive) (find-file (f-join org-directory "ideas.org")))
-   "Ideas")
-  ("u"
-   (lambda () (interactive) (find-file (f-join org-directory "uni.org")))
-   "University")
-  ("v"
-   (lambda () (interactive) (find-file (f-join org-directory "vitakid.org")))
-   "vitakid")
-  ("p"
-   (lambda () (interactive) (find-file (f-join org-directory "passwords.org")))
-   "Passwords"))
-
 (defhydra cqql-multiple-cursors-hydra (:hint nil)
   "
      ^Up^            ^Down^        ^Miscellaneous^
@@ -34,7 +16,6 @@
   ("q" nil))
 
 (cqql-define-global-keys
-  ("M-n" 'cqql-multiple-cursors-hydra/body)
-  ("<f6>" 'cqql-org-hydra/body))
+  ("M-n" 'cqql-multiple-cursors-hydra/body))
 
 (provide 'bindings)
