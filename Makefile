@@ -24,7 +24,7 @@ emacs-packages:
 	(cd "$$HOME/.emacs.d" && cask)
 
 compile-elisp: dotfiles
-	emacs --batch --funcall batch-byte-compile $$HOME/.emacs.d/{init.el,lisp/*.el}
+	emacs --no-init-file --batch --funcall batch-byte-compile $$HOME/.emacs.d/{init.el,lisp/*.el}
 
 vundle:
 	./manage-git-repo "$$HOME/.vim/bundle/vundle" "https://github.com/gmarik/vundle.git"
