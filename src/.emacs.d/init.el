@@ -329,6 +329,8 @@
   (define-key dired-mode-map
     [remap end-of-buffer] 'cqql-dired-jump-to-last-file))
 
+(use-package dired-x)
+
 (defun cqql-open-notes-file ()
   "Open the default org file."
   (interactive)
