@@ -265,9 +265,13 @@
   :config
   (add-hook 'python-mode-hook 'py-yapf-enable-on-save))
 
+(defun cqql-use-company-jedi ()
+  "Use the `company-jedi' backend."
+  (add-to-list 'company-backends 'company-jedi))
+
 (use-package company-jedi
   :config
-  (add-hook 'python-mode-hook 'company-jedi--setup))
+  (add-hook 'python-mode-hook #'cqql-use-company-jedi))
 
 (defun cqql-disable-ruby-lint-checker ()
   "Disable the ruby-lint checker."
