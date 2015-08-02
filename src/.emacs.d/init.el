@@ -21,6 +21,9 @@
 
 (require 'use-package)
 
+(use-package dictcc
+  :bind ("C-c d" . dictcc))
+
 (use-package savehist
   :config
   (setf history-length 200)

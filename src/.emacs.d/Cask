@@ -29,6 +29,9 @@
 (depends-on "key-chord")
 (depends-on "hydra")
 
+;; Convenience
+(depends-on "dictcc")
+
 ;; UI
 (depends-on "color-theme")
 (depends-on "material-theme")
