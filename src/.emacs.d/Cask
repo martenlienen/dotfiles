@@ -76,8 +76,9 @@
 
 ;; Python
 (depends-on "py-yapf")
-(depends-on "jedi")
-(depends-on "company-jedi")
+(depends-on "pyenv-mode")
+(depends-on "anaconda-mode")
+(depends-on "company-anaconda")
 
 ;; Ruby
 (depends-on "robe")
