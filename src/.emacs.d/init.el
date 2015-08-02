@@ -262,7 +262,8 @@
   (when (executable-find "ipython")
     (setq python-shell-interpreter "ipython"))
 
-  (add-hook 'python-mode-hook 'eldoc-mode))
+  (add-hook 'python-mode-hook 'eldoc-mode)
+  (add-hook 'python-mode-hook 'subword-mode))
 
 (use-package py-yapf
   :config
