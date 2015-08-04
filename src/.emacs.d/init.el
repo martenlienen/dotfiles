@@ -260,8 +260,16 @@
   :disabled t
   :config (flx-ido-mode t))
 
+(defun cqql-isort-current-buffer ()
+  "Apply isort to the current python buffer."
+  (interactive)
+  (call-process "isort" nil nil nil (buffer-file-name))
+  (revert-buffer t t))
+
 (use-package python
   :config
+  (bind-key "C-c p i" #'cqql-isort-current-buffer python-mode-map)
+
   (when (executable-find "ipython")
     (setq python-shell-interpreter "ipython"))
 
@@ -270,7 +278,7 @@
 
 (use-package py-yapf
   :config
-  (add-hook 'python-mode-hook 'py-yapf-enable-on-save))
+  (add-hook 'python-mode-hook #'py-yapf-enable-on-save))
 
 (use-package anaconda-mode
   :config
