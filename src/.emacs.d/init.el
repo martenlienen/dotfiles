@@ -155,6 +155,8 @@
 
 (use-package projectile
   :bind ("C-x C-f" . helm-projectile)
+  :init
+  (setq projectile-keymap-prefix (kbd "C-x p"))
   :config
   (require 'helm-projectile)
 
