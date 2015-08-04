@@ -48,7 +48,9 @@
          ("M-D" . cqql-duplicate-text)
          ("C-S-k" . cqql-kill-line)
          ("C-o" . cqql-open-line)
-         ("C-S-o" . cqql-open-line-above)))
+         ("C-S-o" . cqql-open-line-above))
+  :config
+  (add-hook 'before-save-hook #'cqql-trim-whitespace))
 
 (use-package discover-my-major
   :bind ("C-h C-m" . discover-my-major))
