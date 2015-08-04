@@ -228,7 +228,8 @@
          ("C-c g l" . magit-log-buffer-file))
   :init
   (setq magit-last-seen-setup-instructions "1.4.0"
-        magit-commit-ask-to-stage nil))
+        magit-commit-ask-to-stage nil
+        magit-push-always-verify nil))
 
 (use-package git-timemachine
   :bind ("C-c g t" . git-timemachine))
