@@ -294,13 +294,6 @@
   :config
   (add-hook 'python-mode-hook 'cqql-use-company-anaconda))
 
-(defun cqql-disable-ruby-lint-checker ()
-  "Disable the ruby-lint checker."
-  (cqql-after-load 'flycheck
-    (let* ((checkers (flycheck-checker-next-checkers 'ruby-rubocop))
-           (filtered (-filter (lambda (e) (not (eq 'ruby-rubylint (cdr e)))) checkers)))
-      (put 'ruby-rubocop 'flycheck-next-checkers filtered))))
-
 (use-package ruby-mode
   :commands (rspec-verify-single rspec-rerun rspec-verify rspec-verify-all)
   :mode (("Rakefile\\'" . ruby-mode)
@@ -323,9 +316,7 @@
   (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
   (add-hook 'ruby-mode-hook 'yard-mode)
   (add-hook 'ruby-mode-hook 'eldoc-mode)
-  (add-hook 'ruby-mode-hook 'subword-mode)
-  (add-hook 'ruby-mode-hook 'flycheck-mode)
-  (add-hook 'ruby-mode-hook 'cqql-disable-ruby-lint-checker))
+  (add-hook 'ruby-mode-hook 'subword-mode))
 
 (use-package rspec-mode
   :config
