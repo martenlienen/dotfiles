@@ -212,12 +212,15 @@
   (interactive)
   (ert t))
 
+(use-package macrostep)
+
 (use-package lisp-mode
   :mode ("Cask\\'" . emacs-lisp-mode)
   :config
   (bind-key "C-h C-f" 'find-function emacs-lisp-mode-map)
   (bind-key "C-c e t" 'cqql-run-all-ert-tests emacs-lisp-mode-map)
   (bind-key "C-c e b" 'eval-buffer emacs-lisp-mode-map)
+  (bind-key "C-c e m" 'macrostep-expand emacs-lisp-mode-map)
 
   (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
   (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)

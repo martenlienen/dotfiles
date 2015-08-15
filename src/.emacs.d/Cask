@@ -48,7 +48,7 @@
 
 ;; Autocomplete
 (depends-on "company")
-
+	
 ;; VCS
 (depends-on "magit")
 (depends-on "git-timemachine")
@@ -66,6 +66,9 @@
 
 ;; Markdown
 (depends-on "markdown-mode")
+
+;; Emacs Lisp
+(depends-on "macrostep")
 
 ;; Haskell
 (depends-on "haskell-mode")
