@@ -48,7 +48,7 @@
 
 ;; Autocomplete
 (depends-on "company")
-	
+
 ;; VCS
 (depends-on "magit")
 (depends-on "git-timemachine")
@@ -114,7 +114,3 @@
 
 ;; LaTeX
 (depends-on "auctex")
-
-;; R, Julia
-(depends-on "ess")
-(depends-on "julia-mode")
