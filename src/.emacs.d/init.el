@@ -117,6 +117,7 @@
          ("C-x b" . helm-mini)
          ("C-x f" . helm-find-files)
          ("M-x" . helm-M-x))
+  :demand t
   :config (helm-mode t))
 
 (use-package helm-swoop
