@@ -139,9 +139,6 @@
         company-minimum-prefix-length 2
         company-show-numbers t
         company-selection-wrap-around t
-        company-dabbrev-ignore-case 'keep-prefix
-        company-dabbrev-ignore-invisible t
-        company-dabbrev-downcase nil
         company-backends (list #'company-css
                                #'company-clang
                                #'company-capf
@@ -151,6 +148,12 @@
                                #'company-dabbrev))
   :config
   (global-company-mode t))
+
+(use-package company-dabbrev
+  :init
+  (setf company-dabbrev-ignore-case 'keep-prefix
+        company-dabbrev-ignore-invisible t
+        company-dabbrev-downcase nil))
 
 (use-package color-identifiers-mode
   :config (setf color-identifiers:num-colors 6))
