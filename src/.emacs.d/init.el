@@ -409,7 +409,8 @@ Password: %^{Password}")))
   ;; Configure org-babel
   (setf org-src-fontify-natively t
         org-babel-load-languages '((emacs-lisp . t)
-                                   (python . t)))
+                                   (python . t)
+                                   (sh . t)))
 
   ;; Load language support
   (org-babel-do-load-languages

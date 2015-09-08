@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Babel source code block
+# key: src
+# --
+#+BEGIN_SRC $1
+$0
+#+END_SRC
