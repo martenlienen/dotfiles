@@ -63,4 +63,7 @@
 (when (memq window-system '(x))
   (exec-path-from-shell-initialize))
 
+;; Disable tramp and GPG keys for performance
+(setq file-name-handler-alist nil)
+
 (provide 'globals)
