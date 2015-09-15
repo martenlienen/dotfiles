@@ -53,6 +53,9 @@
 ;; Line breaks at 80 characters
 (setq-default fill-column 80)
 
+;; Append a newline at the end of files
+(setq require-final-newline t)
+
 ;; Disable backups and autosaves
 (setq backup-inhibited t)
 (setq auto-save-default nil)
