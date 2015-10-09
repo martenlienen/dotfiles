@@ -106,9 +106,6 @@
   :bind (("M-m" . er/expand-region)
          ("M-M" . er/contract-region))
   :config
-  (cqql-after-load 'ruby-mode
-    (require 'ruby-mode-expansions))
-
   (cqql-after-load 'latex-mode
     (require 'latex-mode-expansions)))
 
@@ -202,14 +199,8 @@
 
   (add-hook 'js2-mode-hook 'subword-mode))
 
-(use-package scss-mode
-  :config (setq scss-compile-at-save nil))
-
 (use-package c++-mode
   :mode "\\.h\\'")
-
-(use-package coffee-mode
-  :config (add-hook 'coffee-mode-hook 'subword-mode))
 
 (defun cqql-run-all-ert-tests ()
   "Run all ert tests defined."
@@ -300,37 +291,6 @@
 (use-package company-anaconda
   :config
   (add-hook 'python-mode-hook 'cqql-use-company-anaconda))
-
-(use-package ruby-mode
-  :commands (rspec-verify-single rspec-rerun rspec-verify rspec-verify-all)
-  :mode (("Rakefile\\'" . ruby-mode)
-         ("Capfile\\'" . ruby-mode)
-         ("Vagrantfile\\'" . ruby-mode)
-         ("Berksfile\\'" . ruby-mode)
-         (".gemspec\\'" . ruby-mode)
-         (".json_builder\\'" . ruby-mode)
-         ("Gemfile\\'" . ruby-mode))
-  :config
-  (cqql-define-keys ruby-mode-map
-    ("C-c f" 'rspec-verify-single)
-    ("C-c r r" 'rspec-rerun)
-    ("C-c r f" 'rspec-verify)
-    ("C-c r g" 'rspec-verify-all))
-
-  (setf ruby-insert-encoding-magic-comment nil)
-
-  (add-hook 'ruby-mode-hook 'robe-mode)
-  (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
-  (add-hook 'ruby-mode-hook 'yard-mode)
-  (add-hook 'ruby-mode-hook 'eldoc-mode)
-  (add-hook 'ruby-mode-hook 'subword-mode))
-
-(use-package rspec-mode
-  :config
-  (cqql-after-load 'ruby-mode
-    (require 'rspec-mode)
-
-    (setq rspec-use-rake-when-possible nil)))
 
 (defun cqql-dired-jump-to-first-file ()
   (interactive)
@@ -457,9 +417,6 @@ Password: %^{Password}")))
   (smartparens-global-mode t)
   (smartparens-strict-mode t)
   (show-smartparens-global-mode t))
-
-(use-package web-mode
-  :mode "\\.erb\\'")
 
 (use-package tex-mode
   :mode ("\\.tex\\'" . LaTeX-mode)

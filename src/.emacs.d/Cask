@@ -86,31 +86,9 @@
 (depends-on "anaconda-mode")
 (depends-on "company-anaconda")
 
-;; Ruby
-(depends-on "robe")
-(depends-on "inf-ruby")
-(depends-on "rspec-mode")
-(depends-on "yard-mode")
-
-;; Web development
-(depends-on "web-mode")
-
-;; HTML replacements
-(depends-on "haml-mode")
-
-;; CSS replacements
-(depends-on "scss-mode")
-(depends-on "less-css-mode")
-
 ;; Javascript
 (depends-on "js2-mode")
 (depends-on "js2-refactor")
-
-;; Javascript replacements
-(depends-on "coffee-mode")
-
-;; YAML
-(depends-on "yaml-mode")
 
 ;; LaTeX
 (depends-on "auctex")
