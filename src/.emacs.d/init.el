@@ -322,9 +322,6 @@
                      org-default-notes-file)))
 
 (use-package org
-  :bind (("C-c a" . org-agenda)
-         ("C-c c" . org-capture)
-         ("<f6>" . cqql-open-notes-file))
   :init
   (setf org-directory "~/notes"
         org-agenda-files (list org-directory)
@@ -335,32 +332,7 @@
         org-M-RET-may-split-line nil
         org-enforce-todo-dependencies t
         org-enforce-todo-checkbox-dependencies t
-        org-agenda-start-on-weekday nil
-        org-capture-templates
-        '(("n" "Note" entry (file+olp "notes.org" "Inbox")
-           "* %?")
-          ("i" "Idea" entry (file+olp "notes.org" "Ideas")
-           "* %?")
-          ("v" "vitakid")
-          ("vw" "Web" entry (file+olp "notes.org" "vitakid" "Web")
-           "* %?")
-          ("vs" "Servers" entry (file+olp "notes.org" "vitakid" "Servers")
-           "* %?")
-          ("va" "Apps" entry (file+olp "notes.org" "vitakid" "Apps")
-           "* %?")
-          ("vq" "QuaLiFY" entry (file+olp "notes.org" "vitakid" "QuaLiFY")
-           "* %?")
-          ("p" "Passwords")
-          ("pp" "Personal Password" entry
-           (file+olp "notes.org" "Passwords" "Personal")
-           "* %^{Service Name (e.g. gmail)} :crypt:
-User: %^{User}
-Password: %^{Password}")
-          ("pv" "vitakid Password" entry
-           (file+olp "notes.org" "Passwords" "vitakid")
-           "* %^{Service Name (e.g. gmail)} :crypt:
-User: %^{User}
-Password: %^{Password}")))
+        org-agenda-start-on-weekday nil)
 
   :config
   (require 'org-crypt)
