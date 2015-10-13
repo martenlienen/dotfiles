@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: A basic template for exercise sheets
+# key: exercise
+# --
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+
+% Math environments and macros
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% Define the page margin
+\usepackage[margin=3cm]{geometry}
+
+% Define \includegraphics to include graphics
+\usepackage{graphicx}
+
+% Better typography (font rendering)
+\usepackage{microtype}
+
+% Syntax highlighting
+\usepackage{minted}
+
+% Set global minted options
+\setminted{linenos, autogobble, frame=lines, framesep=2mm}
+
+\title{$1}
+\author{Marten Lienen (03670270)}
+
+\begin{document}
+
+\maketitle
+
+$0
+
+\end{document}
