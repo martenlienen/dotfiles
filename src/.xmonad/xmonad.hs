@@ -50,7 +50,8 @@ myKeys = [ ("<XF86AudioRaiseVolume>", spawn "amixer -c 0 -- sset Master '2.00dB+
          , ("M-S-s", spawn (maim "-s"))
          , ("M-S-e", spawn "emacs")
          , ("M-S-i", spawn "chromium")
-         , ("M-S-f", spawn "firefox") ]
+         , ("M-S-f", spawn "firefox")
+         , ("M-g", spawn "togglexkbmap") ]
 
 myPP = defaultPP { ppCurrent = xmobarColor "white" "" . wrap "<" ">",
                    ppHidden = xmobarColor "#a7a7a7" "",
