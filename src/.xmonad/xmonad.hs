@@ -4,8 +4,6 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
 import XMonad.Util.EZConfig (additionalKeysP)
-import XMonad.Util.Paste (pasteString)
-import XMonad.Util.Run (spawnPipe)
 import XMonad.Layout.Spacing (smartSpacing)
 import XMonad.Layout.NoBorders (smartBorders)
 
