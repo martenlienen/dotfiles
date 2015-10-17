@@ -13,3 +13,6 @@ case $layout in
 esac
 
 setxkbmap $target
+
+# Reload xmodmap because setxkbmap clears it
+xmodmap ~/.Xmodmap
