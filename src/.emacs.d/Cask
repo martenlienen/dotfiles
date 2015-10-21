@@ -92,3 +92,6 @@
 
 ;; LaTeX
 (depends-on "auctex")
+
+;; ledger-cli
+(depends-on "ledger-mode")

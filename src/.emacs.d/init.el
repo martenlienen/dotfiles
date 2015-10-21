@@ -426,6 +426,9 @@
 
 (use-package hydra)
 
+(use-package ledger-mode
+  :mode "\\.ledger\\'")
+
 (require 'bindings)
 
 (provide 'init)
