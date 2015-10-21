@@ -400,15 +400,6 @@
   (require 'tex-site)
   (require 'preview)
 
-  (cqql-define-keys LaTeX-mode-map
-    ("C-c u" (lambda () (interactive) (insert "ü")))
-    ("C-c U" (lambda () (interactive) (insert "Ü")))
-    ("C-c a" (lambda () (interactive) (insert "ä")))
-    ("C-c A" (lambda () (interactive) (insert "Ä")))
-    ("C-c o" (lambda () (interactive) (insert "ö")))
-    ("C-c O" (lambda () (interactive) (insert "Ö")))
-    ("C-c s" (lambda () (interactive) (insert "ß"))))
-
   (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
