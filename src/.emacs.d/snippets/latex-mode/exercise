@@ -5,20 +5,23 @@
 \documentclass[10pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 
+% Define the page margin
+\usepackage[margin=3cm]{geometry}
+
+% Better typography (font rendering)
+\usepackage{microtype}
+
 % Math environments and macros
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
 
-% Define the page margin
-\usepackage[margin=3cm]{geometry}
-
 % Define \includegraphics to include graphics
 \usepackage{graphicx}
 
-% Better typography (font rendering)
-\usepackage{microtype}
+% Draw graphics from a text description
+\usepackage{tikz}
 
 % Syntax highlighting
 \usepackage{minted}
