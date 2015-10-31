@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: minted
+# key: minted
+# --
+\begin{minted}{$1}
+  $0
+\end{minted}
