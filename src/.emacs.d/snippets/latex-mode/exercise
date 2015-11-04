@@ -29,6 +29,9 @@
 % Set global minted options
 \setminted{linenos, autogobble, frame=lines, framesep=2mm}
 
+% Import the comment environment for orgtbl-mode
+\usepackage{comment}
+
 \title{$1}
 \author{Marten Lienen (03670270)}
 
