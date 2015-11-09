@@ -70,6 +70,9 @@
 ;; Emacs Lisp
 (depends-on "macrostep")
 
+;; C/C++
+(depends-on "cmake-mode")
+
 ;; Haskell
 (depends-on "haskell-mode")
 (depends-on "shm")

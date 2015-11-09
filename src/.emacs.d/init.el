@@ -122,6 +122,8 @@
   :config
   (bind-key "M-o" 'helm-multi-swoop-all-from-helm-swoop helm-swoop-map))
 
+(use-package cmake-mode)
+
 (use-package clojure-mode
   :config
   (require 'cider-eldoc)
