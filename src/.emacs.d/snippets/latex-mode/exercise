@@ -32,6 +32,9 @@
 % Import the comment environment for orgtbl-mode
 \usepackage{comment}
 
+% Do not indent paragraphs
+\usepackage{parskip}
+
 \title{$1}
 \author{Marten Lienen (03670270)}
 
