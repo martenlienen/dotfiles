@@ -12,8 +12,8 @@ xrdb -merge ~/.Xresources
 # Load mod-key mappings
 xmodmap ~/.Xmodmap
 
-# Disable screensaver
-xset s off
+# Disable display power management
+xset -dpms
 
 # Load zshrc so that my amended PATH is available to dmenu and other X
 # applications
