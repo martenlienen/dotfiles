@@ -60,8 +60,8 @@
          ("M-#" . vr/query-replace)))
 
 (use-package ag
-  :bind (("C-x C-a" . ag-project-regexp)
-         ("C-x M-a" . ag-regexp))
+  :bind (("C-c a" . ag-project-regexp)
+         ("C-c M-a" . ag-regexp))
   :config
   ;; Search in hidden files
   (add-to-list 'ag-arguments "--hidden")
