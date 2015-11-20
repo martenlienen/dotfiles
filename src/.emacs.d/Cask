@@ -72,6 +72,7 @@
 
 ;; C/C++
 (depends-on "cmake-mode")
+(depends-on "google-c-style")
 
 ;; Haskell
 (depends-on "haskell-mode")

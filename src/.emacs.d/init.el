@@ -124,6 +124,11 @@
 
 (use-package cmake-mode)
 
+(use-package google-c-style
+  :demand t
+  :config
+  (add-hook 'c-mode-common-hook #'google-set-c-style))
+
 (use-package clojure-mode
   :config
   (require 'cider-eldoc)
