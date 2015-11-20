@@ -1,5 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: #include <>
-# key: inc
+# name: return
+# key: r
 # --
-#include <$0>
+return $0;

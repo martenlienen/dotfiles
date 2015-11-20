@@ -2,9 +2,9 @@
 # name: header guard
 # key: guard
 # --
-#ifndef `(s-upcase (s-snake-case (f-filename (buffer-file-name))))`
-#define `(s-upcase (s-snake-case (f-filename (buffer-file-name))))`
+#ifndef `(s-upcase (s-snake-case (f-filename (buffer-file-name))))`_
+#define `(s-upcase (s-snake-case (f-filename (buffer-file-name))))`_
 
 $0
 
-#endif // `(s-upcase (s-snake-case (f-filename (buffer-file-name))))`
+#endif // `(s-upcase (s-snake-case (f-filename (buffer-file-name))))`_

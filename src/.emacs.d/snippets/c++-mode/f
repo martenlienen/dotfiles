@@ -1,5 +1,7 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: #include <>
-# key: inc
+# name: for
+# key: f
 # --
-#include <$0>
+for ($1) {
+  $0
+}

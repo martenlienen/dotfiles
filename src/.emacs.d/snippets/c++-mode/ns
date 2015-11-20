@@ -1,7 +1,9 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: for
-# key: for
+# name: namespace
+# key: ns
 # --
-for ($1) {
-  $0
+namespace $1 {
+
+$0
+
 }
