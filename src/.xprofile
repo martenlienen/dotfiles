@@ -17,7 +17,7 @@ xset -dpms
 
 # Load zshrc so that my amended PATH is available to dmenu and other X
 # applications
-source ~/.zshrc
+source ~/.zshenv
 
 # Start gnome-keyring as an ssh-agent replacement
 eval $(gnome-keyring-daemon --start --components=ssh)
