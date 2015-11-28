@@ -39,7 +39,6 @@
 (depends-on "rainbow-delimiters")
 (depends-on "shackle")
 (depends-on "rainbow-mode")
-(depends-on "color-identifiers-mode")
 (depends-on "highlight-symbol")
 (depends-on "discover-my-major")
 
@@ -62,7 +61,6 @@
 (depends-on "helm-swoop")
 (depends-on "projectile")
 (depends-on "helm-projectile")
-(depends-on "flx-ido")
 
 ;; Markdown
 (depends-on "markdown-mode")

@@ -27,11 +27,20 @@ cask:
 emacs-packages:
 	(cd "$$HOME/.emacs.d" && cask)
 
-compile-elisp: dotfiles
-	emacs --no-init-file --batch --funcall batch-byte-compile $$HOME/.emacs.d/{init.el,lisp/*.el}
+tangle-init-org:
+	emacs --quick --batch --eval									\
+				"(progn 																\
+					(require 'ob-tangle)									\
+				  (find-file \"src/.emacs.d/init.org\")	\
+				  (org-babel-tangle))"
+
+compile-elisp: tangle-init-org dotfiles
+	emacs --no-init-file --batch --funcall batch-byte-compile	\
+				$$HOME/.emacs.d/{init.el,lisp/*.el}
 
 vundle:
-	./manage-git-repo "$$HOME/.vim/bundle/vundle" "https://github.com/gmarik/vundle.git"
+	./manage-git-repo "$$HOME/.vim/bundle/vundle"							\
+										"https://github.com/gmarik/vundle.git"
 
 vundle-packages: dotfiles
 	vim +BundleInstall +qall
