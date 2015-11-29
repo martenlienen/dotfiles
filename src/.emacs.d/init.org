@@ -618,7 +618,9 @@ Filter lines by regular expression before jumping there.
 
 #+BEGIN_SRC emacs-lisp
   (use-package c++-mode
-    :mode "\\.h\\'")
+    :mode "\\.h\\'"
+    :config
+    (add-hook 'c++-mode-hook #'subword-mode))
 #+END_SRC
 
 *** Style Guide
