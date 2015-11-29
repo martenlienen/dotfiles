@@ -8,9 +8,6 @@
 
   (setf ring-bell-function 'ignore)
 
-  ;; Color theme
-  (load-theme 'material t)
-
   (setq-default cursor-type 'bar)
 
   ;; Use dejavu to display greek symbols (Source Code Pro has really weird greek
@@ -68,9 +65,6 @@
   ;; Yank at point instead of position of cursor
   (setf mouse-yank-at-point t)
 
-  (when (memq window-system '(x))
-    (exec-path-from-shell-initialize))
-
   ;; Disable tramp and GPG keys for performance
   (setq file-name-handler-alist nil)
 #+END_SRC
@@ -98,7 +92,7 @@ Packages are configured with the ~use-package~ macro.
 
 * Utilities
 
-The ~cqql~ package (conspicously named after myself) contains several a loose
+The ~cqql~ package (conspicuously named after myself) contains several a loose
 collection of utility functions and commands which is why it cannot be put
 easily into one of the existing sections.
 
@@ -111,6 +105,16 @@ easily into one of the existing sections.
            ("C-S-o" . cqql-open-line-above))
     :config
     (add-hook 'before-save-hook #'cqql-trim-whitespace))
+#+END_SRC
+
+** PATH
+
+Teach emacs my modified ~PATH~ so that it can, for example, find local python
+installations.
+
+#+BEGIN_SRC emacs-lisp
+  (when (memq window-system '(x))
+    (exec-path-from-shell-initialize))
 #+END_SRC
 
 * Key Bindings
@@ -154,6 +158,12 @@ key maps.
 #+END_SRC
 
 * UI
+
+** Theme
+
+#+BEGIN_SRC emacs-lisp
+  (load-theme 'material t)
+#+END_SRC
 
 ** Mode Line
 
