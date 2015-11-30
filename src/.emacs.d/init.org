@@ -674,7 +674,18 @@ Filter lines by regular expression before jumping there.
     (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
     (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
     (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
+#+END_SRC
 
+LaTeX tables are really horrible to create and edit for most simple
+use-cases. But ~org-mode~ comes to our rescue. Simply enabling ~org-table-mode~
+gives you automatically resizing ASCII tables everywhere and you can even export
+them to LaTeX!
+
+#+BEGIN_SRC emacs-lisp
+    (add-hook 'LaTeX-mode-hook #'orgtbl-mode)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
     (add-hook 'LaTeX-mode-hook (lambda () (setq word-wrap t)))
 
     (add-hook 'LaTeX-mode-hook
