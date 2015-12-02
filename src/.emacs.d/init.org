@@ -154,7 +154,7 @@ key maps.
     ("q" nil))
 
   (cqql-define-global-keys
-    ("M-n" 'cqql-multiple-cursors-hydra/body))
+    ("C-c m" #'cqql-multiple-cursors-hydra/body))
 #+END_SRC
 
 * UI
