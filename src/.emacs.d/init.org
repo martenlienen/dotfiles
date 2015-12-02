@@ -656,6 +656,26 @@ Filter lines by regular expression before jumping there.
   (use-package cmake-mode)
 #+END_SRC
 
+*** Irony
+
+#+BEGIN_SRC emacs-lisp
+  (use-package irony
+    :config
+    (add-hook 'c++-mode-hook #'irony-mode)
+    (add-hook 'c-mode-hook #'irony-mode)
+
+    (add-hook 'irony-mode-hook #'irony-cdb-autosetup-compile-options)
+
+    (require 'irony-eldoc)
+    (add-hook 'irony-mode-hook #'eldoc-mode)
+    (add-hook 'irony-mode-hook #'irony-eldoc)
+
+    (require 'company-irony)
+    (require 'company-irony-c-headers)
+    (add-to-list 'company-backends (list #'company-irony
+                                         #'company-irony-c-headers)))
+#+END_SRC
+
 ** Shell
 
 #+BEGIN_SRC emacs-lisp

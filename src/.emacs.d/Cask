@@ -71,6 +71,10 @@
 ;; C/C++
 (depends-on "cmake-mode")
 (depends-on "google-c-style")
+(depends-on "irony")
+(depends-on "irony-eldoc")
+(depends-on "company-irony")
+(depends-on "company-irony-c-headers")
 
 ;; Haskell
 (depends-on "haskell-mode")
