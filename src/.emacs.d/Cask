@@ -5,6 +5,9 @@
 ;; Package configuration
 (depends-on "use-package")
 
+;; Key bindings
+(depends-on "free-keys")
+
 ;; Libaries
 (depends-on "dash")
 (depends-on "s")
