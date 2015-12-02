@@ -160,7 +160,9 @@ key maps.
     ("q" nil))
 
   (cqql-define-global-keys
-    ("C-c m" #'cqql-multiple-cursors-hydra/body))
+    ("M-n" #'cqql-multiple-cursors-hydra/body)
+    ;; Bind this to multiple keys because some modes define M-n themselves
+    ("C-c M-n" #'cqql-multiple-cursors-hydra/body))
 #+END_SRC
 
 * UI
