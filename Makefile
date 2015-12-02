@@ -1,7 +1,7 @@
 all: dotfiles pyenv pyenv-virtualenv rbenv ruby-build antigen cask	\
 	emacs-packages compile-elisp vundle vundle-packages
 
-dotfiles:
+dotfiles: tangle-init-org
 	find src -maxdepth 1 -mindepth 1 -exec cp --recursive {} $$HOME \;
 
 pyenv:
@@ -34,7 +34,7 @@ tangle-init-org:
 				  (find-file \"src/.emacs.d/init.org\")	\
 				  (org-babel-tangle))"
 
-compile-elisp: tangle-init-org dotfiles
+compile-elisp: dotfiles
 	emacs --no-init-file --batch --funcall batch-byte-compile	\
 				$$HOME/.emacs.d/{init.el,lisp/*.el}
 
