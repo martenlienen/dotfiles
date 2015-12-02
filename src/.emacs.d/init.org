@@ -69,6 +69,12 @@
   (setq file-name-handler-alist nil)
 #+END_SRC
 
+Automatically jump to origin file and line when an the point is on an error.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'compilation-mode-hook #'next-error-follow-minor-mode)
+#+END_SRC
+
 * Cask
 
 Initialize cask to put the installed packages on the load path.
@@ -627,9 +633,11 @@ Filter lines by regular expression before jumping there.
 ** C/C++
 
 #+BEGIN_SRC emacs-lisp
-  (use-package c++-mode
-    :mode "\\.h\\'"
+  (use-package cc-mode
+    :mode ("\\.h\\'" . c++-mode)
     :config
+    (bind-key "C-c C-c" #'recompile c-mode-base-map)
+
     (add-hook 'c++-mode-hook #'subword-mode))
 #+END_SRC
 
