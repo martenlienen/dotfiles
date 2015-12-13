@@ -78,6 +78,7 @@
 (depends-on "irony-eldoc")
 (depends-on "company-irony")
 (depends-on "company-irony-c-headers")
+(depends-on "clang-format")
 
 ;; Haskell
 (depends-on "haskell-mode")

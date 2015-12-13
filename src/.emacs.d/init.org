@@ -639,6 +639,8 @@ Filter lines by regular expression before jumping there.
     :mode ("\\.h\\'" . c++-mode)
     :config
     (bind-key "C-c C-c" #'recompile c-mode-base-map)
+    (bind-key "C-c C-o" #'ff-find-other-file c-mode-base-map)
+    (bind-key "C-c f" #'clang-format-buffer c-mode-base-map)
 
     (add-hook 'c++-mode-hook #'subword-mode))
 #+END_SRC
