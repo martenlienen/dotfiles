@@ -116,11 +116,14 @@ easily into one of the existing sections.
 ** PATH
 
 Teach emacs my modified ~PATH~ so that it can, for example, find local python
-installations.
+installations. We have to set ~exec-path-from-shell-arguments~ to ~""~ so that
+it uses an interactive shell instead of a login one which would not read my
+~.zshenv~ file, where ~PATH~ is initialized.
 
 #+BEGIN_SRC emacs-lisp
-  (when (memq window-system '(x))
-    (exec-path-from-shell-initialize))
+  (setq exec-path-from-shell-arguments "")
+
+  (exec-path-from-shell-initialize)
 #+END_SRC
 
 * Key Bindings
