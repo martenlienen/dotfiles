@@ -551,16 +551,13 @@ Filter lines by regular expression before jumping there.
   (use-package python
     :config
     (bind-key "C-c p i" #'cqql-isort-current-buffer python-mode-map)
+    (bind-key "C-c f" #'py-yapf-buffer python-mode-map)
 
     (when (executable-find "ipython")
       (setq python-shell-interpreter "ipython"))
 
     (add-hook 'python-mode-hook 'eldoc-mode)
     (add-hook 'python-mode-hook 'subword-mode))
-
-  (use-package py-yapf
-    :config
-    (add-hook 'python-mode-hook #'py-yapf-enable-on-save))
 
   (use-package anaconda-mode
     :config
