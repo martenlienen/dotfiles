@@ -173,7 +173,7 @@ key maps.
 ** Theme
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'material t)
+  (load-theme 'leuven t)
 #+END_SRC
 
 ** Mode Line
@@ -181,7 +181,7 @@ key maps.
 #+BEGIN_SRC emacs-lisp
   (use-package smart-mode-line
     :config
-    (setf sml/theme 'dark
+    (setf sml/theme 'light
           sml/no-confirm-load-theme t)
 
     (sml/setup))
