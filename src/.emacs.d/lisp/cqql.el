@@ -66,6 +66,20 @@ first line of the region to the end of the last."
     (when (< pos (point))
       (setf (point) pos))))
 
+(defun cqql-c-append-semicolon ()
+  "Insert semicolon at the end of the line."
+  (interactive)
+  (save-excursion
+    (move-end-of-line nil)
+    (insert ";")))
+
+(defun cqql-latex-append-line-break ()
+  "Insert the \\\\ macro at the end of the line."
+  (interactive)
+  (save-excursion
+    (move-end-of-line nil)
+    (insert "\\\\")))
+
 (defun cqql-exercise-headers (structure)
   "Create a STRUCTURE of headers for exercise sheets."
   (interactive "xStructure: ")

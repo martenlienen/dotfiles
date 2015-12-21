@@ -638,6 +638,8 @@ Filter lines by regular expression before jumping there.
   (use-package cc-mode
     :mode ("\\.h\\'" . c++-mode)
     :config
+    (require 'cqql)
+    (bind-key "<C-return>" #'cqql-c-append-semicolon c-mode-base-map)
     (bind-key "C-c C-c" #'recompile c-mode-base-map)
     (bind-key "C-c C-o" #'ff-find-other-file c-mode-base-map)
     (bind-key "C-c f" #'clang-format-buffer c-mode-base-map)
@@ -702,6 +704,9 @@ Filter lines by regular expression before jumping there.
     (require 'latex)
     (require 'tex-site)
     (require 'preview)
+
+    (require 'cqql)
+    (bind-key "<C-return>" #'cqql-latex-append-line-break TeX-mode-map)
 
     (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
     (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
