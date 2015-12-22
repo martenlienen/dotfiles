@@ -7,6 +7,8 @@
   email = "marten.lienen@gmail.com"
 [push]
   default = simple
+[pull]
+  rebase = true
 [format]
   pretty = oneline
 [log]
