@@ -6,7 +6,6 @@ DISABLE_AUTO_UPDATE="true"
 antigen use oh-my-zsh
 
 antigen bundle git
-antigen bundle bundler
 antigen bundle archlinux
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
