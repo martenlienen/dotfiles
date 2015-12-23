@@ -5,8 +5,6 @@ DISABLE_AUTO_UPDATE="true"
 
 antigen use oh-my-zsh
 
-antigen bundle git
-antigen bundle archlinux
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-history-substring-search
@@ -32,8 +30,4 @@ setopt HIST_IGNORE_ALL_DUPS
 bindkey -M emacs "^P" history-substring-search-up
 bindkey -M emacs "^N" history-substring-search-down
 
-# Aliases
-alias grb="git rebase"
-alias grbs="git rebase --skip"
-alias t="bundle exec translations"
-alias s="bundle exec spring"
+. ~/.zsh/aliases.zsh
