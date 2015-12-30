@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: Math operator
+# key: mathop
+# --
+\DeclareMathOperator{\\$1}{${2:$1}}
