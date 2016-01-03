@@ -2,7 +2,7 @@
 # name: Picture figure
 # key: pic
 # --
-\begin{figure}
+\begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{$1}
   \caption{$2}${3:
