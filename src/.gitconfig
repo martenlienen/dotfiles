@@ -9,6 +9,8 @@
   default = simple
 [pull]
   rebase = true
+[rebase]
+  autostash = true
 [format]
   pretty = oneline
 [log]
