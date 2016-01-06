@@ -25,6 +25,8 @@ alias grs="git reset"
 alias grsp="git reset --soft HEAD^"
 alias grsh="git reset HEAD"
 
+alias gcl="git clone"
+
 alias grm="git remote"
 
 alias gf="git fetch"
