@@ -108,7 +108,9 @@ easily into one of the existing sections.
            ("M-D" . cqql-duplicate-text)
            ("C-S-k" . cqql-kill-line)
            ("C-o" . cqql-open-line)
-           ("C-S-o" . cqql-open-line-above))
+           ("C-S-o" . cqql-open-line-above)
+           ("C-S-p" . cqql-move-text-up)
+           ("C-S-n" . cqql-move-text-down))
     :config
     (add-hook 'before-save-hook #'cqql-trim-whitespace))
 #+END_SRC
@@ -397,14 +399,6 @@ Highlight lines that are longer than 80 characters.
     :config
     (cqql-after-load 'latex-mode
       (require 'latex-mode-expansions)))
-#+END_SRC
-
-** Moving Text
-
-#+BEGIN_SRC emacs-lisp
-  (use-package move-text
-    :bind (("C-S-p" . move-text-up)
-           ("C-S-n" . move-text-down)))
 #+END_SRC
 
 ** Replacing

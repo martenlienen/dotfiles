@@ -14,6 +14,45 @@
     (when (= prev-pos (point))
       (move-beginning-of-line nil))))
 
+(defun cqql-move-text (lines)
+  "Move the current line or region LINES lines."
+  (interactive "p")
+  (let* ((region? (use-region-p))
+         (column (current-column))
+         (text-start (save-excursion
+                       (if region?
+                           (setf (point) (region-beginning)))
+                       (beginning-of-line)
+                       (point)))
+         (text-end (save-excursion
+                     (if region?
+                         (setf (point) (region-end)))
+                     (end-of-line)
+                     (point)))
+         (mark-offset (- (mark) text-start))
+         (point-offset (- (point) text-start))
+         (text (if (= text-end (point-max))
+                   (concat (delete-and-extract-region text-start text-end)
+                           "\n")
+                 (delete-and-extract-region text-start (1+ text-end)))))
+    (forward-line lines)
+    (let ((insert-start (point)))
+      (insert text)
+      (setf (point) (+ insert-start point-offset))
+      (when region?
+        (setf (mark) (+ insert-start mark-offset)
+              deactivate-mark nil)))))
+
+(defun cqql-move-text-up (lines)
+  "Move the current line or region LINES lines up."
+  (interactive "p")
+  (cqql-move-text (- lines)))
+
+(defun cqql-move-text-down (lines)
+  "Move the current line or region LINES lines down."
+  (interactive "p")
+  (cqql-move-text lines))
+
 (defun cqql-duplicate-text (times)
   "Duplicate the current line or region TIMES times.
 

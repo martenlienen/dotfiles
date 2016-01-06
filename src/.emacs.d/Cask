@@ -27,7 +27,6 @@
 (depends-on "expand-region")
 (depends-on "wrap-region")
 (depends-on "centimacro")
-(depends-on "move-text")
 (depends-on "visual-regexp")
 (depends-on "key-chord")
 (depends-on "hydra")
