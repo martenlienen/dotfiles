@@ -99,6 +99,9 @@
 (depends-on "js2-mode")
 (depends-on "js2-refactor")
 
+;; Lua
+(depends-on "lua-mode")
+
 ;; LaTeX
 (depends-on "auctex")
 
