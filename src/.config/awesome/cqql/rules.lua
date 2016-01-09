@@ -2,6 +2,8 @@ local awful = require("awful")
 local rules = require("awful.rules")
 local beautiful = require("beautiful")
 
+local keybindings = require("cqql.keybindings")
+
 -- Rules to apply to new clients (through the "manage" signal).
 rules.rules = {
   -- All clients will match this rule.
@@ -10,15 +12,12 @@ rules.rules = {
                    border_color = beautiful.border_normal,
                    focus = awful.client.focus.filter,
                    raise = true,
-                   keys = clientkeys,
-                   buttons = clientbuttons } },
+                   keys = keybindings.clientkeys,
+                   buttons = keybindings.clientbuttons } },
   { rule = { class = "MPlayer" },
     properties = { floating = true } },
   { rule = { class = "pinentry" },
     properties = { floating = true } },
   { rule = { class = "gimp" },
-    properties = { floating = true } },
-  -- Set Firefox to always map on tags number 2 of screen 1.
-  -- { rule = { class = "Firefox" },
-  --   properties = { tag = tags[1][2] } },
+    properties = { floating = true } }
 }

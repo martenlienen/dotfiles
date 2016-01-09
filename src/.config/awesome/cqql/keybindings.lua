@@ -54,7 +54,7 @@ root.buttons(awful.util.table.join(
                awful.button({ }, 4, awful.tag.viewnext),
                awful.button({ }, 5, awful.tag.viewprev)))
 
-globalkeys = awful.util.table.join(
+local globalkeys = awful.util.table.join(
   awful.key({ mod }, "Left", awful.tag.viewprev),
   awful.key({ mod }, "Right", awful.tag.viewnext),
   awful.key({ mod }, "Escape", awful.tag.history.restore),
@@ -142,7 +142,7 @@ globalkeys = awful.util.table.join(
 
   awful.key({ mod }, "g", function () awful.util.spawn("togglexkbmap") end))
 
-clientkeys = awful.util.table.join(
+local clientkeys = awful.util.table.join(
   awful.key({ mod }, "f", function (c) c.fullscreen = not c.fullscreen  end),
   awful.key({ mod, "Shift" }, "c", function (c) c:kill() end),
   awful.key({ mod, "Control" }, "space",  awful.client.floating.toggle),
@@ -203,10 +203,15 @@ for i = 1, 9 do
   end))
 end
 
-clientbuttons = awful.util.table.join(
+local clientbuttons = awful.util.table.join(
   awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
   awful.button({ mod }, 1, awful.mouse.client.move),
   awful.button({ mod }, 3, awful.mouse.client.resize))
 
 -- Set keys
 root.keys(globalkeys)
+
+return {
+   clientkeys = clientkeys,
+   clientbuttons = clientbuttons
+}
