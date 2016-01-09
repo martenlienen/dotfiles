@@ -7,6 +7,49 @@ local function rofi(mode)
   awful.util.spawn("rofi -show " .. mode)
 end
 
+local function logind(method)
+  command = "dbus-send --system " ..
+    -- Block and wait for reply. If this is missing, the method call does not
+    -- have any effect
+    "--print-reply " ..
+    "--dest=org.freedesktop.login1 /org/freedesktop/login1 " ..
+    "\"org.freedesktop.login1.Manager." .. method .. "\" boolean:true"
+
+  awful.util.spawn(command)
+end
+
+local function screenshot(options)
+  options = options or ""
+  command = "maim " .. options .. " ~/$(date +%F-%T).png"
+
+  awful.util.spawn_with_shell(command)
+end
+
+local function brightness(diff)
+  command = "xbacklight -time 0 "
+
+  if diff >= 0 then
+    command = command .. "-inc " .. diff
+  else
+    command = command .. "-dec " .. (-diff)
+  end
+
+  awful.util.spawn(command)
+end
+
+local function volume(diff)
+  sign = diff >= 0 and "+" or "-"
+  command = "amixer -D pulse set Master " .. math.abs(diff) .. "%" .. sign
+
+  awful.util.spawn(command)
+end
+
+local function toggleMute()
+   awful.util.spawn("amixer -D pulse set Master toggle")
+end
+
+local run = awful.util.spawn
+
 root.buttons(awful.util.table.join(
                awful.button({ }, 4, awful.tag.viewnext),
                awful.button({ }, 5, awful.tag.viewprev)))
@@ -79,7 +122,27 @@ globalkeys = awful.util.table.join(
   end),
 
   awful.key({ mod }, "w", function() rofi("window") end),
-  awful.key({ mod }, "p", function() rofi("run") end))
+  awful.key({ mod }, "p", function() rofi("run") end),
+
+  awful.key({ mod }, "F10", function() logind("PowerOff") end),
+  awful.key({ mod }, "F11", function() logind("Reboot") end),
+  awful.key({ mod }, "F12", function() logind("Suspend") end),
+
+  awful.key({ }, "XF86MonBrightnessUp", function () brightness(20) end),
+  awful.key({ }, "XF86MonBrightnessDown", function () brightness(-20) end),
+
+  awful.key({ }, "XF86AudioRaiseVolume", function () volume(5) end),
+  awful.key({ }, "XF86AudioLowerVolume", function () volume(-5) end),
+  awful.key({ }, "XF86AudioMute", toggleMute),
+
+  awful.key({ mod }, "s", screenshot),
+  awful.key({ mod, "Shift" }, "s", function () screenshot("-s") end),
+
+  awful.key({ mod, "Shift" }, "f", function () run("firefox") end),
+  awful.key({ mod, "Shift" }, "i", function () run("chromium") end),
+  awful.key({ mod, "Shift" }, "e", function () run("emacs") end),
+
+  awful.key({ mod }, "g", function () awful.util.spawn("togglexkbmap") end))
 
 clientkeys = awful.util.table.join(
   awful.key({ mod }, "f", function (c) c.fullscreen = not c.fullscreen  end),
