@@ -1,7 +1,7 @@
 local awful = require("awful")
 
 return {
-  theme = "/usr/share/awesome/themes/default/theme.lua",
+  theme = os.getenv("HOME") .. "/.config/awesome/theme/theme.lua",
   terminal = "urxvt",
   modkey = "Mod4",
   layouts = {
