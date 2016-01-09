@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: local function
+# key: lf
+# --
+local function $1($2)
+  $0
+end

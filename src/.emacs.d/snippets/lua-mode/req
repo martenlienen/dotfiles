@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: require
+# key: req
+# --
+local ${1:$(car (last (s-split "\\\\." yas-text)))} = require("$1")
