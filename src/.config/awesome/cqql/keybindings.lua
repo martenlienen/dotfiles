@@ -50,10 +50,6 @@ end
 
 local run = awful.util.spawn
 
-root.buttons(awful.util.table.join(
-               awful.button({ }, 4, awful.tag.viewnext),
-               awful.button({ }, 5, awful.tag.viewprev)))
-
 local globalkeys = awful.util.table.join(
   awful.key({ mod }, "Left", awful.tag.viewprev),
   awful.key({ mod }, "Right", awful.tag.viewnext),
@@ -142,25 +138,6 @@ local globalkeys = awful.util.table.join(
 
   awful.key({ mod }, "g", function () awful.util.spawn("togglexkbmap") end))
 
-local clientkeys = awful.util.table.join(
-  awful.key({ mod }, "f", function (c) c.fullscreen = not c.fullscreen  end),
-  awful.key({ mod, "Shift" }, "c", function (c) c:kill() end),
-  awful.key({ mod, "Control" }, "space",  awful.client.floating.toggle),
-  awful.key({ mod, "Control" }, "Return", function (c)
-      c:swap(awful.client.getmaster())
-  end),
-  awful.key({ mod }, "o", awful.client.movetoscreen),
-  awful.key({ mod }, "t", function (c) c.ontop = not c.ontop end),
-  awful.key({ mod }, "n", function (c)
-      -- The client currently has the input focus, so it cannot be
-      -- minimized, since minimized clients can't have the focus.
-      c.minimized = true
-  end),
-  awful.key({ mod }, "m", function (c)
-      c.maximized_horizontal = not c.maximized_horizontal
-      c.maximized_vertical   = not c.maximized_vertical
-end))
-
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
@@ -203,13 +180,38 @@ for i = 1, 9 do
   end))
 end
 
+globalbuttons = awful.util.table.join(
+   awful.button({ }, 4, awful.tag.viewnext),
+   awful.button({ }, 5, awful.tag.viewprev))
+
+
+-- Set keys
+root.keys(globalkeys)
+root.buttons(globalbuttons)
+
+local clientkeys = awful.util.table.join(
+  awful.key({ mod }, "f", function (c) c.fullscreen = not c.fullscreen  end),
+  awful.key({ mod, "Shift" }, "c", function (c) c:kill() end),
+  awful.key({ mod, "Control" }, "space",  awful.client.floating.toggle),
+  awful.key({ mod, "Control" }, "Return", function (c)
+      c:swap(awful.client.getmaster())
+  end),
+  awful.key({ mod }, "o", awful.client.movetoscreen),
+  awful.key({ mod }, "t", function (c) c.ontop = not c.ontop end),
+  awful.key({ mod }, "n", function (c)
+      -- The client currently has the input focus, so it cannot be
+      -- minimized, since minimized clients can't have the focus.
+      c.minimized = true
+  end),
+  awful.key({ mod }, "m", function (c)
+      c.maximized_horizontal = not c.maximized_horizontal
+      c.maximized_vertical   = not c.maximized_vertical
+end))
+
 local clientbuttons = awful.util.table.join(
   awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
   awful.button({ mod }, 1, awful.mouse.client.move),
   awful.button({ mod }, 3, awful.mouse.client.resize))
-
--- Set keys
-root.keys(globalkeys)
 
 return {
    clientkeys = clientkeys,
