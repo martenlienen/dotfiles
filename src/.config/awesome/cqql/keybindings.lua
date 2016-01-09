@@ -111,8 +111,6 @@ globalkeys = awful.util.table.join(
   awful.key({ mod, "Control" }, "n", awful.client.restore),
 
   -- Prompt
-  awful.key({ mod }, "r", function () mypromptbox[mouse.screen]:run() end),
-
   awful.key({ mod }, "x",
     function ()
       awful.prompt.run({ prompt = "Run Lua code: " },
@@ -122,7 +120,7 @@ globalkeys = awful.util.table.join(
   end),
 
   awful.key({ mod }, "w", function() rofi("window") end),
-  awful.key({ mod }, "p", function() rofi("run") end),
+  awful.key({ mod }, "r", function() rofi("run") end),
 
   awful.key({ mod }, "F10", function() logind("PowerOff") end),
   awful.key({ mod }, "F11", function() logind("Reboot") end),
