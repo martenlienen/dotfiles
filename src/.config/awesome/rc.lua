@@ -26,7 +26,6 @@ end
 
 require("cqql.theme")
 require("cqql.tags")
-require("cqql.menubar")
 require("cqql.wibox")
 require("cqql.keybindings")
 require("cqql.rules")

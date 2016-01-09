@@ -61,3 +61,29 @@ Emacs.font: Source Code Pro-11
 *.color19:      base02
 *.color20:      base04
 *.color21:      base06
+
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+!
+! The colors are taken from the arch-linux theme presented on the website.
+! ------------------------------------------------------------------------------
+! Use extended color scheme
+rofi.color-enabled: true
+! Color scheme for normal row
+rofi.color-normal: #ffffff,#525d76,#f5f5f5,#5294e2,#ffffff
+! Color scheme for urgent row
+rofi.color-urgent: #ffffff,#dc322f,#f5f5f5,#5294e2,#dc322f
+! Color scheme for active row
+rofi.color-active: #ffffff,#c2cad0,#f5f5f5,#5294e2,#c2cad0
+! Color scheme window
+rofi.color-window: #ffffff,#f5f5f5
+! Separator style (none, dash, solid)
+rofi.separator-style: solid
+
+rofi.font: Source Code Pro 11
+rofi.hide-scrollbar: true
+
+! Emacs bindings
+rofi.kb-remove-word-back:            Alt+h
+rofi.kb-remove-word-forward:         Alt+d
+rofi.kb-cancel:                      Escape,Control+g

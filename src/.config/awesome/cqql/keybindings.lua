@@ -1,8 +1,11 @@
 local awful = require("awful")
-local menubar = require("menubar")
 
 local settings = require("cqql.settings")
 local mod = settings.modkey
+
+local function rofi(mode)
+  awful.util.spawn("rofi -show " .. mode)
+end
 
 root.buttons(awful.util.table.join(
                awful.button({ }, 4, awful.tag.viewnext),
@@ -74,8 +77,9 @@ globalkeys = awful.util.table.join(
         awful.util.eval, nil,
         awful.util.getdir("cache") .. "/history_eval")
   end),
-  -- Menubar
-  awful.key({ mod }, "p", function() menubar.show() end))
+
+  awful.key({ mod }, "w", function() rofi("window") end),
+  awful.key({ mod }, "p", function() rofi("run") end))
 
 clientkeys = awful.util.table.join(
   awful.key({ mod }, "f", function (c) c.fullscreen = not c.fullscreen  end),
