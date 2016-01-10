@@ -21,6 +21,8 @@ alias gca="git commit --amend"
 alias gd="git diff"
 alias gdc="git diff --cached"
 
+alias gl="git log"
+
 alias grs="git reset"
 alias grsp="git reset --soft HEAD^"
 alias grsh="git reset HEAD"
