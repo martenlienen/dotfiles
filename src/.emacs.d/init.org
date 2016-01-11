@@ -323,6 +323,8 @@ Highlight lines that are longer than 80 characters.
     :config
     (setf dired-listing-switches "-lahv")
 
+    (bind-key "M-w" #'wdired-change-to-wdired-mode dired-mode-map)
+
     (define-key dired-mode-map
       [remap beginning-of-buffer] 'cqql-dired-jump-to-first-file)
 
