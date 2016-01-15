@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Set background
-feh --bg-fill ~/.wallpaper.jpg &
-
 # Start pulseaudio
 start-pulseaudio-x11 &
 
