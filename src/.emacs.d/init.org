@@ -538,16 +538,25 @@ Filter lines by regular expression before jumping there.
 ** Python
 
 #+BEGIN_SRC emacs-lisp
+  (defun cqql-apply-command-to-buffer (command)
+    "Apply shell command COMMAND to the current buffer."
+    (interactive "sCommand:")
+    (shell-command-on-region (point-min) (point-max) command t t))
+
   (defun cqql-isort-current-buffer ()
     "Apply isort to the current python buffer."
     (interactive)
-    (call-process "isort" nil nil nil (buffer-file-name))
-    (revert-buffer t t))
+    (shell-command-on-region (point-min) (point-max) "isort -" t t))
+
+  (defun cqql-yapf-current-buffer ()
+    "Apply yapf to the current python buffer."
+    (interactive)
+    (shell-command-on-region (point-min) (point-max) "yapf" t t))
 
   (use-package python
     :config
     (bind-key "C-c p i" #'cqql-isort-current-buffer python-mode-map)
-    (bind-key "C-c f" #'py-yapf-buffer python-mode-map)
+    (bind-key "C-c f" #'cqql-yapf-current-buffer python-mode-map)
 
     (when (executable-find "ipython")
       (setq python-shell-interpreter "ipython"))

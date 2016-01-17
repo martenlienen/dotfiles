@@ -90,7 +90,6 @@
 (depends-on "cider")
 
 ;; Python
-(depends-on "py-yapf")
 (depends-on "pyenv-mode")
 (depends-on "anaconda-mode")
 (depends-on "company-anaconda")
