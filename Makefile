@@ -1,5 +1,5 @@
 all: dotfiles pyenv pyenv-virtualenv rbenv ruby-build antigen cask	\
-	emacs-packages compile-elisp vundle vundle-packages
+	emacs-packages compile-elisp vundle vundle-packages vicious
 
 dotfiles: tangle-init-org
 	find src -maxdepth 1 -mindepth 1 -exec cp --recursive {} $$HOME \;
@@ -27,7 +27,10 @@ cask:
 emacs-packages:
 	(cd "$$HOME/.emacs.d" && cask)
 
-tangle-init-org:
+.PHONY: tangle-init-org
+tangle-init-org: src/.emacs.d/init.el
+
+src/.emacs.d/init.el: src/.emacs.d/init.org
 	emacs --quick --batch --eval									\
 				"(progn 																\
 					(require 'ob-tangle)									\
@@ -44,3 +47,7 @@ vundle:
 
 vundle-packages: dotfiles
 	vim +BundleInstall +qall
+
+vicious:
+	./manage-git-repo "$$HOME/.config/awesome/vicious"	\
+									 "http://git.sysphere.org/vicious"
