@@ -101,6 +101,9 @@
 ;; Lua
 (depends-on "lua-mode")
 
+;; Rust
+(depends-on "rust-mode")
+
 ;; LaTeX
 (depends-on "auctex")
 
