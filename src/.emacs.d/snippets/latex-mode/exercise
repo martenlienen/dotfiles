@@ -20,9 +20,6 @@
 % Define \includegraphics to include graphics
 \usepackage{graphicx}
 
-% Draw graphics from a text description
-\usepackage{tikz}
-
 % Syntax highlighting
 \usepackage{minted}
 
