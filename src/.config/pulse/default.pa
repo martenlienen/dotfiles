@@ -1,0 +1,2 @@
+.nofail
+load-module module-echo-cancel aec_method=webrtc
