@@ -555,17 +555,19 @@ Filter lines by regular expression before jumping there.
   (defun cqql-apply-command-to-buffer (command)
     "Apply shell command COMMAND to the current buffer."
     (interactive "sCommand:")
-    (shell-command-on-region (point-min) (point-max) command t t))
+    (let ((p (point)))
+      (shell-command-on-region (point-min) (point-max) command t t)
+      (setf (point) p)))
 
   (defun cqql-isort-current-buffer ()
     "Apply isort to the current python buffer."
     (interactive)
-    (shell-command-on-region (point-min) (point-max) "isort -" t t))
+    (cqql-apply-command-to-buffer "isort -"))
 
   (defun cqql-yapf-current-buffer ()
     "Apply yapf to the current python buffer."
     (interactive)
-    (shell-command-on-region (point-min) (point-max) "yapf" t t))
+    (cqql-apply-command-to-buffer "yapf"))
 
   (use-package python
     :config
