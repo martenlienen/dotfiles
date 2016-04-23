@@ -29,7 +29,8 @@
                          (setf (point) (region-end)))
                      (end-of-line)
                      (point)))
-         (mark-offset (- (mark) text-start))
+         (mark? (mark))
+         (mark-offset (when mark? (- mark? text-start)))
          (point-offset (- (point) text-start))
          (text (if (= text-end (point-max))
                    (concat (delete-and-extract-region text-start text-end)
@@ -39,7 +40,7 @@
     (let ((insert-start (point)))
       (insert text)
       (setf (point) (+ insert-start point-offset))
-      (when region?
+      (when (and region? mark?)
         (setf (mark) (+ insert-start mark-offset)
               deactivate-mark nil)))))
 
