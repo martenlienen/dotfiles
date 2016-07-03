@@ -559,15 +559,29 @@ Filter lines by regular expression before jumping there.
       (shell-command-on-region (point-min) (point-max) command t t)
       (setf (point) p)))
 
+  (use-package pyenv-mode)
+
+  (defmacro with-pyenv (name &rest body)
+    "Execute BODY with pyenv NAME activated."
+    (declare (indent defun))
+    `(let ((current (pyenv-mode-version)))
+       (unwind-protect
+           (progn
+             (pyenv-mode-set ,name)
+             ,@body)
+         (pyenv-mode-set current))))
+
   (defun cqql-isort-current-buffer ()
     "Apply isort to the current python buffer."
     (interactive)
-    (cqql-apply-command-to-buffer "isort -"))
+    (with-pyenv "tools"
+      (cqql-apply-command-to-buffer "isort -")))
 
   (defun cqql-yapf-current-buffer ()
     "Apply yapf to the current python buffer."
     (interactive)
-    (cqql-apply-command-to-buffer "yapf"))
+    (with-pyenv "tools"
+      (cqql-apply-command-to-buffer "yapf")))
 
   (use-package python
     :config
@@ -578,7 +592,8 @@ Filter lines by regular expression before jumping there.
       (setq python-shell-interpreter "ipython"))
 
     (add-hook 'python-mode-hook 'eldoc-mode)
-    (add-hook 'python-mode-hook 'subword-mode))
+    (add-hook 'python-mode-hook 'subword-mode)
+    (add-hook 'python-mode-hook 'pyenv-mode))
 
   (use-package anaconda-mode
     :config
