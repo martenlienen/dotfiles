@@ -831,3 +831,30 @@ Use some nice UTF-8 symbols to signify the nesting depth.
   (use-package ledger-mode
     :mode "\\.ledger\\'")
 #+END_SRC
+
+** reStructuredText
+
+#+BEGIN_SRC emacs-lisp
+  (defun cqql-length-of-line ()
+    "Return length of the current line."
+    (save-excursion
+      (- (progn (end-of-line) (point))
+         (progn (beginning-of-line) (point)))))
+
+  (defun cqql-underline ()
+    "Repeat the character at point until it stretches the length of
+    the previous line."
+    (interactive)
+    (let* ((char (preceding-char))
+           (prev-length (save-excursion
+                          (forward-line -1)
+                          (cqql-length-of-line)))
+           (curr-length (save-excursion
+                          (cqql-length-of-line)))
+           (repeat-length (max 0 (- prev-length curr-length))))
+      (insert (s-repeat repeat-length (char-to-string char)))))
+
+  (use-package rst-mode
+    :config
+    (bind-key "<C-right>" #'cqql-underline rst-mode-map))
+#+END_SRC
