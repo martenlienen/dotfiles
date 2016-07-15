@@ -854,7 +854,7 @@ Use some nice UTF-8 symbols to signify the nesting depth.
            (repeat-length (max 0 (- prev-length curr-length))))
       (insert (s-repeat repeat-length (char-to-string char)))))
 
-  (use-package rst-mode
+  (use-package rst
     :config
     (bind-key "<C-right>" #'cqql-underline rst-mode-map))
 #+END_SRC
