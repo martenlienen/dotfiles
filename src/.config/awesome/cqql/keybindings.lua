@@ -136,6 +136,8 @@ local globalkeys = awful.util.table.join(
   awful.key({ mod, "Shift" }, "i", function () run("chromium") end),
   awful.key({ mod, "Shift" }, "e", function () run("emacs") end),
 
+  awful.key({ mod}, "l", function () run("physlock") end),
+
   awful.key({ mod }, "g", function () awful.util.spawn("togglexkbmap") end))
 
 -- Bind all key numbers to tags.
