@@ -118,9 +118,9 @@ local globalkeys = awful.util.table.join(
   awful.key({ mod }, "w", function() rofi("window") end),
   awful.key({ mod }, "r", function() rofi("run") end),
 
-  awful.key({ mod }, "F10", function() logind("PowerOff") end),
-  awful.key({ mod }, "F11", function() logind("Reboot") end),
-  awful.key({ mod }, "F12", function() logind("Suspend") end),
+  awful.key({ mod }, "F10", function() run("systemctl poweroff") end),
+  awful.key({ mod }, "F11", function() run("systemctl reboot") end),
+  awful.key({ mod }, "F12", function() run("systemctl suspend") end),
 
   awful.key({ }, "XF86MonBrightnessUp", function () brightness(20) end),
   awful.key({ }, "XF86MonBrightnessDown", function () brightness(-20) end),
