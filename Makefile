@@ -51,3 +51,7 @@ vundle-packages: dotfiles
 vicious:
 	./manage-git-repo "$$HOME/.config/awesome/vicious"	\
 									 "http://git.sysphere.org/vicious"
+
+.PHONY : services
+services:
+	sudo systemctl enable physlock@$$USER.service
