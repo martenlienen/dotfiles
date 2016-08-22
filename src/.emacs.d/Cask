@@ -60,6 +60,7 @@
 ;; Searching
 (depends-on "swiper")
 (depends-on "projectile")
+(depends-on "flx")
 
 ;; Markdown
 (depends-on "markdown-mode")
