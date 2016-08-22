@@ -240,7 +240,7 @@ in a condensed format.
     "Find files in projects and outside."
     (interactive)
     (if (projectile-project-p)
-        (projectile-find-file)
+        (counsel-git)
       (counsel-find-file)))
 
   (defun cqql-counsel-ag-in-project-root ()
