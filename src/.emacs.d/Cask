@@ -59,8 +59,8 @@
 
 ;; Searching
 (depends-on "ag")
+(depends-on "swiper")
 (depends-on "helm")
-(depends-on "helm-swoop")
 (depends-on "projectile")
 (depends-on "helm-projectile")
 

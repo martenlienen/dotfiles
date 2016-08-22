@@ -233,6 +233,11 @@ in a condensed format.
 
 ** Better Selection
 
+#+BEGIN_SRC emacs-lisp
+  (use-package ivy
+    :bind (("C-s" . swiper)))
+#+END_SRC
+
 ~helm~ gives you a uniform interface whenever you need to select something,
 e.g. a buffer, file, command etc.
 
@@ -435,15 +440,6 @@ Quickly move to every word and character on screen.
   (use-package avy
     :bind (("M-s" . avy-goto-word-or-subword-1)
            ("M-S" . avy-goto-char-2)))
-#+END_SRC
-
-Filter lines by regular expression before jumping there.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package helm-swoop
-    :bind ("M-o" . helm-swoop)
-    :config
-    (bind-key "M-o" 'helm-multi-swoop-all-from-helm-swoop helm-swoop-map))
 #+END_SRC
 
 * Code Intelligence
