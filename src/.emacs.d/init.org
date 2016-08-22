@@ -261,6 +261,7 @@ in a condensed format.
     :init
     (setq ivy-count-format "%d/%d "
           ivy-extra-directories (list ".")
+          ivy-re-builders-alist '((t . ivy--regex-ignore-order))
           counsel-yank-pop-truncate-radius 3)
     :config
     (ivy-mode))
