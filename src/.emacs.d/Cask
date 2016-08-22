@@ -58,11 +58,8 @@
 (depends-on "flycheck")
 
 ;; Searching
-(depends-on "ag")
 (depends-on "swiper")
-(depends-on "helm")
 (depends-on "projectile")
-(depends-on "helm-projectile")
 
 ;; Markdown
 (depends-on "markdown-mode")
