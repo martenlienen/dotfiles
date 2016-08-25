@@ -591,6 +591,9 @@ Quickly move to every word and character on screen.
 
   (require 'cl-lib)
 
+  (defvar cqql-python-last-command nil
+    "Stores the last sent region for resending.")
+
   (defun cqql-python-shell-send-region ()
     "Send the current region to inferior python process stripping indentation."
     (interactive)
@@ -626,14 +629,28 @@ Quickly move to every word and character on screen.
                             do (delete-char 1))
                    (forward-line 1)))
         (setq command (buffer-string)))
+      (setq cqql-python-last-command command)
       (python-shell-send-string command)))
+
+  (defun cqql-python-shell-resend-last-command ()
+    "Resend the last command to the inferior python process."
+    (interactive)
+    (when cqql-python-last-command
+      (python-shell-send-string cqql-python-last-command)))
+
+  (defun cqql-python-shell-send-region-dwim ()
+    "Send active region or resend last region."
+    (interactive)
+    (if (use-region-p)
+        (cqql-python-shell-send-region)
+      (cqql-python-shell-resend-last-command)))
 
   (use-package python
     :config
     (bind-key "C-c i" #'cqql-isort-current-buffer python-mode-map)
     (bind-key "C-c f" #'cqql-yapf-current-buffer python-mode-map)
     (bind-key "C-c C-l" #'cqql-python-shell-send-line python-mode-map)
-    (bind-key "C-c C-r" #'cqql-python-shell-send-region python-mode-map)
+    (bind-key "C-c C-r" #'cqql-python-shell-send-region-dwim python-mode-map)
 
     (when (executable-find "ipython")
       (setq python-shell-interpreter "ipython"))
