@@ -26,12 +26,12 @@ local function screenshot(options)
 end
 
 local function brightness(diff)
-  command = "xbacklight -time 0 "
+  command = "light "
 
   if diff >= 0 then
-    command = command .. "-inc " .. diff
+    command = command .. "-A " .. diff
   else
-    command = command .. "-dec " .. (-diff)
+    command = command .. "-U " .. (-diff)
   end
 
   awful.util.spawn(command)
