@@ -28,33 +28,6 @@ Bundle 'tpope/vim-dispatch'
 Bundle 'wincent/Command-T'
 let g:CommandTAlwaysShowDotFiles = 1
 
-" Ruby and Rails
-autocmd BufRead,BufNewFile *.json_builder set filetype=ruby
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-rake'
-Bundle 'tpope/vim-bundler'
-Bundle 'thoughtbot/vim-rspec'
-let g:rspec_command = 'Dispatch rspec {spec}'
-Bundle 'nelstrom/vim-textobj-rubyblock'
-
-" HTML
-Bundle 'mattn/zencoding-vim'
-
-" HAML
-Bundle 'tpope/vim-haml'
-
-" Jade
-Bundle 'digitaltoad/vim-jade'
-
-" LESS
-Bundle 'groenewege/vim-less'
-
-" Coffeescript
-Bundle 'kchmck/vim-coffee-script'
-
-" Livescript
-Bundle 'gkz/vim-ls'
-
 filetype plugin indent on " required!
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -224,10 +197,3 @@ set tabstop=2
 
 " Do not wrap lines
 set nowrap
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" HTML
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tags that are not indented by default
-let g:html_indent_inctags = 'html,head,body,title'
