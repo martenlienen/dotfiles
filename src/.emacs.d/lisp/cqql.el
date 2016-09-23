@@ -72,15 +72,21 @@ first line of the region to the end of the last."
                          (setf (point) (region-end)))
                      (end-of-line)
                      (point)))
+         (mark? (mark))
+         (mark-offset (when mark? (- mark? text-start)))
          (text (buffer-substring text-start text-end))
-         (new-pos (+ pos (* times (length text)) 1)))
+         (new-pos (+ 1 pos (* times (length text)))))
     (if region?
         (setf (point) text-end))
     (dotimes (i times)
       (end-of-line)
       (insert "\n")
       (insert text))
-    (setf (point) new-pos)))
+    (setf (point) new-pos
+          deactivate-mark nil)
+    (when (and region? mark?)
+      (setf (mark) (+ 1 mark? (* times (length text)))
+            deactivate-mark nil))))
 
 (defun cqql-open-line ()
   "Create a new line below and put point into it."
