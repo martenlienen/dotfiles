@@ -59,6 +59,8 @@
 
 ;; Searching
 (depends-on "swiper")
+(depends-on "ivy")
+(depends-on "counsel")
 (depends-on "projectile")
 (depends-on "flx")
 
