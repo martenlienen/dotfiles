@@ -22,3 +22,6 @@ export SSH_AUTH_SOCK
 
 # NetworkManager applet
 nm-applet &
+
+# Seafile applet
+test -x /usr/bin/seafile-applet && seafile-applet &
