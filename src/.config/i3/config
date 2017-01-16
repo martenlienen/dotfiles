@@ -36,6 +36,10 @@ for_window [class="Seafile Client"] floating enable
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Move workspace to other screen
+bindsym $mod+Left move workspace to output left
+bindsym $mod+Right move workspace to output right
+
 # F row
 bindsym XF86MonBrightnessDown $run light -U 20
 bindsym XF86MonBrightnessUp $run light -A 20
