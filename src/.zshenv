@@ -1,10 +1,6 @@
 # Add installed haskell binaries to PATH
 export PATH="$HOME/.cabal/bin:$PATH"
 
-# Initialize rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - --no-rehash)"
-
 # Initialize pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"

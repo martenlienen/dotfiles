@@ -1,5 +1,5 @@
-all: dotfiles pyenv pyenv-virtualenv rbenv ruby-build antigen cask	\
-	emacs-packages compile-elisp vundle vundle-packages vicious
+all: dotfiles pyenv pyenv-virtualenv antigen cask emacs-packages compile-elisp \
+	vundle vundle-packages vicious
 
 dotfiles: tangle-init-org
 	find src -maxdepth 1 -mindepth 1 -exec cp --recursive {} $$HOME \;
@@ -10,13 +10,6 @@ pyenv:
 pyenv-virtualenv:
 	./manage-git-repo "$$HOME/.pyenv/plugins/pyenv-virtualenv"				\
 										"https://github.com/yyuu/pyenv-virtualenv.git"
-
-rbenv:
-	./manage-git-repo "$$HOME/.rbenv" "https://github.com/sstephenson/rbenv.git"
-
-ruby-build: rbenv
-	./manage-git-repo "$$HOME/.rbenv/plugins/ruby-build"							\
-                    "https://github.com/sstephenson/ruby-build.git"
 
 antigen:
 	./manage-git-repo "$$HOME/.antigen" "git://github.com/zsh-users/antigen.git"
