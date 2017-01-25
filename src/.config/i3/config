@@ -97,9 +97,6 @@ bindsym $mod+e layout toggle split
 # Toggle tiling / floating
 bindsym $mod+t floating toggle
 
-# Change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
 # Make a floating window sticky, i.e. keep it visible across workspaces
 bindsym $mod+m sticky toggle
 
@@ -108,6 +105,21 @@ bindsym $mod+a focus parent
 
 # Focus the child container
 #bindsym $mod+d focus child
+
+# Mode for managing i3 itself
+set $mode_german "German: [a] ä  [u] ü  [o]  ö  [s]  ß"
+bindsym $mod+space mode $mode_german
+mode $mode_german {
+    bindsym --release a $run "xdotool type ä"; mode "default"
+    bindsym --release shift+a $run "xdotool type Ä"; mode "default"
+    bindsym --release o $run "xdotool type ö"; mode "default"
+    bindsym --release shift+o $run "xdotool type Ö"; mode "default"
+    bindsym --release u $run "xdotool type ü"; mode "default"
+    bindsym --release shift+u $run "xdotool type Ü"; mode "default"
+    bindsym --release s $run "xdotool type ß"; mode "default"
+
+    bindsym Ctrl+g mode "default"
+}
 
 # Mode for managing i3 itself
 set $mode_i3 "i3: reload[i] [r]estart [e]xit"
