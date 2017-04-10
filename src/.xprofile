@@ -23,5 +23,8 @@ export SSH_AUTH_SOCK
 # NetworkManager applet
 nm-applet &
 
+# Synchronize screen size etc. if the system runs in a virtualbox
+type VBoxClient-all > /dev/null && VBoxClient-all
+
 # Seafile applet
 test -x /usr/bin/seafile-applet && seafile-applet &
