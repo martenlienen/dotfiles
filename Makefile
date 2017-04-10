@@ -1,5 +1,5 @@
 all: dotfiles pyenv pyenv-virtualenv antigen cask emacs-packages compile-elisp \
-	vundle vundle-packages vicious
+	vundle vundle-packages
 
 dotfiles: tangle-init-org
 	find src -maxdepth 1 -mindepth 1 -exec cp --recursive {} $$HOME \;
@@ -12,10 +12,10 @@ pyenv-virtualenv:
 										"https://github.com/yyuu/pyenv-virtualenv.git"
 
 antigen:
-	./manage-git-repo "$$HOME/.antigen" "git://github.com/zsh-users/antigen.git"
+	./manage-git-repo "$$HOME/.antigen" "https://github.com/zsh-users/antigen.git"
 
 cask:
-	./manage-git-repo "$$HOME/.cask" "git://github.com/cask/cask.git"
+	./manage-git-repo "$$HOME/.cask" "https://github.com/cask/cask.git"
 
 emacs-packages:
 	(cd "$$HOME/.emacs.d" && cask)
@@ -40,10 +40,6 @@ vundle:
 
 vundle-packages: dotfiles
 	vim +BundleInstall +qall
-
-vicious:
-	./manage-git-repo "$$HOME/.config/awesome/vicious"	\
-									 "http://git.sysphere.org/vicious"
 
 .PHONY : services
 services:
