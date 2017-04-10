@@ -5,9 +5,9 @@ call vundle#rc()
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
-" My bundles
-" UI
-Bundle 'altercation/vim-colors-solarized'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" My bundles
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " General editing
 Bundle 'tpope/vim-surround'
@@ -15,8 +15,8 @@ Bundle 'tpope/vim-endwise'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'rking/ag.vim'
-let g:agprg = "ag --column --smart-case"
-let g:aghighlight = 1
+let g:ag_prg = "ag --column --smart-case"
+let g:ag_highlight = 1
 Bundle 'matchit.zip'
 Bundle 'Raimondi/delimitMate'
 Bundle 'kana/vim-textobj-user'
@@ -51,8 +51,6 @@ inoremap <Esc> <Nop>
 
 nnoremap , :
 
-noremap <C-n> :NERDTreeToggle<CR>
-
 " Move through windows
 noremap <C-h> :wincmd h<CR>
 noremap <C-j> :wincmd j<CR>
@@ -67,12 +65,6 @@ nnoremap <Right> :wincmd ><CR>
 
 " Search for word under cursor in current directory
 nnoremap <Leader># :Ag<CR>
-
-" Run rspec
-nnoremap <Leader>f :call RunNearestSpec()<CR>
-nnoremap <Leader>rf :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>rr :call RunLastSpec()<CR>
-nnoremap <Leader>rg :call RunAllSpecs()<CR>
 
 " Git
 nnoremap <Leader>gg :Gstatus<CR>
@@ -161,9 +153,6 @@ if $COLORTERM == 'gnome-terminal'
   " instead of the terminal's bg color
   set t_ut=
 endif
-
-set background=dark
-colorscheme solarized
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
