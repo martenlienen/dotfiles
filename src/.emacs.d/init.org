@@ -297,20 +297,6 @@ in a condensed format.
     (setf highlight-symbol-idle-delay 0))
 #+END_SRC
 
-*** Whitespace
-
-Highlight lines that are longer than 80 characters.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package whitespace
-    :config
-    (setf whitespace-line-column 80
-          ;; I also like the other styles, but they are too performance heavy
-          whitespace-style '(face lines))
-
-    (add-hook 'prog-mode-hook #'whitespace-mode))
-#+END_SRC
-
 ** Window Management
 
 #+BEGIN_SRC emacs-lisp
