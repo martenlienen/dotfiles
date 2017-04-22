@@ -639,7 +639,11 @@ Quickly move to every word and character on screen.
     (bind-key "C-c C-r" #'cqql-python-shell-send-region-dwim python-mode-map)
 
     (when (executable-find "ipython")
-      (setq python-shell-interpreter "ipython"))
+      (setq python-shell-interpreter "ipython"
+            ;; Disable ipython 5 features that are incompatible with
+            ;; inferior-python
+            python-shell-interpreter-args "--simple-prompt")
+      (push "ipython" python-shell-completion-native-disabled-interpreters))
 
     (add-hook 'python-mode-hook 'eldoc-mode)
     (add-hook 'python-mode-hook 'subword-mode)
