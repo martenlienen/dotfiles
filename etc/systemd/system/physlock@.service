@@ -1,0 +1,11 @@
+[Unit]
+Description=Lock the screen on sleep
+Before=sleep.target
+
+[Service]
+User=%i
+Type=forking
+ExecStart=/usr/bin/physlock -d
+
+[Install]
+WantedBy=sleep.target
