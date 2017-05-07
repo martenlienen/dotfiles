@@ -25,7 +25,7 @@ ELISP = FileList.new(FILES.select { |f| f.end_with?(".el") })
 ELISP.include(ORG_FILES.ext(".el"))
 ELISP_BYTECODE = ELISP.ext(".elc")
 
-task :default => [:dotfiles, :tools, :packages]
+task :default => [:dotfiles, :tools, :packages, :user_services]
 
 multitask :tools => [:pyenv, :pyenv_virtualenv, :cask, :vundle, :antigen]
 
@@ -80,7 +80,15 @@ END
 end
 CLEAN.include(ORG_FILES.ext(".el"))
 
-task :system => [:pacaur, :system_packages, :system_conf]
+task :user_services do
+  sh <<END
+systemctl --user daemon-reload
+systemctl --user enable mute-on-suspend.service
+systemctl --user enable physlock.service
+END
+end
+
+task :system => [:pacaur, :system_packages, :system_conf, :lingering]
 
 task :pacaur do
   if not system("pacman -Q pacaur")
@@ -109,7 +117,7 @@ END
   end
 end
 
-task :system_packages => :pacaur do
+task :system_packages => [:pacaur, :system_conf] do
   sh <<END
 # XOrg packages
 xorg="xorg-server xorg-xrdb xorg-xrandr xorg-xmodmap xorg-xev"
@@ -160,8 +168,9 @@ sudo systemctl enable lightdm.service
 sudo systemctl enable firehol.service
 sudo systemctl start firehol.service
 
-# Mute on susend
-sudo systemctl enable mute-on-suspend.service
+# Trigger user services on suspend
+sudo systemctl daemon-reload
+sudo systemctl enable user-suspend@#{`id -u ${ENV["USER"]}`.strip}.service
 END
 end
 
@@ -177,4 +186,9 @@ end
 
 task :system_conf do
   sh "sudo cp --recursive etc usr /"
+end
+
+desc "Enable lingering for user-level systemd services"
+task :lingering do
+  sh "sudo loginctl enable-linger #{ENV["USER"]}"
 end

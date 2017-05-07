@@ -1,10 +1,10 @@
 [Unit]
 Description=Mute the system on suspend so that music does not start blaring at inappropriate moments
-Before=sleep.target
+Before=suspend.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/amixer -q set Master mute
+ExecStart=/usr/bin/pacmd set-sink-mute 0 1
 
 [Install]
-WantedBy=sleep.target
+WantedBy=suspend.target
