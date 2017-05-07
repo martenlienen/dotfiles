@@ -1,9 +1,8 @@
+require "tmpdir"
 require "find"
 require "rake/clean"
 
 def manage_git_repo(path, repo)
-  mkdir_p path
-
   if File.directory?(path + "/.git")
     sh "cd #{path} && git pull"
   else
@@ -11,7 +10,7 @@ def manage_git_repo(path, repo)
       # Allow cloning into existing directories
       Dir.mktmpdir do |dir|
         sh "git clone #{repo} #{dir}"
-        sh "cp -r #{dir}/{*,.*} #{path}"
+        sh "cp --recursive #{dir} #{path}"
       end
     else
       sh "git clone #{repo} #{path}"
@@ -27,7 +26,7 @@ ELISP_BYTECODE = ELISP.ext(".elc")
 
 task :default => [:dotfiles, :tools, :packages, :user_services]
 
-multitask :tools => [:pyenv, :pyenv_virtualenv, :cask, :vundle, :antigen]
+multitask :tools => [:pyenv, :pyenv_virtualenv, :cask, :vim_plug, :antigen]
 
 task :pyenv do
   manage_git_repo "#{Dir.home}/.pyenv", "https://github.com/yyuu/pyenv.git"
@@ -41,8 +40,8 @@ task :cask do
   manage_git_repo "#{Dir.home}/.cask", "https://github.com/cask/cask.git"
 end
 
-task :vundle do
-  manage_git_repo "#{Dir.home}/.vim/bundle/vundle", "https://github.com/gmarik/vundle.git"
+task :vim_plug do
+  manage_git_repo "#{Dir.home}/.vim/plug", "https://github.com/junegunn/vim-plug.git"
 end
 
 task :antigen do
@@ -55,8 +54,8 @@ task :emacs_packages => [:cask, :dotfiles] do
   sh "cd #{Dir.home}/.emacs.d && cask"
 end
 
-task :vim_packages => [:vundle, :dotfiles] do
-  sh "vim +BundleInstall +qall"
+task :vim_packages => [:vim_plug, :dotfiles] do
+  sh "vim +PlugUpdate +qall"
 end
 
 task :dotfiles => ELISP_BYTECODE do
