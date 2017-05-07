@@ -106,3 +106,6 @@
 
 ;; LaTeX
 (depends-on "auctex")
+
+;; Markup Languages
+(depends-on "yaml-mode")

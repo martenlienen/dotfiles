@@ -905,3 +905,9 @@ Use some nice UTF-8 symbols to signify the nesting depth.
     :config
     (bind-key "<C-right>" #'cqql-underline rst-mode-map))
 #+END_SRC
+
+** YAML
+
+#+BEGIN_SRC emacs-lisp
+  (use-package yaml-mode)
+#+END_SRC
