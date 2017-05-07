@@ -879,13 +879,6 @@ Use some nice UTF-8 symbols to signify the nesting depth.
     (add-hook 'org-mode-hook 'org-bullets-mode))
 #+END_SRC
 
-** ledger-cli
-
-#+BEGIN_SRC emacs-lisp
-  (use-package ledger-mode
-    :mode "\\.ledger\\'")
-#+END_SRC
-
 ** reStructuredText
 
 #+BEGIN_SRC emacs-lisp
