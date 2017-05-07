@@ -1,2 +1,5 @@
 # Tangled init.el
-src/.emacs.d/init.el
+home/.emacs.d/init.el
+
+# Compiled Elisp
+*.elc

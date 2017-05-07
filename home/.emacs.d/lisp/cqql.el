@@ -4,8 +4,6 @@
 
 ;;; Code:
 
-(require 'dash)
-
 (defun cqql-go-to-beginning-of-line-dwim ()
   "Toggle point between beginning of line and first non-whitespace character."
   (interactive)
@@ -141,7 +139,7 @@ first line of the region to the end of the last."
   "A list of modes, that should not be whitespace-trimmed.")
 
 (defun cqql-trim-whitespace ()
-  (when (not (-contains? cqql-no-trimming-modes major-mode))
+  (when (not (seq-contains cqql-no-trimming-modes major-mode))
     (delete-trailing-whitespace)))
 
 (defmacro cqql-after-load (feature &rest body)
@@ -153,14 +151,14 @@ first line of the region to the end of the last."
 (defmacro cqql-define-keys (keymap &rest bindings)
   (declare (indent defun))
   `(progn
-     ,@(-map
+     ,@(seq-map
         (lambda (binding) `(define-key ,keymap (kbd ,(car binding)) ,(cadr binding)))
         bindings)))
 
 (defmacro cqql-define-global-keys (&rest bindings)
   (declare (indent defun))
   `(progn
-     ,@(-map
+     ,@(seq-map
         (lambda (binding) `(global-set-key (kbd ,(car binding)) ,(cadr binding)))
         bindings)))
 

@@ -4,6 +4,10 @@
 
 ;;; Code:
 
+;; Require cask so that s and f are available when compiling
+(require 'cask "~/.cask/cask.el")
+(eval-when-compile (cask-initialize))
+
 (require 's)
 (require 'f)
 

@@ -4,6 +4,13 @@
 
 ;;; Code:
 
+;; Require cask so that s and f are available when compiling
+(require 'cask "~/.cask/cask.el")
+(eval-when-compile (cask-initialize))
+
+(require 'python)
+(require 's)
+
 (defun isnip-python-maybe-prepend-comma (text)
   "Prepend ', ' if TEXT is not empty"
   (if (or (string= text "") (s-starts-with? "," text))
