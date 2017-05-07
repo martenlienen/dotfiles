@@ -80,7 +80,7 @@ END
 end
 CLEAN.include(ORG_FILES.ext(".el"))
 
-task :system => [:pacaur, :system_packages, :system_conf, :lock_screen]
+task :system => [:pacaur, :system_packages, :system_conf]
 
 task :pacaur do
   if not system("pacman -Q pacaur")
