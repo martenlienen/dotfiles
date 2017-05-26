@@ -10,7 +10,7 @@ def manage_git_repo(path, repo)
       # Allow cloning into existing directories
       Dir.mktmpdir do |dir|
         sh "git clone #{repo} #{dir}"
-        sh "cp --recursive #{dir} #{path}"
+        sh "cp --recursive #{dir}/. #{path}"
       end
     else
       sh "git clone #{repo} #{path}"
@@ -26,7 +26,7 @@ ELISP_BYTECODE = ELISP.ext(".elc")
 
 task :default => [:dotfiles, :tools, :packages, :user_services]
 
-multitask :tools => [:pyenv, :pyenv_virtualenv, :cask, :vim_plug, :antigen]
+multitask :tools => [:pyenv, :pyenv_virtualenv, :spacemacs, :vim_plug, :antigen]
 
 task :pyenv do
   manage_git_repo "#{Dir.home}/.pyenv", "https://github.com/yyuu/pyenv.git"
@@ -36,8 +36,8 @@ task :pyenv_virtualenv => :pyenv do
   manage_git_repo "#{Dir.home}/.pyenv/plugins/pyenv-virtualenv", "https://github.com/yyuu/pyenv-virtualenv.git"
 end
 
-task :cask do
-  manage_git_repo "#{Dir.home}/.cask", "https://github.com/cask/cask.git"
+task :spacemacs do
+  manage_git_repo "#{Dir.home}/.emacs.d", "https://github.com/syl20bnr/spacemacs"
 end
 
 task :vim_plug do
@@ -48,17 +48,13 @@ task :antigen do
   manage_git_repo "#{Dir.home}/.antigen", "https://github.com/zsh-users/antigen.git"
 end
 
-multitask :packages => [:emacs_packages, :vim_packages]
-
-task :emacs_packages => [:cask, :dotfiles] do
-  sh "cd #{Dir.home}/.emacs.d && cask"
-end
+multitask :packages => :vim_packages
 
 task :vim_packages => [:vim_plug, :dotfiles] do
   sh "vim +PlugUpdate +qall"
 end
 
-task :dotfiles => ELISP_BYTECODE do
+task :dotfiles do
   sh "find home -maxdepth 1 -mindepth 1 -exec cp --recursive {} #{Dir.home} \\;"
 end
 
