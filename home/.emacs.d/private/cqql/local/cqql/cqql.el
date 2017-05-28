@@ -4,6 +4,7 @@
 
 ;;; Code:
 
+;;;###autoload
 (defun cqql-go-to-beginning-of-line-dwim ()
   "Toggle point between beginning of line and first non-whitespace character."
   (interactive)
@@ -12,6 +13,7 @@
     (when (= prev-pos (point))
       (move-beginning-of-line nil))))
 
+;;;###autoload
 (defun cqql-move-text (lines)
   "Move the current line or region LINES lines."
   (interactive "p")
@@ -42,11 +44,13 @@
         (setf (mark) (+ insert-start mark-offset)
               deactivate-mark nil)))))
 
+;;;###autoload
 (defun cqql-move-text-up (lines)
   "Move the current line or region LINES lines up."
   (interactive "p")
   (cqql-move-text (- lines)))
 
+;;;###autoload
 (defun cqql-move-text-down (lines)
   "Move the current line or region LINES lines down."
   (interactive "p")
@@ -86,12 +90,14 @@ first line of the region to the end of the last."
       (setf (mark) (+ 1 mark? (* times (length text)))
             deactivate-mark nil))))
 
+;;;###autoload
 (defun cqql-open-line ()
   "Create a new line below and put point into it."
   (interactive)
   (move-end-of-line nil)
   (newline-and-indent))
 
+;;;###autoload
 (defun cqql-open-line-above ()
   "Create a new line above point and move point into it."
   (interactive)
@@ -100,6 +106,7 @@ first line of the region to the end of the last."
   (forward-line -1)
   (indent-according-to-mode))
 
+;;;###autoload
 (defun cqql-kill-line ()
   "Kill the current line."
   (interactive)
@@ -110,6 +117,7 @@ first line of the region to the end of the last."
     (when (< pos (point))
       (setf (point) pos))))
 
+;;;###autoload
 (defun cqql-c-append-semicolon ()
   "Insert semicolon at the end of the line."
   (interactive)
@@ -117,6 +125,7 @@ first line of the region to the end of the last."
     (move-end-of-line nil)
     (insert ";")))
 
+;;;###autoload
 (defun cqql-latex-append-line-break ()
   "Insert the \\\\ macro at the end of the line."
   (interactive)
@@ -124,6 +133,7 @@ first line of the region to the end of the last."
     (move-end-of-line nil)
     (insert "\\\\")))
 
+;;;###autoload
 (defun cqql-exercise-headers (structure)
   "Create a STRUCTURE of headers for exercise sheets."
   (interactive "xStructure: ")
@@ -135,16 +145,19 @@ first line of the region to the end of the last."
                                            subnode)))
              (insert (format "\\section*{Exercise %s}\n\n" node)))))
 
+;;;###autoload
 (defun cqql-dired-jump-to-first-file ()
   (interactive)
   (goto-char (point-min))
   (dired-next-line 4))
 
+;;;###autoload
 (defun cqql-dired-jump-to-last-file ()
   (interactive)
   (goto-char (point-max))
   (dired-next-line -1))
 
+;;;###autoload
 (defun cqql-apply-command-to-buffer (command)
   "Apply shell command COMMAND to the current buffer."
   (interactive "sCommand:")
@@ -162,6 +175,7 @@ first line of the region to the end of the last."
            ,@body)
        (pyenv-mode-set current))))
 
+;;;###autoload
 (defun cqql-python-shell-send-line ()
   "Send the current line to inferior python process disregarding indentation."
   (interactive)
@@ -178,6 +192,7 @@ first line of the region to the end of the last."
 (defvar cqql-python-last-command nil
   "Stores the last sent region for resending.")
 
+;;;###autoload
 (defun cqql-python-shell-send-region ()
   "Send the current region to inferior python process stripping indentation."
   (interactive)
@@ -216,12 +231,14 @@ first line of the region to the end of the last."
     (setq cqql-python-last-command command)
     (python-shell-send-string command)))
 
+;;;###autoload
 (defun cqql-python-shell-resend-last-command ()
   "Resend the last command to the inferior python process."
   (interactive)
   (when cqql-python-last-command
     (python-shell-send-string cqql-python-last-command)))
 
+;;;###autoload
 (defun cqql-python-shell-send-region-dwim ()
   "Send active region or resend last region."
   (interactive)

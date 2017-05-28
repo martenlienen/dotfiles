@@ -9,6 +9,7 @@
 
 (defun cqql/init-cqql ()
   (use-package cqql
+    :commands (cqql-dired-jump-to-first-file cqql-dired-jump-to-last-file)
     :bind (:map evil-hybrid-state-map
                 ("C-a" . cqql-go-to-beginning-of-line-dwim)
                 ("M-D" . cqql-duplicate-text)
