@@ -41,7 +41,7 @@ modifying the variable values."
             shell-default-height 30
             shell-default-position 'bottom)
 
-     c-c++
+     (c-c++ :variables c-c++-enable-clang-support t)
      (python :variables
              python-auto-set-local-pyenv-version 'on-visit)
      ipython-notebook
@@ -389,7 +389,11 @@ package is loaded, you should place your code here."
                     TeX-command-extra-options "-shell-escape")))
 
   (setq-default dired-listing-switches "-lahv")
-  (bind-key "M-w" #'wdired-change-to-wdired-mode dired-mode-map))
+  (bind-key "M-w" #'wdired-change-to-wdired-mode dired-mode-map)
+
+  (spacemacs/set-leader-keys-for-major-mode 'c++-mode
+    "f" 'clang-format-buffer
+    "F" 'clang-format))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
