@@ -113,7 +113,7 @@ any user code in there besides modifying the variable values."
    ;; to layers). Check the editing styles section of the documentation for
    ;; details on available variables. (default 'vim)
    dotspacemacs-editing-style '(hybrid :variables
-                                       hybrid-mode-default-state 'emacs
+                                       hybrid-mode-default-state 'normal
                                        hybrid-mode-enable-evilified-state nil
                                        hybrid-mode-enable-hjkl-bindings nil)
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
