@@ -381,6 +381,9 @@ package is loaded, you should place your code here."
   ;; and you can even export them to LaTeX!
   (add-hook 'LaTeX-mode-hook #'orgtbl-mode)
 
+  ;; In commit buffers, I want to type right away
+  (add-hook 'git-commit-mode-hook #'evil-hybrid-state)
+
   (add-hook 'LaTeX-mode-hook
             (lambda ()
               (setq TeX-electric-sub-and-superscript t
