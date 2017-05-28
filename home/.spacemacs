@@ -347,7 +347,8 @@ initialization after layers configuration. This is the place
 where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a
 package is loaded, you should place your code here."
-  (bind-key ";" #'yas-next-field yas-minor-mode-map)
+  (require 'yasnippet)
+  (bind-key ";" yas-maybe-expand yas-minor-mode-map)
 
   ;; Don't append newlines to snippet files
   (add-hook 'snippet-mode (lambda () (setq require-final-newline nil)))
