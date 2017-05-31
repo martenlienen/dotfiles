@@ -397,7 +397,10 @@ package is loaded, you should place your code here."
 
   (spacemacs/set-leader-keys-for-major-mode 'c++-mode
     "f" 'clang-format-buffer
-    "F" 'clang-format))
+    "F" 'clang-format)
+
+  ;; Make completion work in C++ code up to C++17
+  (setq-default company-clang-arguments '("-std=c++1z")))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
