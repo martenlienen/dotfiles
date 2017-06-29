@@ -400,7 +400,11 @@ package is loaded, you should place your code here."
     "F" 'clang-format)
 
   ;; Make completion work in C++ code up to C++17
-  (setq-default company-clang-arguments '("-std=c++1z")))
+  (setq-default company-clang-arguments '("-std=c++1z"))
+
+  ;; Unbind the helm command that spacemacs usually binds there
+  (bind-key "j" #'dired-goto-file dired-mode-map)
+  (add-to-list 'evil-emacs-state-modes 'dired-mode))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
