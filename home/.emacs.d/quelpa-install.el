@@ -9,6 +9,9 @@
 ;; Package configuration
 (quelpa 'use-package)
 
+;; My own package
+(quelpa '(cqql :fetcher file :path "home/.emacs.d/lisp/cqql.el"))
+
 ;; Key bindings
 (quelpa 'free-keys)
 

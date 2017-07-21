@@ -1,4 +1,4 @@
-;;; cqql --- My custom functions
+;;; cqql.el --- My custom functions
 
 ;;; Commentary:
 
