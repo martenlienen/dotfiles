@@ -26,7 +26,7 @@ ELISP_BYTECODE = ELISP.ext(".elc")
 
 task :default => [:dotfiles, :tools, :packages, :user_services]
 
-multitask :tools => [:pyenv, :pyenv_virtualenv, :spacemacs, :vim_plug, :antigen]
+multitask :tools => [:pyenv, :pyenv_virtualenv, :vim_plug, :antigen]
 
 task :pyenv do
   manage_git_repo "#{Dir.home}/.pyenv", "https://github.com/yyuu/pyenv.git"
@@ -34,10 +34,6 @@ end
 
 task :pyenv_virtualenv => :pyenv do
   manage_git_repo "#{Dir.home}/.pyenv/plugins/pyenv-virtualenv", "https://github.com/yyuu/pyenv-virtualenv.git"
-end
-
-task :spacemacs do
-  manage_git_repo "#{Dir.home}/.emacs.d", "https://github.com/syl20bnr/spacemacs"
 end
 
 task :vim_plug do
@@ -54,7 +50,11 @@ task :vim_packages => [:vim_plug, :dotfiles] do
   sh "vim +PlugUpdate +qall"
 end
 
-task :dotfiles do
+task :quelpa do
+  sh "emacs --script home/.emacs.d/quelpa-install.el"
+end
+
+task :dotfiles => [:quelpa] + ELISP_BYTECODE do
   sh "find home -maxdepth 1 -mindepth 1 -exec cp --recursive {} #{Dir.home} \\;"
 end
 

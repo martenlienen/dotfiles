@@ -75,17 +75,15 @@ Automatically jump to origin file and line when an the point is on an error.
   (add-hook 'compilation-mode-hook #'next-error-follow-minor-mode)
 #+END_SRC
 
-* Cask
+* Quelpa
 
-Initialize cask to put the installed packages on the load path.
+Initialize quelpa to put the installed packages on the load path.
 
 #+BEGIN_SRC emacs-lisp
-  (require 'cask "~/.cask/cask.el")
-
   (eval-and-compile
-    (cask-initialize)
+    (package-initialize))
 
-    (push "~/.emacs.d/lisp" load-path))
+  (require 'quelpa)
 #+END_SRC
 
 * Packages
@@ -178,7 +176,7 @@ key maps.
     ("M-p" mc/unmark-previous-like-this)
     ("q" nil))
 
-  (cqql-define-global-keys
+  (bind-keys
     ("M-n" #'cqql-multiple-cursors-hydra/body)
     ;; Bind this to multiple keys because some modes define M-n themselves
     ("C-c M-n" #'cqql-multiple-cursors-hydra/body))
@@ -380,7 +378,7 @@ in a condensed format.
     :config
     (require 'smartparens-config)
 
-    (cqql-define-keys smartparens-mode-map
+    (bind-keys :map smartparens-mode-map
       ("C-M-f" 'sp-forward-sexp)
       ("C-M-S-f" 'sp-next-sexp)
       ("C-M-b" 'sp-backward-sexp)
@@ -680,7 +678,6 @@ Quickly move to every word and character on screen.
   (use-package macrostep)
 
   (use-package lisp-mode
-    :mode ("Cask\\'" . emacs-lisp-mode)
     :config
     (bind-key "C-h C-f" 'find-function emacs-lisp-mode-map)
     (bind-key "C-c e t" 'cqql-run-all-ert-tests emacs-lisp-mode-map)
