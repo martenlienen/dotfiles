@@ -6,6 +6,10 @@
     (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
     (eval-buffer)))
 
+(dolist (p '(auctex))
+  (unless (package-installed-p p)
+    (package-install p)))
+
 ;; Package configuration
 (quelpa 'use-package)
 
