@@ -187,7 +187,7 @@ key maps.
 ** Theme
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'leuven t)
+  (load-theme 'ample t)
 #+END_SRC
 
 ** Mode Line

@@ -39,8 +39,7 @@
 (quelpa 'dictcc)
 
 ;; UI
-(quelpa 'color-theme)
-(quelpa 'material-theme)
+(quelpa 'ample-theme)
 (quelpa 'smart-mode-line)
 (quelpa 'rainbow-delimiters)
 (quelpa 'shackle)
