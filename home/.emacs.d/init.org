@@ -689,18 +689,6 @@ Quickly move to every word and character on screen.
     (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode))
 #+END_SRC
 
-** Clojure
-
-#+BEGIN_SRC emacs-lisp
-  (use-package clojure-mode
-    :config
-    (require 'cider-eldoc)
-
-    (add-hook 'clojure-mode-hook 'cider-mode)
-    (add-hook 'clojure-mode-hook 'cider-turn-on-eldoc-mode)
-    (add-hook 'clojure-mode-hook 'smartparens-strict-mode))
-#+END_SRC
-
 ** javascript
 
 #+BEGIN_SRC emacs-lisp
@@ -796,7 +784,6 @@ Quickly move to every word and character on screen.
     ;; Workaround for smartparens overwriting `
     (require 'smartparens-latex)
 
-    (require 'latex)
     (require 'tex-site)
     (require 'preview)
 

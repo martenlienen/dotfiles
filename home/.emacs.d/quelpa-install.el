@@ -88,10 +88,6 @@
 (quelpa 'ghc)
 (quelpa 'ghci-completion)
 
-;; Clojure
-(quelpa 'clojure-mode)
-(quelpa 'cider)
-
 ;; Python
 (quelpa 'pyenv-mode)
 (quelpa 'anaconda-mode)
