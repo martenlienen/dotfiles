@@ -4,7 +4,6 @@
 
 ;;; Code:
 
-;;;###autoload
 (defun cqql-go-to-beginning-of-line-dwim ()
   "Toggle point between beginning of line and first non-whitespace character."
   (interactive)
@@ -13,7 +12,6 @@
     (when (= prev-pos (point))
       (move-beginning-of-line nil))))
 
-;;;###autoload
 (defun cqql-move-text (lines)
   "Move the current line or region LINES lines."
   (interactive "p")
@@ -44,13 +42,11 @@
         (setf (mark) (+ insert-start mark-offset)
               deactivate-mark nil)))))
 
-;;;###autoload
 (defun cqql-move-text-up (lines)
   "Move the current line or region LINES lines up."
   (interactive "p")
   (cqql-move-text (- lines)))
 
-;;;###autoload
 (defun cqql-move-text-down (lines)
   "Move the current line or region LINES lines down."
   (interactive "p")
@@ -90,14 +86,12 @@ first line of the region to the end of the last."
       (setf (mark) (+ 1 mark? (* times (length text)))
             deactivate-mark nil))))
 
-;;;###autoload
 (defun cqql-open-line ()
   "Create a new line below and put point into it."
   (interactive)
   (move-end-of-line nil)
   (newline-and-indent))
 
-;;;###autoload
 (defun cqql-open-line-above ()
   "Create a new line above point and move point into it."
   (interactive)
@@ -106,7 +100,6 @@ first line of the region to the end of the last."
   (forward-line -1)
   (indent-according-to-mode))
 
-;;;###autoload
 (defun cqql-kill-line ()
   "Kill the current line."
   (interactive)
@@ -117,7 +110,6 @@ first line of the region to the end of the last."
     (when (< pos (point))
       (setf (point) pos))))
 
-;;;###autoload
 (defun cqql-c-append-semicolon ()
   "Insert semicolon at the end of the line."
   (interactive)
@@ -125,7 +117,6 @@ first line of the region to the end of the last."
     (move-end-of-line nil)
     (insert ";")))
 
-;;;###autoload
 (defun cqql-latex-append-line-break ()
   "Insert the \\\\ macro at the end of the line."
   (interactive)
@@ -133,7 +124,6 @@ first line of the region to the end of the last."
     (move-end-of-line nil)
     (insert "\\\\")))
 
-;;;###autoload
 (defun cqql-exercise-headers (structure)
   "Create a STRUCTURE of headers for exercise sheets."
   (interactive "xStructure: ")
@@ -145,106 +135,32 @@ first line of the region to the end of the last."
                                            subnode)))
              (insert (format "\\section*{Exercise %s}\n\n" node)))))
 
-;;;###autoload
-(defun cqql-dired-jump-to-first-file ()
-  (interactive)
-  (goto-char (point-min))
-  (dired-next-line 4))
+(defvar cqql-no-trimming-modes '()
+  "A list of modes, that should not be whitespace-trimmed.")
 
-;;;###autoload
-(defun cqql-dired-jump-to-last-file ()
-  (interactive)
-  (goto-char (point-max))
-  (dired-next-line -1))
+(defun cqql-trim-whitespace ()
+  (when (not (seq-contains cqql-no-trimming-modes major-mode))
+    (delete-trailing-whitespace)))
 
-;;;###autoload
-(defun cqql-apply-command-to-buffer (command)
-  "Apply shell command COMMAND to the current buffer."
-  (interactive "sCommand:")
-  (let ((p (point)))
-    (shell-command-on-region (point-min) (point-max) command t t)
-    (setf (point) p)))
-
-(defmacro with-pyenv (name &rest body)
-  "Execute BODY with pyenv NAME activated."
+(defmacro cqql-after-load (feature &rest body)
+  "After FEATURE is loaded, evaluate BODY."
   (declare (indent defun))
-  `(let ((current (pyenv-mode-version)))
-     (unwind-protect
-         (progn
-           (pyenv-mode-set ,name)
-           ,@body)
-       (pyenv-mode-set current))))
+  `(eval-after-load ,feature
+     '(progn ,@body)))
 
-;;;###autoload
-(defun cqql-python-shell-send-line ()
-  "Send the current line to inferior python process disregarding indentation."
-  (interactive)
-  (let ((start (save-excursion
-                 (back-to-indentation)
-                 (point)))
-        (end (save-excursion
-               (end-of-line)
-               (point))))
-    (python-shell-send-string (buffer-substring start end))))
+(defmacro cqql-define-keys (keymap &rest bindings)
+  (declare (indent defun))
+  `(progn
+     ,@(seq-map
+        (lambda (binding) `(define-key ,keymap (kbd ,(car binding)) ,(cadr binding)))
+        bindings)))
 
-(require 'cl-lib)
-
-(defvar cqql-python-last-command nil
-  "Stores the last sent region for resending.")
-
-;;;###autoload
-(defun cqql-python-shell-send-region ()
-  "Send the current region to inferior python process stripping indentation."
-  (interactive)
-  (let* ((start (save-excursion
-                  (goto-char (region-beginning))
-                  (beginning-of-line)
-                  (point)))
-         (end (save-excursion
-                (goto-char (region-end))
-                (end-of-line)
-                (point)))
-         (region (buffer-substring start end))
-         (command))
-    ;; Strip indentation
-    (with-temp-buffer
-      (insert region)
-
-      ;; Clear leading empty lines
-      (goto-char (point-min))
-      (while (char-equal (following-char) ?\n)
-        (delete-char 1))
-
-      ;; Remove indentation from all non-empty lines
-      (let ((indent (save-excursion
-                      (back-to-indentation)
-                      (- (point) (point-min)))))
-        (cl-loop until (eobp)
-                 do
-                 ;; Make sure that we do not delete empty lines or lines with
-                 ;; only spaces but fewer than indent
-                 (cl-loop repeat indent
-                          while (char-equal (following-char) ?\s)
-                          do (delete-char 1))
-                 (forward-line 1)))
-      (setq command (buffer-string)))
-    (setq cqql-python-last-command command)
-    (python-shell-send-string command)))
-
-;;;###autoload
-(defun cqql-python-shell-resend-last-command ()
-  "Resend the last command to the inferior python process."
-  (interactive)
-  (when cqql-python-last-command
-    (python-shell-send-string cqql-python-last-command)))
-
-;;;###autoload
-(defun cqql-python-shell-send-region-dwim ()
-  "Send active region or resend last region."
-  (interactive)
-  (if (use-region-p)
-      (cqql-python-shell-send-region)
-    (cqql-python-shell-resend-last-command)))
+(defmacro cqql-define-global-keys (&rest bindings)
+  (declare (indent defun))
+  `(progn
+     ,@(seq-map
+        (lambda (binding) `(global-set-key (kbd ,(car binding)) ,(cadr binding)))
+        bindings)))
 
 (provide 'cqql)
 ;;; cqql.el ends here

@@ -1,0 +1,913 @@
+#+TITLE: init.el
+#+PROPERTY: header-args :tangle yes :results silent
+
+* Globals
+#+BEGIN_SRC emacs-lisp
+  ;; Disable splash screen
+  (setq inhibit-startup-message t)
+
+  (setf ring-bell-function 'ignore)
+
+  (setq-default cursor-type 'bar)
+
+  ;; Use dejavu to display greek symbols (Source Code Pro has really weird greek
+  ;; characters)
+  (set-fontset-font "fontset-default" 'greek "DejaVu Sans Mono")
+
+  ;; Configure the *scratch* buffer
+  (setf initial-scratch-message ""
+        initial-major-mode 'emacs-lisp-mode)
+
+  ;; Enable X clipboards
+  (setf x-select-enable-clipboard t
+        x-select-enable-primary t)
+
+  ;; Put more information into the frame title
+  (setf frame-title-format '("" invocation-name ": %b - " mode-name))
+
+  ;; Enable all commands
+  (mapatoms (lambda (s) (when (get s 'disabled) (put s 'disabled nil))))
+
+  ;; Show column numbers
+  (column-number-mode t)
+
+  ;; y and n instead of yes and no
+  (fset 'yes-or-no-p 'y-or-n-p)
+
+  ;; Create new files and buffers without confirmation
+  (setq confirm-nonexistent-file-or-buffer nil)
+  (setq ido-create-new-buffer 'always)
+
+  ;; Only GC every 20 MB
+  (setq gc-cons-threshold 20000000)
+
+  ;; Indent with 2 spaces
+  (setq-default indent-tabs-mode nil
+                tab-width 2
+                js-indent-level 2
+                css-indent-offset 2
+                sh-indentation 2
+                web-mode-markup-indent-offset 2
+                web-mode-code-indent-offset 2
+                web-mode-css-indent-offset 2
+                web-mode-attr-indent-offset 2)
+
+  ;; Line breaks at 80 characters
+  (setq-default fill-column 80)
+
+  ;; Append a newline at the end of files
+  (setq require-final-newline t)
+
+  ;; Disable backups and autosaves
+  (setq backup-inhibited t)
+  (setq auto-save-default nil)
+
+  ;; Yank at point instead of position of cursor
+  (setf mouse-yank-at-point t)
+
+  ;; Disable tramp and GPG keys for performance
+  (setq file-name-handler-alist nil)
+#+END_SRC
+
+Automatically jump to origin file and line when an the point is on an error.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'compilation-mode-hook #'next-error-follow-minor-mode)
+#+END_SRC
+
+* Cask
+
+Initialize cask to put the installed packages on the load path.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'cask "~/.cask/cask.el")
+
+  (eval-and-compile
+    (cask-initialize)
+
+    (push "~/.emacs.d/lisp" load-path))
+#+END_SRC
+
+* Packages
+
+Packages are configured with the ~use-package~ macro.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'use-package)
+#+END_SRC
+
+* Tramp Fix
+
+Tramp by default tries to look for the availability of various config options by
+running ~ssh~ against the host ~host.does.not.exist~ which leads to a wait until
+timeout if you are connected to a SpeedPort router. This can be prevented by
+setting the options before loading tramp.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package tramp
+    :init
+    (setq tramp-ssh-controlmaster-options
+          "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no"))
+#+END_SRC
+
+* Utilities
+
+The ~cqql~ package (conspicuously named after myself) contains several a loose
+collection of utility functions and commands which is why it cannot be put
+easily into one of the existing sections.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package cqql
+    :bind (("C-a" . cqql-go-to-beginning-of-line-dwim)
+           ("M-D" . cqql-duplicate-text)
+           ("C-S-k" . cqql-kill-line)
+           ("C-o" . cqql-open-line)
+           ("C-S-o" . cqql-open-line-above)
+           ("C-S-p" . cqql-move-text-up)
+           ("C-S-n" . cqql-move-text-down))
+    :config
+    (add-hook 'before-save-hook #'cqql-trim-whitespace))
+#+END_SRC
+
+** PATH
+
+Teach emacs my modified ~PATH~ so that it can, for example, find local python
+installations. We have to set ~exec-path-from-shell-arguments~ to ~""~ so that
+it uses an interactive shell instead of a login one which would not read my
+~.zshenv~ file, where ~PATH~ is initialized.
+
+#+BEGIN_SRC emacs-lisp
+  (setq exec-path-from-shell-arguments "")
+
+  (exec-path-from-shell-initialize)
+#+END_SRC
+
+* Key Bindings
+
+~key-chord~ lets you press keys simultaneously to activate often used commands.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package key-chord
+    :config (key-chord-mode t))
+#+END_SRC
+
+While ~hydra~ gives the means to group related functionality into small focused
+key maps.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package hydra)
+#+END_SRC
+
+** Global Bindings
+
+#+BEGIN_SRC emacs-lisp
+  (defhydra cqql-multiple-cursors-hydra (:hint nil)
+    "
+       ^Up^            ^Down^        ^Miscellaneous^
+  ----------------------------------------------
+  [_p_]   Next    [_n_]   Next    [_l_] Edit lines
+  [_P_]   Skip    [_N_]   Skip    [_a_] Mark all
+  [_M-p_] Unmark  [_M-n_] Unmark  [_q_] Quit"
+    ("l" mc/edit-lines :exit t)
+    ("a" mc/mark-all-like-this :exit t)
+    ("n" mc/mark-next-like-this)
+    ("N" mc/skip-to-next-like-this)
+    ("M-n" mc/unmark-next-like-this)
+    ("p" mc/mark-previous-like-this)
+    ("P" mc/skip-to-previous-like-this)
+    ("M-p" mc/unmark-previous-like-this)
+    ("q" nil))
+
+  (cqql-define-global-keys
+    ("M-n" #'cqql-multiple-cursors-hydra/body)
+    ;; Bind this to multiple keys because some modes define M-n themselves
+    ("C-c M-n" #'cqql-multiple-cursors-hydra/body))
+#+END_SRC
+
+* UI
+
+** Theme
+
+#+BEGIN_SRC emacs-lisp
+  (load-theme 'leuven t)
+#+END_SRC
+
+** Mode Line
+
+#+BEGIN_SRC emacs-lisp
+  (use-package smart-mode-line
+    :config
+    (setf sml/theme 'light
+          sml/no-confirm-load-theme t)
+
+    (sml/setup))
+#+END_SRC
+
+** Minibuffer
+
+Save the minibuffer history.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package savehist
+    :config
+    (setf history-length 200)
+    (savehist-mode))
+#+END_SRC
+
+** eldoc
+
+#+BEGIN_SRC emacs-lisp
+  (use-package eldoc
+    :config (setf eldoc-idle-delay 0.2))
+#+END_SRC
+
+** Better Help
+
+Displays all key bindings of the current major mode with one-line descriptions
+in a condensed format.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package discover-my-major
+    :bind ("C-h C-m" . discover-my-major))
+#+END_SRC
+
+** COMMENT Better Selection
+
+~ivy/swiper~ is a light-weight completion front end for emacs.
+
+#+BEGIN_SRC emacs-lisp
+  (defun cqql-find-file ()
+    "Find files in projects and outside."
+    (interactive)
+    (if (projectile-project-p)
+        (counsel-git)
+      (counsel-find-file)))
+
+  (defun cqql-counsel-ag-in-project-root ()
+    "Run counsel-ag in the project root."
+    (interactive)
+    (let ((root (condition-case nil (projectile-project-root) (error nil))))
+      ;; Search hidden files
+      (counsel-ag "" root "--hidden")))
+
+  (use-package ivy
+    :bind (("C-x C-f" . cqql-find-file)
+           ("C-s" . swiper)
+           ("M-x" . counsel-M-x)
+           ("C-x 8" . counsel-unicode-char)
+           ("C-c a" . cqql-counsel-ag-in-project-root)
+           ("C-c M-a" . counsel-ag)
+           ("M-o" . ivy-resume))
+    :init
+    (setq ivy-count-format "%d/%d "
+          ivy-extra-directories (list ".")
+          ivy-re-builders-alist '((t . ivy--regex-ignore-order))
+          counsel-yank-pop-truncate-radius 3)
+    :config
+    (ivy-mode)
+    (counsel-mode))
+#+END_SRC
+
+** Highlighting
+
+*** Color Strings
+
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-mode
+    :config (add-hook 'after-change-major-mode-hook 'rainbow-mode))
+#+END_SRC
+
+*** Delimiter
+
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-delimiters
+    :config
+    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+    (setf rainbow-delimiters-max-face-count 6))
+#+END_SRC
+
+*** Symbols
+
+#+BEGIN_SRC emacs-lisp
+  (use-package highlight-symbol
+    :config
+    (add-hook 'prog-mode-hook 'highlight-symbol-mode)
+
+    (setf highlight-symbol-idle-delay 0))
+#+END_SRC
+
+** Window Management
+
+#+BEGIN_SRC emacs-lisp
+  (use-package shackle
+    :config
+    (setq shackle-rules '(("*magit-commit*" :select nil)
+                          ("\*Flycheck.+\*" :select nil :regexp t)
+                          ("\*ag.+\*" :select t :regexp t)
+                          (t :select t)))
+
+    (shackle-mode))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ace-window
+    :bind ("M-i" . ace-window))
+#+END_SRC
+
+** Buffer Management
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ibuffer
+    :bind ("C-x C-b" . ibuffer))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package uniquify
+    :config (setf uniquify-buffer-name-style 'forward
+                  uniquify-strip-common-suffix t))
+#+END_SRC
+
+** File Management
+
+#+BEGIN_SRC emacs-lisp
+  (defun cqql-dired-jump-to-first-file ()
+    (interactive)
+    (goto-char (point-min))
+    (dired-next-line 4))
+
+  (defun cqql-dired-jump-to-last-file ()
+    (interactive)
+    (goto-char (point-max))
+    (dired-next-line -1))
+
+  (use-package dired
+    :config
+    (setf dired-listing-switches "-lahv")
+
+    (bind-key "M-w" #'wdired-change-to-wdired-mode dired-mode-map)
+
+    (define-key dired-mode-map
+      [remap beginning-of-buffer] 'cqql-dired-jump-to-first-file)
+
+    (define-key dired-mode-map
+      [remap end-of-buffer] 'cqql-dired-jump-to-last-file))
+#+END_SRC
+
+~dired-jump~ from ~dired-x~ is probably my most used ~dired~ command.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package dired-x)
+#+END_SRC
+
+** Project Management
+
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :init
+    (setq projectile-keymap-prefix (kbd "C-x p"))
+    (setq projectile-completion-system 'ivy)
+    :config
+    (projectile-global-mode))
+#+END_SRC
+
+* Editing
+
+** SmartParens
+
+#+BEGIN_SRC emacs-lisp
+  (use-package smartparens
+    :config
+    (require 'smartparens-config)
+
+    (cqql-define-keys smartparens-mode-map
+      ("C-M-f" 'sp-forward-sexp)
+      ("C-M-S-f" 'sp-next-sexp)
+      ("C-M-b" 'sp-backward-sexp)
+      ("C-M-S-b" 'sp-previous-sexp)
+      ("C-M-n" 'sp-down-sexp)
+      ("C-M-S-n" 'sp-backward-down-sexp)
+      ("C-M-p" 'sp-up-sexp)
+      ("C-M-S-p" 'sp-backward-up-sexp)
+      ("C-M-a" 'sp-beginning-of-sexp)
+      ("C-M-e" 'sp-end-of-sexp)
+      ("C-M-k" 'sp-kill-sexp)
+      ("C-M-S-k" 'sp-backward-kill-sexp)
+      ("C-M-w" 'sp-copy-sexp)
+      ("C-M-t" 'sp-transpose-sexp)
+      ("C-M-h" 'sp-backward-slurp-sexp)
+      ("C-M-S-h" 'sp-backward-barf-sexp)
+      ("C-M-l" 'sp-forward-slurp-sexp)
+      ("C-M-S-l" 'sp-forward-barf-sexp)
+      ("C-M-j" 'sp-splice-sexp)
+      ("C-M-S-j" 'sp-raise-sexp))
+
+    (smartparens-global-mode t)
+    (smartparens-strict-mode t)
+    (show-smartparens-global-mode t))
+#+END_SRC
+
+** Region
+
+#+BEGIN_SRC emacs-lisp
+  (use-package wrap-region
+    :config (wrap-region-global-mode t))
+
+  (use-package expand-region
+    :bind (("M-m" . er/expand-region)
+           ("M-M" . er/contract-region))
+    :config
+    (cqql-after-load 'latex-mode
+      (require 'latex-mode-expansions)))
+#+END_SRC
+
+** Replacing
+
+Gives you a visual preview at the point of replacement.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package visual-regexp
+    :bind (("M-3" . vr/replace)
+           ("M-#" . vr/query-replace)))
+#+END_SRC
+
+** Navigation
+
+Quickly move to every word and character on screen.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package avy
+    :bind (("M-s" . avy-goto-word-or-subword-1)
+           ("M-S" . avy-goto-char-2)))
+#+END_SRC
+
+* Code Intelligence
+
+** Auto-Completion
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :bind ("C-M-SPC" . company-complete)
+    :init
+    (setf company-idle-delay 0
+          company-minimum-prefix-length 2
+          company-show-numbers t
+          company-selection-wrap-around t
+          company-backends (list #'company-css
+                                 #'company-clang
+                                 #'company-capf
+                                 (list #'company-dabbrev-code
+                                       #'company-keywords)
+                                 #'company-files
+                                 #'company-dabbrev))
+    :config
+    (global-company-mode t))
+
+  (use-package company-dabbrev
+    :init
+    (setf company-dabbrev-ignore-case 'keep-prefix
+          company-dabbrev-ignore-invisible t
+          company-dabbrev-downcase nil))
+#+END_SRC
+
+** Complete from elsewhere
+
+#+BEGIN_SRC emacs-lisp
+  (use-package hippie-exp
+    :bind ("M-/" . hippie-expand)
+    :init
+    (setf hippie-expand-try-functions-list
+          '(try-expand-dabbrev-visible
+            try-expand-dabbrev
+            try-expand-dabbrev-all-buffers
+            try-expand-line
+            try-complete-lisp-symbol)))
+#+END_SRC
+
+** Snippets
+
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :config
+    (bind-key ";" 'yas-expand yas-minor-mode-map)
+    (bind-key "<tab>" nil yas-minor-mode-map)
+    (bind-key "TAB" nil yas-minor-mode-map)
+
+    (setq yas-fallback-behavior 'call-other-command)
+
+    ;; Don't append newlines to snippet files
+    (add-hook 'snippet-mode (lambda () (setq require-final-newline nil)))
+
+    (setf yas-snippet-dirs '("~/.emacs.d/snippets"))
+
+    (yas-global-mode t))
+#+END_SRC
+
+* Integrations
+
+** git
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :bind (("<f2>" . magit-status)
+           ("C-c g b" . magit-blame)
+           ("C-c g l" . magit-log-buffer-file))
+    :init
+    (setq magit-last-seen-setup-instructions "1.4.0"
+          magit-commit-ask-to-stage nil
+          magit-push-always-verify nil))
+
+  (use-package git-timemachine
+    :bind ("C-c g t" . git-timemachine))
+#+END_SRC
+
+** dict.cc
+
+#+BEGIN_SRC emacs-lisp
+  (use-package dictcc
+    :bind ("C-c d" . dictcc))
+#+END_SRC
+
+* Programming Languages
+
+** Python
+
+#+BEGIN_SRC emacs-lisp
+  (defun cqql-apply-command-to-buffer (command)
+    "Apply shell command COMMAND to the current buffer."
+    (interactive "sCommand:")
+    (let ((p (point)))
+      (shell-command-on-region (point-min) (point-max) command t t)
+      (setf (point) p)))
+
+  (use-package pyenv-mode)
+
+  (defmacro with-pyenv (name &rest body)
+    "Execute BODY with pyenv NAME activated."
+    (declare (indent defun))
+    `(let ((current (pyenv-mode-version)))
+       (unwind-protect
+           (progn
+             (pyenv-mode-set ,name)
+             ,@body)
+         (pyenv-mode-set current))))
+
+  (defun cqql-isort-current-buffer ()
+    "Apply isort to the current python buffer."
+    (interactive)
+    (with-pyenv "tools"
+      (cqql-apply-command-to-buffer "isort -")))
+
+  (defun cqql-yapf-current-buffer ()
+    "Apply yapf to the current python buffer."
+    (interactive)
+    (with-pyenv "tools"
+      (cqql-apply-command-to-buffer "yapf")))
+
+  (defun cqql-python-shell-send-line ()
+    "Send the current line to inferior python process disregarding indentation."
+    (interactive)
+    (let ((start (save-excursion
+                   (back-to-indentation)
+                   (point)))
+          (end (save-excursion
+                 (end-of-line)
+                 (point))))
+      (python-shell-send-string (buffer-substring start end))))
+
+  (require 'cl-lib)
+
+  (defvar cqql-python-last-command nil
+    "Stores the last sent region for resending.")
+
+  (defun cqql-python-shell-send-region ()
+    "Send the current region to inferior python process stripping indentation."
+    (interactive)
+    (let* ((start (save-excursion
+                    (goto-char (region-beginning))
+                    (beginning-of-line)
+                    (point)))
+           (end (save-excursion
+                  (goto-char (region-end))
+                  (end-of-line)
+                  (point)))
+           (region (buffer-substring start end))
+           (command))
+      ;; Strip indentation
+      (with-temp-buffer
+        (insert region)
+
+        ;; Clear leading empty lines
+        (goto-char (point-min))
+        (while (char-equal (following-char) ?\n)
+          (delete-char 1))
+
+        ;; Remove indentation from all non-empty lines
+        (let ((indent (save-excursion
+                        (back-to-indentation)
+                        (- (point) (point-min)))))
+          (cl-loop until (eobp)
+                   do
+                   ;; Make sure that we do not delete empty lines or lines with
+                   ;; only spaces but fewer than indent
+                   (cl-loop repeat indent
+                            while (char-equal (following-char) ?\s)
+                            do (delete-char 1))
+                   (forward-line 1)))
+        (setq command (buffer-string)))
+      (setq cqql-python-last-command command)
+      (python-shell-send-string command)))
+
+  (defun cqql-python-shell-resend-last-command ()
+    "Resend the last command to the inferior python process."
+    (interactive)
+    (when cqql-python-last-command
+      (python-shell-send-string cqql-python-last-command)))
+
+  (defun cqql-python-shell-send-region-dwim ()
+    "Send active region or resend last region."
+    (interactive)
+    (if (use-region-p)
+        (cqql-python-shell-send-region)
+      (cqql-python-shell-resend-last-command)))
+
+  (use-package python
+    :config
+    (bind-key "C-c i" #'cqql-isort-current-buffer python-mode-map)
+    (bind-key "C-c f" #'cqql-yapf-current-buffer python-mode-map)
+    (bind-key "C-c C-l" #'cqql-python-shell-send-line python-mode-map)
+    (bind-key "C-c C-r" #'cqql-python-shell-send-region-dwim python-mode-map)
+
+    (when (executable-find "ipython")
+      (setq python-shell-interpreter "ipython"
+            ;; Disable ipython 5 features that are incompatible with
+            ;; inferior-python
+            python-shell-interpreter-args "--simple-prompt")
+      (push "ipython" python-shell-completion-native-disabled-interpreters))
+
+    (add-hook 'python-mode-hook 'eldoc-mode)
+    (add-hook 'python-mode-hook 'subword-mode)
+    (add-hook 'python-mode-hook 'pyenv-mode))
+
+  (use-package anaconda-mode
+    :config
+    (add-hook 'python-mode-hook 'anaconda-mode))
+
+  (defun cqql-use-company-anaconda ()
+    "Active the company-anaconda backend."
+    (add-to-list 'company-backends 'company-anaconda))
+
+  (use-package company-anaconda
+    :config
+    (add-hook 'python-mode-hook 'cqql-use-company-anaconda))
+#+END_SRC
+
+** Haskell
+
+#+BEGIN_SRC emacs-lisp
+  (use-package haskell-mode
+    :config (add-hook 'haskell-mode-hook 'structured-haskell-mode))
+#+END_SRC
+
+** Emacs Lisp
+
+#+BEGIN_SRC emacs-lisp
+  (defun cqql-run-all-ert-tests ()
+    "Run all ert tests defined."
+    (interactive)
+    (ert t))
+
+  (use-package macrostep)
+
+  (use-package lisp-mode
+    :mode ("Cask\\'" . emacs-lisp-mode)
+    :config
+    (bind-key "C-h C-f" 'find-function emacs-lisp-mode-map)
+    (bind-key "C-c e t" 'cqql-run-all-ert-tests emacs-lisp-mode-map)
+    (bind-key "C-c e b" 'eval-buffer emacs-lisp-mode-map)
+    (bind-key "C-c e m" 'macrostep-expand emacs-lisp-mode-map)
+
+    (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+    (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
+    (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode))
+#+END_SRC
+
+** Clojure
+
+#+BEGIN_SRC emacs-lisp
+  (use-package clojure-mode
+    :config
+    (require 'cider-eldoc)
+
+    (add-hook 'clojure-mode-hook 'cider-mode)
+    (add-hook 'clojure-mode-hook 'cider-turn-on-eldoc-mode)
+    (add-hook 'clojure-mode-hook 'smartparens-strict-mode))
+#+END_SRC
+
+** javascript
+
+#+BEGIN_SRC emacs-lisp
+  (use-package js2-mode
+    :mode (("\\.js\\'" . js2-mode) ("\\.jsx\\'" . js2-mode))
+    :interpreter "node"
+    :config
+    (require 'js2-refactor)
+
+    (setq-default js2-basic-offset 2)
+    (setf js2-highlight-level 3
+          js2-include-node-externs t)
+
+    (js2r-add-keybindings-with-prefix "C-c r")
+
+    (add-hook 'js2-mode-hook 'subword-mode))
+#+END_SRC
+
+** C/C++
+
+#+BEGIN_SRC emacs-lisp
+  (use-package cc-mode
+    :mode ("\\.h\\'" . c++-mode)
+    :config
+    (require 'cqql)
+    (bind-key "<C-return>" #'cqql-c-append-semicolon c-mode-base-map)
+    (bind-key "C-c C-c" #'recompile c-mode-base-map)
+    (bind-key "C-c C-o" #'ff-find-other-file c-mode-base-map)
+    (bind-key "C-c f" #'clang-format-buffer c-mode-base-map)
+
+    (add-hook 'c++-mode-hook #'subword-mode))
+#+END_SRC
+
+*** Style Guide
+
+#+BEGIN_SRC emacs-lisp
+  (use-package google-c-style
+    :demand t
+    :config
+    (add-hook 'c-mode-common-hook #'google-set-c-style))
+#+END_SRC
+
+*** Build Tools
+
+#+BEGIN_SRC emacs-lisp
+  (use-package cmake-mode)
+#+END_SRC
+
+*** Irony
+
+#+BEGIN_SRC emacs-lisp
+  (use-package irony
+    :config
+    (add-hook 'c++-mode-hook #'irony-mode)
+    (add-hook 'c-mode-hook #'irony-mode)
+
+    (add-hook 'irony-mode-hook #'irony-cdb-autosetup-compile-options)
+
+    (require 'irony-eldoc)
+    (add-hook 'irony-mode-hook #'eldoc-mode)
+    (add-hook 'irony-mode-hook #'irony-eldoc)
+
+    (require 'company-irony)
+    (require 'company-irony-c-headers)
+    (add-to-list 'company-backends (list #'company-irony
+                                         #'company-irony-c-headers)))
+#+END_SRC
+
+** Shell
+
+#+BEGIN_SRC emacs-lisp
+  (use-package sh-script
+    :mode ("PKGBUILD\\'" . sh-mode)
+    :config  (setq-default sh-basic-offset 2))
+#+END_SRC
+
+** Lua
+
+#+BEGIN_SRC emacs-lisp
+  (use-package lua-mode
+    :config
+    (setq lua-indent-level 2))
+#+END_SRC
+
+* Text Formats
+
+** LaTeX
+
+#+BEGIN_SRC emacs-lisp
+  (use-package tex-mode
+    :mode ("\\.tex\\'" . LaTeX-mode)
+    :config
+    ;; Workaround for smartparens overwriting `
+    (require 'smartparens-latex)
+
+    (require 'latex)
+    (require 'tex-site)
+    (require 'preview)
+
+    (require 'cqql)
+    (bind-key "<C-return>" #'cqql-latex-append-line-break TeX-mode-map)
+
+    (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
+    (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+    (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
+#+END_SRC
+
+LaTeX tables are really horrible to create and edit for most simple
+use-cases. But ~org-mode~ comes to our rescue. Simply enabling ~org-table-mode~
+gives you automatically resizing ASCII tables everywhere and you can even export
+them to LaTeX!
+
+#+BEGIN_SRC emacs-lisp
+    (add-hook 'LaTeX-mode-hook #'orgtbl-mode)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+    (add-hook 'LaTeX-mode-hook (lambda () (setq word-wrap t)))
+
+    (add-hook 'LaTeX-mode-hook
+              (lambda ()
+                (setq TeX-electric-sub-and-superscript t
+                      TeX-save-query nil
+                      TeX-view-program-selection '((output-pdf "Okular"))
+                      ;; Otherwise minted can't find pygments
+                      TeX-command-extra-options "-shell-escape"))))
+#+END_SRC
+
+** org
+
+#+BEGIN_SRC emacs-lisp
+  (defun cqql-open-notes-file ()
+    "Open the default org file."
+    (interactive)
+    (find-file (concat org-directory
+                       "/"
+                       org-default-notes-file)))
+
+  (use-package org
+    :init
+    (setf org-directory "~/notes"
+          org-agenda-files (list org-directory)
+          org-default-notes-file "notes.org"
+          org-crypt-key nil
+          org-tags-exclude-from-inheritance (list "crypt")
+          org-startup-indented t
+          org-M-RET-may-split-line nil
+          org-enforce-todo-dependencies t
+          org-enforce-todo-checkbox-dependencies t
+          org-agenda-start-on-weekday nil)
+
+    :config
+    (require 'org-crypt)
+    (org-crypt-use-before-save-magic)
+
+    ;; Configure org-babel
+    (setf org-src-fontify-natively t
+          org-babel-load-languages '((emacs-lisp . t)
+                                     (python . t)
+                                     (sh . t)))
+
+    ;; Load language support
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     org-babel-load-languages))
+#+END_SRC
+
+Use some nice UTF-8 symbols to signify the nesting depth.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-bullets
+    :config
+    (add-hook 'org-mode-hook 'org-bullets-mode))
+#+END_SRC
+
+** reStructuredText
+
+#+BEGIN_SRC emacs-lisp
+  (defun cqql-length-of-line ()
+    "Return length of the current line."
+    (save-excursion
+      (- (progn (end-of-line) (point))
+         (progn (beginning-of-line) (point)))))
+
+  (defun cqql-underline ()
+    "Repeat the character at point until it stretches the length of
+    the previous line."
+    (interactive)
+    (let* ((char (preceding-char))
+           (prev-length (save-excursion
+                          (forward-line -1)
+                          (cqql-length-of-line)))
+           (curr-length (save-excursion
+                          (cqql-length-of-line)))
+           (repeat-length (max 0 (- prev-length curr-length))))
+      (insert (s-repeat repeat-length (char-to-string char)))))
+
+  (use-package rst
+    :config
+    (bind-key "<C-right>" #'cqql-underline rst-mode-map))
+#+END_SRC
+
+** YAML
+
+#+BEGIN_SRC emacs-lisp
+  (use-package yaml-mode)
+#+END_SRC
