@@ -329,27 +329,11 @@ in a condensed format.
 ** File Management
 
 #+BEGIN_SRC emacs-lisp
-  (defun cqql-dired-jump-to-first-file ()
-    (interactive)
-    (goto-char (point-min))
-    (dired-next-line 4))
-
-  (defun cqql-dired-jump-to-last-file ()
-    (interactive)
-    (goto-char (point-max))
-    (dired-next-line -1))
-
   (use-package dired
     :config
     (setf dired-listing-switches "-lahv")
 
-    (bind-key "M-w" #'wdired-change-to-wdired-mode dired-mode-map)
-
-    (define-key dired-mode-map
-      [remap beginning-of-buffer] 'cqql-dired-jump-to-first-file)
-
-    (define-key dired-mode-map
-      [remap end-of-buffer] 'cqql-dired-jump-to-last-file))
+    (bind-key "M-w" #'wdired-change-to-wdired-mode dired-mode-map))
 #+END_SRC
 
 ~dired-jump~ from ~dired-x~ is probably my most used ~dired~ command.
@@ -437,6 +421,14 @@ Quickly move to every word and character on screen.
   (use-package avy
     :bind (("M-s" . avy-goto-word-or-subword-1)
            ("M-S" . avy-goto-char-2)))
+#+END_SRC
+
+Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package beginend
+    :config
+    (beginend-global-mode))
 #+END_SRC
 
 * Code Intelligence
