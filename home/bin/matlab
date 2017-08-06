@@ -1,4 +1,0 @@
-#!/bin/sh
-
-# Without this flag matlab crashes if you start it from a command prompt
-~/matlab/bin/matlab -desktop
