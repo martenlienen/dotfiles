@@ -101,6 +101,9 @@
 (quelpa 'anaconda-mode)
 (quelpa 'company-anaconda)
 
+;; Anything web related
+(quelpa 'web-mode)
+
 ;; Javascript
 (quelpa 'js2-mode)
 (quelpa 'js2-refactor)
