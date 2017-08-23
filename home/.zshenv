@@ -14,7 +14,7 @@ eval "$(pyenv virtualenv-init -)"
 export PATH="$HOME/.cask/bin:$PATH"
 
 # Make my utilities available on PATH
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Android SDK
 export PATH="/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$PATH"
