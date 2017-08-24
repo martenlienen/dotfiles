@@ -21,10 +21,3 @@ export PATH="/opt/android-sdk/tools:/opt/android-sdk/platform-tools:$PATH"
 
 # Set editor
 export EDITOR="vim"
-
-# Use emacs for gems
-export BUNDLER_EDITOR="emacs"
-
-# Improve performance in ruby dev environment
-export RUBY_GC_MALLOC_LIMIT=90000000
-export RUBY_GC_HEAP_FREE_SLOTS=200000
