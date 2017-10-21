@@ -6,3 +6,6 @@ tags
 
 # Emacs backups
 .#*
+
+# Python virtualenv settings
+.python-version
