@@ -1,6 +1,3 @@
-# Add installed haskell binaries to PATH
-export PATH="$HOME/.cabal/bin:$PATH"
-
 # Initialize rustup
 export PATH="$HOME/.cargo/bin:$PATH"
 
