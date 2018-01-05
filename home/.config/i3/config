@@ -110,13 +110,13 @@ bindsym $mod+a focus parent
 set $mode_german "German: [a] ä  [u] ü  [o]  ö  [s]  ß"
 bindsym $mod+space mode $mode_german
 mode $mode_german {
-    bindsym --release a $run "xdotool type ä"; mode "default"
-    bindsym --release shift+a $run "xdotool type Ä"; mode "default"
-    bindsym --release o $run "xdotool type ö"; mode "default"
-    bindsym --release shift+o $run "xdotool type Ö"; mode "default"
-    bindsym --release u $run "xdotool type ü"; mode "default"
-    bindsym --release shift+u $run "xdotool type Ü"; mode "default"
-    bindsym --release s $run "xdotool type ß"; mode "default"
+    bindsym --release a $run "xdotool getactivewindow windowactivate --sync type 'ä'"; mode "default"
+    bindsym --release shift+a $run "xdotool getactivewindow windowactivate --sync type 'Ä'"; mode "default"
+    bindsym --release o $run "xdotool getactivewindow windowactivate --sync type 'ö'"; mode "default"
+    bindsym --release shift+o $run "xdotool getactivewindow windowactivate --sync type 'Ö'"; mode "default"
+    bindsym --release u $run "xdotool getactivewindow windowactivate --sync type 'ü'"; mode "default"
+    bindsym --release shift+u $run "xdotool getactivewindow windowactivate --sync type 'Ü'"; mode "default"
+    bindsym --release s $run "xdotool getactivewindow windowactivate --sync type 'ß'"; mode "default"
 
     bindsym Ctrl+g mode "default"
 }
