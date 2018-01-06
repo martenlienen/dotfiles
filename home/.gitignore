@@ -9,3 +9,8 @@ tags
 
 # Python virtualenv settings
 .python-version
+
+# IntelliJ files
+*.iml
+.idea
+local.properties
