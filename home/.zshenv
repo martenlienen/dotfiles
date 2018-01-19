@@ -12,3 +12,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Set editor
 export EDITOR="vim"
+
+# Use the system libstdc++ because the emulator won't start otherwise
+export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
