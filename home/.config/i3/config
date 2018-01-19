@@ -30,8 +30,9 @@ hide_edge_borders both
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
-# Float the seafile applet
+# Float various programs
 for_window [class="Seafile Client"] floating enable
+for_window [title="^Android Emulator"] floating enable
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
