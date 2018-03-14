@@ -67,6 +67,9 @@
 
   ;; Disable tramp and GPG keys for performance
   (setq file-name-handler-alist nil)
+
+  ;; I do not like accidentally freezing my emacs instance
+  (global-set-key (kbd "C-z") nil)
 #+END_SRC
 
 Automatically jump to origin file and line when an the point is on an error.
