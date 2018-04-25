@@ -153,8 +153,8 @@ programming="git vim emacs the_silver_searcher"
 # Web
 web="firefox chromium"
 
-pacaur -S --needed $xorg $dm $wm $network $sound $security $screenshot $shell \
-       $crypto $utils $netutils $programming $web
+pacaur -S --needed --noconfirm $xorg $dm $wm $network $sound $security \
+       $screenshot $shell $crypto $utils $netutils $programming $web
 
 # Start desktop manager on boot
 sudo systemctl enable lightdm.service
