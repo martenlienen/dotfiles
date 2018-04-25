@@ -121,7 +121,7 @@ xorg="xorg-server xorg-xrdb xorg-xrandr xorg-xmodmap xorg-xev"
 dm="lightdm lightdm-gtk-greeter light-git"
 
 # Window manager
-wm="i3 rlwrap rofi autorandr-git"
+wm="i3-wm i3lock i3status rlwrap rofi autorandr-git"
 
 # Sound control
 sound="pulseaudio pulseaudio-alsa pavucontrol"
