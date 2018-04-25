@@ -79,7 +79,7 @@ task :user_services do
   sh <<END
 systemctl --user daemon-reload
 systemctl --user enable mute-on-suspend.service
-systemctl --user enable physlock.service
+systemctl --user enable lock-screen.service
 END
 end
 
@@ -166,16 +166,6 @@ sudo systemctl start firehol.service
 # Trigger user services on suspend
 sudo systemctl daemon-reload
 sudo systemctl enable user-suspend@#{`id -u ${ENV["USER"]}`.strip}.service
-END
-end
-
-task :lock_screen => :pacaur do
-  sh <<END
-# Install package
-pacaur -S --needed physlock
-
-# Lock on suspend
-sudo systemctl enable physlock@#{ENV["USER"]}.service
 END
 end
 

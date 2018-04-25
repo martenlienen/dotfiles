@@ -48,7 +48,7 @@ bindsym XF86AudioMute $run pactl set-sink-mute 0 toggle
 bindsym XF86AudioLowerVolume $run amixer -D pulse set Master 5%-
 bindsym XF86AudioRaiseVolume $run amixer -D pulse set Master 5%+
 bindsym $mod+F8 $run togglexkbmap
-bindsym $mod+F9 $run physlock
+bindsym $mod+F9 $run lock-screen.sh
 bindsym $mod+F10 $run systemctl poweroff
 bindsym $mod+F11 $run systemctl reboot
 bindsym $mod+F12 $run systemctl suspend
