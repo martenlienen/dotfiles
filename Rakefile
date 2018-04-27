@@ -170,7 +170,7 @@ END
 end
 
 task :system_conf do
-  sh "sudo cp --recursive --force --preserve etc usr /"
+  sh "sudo cp --recursive --force --preserve=mode etc usr /"
 end
 
 desc "Enable lingering for user-level systemd services"
