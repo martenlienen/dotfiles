@@ -1,5 +1,10 @@
 # My zsh theme adapted from zeta-theme [1]
 #
+# It is optimized for performance because losing 100ms just for prompt rendering
+# is useless and wasteful. This means that function and program calls are
+# minimized. So everything is in a single function and it uses the built-in
+# print instead of echo.
+#
 # [1]: https://github.com/skylerlee/zeta-zsh-theme
 
 local black=$fg[black]
@@ -24,102 +29,39 @@ local highlight_bg=$bg[red]
 
 local zeta='ζ'
 
-# Machine name.
-function get_box_name {
-    if [ -f ~/.box-name ]; then
-        cat ~/.box-name
-    else
-        echo $HOST
-    fi
-}
-
-# User name.
-function get_usr_name {
-    local name="%n"
-    if [[ "$USER" == 'root' ]]; then
-        name="%{$highlight_bg%}%{$white_bold%}$name%{$reset_color%}"
-    fi
-    echo $name
-}
-
-# Directory info.
-function get_current_dir {
-    echo "${PWD/#$HOME/~}"
-}
-
 # Git info.
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$blue_bold%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$green_bold%} ✔ "
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$red_bold%} ✘ "
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$green_bold%} ✔"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$red_bold%} ✘"
 
-# Git status.
-ZSH_THEME_GIT_PROMPT_ADDED="%{$green_bold%}+"
-ZSH_THEME_GIT_PROMPT_DELETED="%{$red_bold%}-"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$magenta_bold%}*"
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$blue_bold%}>"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$cyan_bold%}="
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$yellow_bold%}?"
+function get_prompt {
+  local user="%n"
+  if [[ "$USER" == "root" ]]; then
+    user="%{$highlight_bg%}%{$white_bold%}$user%{$reset_color%}"
+  fi
 
-# Git sha.
-ZSH_THEME_GIT_PROMPT_SHA_BEFORE="[%{$yellow%}"
-ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$reset_color%}]"
+  local git_info=""
+  if [[ -n $(git rev-parse --is-inside-work-tree 2>/dev/null) ]]; then
+    git_info=" <$(git_prompt_info)>"
+  fi
 
-function get_git_prompt {
-    if [[ -n $(git rev-parse --is-inside-work-tree 2>/dev/null) ]]; then
-        local git_status="$(git_prompt_status)"
-        if [[ -n $git_status ]]; then
-            git_status="[$git_status%{$reset_color%}]"
-        fi
-        local git_prompt=" <$(git_prompt_info)$git_status>"
-        echo $git_prompt
-    fi
-}
-
-function get_time_stamp {
-    echo "%*"
-}
-
-function get_space {
-    local str=$1$2
-    local zero='%([BSUbfksu]|([FB]|){*})'
-    local len=${#${(S%%)str//$~zero/}}
-    local size=$(( $COLUMNS - $len - 1 ))
-    local space=""
-    while [[ $size -gt 0 ]]; do
-        space="$space "
-        let size=$size-1
-    done
-    echo $space
-}
-
-# Prompt: # USER@MACHINE: DIRECTORY <BRANCH [STATUS]> --- (TIME_STAMP)
-# > command
-function print_prompt_head {
-    local left_prompt="\
+  local directory="${PWD/#$HOME/~}"
+  local timestamp="%*"
+  local info_line="\
 %{$blue%}# \
-%{$green_bold%}$(get_usr_name)\
+%{$green_bold%}$user\
 %{$blue%}@\
-%{$cyan_bold%}$(get_box_name): \
-%{$yellow_bold%}$(get_current_dir)%{$reset_color%}\
-$(get_git_prompt) "
-    # Disable right prompt because it does not adapt on window resize
-    # local right_prompt="%{$blue%}($(get_time_stamp))%{$reset_color%} "
-    # print -rP "$left_prompt$(get_space $left_prompt $right_prompt)$right_prompt"
-    print -rP "$left_prompt"
+%{$cyan_bold%}$HOST: \
+%{$yellow_bold%}$directory%{$reset_color%}\
+$git_info %{$blue%}($timestamp)%{$reset_color%}"
+
+  local prompt_color="%{$magenta_bold%}"
+  if [[ $? -ne 0 ]]; then
+    prompt_color="%{$red_bold%}"
+  fi
+
+  print -P "$info_line\n$prompt_color$zeta %{$reset_color%}"
 }
 
-function get_prompt_indicator {
-    if [[ $? -eq 0 ]]; then
-        echo "%{$magenta_bold%}$zeta %{$reset_color%}"
-    else
-        echo "%{$red_bold%}$zeta %{$reset_color%}"
-    fi
-}
-
-autoload -U add-zsh-hook
-add-zsh-hook precmd print_prompt_head
-setopt prompt_subst
-
-PROMPT='$(get_prompt_indicator)'
-RPROMPT='%{$blue%}($(get_time_stamp))%{$reset_color%}'
+PROMPT='$(get_prompt)'
