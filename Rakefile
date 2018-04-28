@@ -1,6 +1,5 @@
 require "tmpdir"
 require "find"
-require "rake/clean"
 
 def manage_git_repo(path, repo)
   if File.directory?(path + "/.git")
@@ -22,9 +21,13 @@ FILES = Find.find("home")
 ORG_FILES = FileList.new(FILES.select { |f| f.end_with? ".org" })
 ELISP = FileList.new(FILES.select { |f| f.end_with?(".el") })
 ELISP.include(ORG_FILES.ext(".el"))
-ELISP_BYTECODE = ELISP.ext(".elc")
+ELISP.gsub!(/^home/, Dir.home)
 
 task :default => [:dotfiles, :tools, :packages, :user_services]
+
+task :dotfiles do
+  sh "find home -maxdepth 1 -mindepth 1 -exec cp --recursive {} #{Dir.home} \\;"
+end
 
 multitask :tools => [:pyenv, :pyenv_virtualenv, :vim_plug, :antigen]
 
@@ -44,36 +47,34 @@ task :antigen do
   manage_git_repo "#{Dir.home}/.antigen", "https://github.com/zsh-users/antigen.git"
 end
 
-multitask :packages => :vim_packages
+multitask :packages => [:emacs, :vim_packages]
+
+task :emacs => [:quelpa, :compile_elisp]
+
+task :quelpa => :dotfiles do
+  sh "emacs --script home/.emacs.d/quelpa-install.el"
+end
+
+task :compile_elisp do
+  ORG_FILES.each do |f|
+    sh <<END
+emacs --quick --batch --eval \
+      "(progn (require 'ob-tangle) (org-babel-tangle-file \\"#{f}\\"))"
+END
+  end
+
+  ELISP.each do |f|
+    # We are not using --quick because we want to have installed libraries
+    # available
+    sh <<END
+emacs --no-init-file --batch --funcall batch-byte-compile #{f}
+END
+  end
+end
 
 task :vim_packages => [:vim_plug, :dotfiles] do
   sh "vim +PlugUpdate +qall"
 end
-
-task :quelpa do
-  sh "emacs --script home/.emacs.d/quelpa-install.el"
-end
-
-task :dotfiles => [:quelpa] + ELISP_BYTECODE do
-  sh "find home -maxdepth 1 -mindepth 1 -exec cp --recursive {} #{Dir.home} \\;"
-end
-
-rule ".elc" => ".el" do |t|
-  # We are not using --quick because we want to have installed libraries
-  # available
-  sh <<END
-emacs --no-init-file --batch --funcall batch-byte-compile #{t.source}
-END
-end
-CLEAN.include(ELISP_BYTECODE)
-
-rule ".el" => ".org" do |t|
-  sh <<END
-emacs --quick --batch --eval \
-      "(progn (require 'ob-tangle) (org-babel-tangle-file \\"#{t.source}\\" \\"#{t.name}\\"))"
-END
-end
-CLEAN.include(ORG_FILES.ext(".el"))
 
 task :user_services do
   sh <<END
