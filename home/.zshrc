@@ -6,16 +6,18 @@ DISABLE_AUTO_UPDATE="true"
 # Add local completions. compinit is called by antigen already
 fpath+=~/.local/zsh
 
+# Use omz for git primitives
 antigen use oh-my-zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-history-substring-search
 
-antigen theme steeef
-
 # Ensure all dependencies are installed
 antigen apply
+
+# Load my theme
+. ~/.local/zsh/cqql.zsh
 
 # Use emacs bindings on the command line
 bindkey -e
