@@ -3,6 +3,9 @@
 # omz should not update itself
 DISABLE_AUTO_UPDATE="true"
 
+# Add local completions. compinit is called by antigen already
+fpath+=~/.local/zsh
+
 antigen use oh-my-zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
