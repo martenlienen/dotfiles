@@ -61,7 +61,7 @@ $git_info %{$blue%}($timestamp)%{$reset_color%}"
     prompt_color="%{$red_bold%}"
   fi
 
-  print -P "$info_line\n$prompt_color$zeta %{$reset_color%}"
+  print "$info_line\n$prompt_color$zeta %{$reset_color%}"
 }
 
 PROMPT='$(get_prompt)'
