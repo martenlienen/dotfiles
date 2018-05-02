@@ -842,7 +842,7 @@ them to LaTeX!
     (setf org-src-fontify-natively t
           org-babel-load-languages '((emacs-lisp . t)
                                      (python . t)
-                                     (sh . t)))
+                                     (shell . t)))
 
     ;; Load language support
     (org-babel-do-load-languages
