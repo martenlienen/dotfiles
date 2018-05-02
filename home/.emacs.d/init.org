@@ -83,7 +83,8 @@ Automatically jump to origin file and line when an the point is on an error.
 Initialize quelpa to put the installed packages on the load path.
 
 #+BEGIN_SRC emacs-lisp
-  (eval-and-compile
+  ;; Make installed packages available for compilation
+  (eval-when-compile
     (package-initialize))
 
   (require 'quelpa)
