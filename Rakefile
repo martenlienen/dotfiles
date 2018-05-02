@@ -21,6 +21,7 @@ FILES = Find.find("home")
 ORG_FILES = FileList.new(FILES.select { |f| f.end_with? ".org" })
 ELISP = FileList.new(FILES.select { |f| f.end_with?(".el") })
 ELISP.include(ORG_FILES.ext(".el"))
+ORG_FILES.gsub!(/^home/, Dir.home)
 ELISP.gsub!(/^home/, Dir.home)
 
 task :default => [:dotfiles, :tools, :packages, :user_services]
