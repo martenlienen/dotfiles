@@ -27,6 +27,9 @@ task :default => [:dotfiles, :tools, :packages, :user_services]
 
 task :dotfiles do
   sh "find home -maxdepth 1 -mindepth 1 -exec cp --recursive {} #{Dir.home} \\;"
+
+  # Update the font cache
+  sh "fc-cache"
 end
 
 multitask :tools => [:pyenv, :pyenv_virtualenv, :vim_plug, :antigen]

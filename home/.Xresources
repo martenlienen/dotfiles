@@ -1,5 +1,5 @@
 URxvt*jumpScroll: False
-URxvt*font: xft:Source Code Pro:size=11
+URxvt*font: xft:Source Code Variable:size=11
 URxvt*scrollBar: False
 URxvt*scollTtyOutput: False
 URxvt*scollWithBuffer: True
@@ -9,7 +9,7 @@ Emacs.menuBar: off
 Emacs.toolBar: off
 Emacs.verticalScrollBars: off
 Emacs.horizontalScrollBars: off
-Emacs.font: Source Code Pro-11
+Emacs.font: Source Code Variable-11
 
 ! Base16 Eighties
 ! Scheme: Chris Kempson (http://chriskempson.com)
@@ -84,7 +84,7 @@ rofi.color-window: #ffffff,#f5f5f5
 ! Separator style (none, dash, solid)
 rofi.separator-style: solid
 
-rofi.font: Source Code Pro 11
+rofi.font: Source Code Variable 11
 rofi.hide-scrollbar: true
 
 ! Emacs bindings
