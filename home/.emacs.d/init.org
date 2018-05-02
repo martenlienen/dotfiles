@@ -233,7 +233,7 @@ in a condensed format.
     :bind ("C-h C-m" . discover-my-major))
 #+END_SRC
 
-** COMMENT Better Selection
+** Better Selection
 
 ~ivy/swiper~ is a light-weight completion front end for emacs.
 
