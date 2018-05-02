@@ -90,12 +90,6 @@
 (quelpa 'company-irony-c-headers)
 (quelpa 'clang-format)
 
-;; Haskell
-(quelpa 'haskell-mode)
-(quelpa 'shm)
-(quelpa 'ghc)
-(quelpa 'ghci-completion)
-
 ;; Python
 (quelpa 'pyenv-mode)
 (quelpa 'anaconda-mode)
