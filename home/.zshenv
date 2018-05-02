@@ -15,3 +15,8 @@ export EDITOR="vim"
 
 # Use the system libstdc++ because the emulator won't start otherwise
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
+
+# Read system-local settings
+if [[ -x ~/.local/zshenv ]]; then
+  . ~/.local/zshenv
+fi
