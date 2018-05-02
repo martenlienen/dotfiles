@@ -62,7 +62,7 @@ set $mode_launcher "Launch: [f]irefox [c]hromium [s]potify [n]etflix [e]macs [p]
 bindsym $mod+o mode $mode_launcher
 mode $mode_launcher {
     bindsym f exec firefox; mode "default"
-    bindsym c exec chromium; mode "default"
+    bindsym c exec chrome-runner.sh; mode "default"
     bindsym s exec spotify; mode "default"
     bindsym n exec google-chrome-stable https://netflix.com; mode "default"
     bindsym e exec emacs; mode "default"
