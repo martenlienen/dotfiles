@@ -58,7 +58,7 @@ task :quelpa => :dotfiles do
   sh "emacs --script home/.emacs.d/quelpa-install.el"
 end
 
-task :compile_elisp do
+task :compile_elisp => :dotfiles do
   ORG_FILES.each do |f|
     sh <<END
 emacs --quick --batch --eval \
