@@ -47,7 +47,7 @@
 (quelpa 'dictcc)
 
 ;; UI
-(quelpa 'ample-theme)
+(quelpa 'color-theme-sanityinc-tomorrow)
 (quelpa 'smart-mode-line)
 (quelpa 'rainbow-delimiters)
 (quelpa 'shackle)

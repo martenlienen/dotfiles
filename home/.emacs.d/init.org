@@ -191,7 +191,7 @@ key maps.
 ** Theme
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'ample t)
+  (load-theme 'sanityinc-tomorrow-eighties t)
 #+END_SRC
 
 ** Mode Line
