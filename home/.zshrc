@@ -23,8 +23,36 @@ unsetopt correct
 # Do not block on Ctrl-S
 stty -ixon
 
+# Interpret directories as cd-ing into them
+setopt AUTO_CD
+
+# Quick cd-ing to parent directories
+alias ...='../..'
+alias ....='../../..'
+alias .....='../../../..'
+alias ......='../../../../..'
+
+# Alternate cd to the last directory
+alias -- -='cd -'
+
+# Share history between terminals
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+
+# Do not put the history command in the history
+setopt HIST_NO_STORE
+
+# Strip whitespace
+setopt HIST_REDUCE_BLANKS
+
 # Uniquify history
 setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_EXPIRE_DUPS_FIRST
+
+# File and limits
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=10000
 
 # Use substring search
 bindkey -M emacs "^P" history-substring-search-up
