@@ -4,8 +4,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Initialize pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - --no-rehash)"
-eval "$(pyenv virtualenv-init -)"
+. ~/.local/zsh/pyenv.zsh
 
 # Make my utilities available on PATH
 export PATH="$HOME/.local/bin:$PATH"
