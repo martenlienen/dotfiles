@@ -59,12 +59,12 @@ function get_prompt {
 %{$yellow_bold%}$directory%{$reset_color%}\
 $git_info %{$blue%}($timestamp)%{$reset_color%}"
 
-  local prompt_color="%{$magenta_bold%}"
+  local prompt_char="%{$magenta_bold%}$zeta"
   if [[ $last_cmd_status -ne 0 ]]; then
-    prompt_color="%{$red_bold%}"
+    prompt_char="%{$red_bold%}!"
   fi
 
-  print "$info_line\n$prompt_color$zeta %{$reset_color%}"
+  print "$info_line\n$prompt_char%{$reset_color%} "
 }
 
 PROMPT='$(get_prompt)'
