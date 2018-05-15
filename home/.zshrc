@@ -1,14 +1,9 @@
 . ~/.antigen/antigen.zsh
 
-# omz should not update itself
-DISABLE_AUTO_UPDATE="true"
-
 # Add local completions. compinit is called by antigen already
 fpath+=~/.local/zsh
 
-# Use omz for git primitives
-antigen use oh-my-zsh
-
+# Install plugins
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-history-substring-search

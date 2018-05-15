@@ -7,6 +7,10 @@
 #
 # [1]: https://github.com/skylerlee/zeta-zsh-theme
 
+# Load zsh color definitions
+autoload -U colors
+colors
+
 local black=$fg[black]
 local red=$fg[red]
 local blue=$fg[blue]
@@ -29,11 +33,30 @@ local highlight_bg=$bg[red]
 
 local zeta='ζ'
 
-# Git info.
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$blue_bold%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$green_bold%} ✔"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$red_bold%} ✘"
+# The following two functions have been taken from oh-my-zsh so that I can avoid
+# loading all the rest of it. Saves 0.05s on every shell start.
+#
+# Outputs current branch info in prompt format
+function git_prompt_info() {
+  local ref
+  ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
+  echo "%{$blue_bold%}${ref#refs/heads/}$(parse_git_dirty)%{$reset_color%}"
+}
+
+# Checks if working tree is dirty
+function parse_git_dirty() {
+  local STATUS=''
+  local -a FLAGS=('--porcelain' '--ignore-submodules=dirty')
+
+  STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
+
+  if [[ -n $STATUS ]]; then
+    echo "%{$red_bold%} ✘"
+  else
+    echo "%{$green_bold%} ✔"
+  fi
+}
 
 function get_prompt {
   # Store the exit code of the last command before overwriting it by running git
@@ -66,5 +89,8 @@ $git_info %{$blue%}($timestamp)%{$reset_color%}"
 
   print "$info_line\n$prompt_char%{$reset_color%} "
 }
+
+# Enable prompt substitution
+setopt promptsubst
 
 PROMPT='$(get_prompt)'
