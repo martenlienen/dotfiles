@@ -272,13 +272,6 @@ in a condensed format.
 
 ** Highlighting
 
-*** Color Strings
-
-#+BEGIN_SRC emacs-lisp
-  (use-package rainbow-mode
-    :config (add-hook 'after-change-major-mode-hook 'rainbow-mode))
-#+END_SRC
-
 *** Delimiter
 
 #+BEGIN_SRC emacs-lisp

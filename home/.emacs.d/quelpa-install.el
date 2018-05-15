@@ -51,7 +51,6 @@
 (quelpa 'smart-mode-line)
 (quelpa 'rainbow-delimiters)
 (quelpa 'shackle)
-(quelpa 'rainbow-mode)
 (quelpa 'highlight-symbol)
 (quelpa 'discover-my-major)
 
