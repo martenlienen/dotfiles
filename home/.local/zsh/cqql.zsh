@@ -36,6 +36,9 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$green_bold%} ✔"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$red_bold%} ✘"
 
 function get_prompt {
+  # Store the exit code of the last command before overwriting it by running git
+  local last_cmd_status=$?
+
   local user="%n"
   if [[ "$USER" == "root" ]]; then
     user="%{$highlight_bg%}%{$white_bold%}$user%{$reset_color%}"
@@ -57,7 +60,7 @@ function get_prompt {
 $git_info %{$blue%}($timestamp)%{$reset_color%}"
 
   local prompt_color="%{$magenta_bold%}"
-  if [[ $? -ne 0 ]]; then
+  if [[ $last_cmd_status -ne 0 ]]; then
     prompt_color="%{$red_bold%}"
   fi
 
