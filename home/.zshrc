@@ -54,6 +54,9 @@ setopt HIST_EXPIRE_DUPS_FIRST
 HISTSIZE=50000
 SAVEHIST=10000
 
+# Autocomplete case-insensitive for lowercase patterns and partial matches
+zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}" "r:|=*" "l:|=* r:|=*"
+
 # Use substring search
 bindkey -M emacs "^P" history-substring-search-up
 bindkey -M emacs "^N" history-substring-search-down
