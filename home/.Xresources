@@ -1,5 +1,5 @@
 URxvt*jumpScroll: False
-URxvt*font: xft:Fantasque Sans Mono:size=13
+URxvt*font: xft:Fantasque Sans Mono:size=13:hinting=false
 URxvt*scrollBar: False
 URxvt*scollTtyOutput: False
 URxvt*scollWithBuffer: True
