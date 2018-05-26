@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pub
+# key: p
+# --
+pub $0

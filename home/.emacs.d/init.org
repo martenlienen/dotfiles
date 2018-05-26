@@ -764,6 +764,24 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
     (setq lua-indent-level 2))
 #+END_SRC
 
+** Rust
+
+#+BEGIN_SRC emacs-lisp
+  (use-package rust-mode
+    :config
+    (add-hook 'rust-mode-hook #'flycheck-mode)
+    (add-hook 'rust-mode-hook #'racer-mode)
+    (add-hook 'rust-mode-hook #'cargo-minor-mode))
+
+  (use-package racer
+    :config
+    (add-hook 'racer-mode-hook #'eldoc-mode))
+
+  (use-package flycheck
+    :config
+    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+#+END_SRC
+
 * Text Formats
 
 ** LaTeX

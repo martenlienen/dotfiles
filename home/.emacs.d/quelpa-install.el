@@ -102,6 +102,9 @@
 
 ;; Rust
 (quelpa 'rust-mode)
+(quelpa 'racer)
+(quelpa 'cargo)
+(quelpa 'flycheck-rust)
 
 ;; LaTeX
 (quelpa 'auctex)

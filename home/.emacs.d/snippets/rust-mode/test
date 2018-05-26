@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: test
+# key: test
+# --
+#[test]
+pub fn $1() {
+    $0
+}
