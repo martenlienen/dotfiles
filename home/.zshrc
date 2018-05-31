@@ -57,6 +57,9 @@ SAVEHIST=10000
 # Autocomplete case-insensitive for lowercase patterns and partial matches
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}" "r:|=*" "l:|=* r:|=*"
 
+# Accept / as a word separator
+WORDCHARS=$(echo $WORDCHARS | sed -e 's:/::')
+
 # Use substring search
 bindkey -M emacs "^P" history-substring-search-up
 bindkey -M emacs "^N" history-substring-search-down
