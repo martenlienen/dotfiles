@@ -87,7 +87,7 @@ Initialize quelpa to put the installed packages on the load path.
 
 #+BEGIN_SRC emacs-lisp
   ;; Make installed packages available for compilation
-  (eval-when-compile
+  (eval-and-compile
     (package-initialize))
 
   (require 'quelpa)
