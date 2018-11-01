@@ -1,3 +1,0 @@
-[Unit]
-Description=This is started when the system is suspended
-StopWhenUnneeded=yes

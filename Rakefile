@@ -24,7 +24,7 @@ ELISP.include(ORG_FILES.ext(".el"))
 ORG_FILES.gsub!(/^home/, Dir.home)
 ELISP.gsub!(/^home/, Dir.home)
 
-task :default => [:dotfiles, :tools, :packages, :user_services]
+task :default => [:dotfiles, :tools, :packages]
 
 task :dotfiles do
   sh "find home -maxdepth 1 -mindepth 1 -exec cp --recursive --preserve=mode {} #{Dir.home} \\;"
@@ -83,15 +83,7 @@ task :vim_packages => [:vim_plug, :dotfiles] do
   sh "vim +PlugUpdate +qall"
 end
 
-task :user_services do
-  sh <<END
-systemctl --user daemon-reload
-systemctl --user enable mute-on-suspend.service
-systemctl --user enable lock-screen.service
-END
-end
-
-task :system => [:pacaur, :system_packages, :system_conf, :lingering]
+task :system => [:pacaur, :system_packages, :system_conf]
 
 task :pacaur do
   if not system("pacman -Q pacaur")
@@ -122,20 +114,20 @@ end
 
 task :system_packages => [:pacaur, :system_conf] do
   sh <<END
-# XOrg packages
-xorg="xorg-server xorg-xrdb xorg-xrandr xorg-xmodmap xorg-xev"
-
 # Desktop manager
-dm="lightdm lightdm-gtk-greeter light-git"
+dm="sddm sddm-theme-kde-plasma-chili"
 
-# Window manager
-wm="i3-wm i3lock i3status rlwrap rofi autorandr-git"
+# Desktop environment
+de="plasma kdebase"
 
-# Sound control
-sound="pulseaudio pulseaudio-alsa pavucontrol"
+# Desktop Utilities
+de_utils="ulauncher"
 
-# Network suite
-network="networkmanager network-manager-applet"
+# Fonts
+fonts="ttf-fira-sans ttf-fira-mono ttf-fira-code"
+
+# Fix for bluetooth speakers
+audio="pulseaudio-bluetooth"
 
 # Security
 security="firehol"
@@ -161,27 +153,20 @@ programming="git vim emacs the_silver_searcher"
 # Web
 web="firefox chromium"
 
-pacaur -S --needed --noconfirm $xorg $dm $wm $network $sound $security \
+pacaur -S --needed --noconfirm $dm $de $de_utils $fonts $audio $security \
        $screenshot $shell $crypto $utils $netutils $programming $web
 
 # Start desktop manager on boot
-sudo systemctl enable lightdm.service
+sudo systemctl enable sddm.service
+
+# Connect to the internet
+sudo systemctl enable NetworkManager.service
 
 # Autostart the firewall
 sudo systemctl enable firehol.service
-sudo systemctl start firehol.service
-
-# Trigger user services on suspend
-sudo systemctl daemon-reload
-sudo systemctl enable user-suspend@#{`id -u ${ENV["USER"]}`.strip}.service
 END
 end
 
 task :system_conf do
   sh "sudo cp --recursive --force --preserve=mode etc usr /"
-end
-
-desc "Enable lingering for user-level systemd services"
-task :lingering do
-  sh "sudo loginctl enable-linger #{ENV["USER"]}"
 end

@@ -4,6 +4,9 @@ URxvt*scrollBar: False
 URxvt*scollTtyOutput: False
 URxvt*scollWithBuffer: True
 URxvt*scollTtyKeypress: True
+URxvt*internalBorder: 10px
+! Remove a black border around the window in WMs that respect size hints
+URxvt*externalBorder: 10px
 
 Emacs.menuBar: off
 Emacs.toolBar: off
