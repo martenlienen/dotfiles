@@ -749,14 +749,6 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
     :config  (setq-default sh-basic-offset 2))
 #+END_SRC
 
-** Lua
-
-#+BEGIN_SRC emacs-lisp
-  (use-package lua-mode
-    :config
-    (setq lua-indent-level 2))
-#+END_SRC
-
 ** Rust
 
 #+BEGIN_SRC emacs-lisp

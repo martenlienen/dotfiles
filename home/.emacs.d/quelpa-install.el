@@ -96,9 +96,6 @@
 (quelpa 'js2-mode)
 (quelpa 'js2-refactor)
 
-;; Lua
-(quelpa 'lua-mode)
-
 ;; Rust
 (quelpa 'rust-mode)
 (quelpa 'racer)
