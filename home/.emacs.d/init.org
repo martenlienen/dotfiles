@@ -81,24 +81,19 @@ Automatically jump to origin file and line when an the point is on an error.
   (add-hook 'compilation-mode-hook #'next-error-follow-minor-mode)
 #+END_SRC
 
-* Quelpa
-
-Initialize quelpa to put the installed packages on the load path.
-
-#+BEGIN_SRC emacs-lisp
-  ;; Make installed packages available for compilation
-  (eval-and-compile
-    (package-initialize))
-
-  (require 'quelpa)
-#+END_SRC
-
 * Packages
 
 Packages are configured with the ~use-package~ macro.
 
 #+BEGIN_SRC emacs-lisp
-  (require 'use-package)
+  ;; Make installed packages available for compilation as well as evaluation
+  (eval-and-compile
+    (package-initialize))
+
+  ;; Load use-package to configure packages
+  (eval-when-compile
+    (require 'use-package))
+  (require 'bind-key)
 #+END_SRC
 
 * Tramp Fix
