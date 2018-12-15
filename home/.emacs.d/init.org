@@ -149,13 +149,6 @@ it uses an interactive shell instead of a login one which would not read my
 
 * Key Bindings
 
-~key-chord~ lets you press keys simultaneously to activate often used commands.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package key-chord
-    :config (key-chord-mode t))
-#+END_SRC
-
 While ~hydra~ gives the means to group related functionality into small focused
 key maps.
 

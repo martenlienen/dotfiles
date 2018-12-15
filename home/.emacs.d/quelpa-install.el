@@ -35,7 +35,6 @@
 (quelpa 'wrap-region)
 (quelpa 'centimacro)
 (quelpa 'visual-regexp)
-(quelpa 'key-chord)
 (quelpa 'hydra)
 (quelpa 'beginend)
 
