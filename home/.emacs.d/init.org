@@ -142,41 +142,6 @@ it uses an interactive shell instead of a login one which would not read my
   (exec-path-from-shell-initialize)
 #+END_SRC
 
-* Key Bindings
-
-While ~hydra~ gives the means to group related functionality into small focused
-key maps.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package hydra)
-#+END_SRC
-
-** Global Bindings
-
-#+BEGIN_SRC emacs-lisp
-  (defhydra cqql-multiple-cursors-hydra (:hint nil)
-    "
-       ^Up^            ^Down^        ^Miscellaneous^
-  ----------------------------------------------
-  [_p_]   Next    [_n_]   Next    [_l_] Edit lines
-  [_P_]   Skip    [_N_]   Skip    [_a_] Mark all
-  [_M-p_] Unmark  [_M-n_] Unmark  [_q_] Quit"
-    ("l" mc/edit-lines :exit t)
-    ("a" mc/mark-all-like-this :exit t)
-    ("n" mc/mark-next-like-this)
-    ("N" mc/skip-to-next-like-this)
-    ("M-n" mc/unmark-next-like-this)
-    ("p" mc/mark-previous-like-this)
-    ("P" mc/skip-to-previous-like-this)
-    ("M-p" mc/unmark-previous-like-this)
-    ("q" nil))
-
-  (bind-keys
-    ("M-n" . cqql-multiple-cursors-hydra/body)
-    ;; Bind this to multiple keys because some modes define M-n themselves
-    ("C-c M-n" . cqql-multiple-cursors-hydra/body))
-#+END_SRC
-
 * UI
 
 ** Theme
@@ -342,6 +307,33 @@ in a condensed format.
 #+END_SRC
 
 * Editing
+
+** Multiple Cursors
+
+#+BEGIN_SRC emacs-lisp
+  (use-package multiple-cursors
+    :init
+    (require 'hydra)
+    (defhydra cqql-multiple-cursors-hydra (:hint nil)
+      "
+         ^Up^            ^Down^        ^Miscellaneous^
+    ----------------------------------------------
+    [_p_]   Next    [_n_]   Next    [_l_] Edit lines
+    [_P_]   Skip    [_N_]   Skip    [_a_] Mark all
+    [_M-p_] Unmark  [_M-n_] Unmark  [_q_] Quit"
+      ("l" mc/edit-lines :exit t)
+      ("a" mc/mark-all-like-this :exit t)
+      ("n" mc/mark-next-like-this)
+      ("N" mc/skip-to-next-like-this)
+      ("M-n" mc/unmark-next-like-this)
+      ("p" mc/mark-previous-like-this)
+      ("P" mc/skip-to-previous-like-this)
+      ("M-p" mc/unmark-previous-like-this)
+      ("q" nil))
+    :bind (("M-n" . cqql-multiple-cursors-hydra/body)
+           ;; Bind this to multiple keys because some modes define M-n themselves
+           ("C-c M-n" . cqql-multiple-cursors-hydra/body)))
+#+END_SRC
 
 ** SmartParens
 
