@@ -349,7 +349,10 @@ of functions.
       ("<down-mouse-1>" ignore)
       ("<drag-mouse-1>" ignore)
       ("q" nil))
-    :bind (("C-c m" . hydra-multiple-cursors/body)))
+    :bind (("C-c m" . hydra-multiple-cursors/body)
+           :map mc/keymap
+           ;; Make enter insert a newline instead of quitting mc
+           ("<return>" . nil)))
 #+END_SRC
 
 ** SmartParens
