@@ -326,13 +326,14 @@ of functions.
   (use-package multiple-cursors
     :init
     (require 'hydra)
-    (defhydra cqql-multiple-cursors-hydra (:hint nil)
+    (defhydra hydra-multiple-cursors (:hint nil)
       "
          ^Up^            ^Down^        ^Miscellaneous^
     ----------------------------------------------
     [_p_]   Next    [_n_]   Next    [_l_] Edit lines
     [_P_]   Skip    [_N_]   Skip    [_a_] Mark all
-    [_M-p_] Unmark  [_M-n_] Unmark  [_q_] Quit"
+    [_M-p_] Unmark  [_M-n_] Unmark  [_s_] Search
+    [Click] Cursor at point     [_q_] Quit"
       ("l" mc/edit-lines :exit t)
       ("a" mc/mark-all-like-this :exit t)
       ("n" mc/mark-next-like-this)
@@ -341,10 +342,12 @@ of functions.
       ("p" mc/mark-previous-like-this)
       ("P" mc/skip-to-previous-like-this)
       ("M-p" mc/unmark-previous-like-this)
+      ("s" mc/mark-all-in-region-regexp :exit t)
+      ("<mouse-1>" mc/add-cursor-on-click)
+      ("<down-mouse-1>" ignore)
+      ("<drag-mouse-1>" ignore)
       ("q" nil))
-    :bind (("M-n" . cqql-multiple-cursors-hydra/body)
-           ;; Bind this to multiple keys because some modes define M-n themselves
-           ("C-c M-n" . cqql-multiple-cursors-hydra/body)))
+    :bind (("C-c m" . hydra-multiple-cursors/body)))
 #+END_SRC
 
 ** SmartParens
