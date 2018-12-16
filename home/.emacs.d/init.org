@@ -226,8 +226,7 @@ of functions.
            ("C-s" . swiper)
            ("M-x" . counsel-M-x)
            ("C-x 8" . counsel-unicode-char)
-           ("C-c a" . cqql-counsel-ag-in-project-root)
-           ("C-c M-a" . counsel-ag)
+           ("C-c s" . cqql-counsel-ag-in-project-root)
            ("M-o" . ivy-resume))
     :init
     (setq ivy-count-format "%d/%d "
