@@ -124,43 +124,12 @@ first line of the region to the end of the last."
     (move-end-of-line nil)
     (insert "\\\\")))
 
-(defun cqql-exercise-headers (structure)
-  "Create a STRUCTURE of headers for exercise sheets."
-  (interactive "xStructure: ")
-  (cl-loop for node in structure
-           do
-           (if (listp node)
-               (cl-loop for subnode in node
-                        do (insert (format "\\subsection*{Part %s)}\n\n"
-                                           subnode)))
-             (insert (format "\\section*{Exercise %s}\n\n" node)))))
-
 (defvar cqql-no-trimming-modes '()
   "A list of modes, that should not be whitespace-trimmed.")
 
 (defun cqql-trim-whitespace ()
   (when (not (seq-contains cqql-no-trimming-modes major-mode))
     (delete-trailing-whitespace)))
-
-(defmacro cqql-after-load (feature &rest body)
-  "After FEATURE is loaded, evaluate BODY."
-  (declare (indent defun))
-  `(eval-after-load ,feature
-     '(progn ,@body)))
-
-(defmacro cqql-define-keys (keymap &rest bindings)
-  (declare (indent defun))
-  `(progn
-     ,@(seq-map
-        (lambda (binding) `(define-key ,keymap (kbd ,(car binding)) ,(cadr binding)))
-        bindings)))
-
-(defmacro cqql-define-global-keys (&rest bindings)
-  (declare (indent defun))
-  `(progn
-     ,@(seq-map
-        (lambda (binding) `(global-set-key (kbd ,(car binding)) ,(cadr binding)))
-        bindings)))
 
 (provide 'cqql)
 ;;; cqql.el ends here

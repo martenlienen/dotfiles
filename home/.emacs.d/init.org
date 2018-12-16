@@ -393,12 +393,14 @@ of functions.
 #+BEGIN_SRC emacs-lisp
   (use-package wrap-region
     :config (wrap-region-global-mode t))
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp
   (use-package expand-region
     :bind (("M-m" . er/expand-region)
            ("M-M" . er/contract-region))
     :config
-    (cqql-after-load 'latex-mode
+    (with-eval-after-load 'latex-mode
       (require 'latex-mode-expansions)))
 #+END_SRC
 
