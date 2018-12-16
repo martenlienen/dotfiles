@@ -405,8 +405,24 @@ Quickly move to every word and character on screen.
 
 #+BEGIN_SRC emacs-lisp
   (use-package avy
-    :bind (("M-s" . avy-goto-word-or-subword-1)
-           ("M-S" . avy-goto-char-2)))
+    :init
+    (require 'hydra)
+    (defhydra hydra-avy (:exit t) "avy"
+      ("g" avy-goto-char "char")
+      ("G" avy-goto-char-timer "char timer")
+      ("l" avy-goto-line "line")
+      ("L" avy-goto-end-of-line "end of line")
+      ("m" avy-move-line "move line")
+      ("M" avy-move-region "move region")
+      ("k" avy-kill-whole-line "kill line")
+      ("w" avy-kill-region "kill region")
+      ("y" avy-copy-line "copy line")
+      ("Y" avy-copy-region "copy region"))
+    :config
+    (setq avy-timeout-seconds 0.25)
+
+    :bind (("M-s" . avy-goto-char-timer)
+           ("C-c a" . hydra-avy/body)))
 #+END_SRC
 
 Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
