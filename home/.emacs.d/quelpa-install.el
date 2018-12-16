@@ -48,6 +48,7 @@
 (quelpa 'shackle)
 (quelpa 'highlight-symbol)
 (quelpa 'discover-my-major)
+(quelpa 'helpful)
 
 ;; Snippets
 (quelpa 'yasnippet)

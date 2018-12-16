@@ -189,6 +189,19 @@ in a condensed format.
     :bind ("C-h C-m" . discover-my-major))
 #+END_SRC
 
+~helpful~ puts a lot of extra funcionality on help pages such as the source code
+of functions.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package helpful
+    :bind (("C-h a" . helpful-command)
+           ("C-h f" . helpful-callable)
+           ("C-h v" . helpful-variable)
+           ("C-h k" . helpful-key)
+           :map emacs-lisp-mode-map
+           ("C-c C-d" . helpful-at-point)))
+#+END_SRC
+
 ** Better Selection
 
 ~ivy/swiper~ is a light-weight completion front end for emacs.
