@@ -8,6 +8,7 @@
 
 ;; Package configuration
 (quelpa 'use-package)
+(quelpa 'use-package-chords)
 
 ;; My own package
 (quelpa '(cqql :fetcher file :path "home/.emacs.d/lisp/cqql.el"))
