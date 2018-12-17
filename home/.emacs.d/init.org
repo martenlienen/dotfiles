@@ -417,8 +417,8 @@ Gives you a visual preview at the point of replacement.
 
 #+BEGIN_SRC emacs-lisp
   (use-package visual-regexp
-    :bind (("M-3" . vr/replace)
-           ("M-#" . vr/query-replace)))
+    :bind (("C-c r" . vr/replace)
+           ("C-c R" . vr/query-replace)))
 #+END_SRC
 
 ** Navigation
