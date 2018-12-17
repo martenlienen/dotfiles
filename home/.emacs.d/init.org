@@ -540,18 +540,18 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet
     :config
-    (bind-key ";" 'yas-expand yas-minor-mode-map)
-    (bind-key "<tab>" nil yas-minor-mode-map)
-    (bind-key "TAB" nil yas-minor-mode-map)
-
-    (setq yas-fallback-behavior 'call-other-command)
+    (setf yas-fallback-behavior 'call-other-command
+          yas-snippet-dirs '("~/.emacs.d/snippets"))
 
     ;; Don't append newlines to snippet files
     (add-hook 'snippet-mode (lambda () (setq require-final-newline nil)))
 
-    (setf yas-snippet-dirs '("~/.emacs.d/snippets"))
+    (yas-global-mode t)
 
-    (yas-global-mode t))
+    :bind (:map yas-minor-mode-map
+                (";" . 'yas-expand)
+                ("<tab>" . nil)
+                ("TAB" . nil)))
 #+END_SRC
 
 * Integrations
