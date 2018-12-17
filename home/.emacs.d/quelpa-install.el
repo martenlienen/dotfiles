@@ -42,7 +42,7 @@
 (quelpa 'dictcc)
 
 ;; UI
-(quelpa 'color-theme-sanityinc-tomorrow)
+(quelpa 'gruvbox-theme)
 (quelpa 'smart-mode-line)
 (quelpa 'rainbow-delimiters)
 (quelpa 'shackle)
