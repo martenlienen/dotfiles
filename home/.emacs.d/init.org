@@ -155,7 +155,7 @@ it uses an interactive shell instead of a login one which would not read my
 #+BEGIN_SRC emacs-lisp
   (use-package smart-mode-line
     :config
-    (setf sml/theme 'light
+    (setf sml/theme 'respectful
           sml/no-confirm-load-theme t)
 
     (sml/setup))
