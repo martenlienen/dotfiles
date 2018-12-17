@@ -322,6 +322,17 @@ of functions.
 
 * Editing
 
+** keychords
+
+Increase the acceptable delay between two keys of key chord to make it easier to
+active them.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package key-chord
+    :config
+    (setq key-chord-two-keys-delay 0.25))
+#+END_SRC
+
 ** Multiple Cursors
 
 #+BEGIN_SRC emacs-lisp
