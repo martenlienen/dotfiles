@@ -571,6 +571,13 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
     (magit-define-popup-action 'magit-file-popup ?T "Timemachine" #'git-timemachine))
 #+END_SRC
 
+Show todos in the magit status buffer by searching for lines with TODO.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magit-todos
+    :config (magit-todos-mode))
+#+END_SRC
+
 ** dict.cc
 
 #+BEGIN_SRC emacs-lisp
