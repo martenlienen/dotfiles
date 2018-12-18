@@ -216,19 +216,19 @@ of functions.
         (counsel-git)
       (counsel-find-file)))
 
-  (defun cqql-counsel-ag-in-project-root ()
-    "Run counsel-ag in the project root."
+  (defun cqql-counsel-rg-in-project-root ()
+    "Run counsel-rg in the project root."
     (interactive)
     (let ((root (condition-case nil (projectile-project-root) (error nil))))
       ;; Search hidden files
-      (counsel-ag "" root "--hidden")))
+      (counsel-rg nil root)))
 
   (use-package ivy
     :bind (("C-x C-f" . cqql-find-file)
            ("C-s" . swiper)
            ("M-x" . counsel-M-x)
            ("C-x 8" . counsel-unicode-char)
-           ("C-c s" . cqql-counsel-ag-in-project-root)
+           ("C-c s" . cqql-counsel-rg-in-project-root)
            ("M-o" . ivy-resume))
     :init
     (setq ivy-count-format "%d/%d "
@@ -269,7 +269,6 @@ of functions.
     :config
     (setq shackle-rules '(("*magit-commit*" :select nil)
                           ("\*Flycheck.+\*" :select nil :regexp t)
-                          ("\*ag.+\*" :select t :regexp t)
                           (t :select t)))
 
     (shackle-mode))

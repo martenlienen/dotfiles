@@ -148,7 +148,7 @@ utils="htop tree rsync tab"
 netutils="nmap tcpdump dnsutils"
 
 # Programming tools
-programming="git vim emacs the_silver_searcher"
+programming="git vim emacs ripgrep"
 
 # Web
 web="firefox chromium"

@@ -9,9 +9,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'tomtom/tcomment_vim'
-Plug 'rking/ag.vim'
-let g:ag_prg = "ag --column --smart-case"
-let g:ag_highlight = 1
 Plug 'Raimondi/delimitMate'
 Plug 'kana/vim-textobj-user'
 
