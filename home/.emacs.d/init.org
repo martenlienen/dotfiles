@@ -386,6 +386,9 @@ active them.
       ("C" sp-change-enclosing "change enclosing" :exit t)
       ("s" sp-splice-sexp "splice")
       ("r" sp-raise-sexp "raise")
+      ("(" sp-wrap-round "wrap ()")
+      ("{" sp-wrap-curly "wrap {}")
+      ("[" sp-wrap-square "wrap []")
 
       ("a" sp-beginning-of-sexp "beginning")
       ("e" sp-end-of-sexp "end")
