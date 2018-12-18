@@ -405,7 +405,9 @@ active them.
       ("h" sp-backward-slurp-sexp "bw slurp")
       ("H" sp-backward-barf-sexp "bw barf")
       ("l" sp-forward-slurp-sexp "slurp")
-      ("L" sp-forward-barf-sexp "barf"))
+      ("L" sp-forward-barf-sexp "barf")
+
+      ("g" nil))
     :config
     (require 'smartparens-config)
 
