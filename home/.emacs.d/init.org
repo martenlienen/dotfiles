@@ -583,6 +583,11 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
                       :server-id 'mspy-ls
                       :initialization-options #'cqql-lsp-python-init-options))
 
+    (lsp-register-client
+     (make-lsp-client :new-connection (lsp-stdio-connection '("rls"))
+                      :major-modes '(rust-mode)
+                      :server-id 'rls))
+
     (require 'hydra)
     (defhydra hydra-lsp (:exit t :hint nil)
       "
@@ -941,7 +946,8 @@ Show todos in the magit status buffer by searching for lines with TODO.
     :config
     (add-hook 'rust-mode-hook #'flycheck-mode)
     (add-hook 'rust-mode-hook #'racer-mode)
-    (add-hook 'rust-mode-hook #'cargo-minor-mode))
+    (add-hook 'rust-mode-hook #'cargo-minor-mode)
+    (add-hook 'rust-mode-hook #'lsp))
 
   (use-package racer
     :config
