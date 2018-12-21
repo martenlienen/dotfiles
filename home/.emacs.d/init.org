@@ -581,9 +581,38 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
      (make-lsp-client :new-connection (lsp-stdio-connection `("dotnet" ,cqql-lsp-python-pyls-path))
                       :major-modes '(python-mode)
                       :server-id 'mspy-ls
-                      :initialization-options #'cqql-lsp-python-init-options)))
+                      :initialization-options #'cqql-lsp-python-init-options))
 
-  (use-package lsp-ui)
+    (require 'hydra)
+    (defhydra hydra-lsp (:exit t :hint nil)
+      "
+  Language Server Protocol
+  Symbol: _d_eclaration _D_efinition _R_eferences _i_mplementation _t_ype _s_ignature d_o_cumentation _r_ename
+  Buffer: _f_ormat i_m_enu e_x_ecute
+  Server: _R_estart _S_hutdown _M-s_ession"
+      ("d" lsp-find-declaration)
+      ("D" lsp-ui-peek-find-definitions)
+      ("R" lsp-ui-peek-find-references)
+      ("i" lsp-ui-peek-find-implementation)
+      ("t" lsp-find-type-definition)
+      ("s" lsp-signature-help)
+      ("o" lsp-describe-thing-at-point)
+      ("r" lsp-rename)
+
+      ("f" lsp-format-buffer)
+      ("m" lsp-ui-imenu)
+      ("x" lsp-execute-code-action)
+
+      ("M-s" lsp-describe-session)
+      ("R" lsp-restart-workspace)
+      ("S" lsp-shutdown-workspace))
+
+    :bind (("C-c l" . hydra-lsp/body)))
+
+  (use-package lsp-ui
+    :bind (:map lsp-ui-mode-map
+                ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+                ([remap xref-find-references] . lsp-ui-peek-find-references)))
 #+END_SRC
 
 ** Auto-Completion
