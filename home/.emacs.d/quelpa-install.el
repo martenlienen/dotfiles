@@ -92,6 +92,7 @@
 
 ;; Python
 (quelpa 'pyenv-mode)
+(quelpa 'ein)
 
 ;; Anything web related
 (quelpa 'web-mode)

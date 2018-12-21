@@ -832,6 +832,8 @@ Show todos in the magit status buffer by searching for lines with TODO.
     (add-hook 'python-mode-hook 'subword-mode)
     (add-hook 'python-mode-hook 'pyenv-mode)
     (add-hook 'python-mode-hook 'lsp))
+
+  (use-package ein)
 #+END_SRC
 
 ** Emacs Lisp
