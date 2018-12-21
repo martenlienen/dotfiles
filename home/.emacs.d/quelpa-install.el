@@ -82,12 +82,9 @@
 (quelpa 'macrostep)
 
 ;; C/C++
+(quelpa 'cquery)
 (quelpa 'cmake-mode)
 (quelpa 'google-c-style)
-(quelpa 'irony)
-(quelpa 'irony-eldoc)
-(quelpa 'company-irony)
-(quelpa 'company-irony-c-headers)
 (quelpa 'clang-format)
 
 ;; Python

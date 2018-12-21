@@ -893,7 +893,17 @@ Show todos in the magit status buffer by searching for lines with TODO.
     (bind-key "C-c C-o" #'ff-find-other-file c-mode-base-map)
     (bind-key "C-c f" #'clang-format-buffer c-mode-base-map)
 
+    (add-hook 'c-mode-common-hook #'lsp)
     (add-hook 'c++-mode-hook #'subword-mode))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package cquery
+    :config
+    (setq cquery-project-root-function #'projectile-project-root
+          cquery-extra-init-params (list :index '(:comments 2)
+                                         :cacheFormat "msgpack"
+                                         :completion '(:detailedLabel t))))
 #+END_SRC
 
 *** Style Guide
@@ -909,26 +919,6 @@ Show todos in the magit status buffer by searching for lines with TODO.
 
 #+BEGIN_SRC emacs-lisp
   (use-package cmake-mode)
-#+END_SRC
-
-*** Irony
-
-#+BEGIN_SRC emacs-lisp
-  (use-package irony
-    :config
-    (add-hook 'c++-mode-hook #'irony-mode)
-    (add-hook 'c-mode-hook #'irony-mode)
-
-    (add-hook 'irony-mode-hook #'irony-cdb-autosetup-compile-options)
-
-    (require 'irony-eldoc)
-    (add-hook 'irony-mode-hook #'eldoc-mode)
-    (add-hook 'irony-mode-hook #'irony-eldoc)
-
-    (require 'company-irony)
-    (require 'company-irony-c-headers)
-    (add-to-list 'company-backends (list #'company-irony
-                                         #'company-irony-c-headers)))
 #+END_SRC
 
 ** Shell
