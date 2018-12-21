@@ -803,18 +803,6 @@ Show todos in the magit status buffer by searching for lines with TODO.
     (add-hook 'python-mode-hook 'subword-mode)
     (add-hook 'python-mode-hook 'pyenv-mode)
     (add-hook 'python-mode-hook 'lsp))
-
-  (use-package anaconda-mode
-    :config
-    (add-hook 'python-mode-hook 'anaconda-mode))
-
-  (defun cqql-use-company-anaconda ()
-    "Active the company-anaconda backend."
-    (add-to-list 'company-backends 'company-anaconda))
-
-  (use-package company-anaconda
-    :config
-    (add-hook 'python-mode-hook 'cqql-use-company-anaconda))
 #+END_SRC
 
 ** Emacs Lisp

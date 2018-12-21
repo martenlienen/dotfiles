@@ -92,8 +92,6 @@
 
 ;; Python
 (quelpa 'pyenv-mode)
-(quelpa 'anaconda-mode)
-(quelpa 'company-anaconda)
 
 ;; Anything web related
 (quelpa 'web-mode)
