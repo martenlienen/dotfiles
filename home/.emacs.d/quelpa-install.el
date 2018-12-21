@@ -55,7 +55,10 @@
 (quelpa 'yasnippet)
 
 ;; Autocomplete
+(quelpa 'lsp-mode)
+(quelpa 'lsp-ui)
 (quelpa 'company)
+(quelpa 'company-lsp)
 
 ;; VCS
 (quelpa 'magit)
