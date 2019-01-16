@@ -19,6 +19,6 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep"
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 
 # Read system-local settings
-if [[ -x ~/.local/zshenv ]]; then
+if [[ -r ~/.local/zshenv ]]; then
   . ~/.local/zshenv
 fi
