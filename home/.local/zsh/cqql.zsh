@@ -58,6 +58,9 @@ function parse_git_dirty() {
   fi
 }
 
+# Enable extended globbing for the #-pattern feature
+setopt extended_glob
+
 function get_prompt {
   # Store the exit code of the last command before overwriting it by running git
   local last_cmd_status=$?
@@ -73,6 +76,17 @@ function get_prompt {
   fi
 
   local directory="${PWD/#$HOME/~}"
+  if [[ ${#directory} -ge 50 ]]; then
+    # While the directory is too long and there are at least three parts to it
+    while [[ (${#directory} -ge 50) && (${#${directory//[^\/]}} -ge 2) ]]; do
+      # Remove the ... from a previous iteration
+      directory="${directory/#?\/...\//${directory/%\/*/}/}"
+
+      # Replace the part after the first slash with ...
+      directory="${directory/#?\/[^\/]#\//${directory/%\/*/}/.../}"
+    done
+  fi
+
   local timestamp="%*"
   local info_line="\
 %{$blue%}# \
