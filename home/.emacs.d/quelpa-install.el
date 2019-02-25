@@ -43,7 +43,7 @@
 (quelpa 'dictcc)
 
 ;; UI
-(quelpa 'gruvbox-theme)
+(quelpa 'nord-theme)
 (quelpa 'smart-mode-line)
 (quelpa 'rainbow-delimiters)
 (quelpa 'shackle)

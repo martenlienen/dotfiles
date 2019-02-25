@@ -149,7 +149,10 @@ it uses an interactive shell instead of a login one which would not read my
 ** Theme
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'gruvbox t)
+  ;; Increase comment brightness by 15%
+  (setq nord-comment-brightness 15)
+
+  (load-theme 'nord t)
 #+END_SRC
 
 ** Mode Line
