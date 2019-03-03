@@ -50,6 +50,7 @@
 (quelpa 'highlight-symbol)
 (quelpa 'discover-my-major)
 (quelpa 'helpful)
+(quelpa 'beacon)
 
 ;; Snippets
 (quelpa 'yasnippet)
