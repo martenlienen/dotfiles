@@ -24,7 +24,7 @@ ELISP.include(ORG_FILES.ext(".el"))
 ORG_FILES.gsub!(/^home/, Dir.home)
 ELISP.gsub!(/^home/, Dir.home)
 
-task :default => [:dotfiles, :tools, :packages]
+task :default => [:dotfiles, :tools, :packages, :dualscreen]
 
 task :dotfiles do
   sh "find home -maxdepth 1 -mindepth 1 -exec cp --recursive --preserve=mode {} #{Dir.home} \\;"
@@ -81,6 +81,10 @@ end
 
 task :vim_packages => [:vim_plug, :dotfiles] do
   sh "vim +PlugUpdate +qall"
+end
+
+task :dualscreen do
+  sh "plasmapkg2 -t kwinscript -u dual-screen"
 end
 
 task :system => [:pacaur, :system_packages, :system_conf]
