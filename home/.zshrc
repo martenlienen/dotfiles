@@ -20,6 +20,9 @@ bindkey -e
 # Do not get in my way, when I type
 unsetopt correct
 
+# Do not beep! Under any circumstances!
+unsetopt BEEP
+
 # Do not block on Ctrl-S
 stty -ixon
 
