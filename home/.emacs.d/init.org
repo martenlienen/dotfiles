@@ -658,7 +658,7 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 #+BEGIN_SRC emacs-lisp
   (use-package magit
     :bind (("<f2>" . magit-status)
-           ("<f5>" . magit-file-popup))
+           ("<f5>" . magit-file-dispatch))
     :init
     (setq magit-last-seen-setup-instructions "1.4.0"
           magit-commit-ask-to-stage nil
@@ -666,7 +666,7 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 
     :config
     (require 'git-timemachine)
-    (magit-define-popup-action 'magit-file-popup ?T "Timemachine" #'git-timemachine))
+    (transient-append-suffix 'magit-file-dispatch "t" (list 1 "T" "Timemachine" #'git-timemachine)))
 #+END_SRC
 
 Show todos in the magit status buffer by searching for lines with TODO.
