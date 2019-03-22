@@ -538,71 +538,6 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 ** Language Server Protocol (LSP)
 
 #+BEGIN_SRC emacs-lisp
-  (defun cqql-lsp-python-find-python (path)
-    "Find the python executable responsible for PATH."
-    (s-trim
-     (let ((default-directory path))
-       ;; Check for pipenv first
-       (if (f-exists? (f-join path "Pipfile"))
-           (shell-command-to-string "pipenv --py")
-         ;; Then for pyenv
-         (if-let ((pyenv-path (with-temp-buffer
-                                (and (eq (call-process shell-file-name nil t nil
-                                                       "-c" "pyenv which python")
-                                         0)
-                                     (buffer-string)))))
-             pyenv-path
-           ;; Fall back to system python
-           (executable-find "python"))))))
-
-  (defvar cqql-lsp-python-info-script
-    "from __future__ import print_function
-  import sys, json
-
-  info = {
-      \"version\": \"{}.{}\".format(sys.version_info.major, sys.version_info.minor),
-      \"path\": sys.path
-  }
-
-  print(json.dumps(info))"
-    "Python script that prints information about the python environment.")
-
-  (defun cqql-lsp-python-run-script (python script)
-    "Run SCRIPT with PYTHON and return the output."
-    (with-temp-buffer
-      (call-process python nil t nil "-c" script)
-      (buffer-string)))
-
-  (defun cqql-lsp-python-get-params (workspace-root)
-    "Find the python executable, version and search path in WORKSPACE-ROOT."
-    (let* ((python (cqql-lsp-python-find-python workspace-root))
-           (info-output (cqql-lsp-python-run-script python cqql-lsp-python-info-script))
-           (info (let ((json-array-type 'list)) (json-read-from-string info-output)))
-           (version (alist-get 'version info))
-           (path (alist-get 'path info))
-           ;; Filter the workspace root from the load path
-           (path (--filter (let* ((default-directory workspace-root) (p (f-expand it)))
-                             (not (or (f-same? workspace-root p)
-                                      (f-ancestor-of? workspace-root p))))
-                           path)))
-      `((interpreter . ,python) (version . ,version) (path . ,path))))
-
-  (defun cqql-lsp-python-init-options ()
-    "Create the initialization options for Microsoft's PyLS."
-    (let ((workspace-root (lsp--calculate-root (lsp-session) (buffer-file-name))))
-      (let-alist (cqql-lsp-python-get-params workspace-root)
-        (list :interpreter (list :properties (list :Version .version
-                                                   :InterpreterPath .interpreter
-                                                   :UseDefaultDatabase :json-true))
-              :displayOptions (list :preferredFormat "plaintext")
-              :searchPaths .path))))
-
-  (defvar cqql-lsp-python-pyls-path
-    (concat (expand-file-name
-             "~/projects/python-language-server/output/bin/Release/")
-            "Microsoft.Python.LanguageServer.dll")
-    "Path to the PyLS .net executable.")
-
   (use-package lsp-mode
     :init
     (setq lsp-auto-guess-root t
@@ -613,12 +548,6 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
     (define-advice lsp--render-string (:filter-args (args) replace-html-spaces)
       "Replace HTML space entities from Microsoft's python language server with actual spaces."
       (cons (s-replace "&nbsp;" " " (car args)) (cdr args)))
-
-    (lsp-register-client
-     (make-lsp-client :new-connection (lsp-stdio-connection `("dotnet" ,cqql-lsp-python-pyls-path))
-                      :major-modes '(python-mode)
-                      :server-id 'mspy-ls
-                      :initialization-options #'cqql-lsp-python-init-options))
 
     (lsp-register-client
      (make-lsp-client :new-connection (lsp-stdio-connection '("rls"))
@@ -873,8 +802,7 @@ Show todos in the magit status buffer by searching for lines with TODO.
 
     (add-hook 'python-mode-hook 'eldoc-mode)
     (add-hook 'python-mode-hook 'subword-mode)
-    (add-hook 'python-mode-hook 'pyenv-mode)
-    (add-hook 'python-mode-hook 'lsp))
+    (add-hook 'python-mode-hook 'pyenv-mode))
 
   (use-package ein)
 #+END_SRC
