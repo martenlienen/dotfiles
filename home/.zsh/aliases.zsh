@@ -4,6 +4,8 @@ alias p="pacman"
 alias sp="sudo pacman"
 alias spu="sudo pacman -Syu"
 
+alias l="ls -lh"
+
 # Aliases
 alias g="git"
 
