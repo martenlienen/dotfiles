@@ -19,6 +19,10 @@ font pango:monospace 8
 # Hide borders adjacent to the edges of the screen
 hide_edge_borders both
 
+# Minimize the space taken up by borders
+default_border pixel 1
+default_floating_border none
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
