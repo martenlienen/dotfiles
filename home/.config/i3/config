@@ -84,7 +84,7 @@ bindsym $mod+Return exec urxvt
 bindsym $mod+q kill
 
 # Start a program launcher
-bindsym $mod+r exec rofi -show run
+bindsym $mod+space exec rofi -show run
 
 # Split in horizontal orientation
 bindsym $mod+c split h
@@ -118,7 +118,7 @@ for_window [class="Spotify"] floating enable; border none; resize set width 1500
 
 # Mode for managing i3 itself
 set $mode_german "German: [a] ä  [u] ü  [o]  ö  [s]  ß"
-bindsym $mod+space mode $mode_german
+bindsym $mod+g mode $mode_german
 mode $mode_german {
     bindsym --release a $run "xdotool getactivewindow windowactivate --sync type 'ä'"; mode "default"
     bindsym --release shift+a $run "xdotool getactivewindow windowactivate --sync type 'Ä'"; mode "default"
