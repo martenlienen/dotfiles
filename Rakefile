@@ -122,7 +122,7 @@ task :system_packages => [:pacaur, :system_conf] do
 dm="sddm sddm-theme-kde-plasma-chili"
 
 # Desktop environment
-de="plasma kdebase"
+de="plasma kdebase i3 wmctrl nitrogen"
 
 # Desktop Utilities
 de_utils="ulauncher"
