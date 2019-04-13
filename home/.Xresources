@@ -6,7 +6,8 @@ URxvt*scollWithBuffer: True
 URxvt*scollTtyKeypress: True
 URxvt*internalBorder: 10px
 ! Remove a black border around the window in WMs that respect size hints
-URxvt*externalBorder: 10px
+! This is only necessary in KWin
+! URxvt*externalBorder: 10px
 
 Emacs.menuBar: off
 Emacs.toolBar: off
