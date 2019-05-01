@@ -49,7 +49,8 @@ bindsym $mod+Left move workspace to output left
 bindsym $mod+Right move workspace to output right
 
 # Media keys (plasma takes care of most of them)
-bindsym XF86Calculator $run emacs --funcall=full-calc
+bindsym XF86Calculator $run emacs -T i3-calculator --funcall=full-calc
+for_window [title="i3-calculator"] floating enable
 
 # F row
 bindsym $mod+F8 $run togglexkbmap
