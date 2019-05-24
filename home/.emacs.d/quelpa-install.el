@@ -75,6 +75,7 @@
 (quelpa 'counsel)
 (quelpa 'projectile)
 (quelpa 'flx)
+(quelpa 'deadgrep)
 
 ;; Markdown
 (quelpa 'markdown-mode)

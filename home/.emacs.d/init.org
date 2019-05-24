@@ -243,6 +243,17 @@ of functions.
     (counsel-mode))
 #+END_SRC
 
+** File search with rg
+
+#+BEGIN_SRC emacs-lisp
+  (use-package deadgrep
+    :bind (("C-c S" . deadgrep)
+           :map deadgrep-mode-map
+           ("s" . cqql-deadgrep-search-term))
+    :config
+    (require 'cqql-deadgrep))
+#+END_SRC
+
 ** Highlighting
 
 *** Cursor
