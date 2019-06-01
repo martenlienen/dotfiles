@@ -14,3 +14,7 @@ tags
 *.iml
 .idea
 local.properties
+
+# cquery
+compile_commands.json
+.cquery_cached_index
