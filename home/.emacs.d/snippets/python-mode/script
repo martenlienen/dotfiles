@@ -9,7 +9,7 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser()
-    $0pass
+    $0
     args = parser.parse_args()
 
 
