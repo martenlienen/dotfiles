@@ -10,6 +10,9 @@ tags
 # Python virtualenv settings
 .python-version
 
+# ipython checkpoints
+.ipynb_checkpoints
+
 # IntelliJ files
 *.iml
 .idea
