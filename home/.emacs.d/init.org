@@ -232,7 +232,8 @@ of functions.
            ("M-x" . counsel-M-x)
            ("C-x 8" . counsel-unicode-char)
            ("C-c s" . cqql-counsel-rg-in-project-root)
-           ("M-o" . ivy-resume))
+           ("M-o" . ivy-resume)
+           ("C-x b" . counsel-switch-buffer))
     :init
     (setq ivy-count-format "%d/%d "
           ivy-extra-directories (list ".")
