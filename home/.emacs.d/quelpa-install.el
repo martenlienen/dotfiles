@@ -12,6 +12,7 @@
 
 ;; My own package
 (quelpa '(cqql :fetcher file :path "home/.emacs.d/lisp/cqql.el"))
+(quelpa '(cqql-deadgrep :fetcher file :path "home/.emacs.d/lisp/cqql-deadgrep.el"))
 
 ;; Key bindings
 (quelpa 'free-keys)

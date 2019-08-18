@@ -624,9 +624,6 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
           company-dabbrev-ignore-invisible t
           company-dabbrev-downcase nil))
 
-  (use-package company-lsp
-    :config
-    (push 'company-lsp company-backends))
 #+END_SRC
 
 ** Complete from elsewhere
@@ -870,8 +867,8 @@ Show todos in the magit status buffer by searching for lines with TODO.
     (bind-key "C-c C-o" #'ff-find-other-file c-mode-base-map)
     (bind-key "C-c f" #'clang-format-buffer c-mode-base-map)
 
-    (add-hook 'c-mode-common-hook #'lsp)
-    (add-hook 'c++-mode-hook #'subword-mode))
+    (add-hook 'c++-mode-hook #'subword-mode)
+    (add-hook 'c++-mode-hook #'eglot-ensure))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -913,8 +910,7 @@ Show todos in the magit status buffer by searching for lines with TODO.
     :config
     (add-hook 'rust-mode-hook #'flycheck-mode)
     (add-hook 'rust-mode-hook #'racer-mode)
-    (add-hook 'rust-mode-hook #'cargo-minor-mode)
-    (add-hook 'rust-mode-hook #'lsp))
+    (add-hook 'rust-mode-hook #'cargo-minor-mode))
 
   (use-package racer
     :config
