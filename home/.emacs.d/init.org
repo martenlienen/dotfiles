@@ -609,9 +609,7 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
           company-minimum-prefix-length 2
           company-show-numbers t
           company-selection-wrap-around t
-          company-backends (list #'company-css
-                                 #'company-clang
-                                 #'company-capf
+          company-backends (list #'company-capf
                                  (list #'company-dabbrev-code
                                        #'company-keywords)
                                  #'company-files
