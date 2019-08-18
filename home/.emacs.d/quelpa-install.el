@@ -92,6 +92,11 @@
 
 ;; Python
 (quelpa 'pyenv-mode)
+(quelpa 'pip-requirements)
+(quelpa 'blacken)
+(quelpa 'python-docstring)
+(quelpa 'anaconda-mode)
+(quelpa 'company-anaconda)
 (quelpa 'ein)
 
 ;; Anything web related

@@ -720,12 +720,6 @@ Show todos in the magit status buffer by searching for lines with TODO.
     (with-pyenv "tools"
       (cqql-apply-command-to-buffer "isort -")))
 
-  (defun cqql-yapf-current-buffer ()
-    "Apply yapf to the current python buffer."
-    (interactive)
-    (with-pyenv "tools"
-      (cqql-apply-command-to-buffer "yapf")))
-
   (defun cqql-python-shell-send-line ()
     "Send the current line to inferior python process disregarding indentation."
     (interactive)
@@ -793,10 +787,13 @@ Show todos in the magit status buffer by searching for lines with TODO.
         (cqql-python-shell-send-region)
       (cqql-python-shell-resend-last-command)))
 
+  (defun cqql-enable-company-anaconda ()
+    "Use anaconda as a company backend."
+    (add-to-list 'company-backends 'company-anaconda))
+
   (use-package python
     :config
     (bind-key "C-c i" #'cqql-isort-current-buffer python-mode-map)
-    (bind-key "C-c f" #'cqql-yapf-current-buffer python-mode-map)
     (bind-key "C-c C-l" #'cqql-python-shell-send-line python-mode-map)
     (bind-key "C-c C-r" #'cqql-python-shell-send-region-dwim python-mode-map)
 
@@ -807,9 +804,23 @@ Show todos in the magit status buffer by searching for lines with TODO.
             python-shell-interpreter-args "--simple-prompt")
       (push "ipython" python-shell-completion-native-disabled-interpreters))
 
-    (add-hook 'python-mode-hook 'eldoc-mode)
-    (add-hook 'python-mode-hook 'subword-mode)
-    (add-hook 'python-mode-hook 'pyenv-mode))
+    (add-hook 'python-mode-hook #'eldoc-mode)
+    (add-hook 'python-mode-hook #'subword-mode)
+    (add-hook 'python-mode-hook #'pyenv-mode)
+    (add-hook 'python-mode-hook #'blacken-mode)
+    (add-hook 'python-mode-hook #'python-docstring-mode)
+    (add-hook 'python-mode-hook #'anaconda-mode)
+    (add-hook 'python-mode-hook #'cqql-enable-company-anaconda))
+
+  (use-package python-docstring
+    :config
+    (setq python-docstring-sentence-end-double-space nil))
+
+  (use-package blacken
+    :config
+    (setq blacken-allow-py36 t))
+
+  (use-package pip-requirements)
 
   (use-package ein)
 #+END_SRC
