@@ -113,7 +113,7 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # Start or toggle spotify
-bindsym $mod+s exec toggle_spotify.py
+bindsym $mod+s $run toggle_spotify.py
 # Start spotify floating, centered and borderless
 for_window [class="Spotify"] floating enable; border none; resize set width 1500; resize set height 800; move position center
 
