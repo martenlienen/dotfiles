@@ -53,6 +53,9 @@
 (quelpa 'helpful)
 (quelpa 'beacon)
 
+;; Debugging
+(quelpa 'realgud)
+
 ;; Snippets
 (quelpa 'yasnippet)
 

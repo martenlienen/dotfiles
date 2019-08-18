@@ -792,10 +792,11 @@ Show todos in the magit status buffer by searching for lines with TODO.
     (add-to-list 'company-backends 'company-anaconda))
 
   (use-package python
-    :config
-    (bind-key "C-c i" #'cqql-isort-current-buffer python-mode-map)
-    (bind-key "C-c C-l" #'cqql-python-shell-send-line python-mode-map)
-    (bind-key "C-c C-r" #'cqql-python-shell-send-region-dwim python-mode-map)
+    :bind (:map python-mode-map
+                ("C-c D" . #'realgud:pdb)
+                ("C-c i" . #'cqql-isort-current-buffer)
+                ("C-c C-l" . #'cqql-python-shell-send-line)
+                ("C-c C-r" . #'cqql-python-shell-send-region-dwim))
 
     (when (executable-find "ipython")
       (setq python-shell-interpreter "ipython"
