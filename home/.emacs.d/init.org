@@ -149,10 +149,7 @@ it uses an interactive shell instead of a login one which would not read my
 ** Theme
 
 #+BEGIN_SRC emacs-lisp
-  ;; Increase comment brightness by 15%
-  (setq nord-comment-brightness 15)
-
-  (load-theme 'nord t)
+  (load-theme 'ample-zen t)
 #+END_SRC
 
 ** Mode Line
