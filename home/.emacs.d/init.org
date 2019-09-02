@@ -795,6 +795,7 @@ Show todos in the magit status buffer by searching for lines with TODO.
                 ("C-c C-l" . #'cqql-python-shell-send-line)
                 ("C-c C-r" . #'cqql-python-shell-send-region-dwim))
 
+    :config
     (when (executable-find "ipython")
       (setq python-shell-interpreter "ipython"
             ;; Disable ipython 5 features that are incompatible with
