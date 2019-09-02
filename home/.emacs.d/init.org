@@ -68,9 +68,6 @@
   ;; Yank at point instead of position of cursor
   (setf mouse-yank-at-point t)
 
-  ;; Disable tramp and GPG keys for performance
-  (setq file-name-handler-alist nil)
-
   ;; I do not like accidentally freezing my emacs instance
   (global-set-key (kbd "C-z") nil)
 #+END_SRC
