@@ -109,7 +109,7 @@ ForegroundVisited=127,140,141
 DirSelectDialog Size=640,480
 
 [General]
-BrowserApplication=chromium.desktop
+BrowserApplication=firefox.desktop
 ColorScheme=Breeze Dark
 Name=Breeze Dark
 XftAntialias=true
