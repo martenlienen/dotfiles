@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Dual Screen
-Comment=Fix windows on external screens to all desktops
-
-X-Plasma-MainScript=dual-screen.js
-X-Plasma-API=javascript
-
-X-KDE-ServiceType=KWin/Script
