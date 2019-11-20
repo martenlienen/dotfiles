@@ -83,36 +83,31 @@ task :vim_packages => [:vim_plug, :dotfiles] do
   sh "vim +PlugUpdate +qall"
 end
 
-task :system => [:pacaur, :system_packages, :system_conf]
+task :system => [:system_packages, :system_conf]
 
-task :pacaur do
-  if not system("pacman -Q pacaur")
+task :yay do
+  if not system("pacman -Q yay")
     sh <<END
+basedir=$(pwd)
+
 # Create build directory
 dir=$(mktemp -d)
 cd $dir
 
-# Install dependencies
-sudo pacman -S --noconfirm yajl expac
+# Clone yay package
+git clone https://aur.archlinux.org/yay.git
 
-# Install cower
-curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower
-makepkg PKGBUILD --skippgpcheck
-sudo pacman -U cower*.tar.xz --noconfirm
+# Build and install
+cd yay
+makepkg --syncdeps --install --noconfirm
 
-# Install pacaur
-curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=pacaur
-makepkg PKGBUILD
-sudo pacman -U pacaur*.tar.xz --noconfirm
-
-# Clean build directory
-cd ~
-rm -r $dir
+cd "${basedir}"
+rm -rf $dir
 END
   end
 end
 
-task :system_packages => [:pacaur, :system_conf] do
+task :system_packages => [:yay, :system_conf] do
   sh <<END
 # Desktop manager
 dm="sddm sddm-theme-kde-plasma-chili"
@@ -153,8 +148,8 @@ programming="git vim emacs ripgrep"
 # Web
 web="firefox chromium"
 
-pacaur -S --needed --noconfirm $dm $de $de_utils $fonts $audio $security \
-       $screenshot $shell $crypto $utils $netutils $programming $web
+yay -S --needed --noconfirm $dm $de $de_utils $fonts $audio $security \
+    $screenshot $shell $crypto $utils $netutils $programming $web
 
 # Start desktop manager on boot
 sudo systemctl enable sddm.service
