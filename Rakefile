@@ -110,7 +110,7 @@ end
 task :system_packages => [:yay, :system_conf] do
   sh <<END
 # Desktop manager
-dm="sddm sddm-theme-kde-plasma-chili"
+dm="sddm"
 
 # Desktop environment
 de="plasma kdebase i3-wm wmctrl nitrogen xdotool"
