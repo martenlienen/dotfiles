@@ -116,7 +116,7 @@ dm="sddm sddm-theme-kde-plasma-chili"
 de="plasma kdebase i3 wmctrl nitrogen xdotool"
 
 # Desktop Utilities
-de_utils="ulauncher"
+de_utils="rofi"
 
 # Fonts
 fonts="ttf-fira-sans ttf-fira-mono ttf-fira-code"
