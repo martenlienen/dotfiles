@@ -113,7 +113,7 @@ task :system_packages => [:yay, :system_conf] do
 dm="sddm sddm-theme-kde-plasma-chili"
 
 # Desktop environment
-de="plasma kdebase i3 wmctrl nitrogen xdotool"
+de="plasma kdebase i3-wm wmctrl nitrogen xdotool"
 
 # Desktop Utilities
 de_utils="rofi"
