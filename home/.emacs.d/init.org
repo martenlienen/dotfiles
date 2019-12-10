@@ -706,7 +706,10 @@ Show todos in the magit status buffer by searching for lines with TODO.
            (progn
              (pyenv-mode-set ,name)
              ,@body)
-         (pyenv-mode-set current))))
+         ;; Ensure that the python environment is exactly the same as before
+         (if current
+             (pyenv-mode-set current)
+           (pyenv-mode-unset)))))
 
   (defun cqql-isort-current-buffer ()
     "Apply isort to the current python buffer."
