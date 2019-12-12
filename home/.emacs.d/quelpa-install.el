@@ -95,6 +95,7 @@
 
 ;; Python
 (quelpa 'pyenv-mode)
+(quelpa 'python-pytest)
 (quelpa 'pip-requirements)
 (quelpa 'blacken)
 (quelpa 'python-docstring)

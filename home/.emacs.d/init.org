@@ -793,7 +793,8 @@ Show todos in the magit status buffer by searching for lines with TODO.
                 ("C-c D" . #'realgud:pdb)
                 ("C-c i" . #'cqql-isort-current-buffer)
                 ("C-c C-l" . #'cqql-python-shell-send-line)
-                ("C-c C-r" . #'cqql-python-shell-send-region-dwim))
+                ("C-c C-r" . #'cqql-python-shell-send-region-dwim)
+                ("C-c t" . #'python-pytest-popup))
 
     :config
     (when (executable-find "ipython")
