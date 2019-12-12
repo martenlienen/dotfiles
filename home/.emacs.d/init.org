@@ -684,6 +684,12 @@ Show todos in the magit status buffer by searching for lines with TODO.
     :bind ("C-c d" . dictcc))
 #+END_SRC
 
+** Debugging
+
+#+BEGIN_SRC emacs-lisp
+  (use-package realgud)
+#+END_SRC
+
 * Programming Languages
 
 ** Python
