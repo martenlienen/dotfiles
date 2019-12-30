@@ -115,6 +115,9 @@ dm="sddm"
 # Desktop environment
 de="plasma kdebase i3-wm wmctrl nitrogen xdotool"
 
+# Color temperature management
+redshift="redshift"
+
 # Desktop Utilities
 de_utils="rofi"
 
@@ -149,7 +152,7 @@ programming="git vim emacs ripgrep"
 web="firefox chromium"
 
 yay -S --needed --noconfirm $dm $de $de_utils $fonts $audio $security \
-    $screenshot $shell $crypto $utils $netutils $programming $web
+    $screenshot $shell $crypto $utils $netutils $programming $web $redshift
 
 # Start desktop manager on boot
 sudo systemctl enable sddm.service
@@ -159,6 +162,9 @@ sudo systemctl enable NetworkManager.service
 
 # Autostart the firewall
 sudo systemctl enable firehol.service
+
+# Autostart redshift
+systemctl --user enable redshift.service
 END
 end
 
