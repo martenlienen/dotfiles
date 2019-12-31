@@ -76,6 +76,8 @@
 ;; Searching
 (quelpa 'swiper)
 (quelpa 'ivy)
+(quelpa 'ivy-rich)
+(quelpa 'ivy-prescient)
 (quelpa 'counsel)
 (quelpa 'projectile)
 (quelpa 'flx)
