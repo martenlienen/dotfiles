@@ -115,8 +115,8 @@ dm="sddm"
 # Desktop environment
 de="plasma kdebase i3-wm wmctrl nitrogen xdotool"
 
-# Color temperature management
-redshift="redshift"
+# Display backlight
+backlight="redshift light"
 
 # Desktop Utilities
 de_utils="rofi"
@@ -152,7 +152,7 @@ programming="git vim emacs ripgrep"
 web="firefox chromium"
 
 yay -S --needed --noconfirm $dm $de $de_utils $fonts $audio $security \
-    $screenshot $shell $crypto $utils $netutils $programming $web $redshift
+    $screenshot $shell $crypto $utils $netutils $programming $web $backlight
 
 # Start desktop manager on boot
 sudo systemctl enable sddm.service
@@ -165,6 +165,9 @@ sudo systemctl enable firehol.service
 
 # Autostart redshift
 systemctl --user enable redshift.service
+
+# Add user to the video group so that they can use light
+sudo usermod --append --groups video "${USER}"
 END
 end
 
