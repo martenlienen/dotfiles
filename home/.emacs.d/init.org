@@ -697,13 +697,6 @@ Show todos in the magit status buffer by searching for lines with TODO.
 ** Python
 
 #+BEGIN_SRC emacs-lisp
-  (defun cqql-apply-command-to-buffer (command)
-    "Apply shell command COMMAND to the current buffer."
-    (interactive "sCommand:")
-    (let ((p (point)))
-      (shell-command-on-region (point-min) (point-max) command t t)
-      (setf (point) p)))
-
   (use-package pyenv-mode)
 
   (defmacro with-pyenv (name &rest body)
@@ -718,12 +711,6 @@ Show todos in the magit status buffer by searching for lines with TODO.
          (if current
              (pyenv-mode-set current)
            (pyenv-mode-unset)))))
-
-  (defun cqql-isort-current-buffer ()
-    "Apply isort to the current python buffer."
-    (interactive)
-    (with-pyenv "tools"
-      (cqql-apply-command-to-buffer "isort -")))
 
   (defun cqql-python-shell-send-line ()
     "Send the current line to inferior python process disregarding indentation."
@@ -799,7 +786,6 @@ Show todos in the magit status buffer by searching for lines with TODO.
   (use-package python
     :bind (:map python-mode-map
                 ("C-c D" . #'realgud:pdb)
-                ("C-c i" . #'cqql-isort-current-buffer)
                 ("C-c C-l" . #'cqql-python-shell-send-line)
                 ("C-c C-r" . #'cqql-python-shell-send-region-dwim)
                 ("C-c t" . #'python-pytest-popup))
@@ -816,6 +802,7 @@ Show todos in the magit status buffer by searching for lines with TODO.
     (add-hook 'python-mode-hook #'subword-mode)
     (add-hook 'python-mode-hook #'pyenv-mode)
     (add-hook 'python-mode-hook #'blacken-mode)
+    (add-hook 'python-mode-hook #'isortify-mode)
     (add-hook 'python-mode-hook #'python-docstring-mode)
     (add-hook 'python-mode-hook #'anaconda-mode)
     (add-hook 'python-mode-hook #'cqql-enable-company-anaconda))

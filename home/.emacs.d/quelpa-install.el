@@ -98,6 +98,7 @@
 ;; Python
 (quelpa 'pyenv-mode)
 (quelpa 'python-pytest)
+(quelpa 'isortify)
 (quelpa 'pip-requirements)
 (quelpa 'blacken)
 (quelpa 'python-docstring)
