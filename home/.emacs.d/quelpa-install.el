@@ -44,7 +44,7 @@
 (quelpa 'dictcc)
 
 ;; UI
-(quelpa 'gruvbox-theme)
+(quelpa 'monokai-theme)
 (quelpa 'smart-mode-line)
 (quelpa 'rainbow-delimiters)
 (quelpa 'shackle)

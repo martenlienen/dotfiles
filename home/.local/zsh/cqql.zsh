@@ -11,7 +11,6 @@
 autoload -U colors
 colors
 
-local black=$fg[black]
 local red=$fg[red]
 local blue=$fg[blue]
 local green=$fg[green]
@@ -20,7 +19,6 @@ local magenta=$fg[magenta]
 local cyan=$fg[cyan]
 local white=$fg[white]
 
-local black_bold=$fg_bold[black]
 local red_bold=$fg_bold[red]
 local blue_bold=$fg_bold[blue]
 local green_bold=$fg_bold[green]
@@ -29,9 +27,17 @@ local magenta_bold=$fg_bold[magenta]
 local cyan_bold=$fg_bold[cyan]
 local white_bold=$fg_bold[white]
 
+local red_no_bold=$fg_no_bold[red]
+local blue_no_bold=$fg_no_bold[blue]
+local green_no_bold=$fg_no_bold[green]
+local yellow_no_bold=$fg_no_bold[yellow]
+local magenta_no_bold=$fg_no_bold[magenta]
+local cyan_no_bold=$fg_no_bold[cyan]
+local white_no_bold=$fg_no_bold[white]
+
 local highlight_bg=$bg[red]
 
-local zeta='ζ'
+local omega="ω"
 
 # The following two functions have been taken from oh-my-zsh so that I can avoid
 # loading all the rest of it. Saves 0.05s on every shell start.
@@ -41,7 +47,7 @@ function git_prompt_info() {
   local ref
   ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
     ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-  echo "%{$blue_bold%}${ref#refs/heads/}$(parse_git_dirty)%{$reset_color%}"
+  echo "%{$blue_bold%}${ref#refs/heads/} $(parse_git_dirty)%{$reset_color%}"
 }
 
 # Checks if working tree is dirty
@@ -52,9 +58,9 @@ function parse_git_dirty() {
   STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
 
   if [[ -n $STATUS ]]; then
-    echo "%{$red_bold%} ✘"
+    echo "%{$red_bold%}≠"
   else
-    echo "%{$green_bold%} ✔"
+    echo "%{$green_bold%}="
   fi
 }
 
@@ -89,14 +95,13 @@ function get_prompt {
 
   local timestamp="%*"
   local info_line="\
-%{$blue%}# \
-%{$green_bold%}$user\
-%{$blue%}@\
-%{$cyan_bold%}$HOST: \
+  %{$yellow_bold%}$user\
+%{$white_bold%}@\
+%{$white_no_bold%}$HOST: \
 %{$yellow_bold%}$directory%{$reset_color%}\
-$git_info %{$blue%}($timestamp)%{$reset_color%}"
+$git_info %{$cyan%}($timestamp)%{$reset_color%}"
 
-  local prompt_char="%{$magenta_bold%}$zeta"
+  local prompt_char="%{$white_bold%}$omega"
   if [[ $last_cmd_status -ne 0 ]]; then
     prompt_char="%{$red_bold%}!"
   fi
