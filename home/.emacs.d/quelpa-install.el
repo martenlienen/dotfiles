@@ -119,6 +119,9 @@
 (quelpa 'cargo)
 (quelpa 'flycheck-rust)
 
+;; Writing
+(quelpa '(darkroom :repo "joaotavora/darkroom" :fetcher "github"))
+
 ;; LaTeX
 (quelpa 'auctex)
 
