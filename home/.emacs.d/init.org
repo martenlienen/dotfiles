@@ -704,6 +704,18 @@ distraction-free writing mode.
     (add-hook 'text-mode-hook #'darkroom-tentative-mode))
 #+END_SRC
 
+** Linting
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :config
+    (setq flycheck-textlint-config ".config/textlintrc.yml")
+    (add-to-list 'flycheck-textlint-plugin-alist '(tex-mode . "latex2e"))
+    (add-to-list 'flycheck-textlint-plugin-alist '(rst-mode . "rst"))
+
+    (add-hook 'markdown-mode-hook #'flycheck-mode))
+#+END_SRC
+
 * Programming Languages
 
 ** Python
@@ -967,6 +979,7 @@ them to LaTeX!
 
 #+BEGIN_SRC emacs-lisp
     (add-hook 'LaTeX-mode-hook #'orgtbl-mode)
+    (add-hook 'LaTeX-mode-hook #'flycheck-mode)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -1017,7 +1030,9 @@ them to LaTeX!
     ;; Load language support
     (org-babel-do-load-languages
      'org-babel-load-languages
-     org-babel-load-languages))
+     org-babel-load-languages)
+
+    (add-hook 'org-mode-hook #'flycheck-mode))
 #+END_SRC
 
 Use some nice UTF-8 symbols to signify the nesting depth.
@@ -1052,7 +1067,9 @@ Use some nice UTF-8 symbols to signify the nesting depth.
 
   (use-package rst
     :config
-    (bind-key "<C-right>" #'cqql-underline rst-mode-map))
+    (bind-key "<C-right>" #'cqql-underline rst-mode-map)
+
+    (add-hook 'rst-mode-hook #'flycheck-mode))
 #+END_SRC
 
 ** YAML

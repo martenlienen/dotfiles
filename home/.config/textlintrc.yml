@@ -1,0 +1,12 @@
+rules:
+  write-good: true
+  no-start-duplicated-conjunction: true
+  max-comma: true
+  stop-words: true
+  alex: true
+plugins:
+  latex2e: true
+  rst: true
+  "@textlint/markdown":
+    extensions:
+      - .org

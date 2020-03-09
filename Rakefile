@@ -24,7 +24,7 @@ ELISP.include(ORG_FILES.ext(".el"))
 ORG_FILES.gsub!(/^home/, Dir.home)
 ELISP.gsub!(/^home/, Dir.home)
 
-task :default => [:dotfiles, :tools, :packages]
+task :default => [:dotfiles, :tools, :packages, :linting]
 
 task :dotfiles do
   sh "find home -maxdepth 1 -mindepth 1 -exec cp --recursive --preserve=mode {} #{Dir.home} \\;"
@@ -81,6 +81,20 @@ end
 
 task :vim_packages => [:vim_plug, :dotfiles] do
   sh "vim +PlugUpdate +qall"
+end
+
+task :linting do
+  sh <<END
+npm install --global --prefix ~/.local \
+            textlint \
+            textlint-plugin-latex2e \
+            textlint-plugin-rst \
+            textlint-rule-write-good \
+            textlint-rule-no-start-duplicated-conjunction \
+            textlint-rule-max-comma \
+            textlint-rule-stop-words \
+            textlint-rule-alex
+END
 end
 
 task :system => [:system_packages, :system_conf]
@@ -146,7 +160,7 @@ utils="htop tree rsync tab"
 netutils="nmap tcpdump dnsutils"
 
 # Programming tools
-programming="git vim emacs ripgrep"
+programming="git vim emacs ripgrep nodejs"
 
 # Web
 web="firefox chromium"
