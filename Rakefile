@@ -160,7 +160,7 @@ utils="htop tree rsync tab"
 netutils="nmap tcpdump dnsutils"
 
 # Programming tools
-programming="git vim emacs ripgrep nodejs"
+programming="git vim emacs ripgrep nodejs npm"
 
 # Web
 web="firefox chromium"
