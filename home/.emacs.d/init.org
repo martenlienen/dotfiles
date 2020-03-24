@@ -837,6 +837,10 @@ Put emacs into distraction-free writing mode on demand.
     (add-hook 'python-mode-hook #'anaconda-mode)
     (add-hook 'python-mode-hook #'cqql-enable-company-anaconda))
 
+  (use-package python-pytest
+    :bind (:map python-pytest-mode-map
+                ("q" . #'bury-buffer)))
+
   (use-package python-docstring
     :config
     (setq python-docstring-sentence-end-double-space nil))
