@@ -694,14 +694,15 @@ Show todos in the magit status buffer by searching for lines with TODO.
 
 * Writing
 
-Whenever a `text-mode` buffer is the only window visible, put emacs into
-distraction-free writing mode.
+Put emacs into distraction-free writing mode on demand.
 
 #+BEGIN_SRC emacs-lisp
   (use-package darkroom
+    :bind (:map text-mode-map
+                ("C-c D" . #'darkroom-mode))
+
     :config
-    (setq darkroom-text-scale-increase 1.5)
-    (add-hook 'text-mode-hook #'darkroom-tentative-mode))
+    (setq darkroom-text-scale-increase 1.5))
 #+END_SRC
 
 ** Linting
