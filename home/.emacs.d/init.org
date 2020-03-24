@@ -804,6 +804,12 @@ Put emacs into distraction-free writing mode on demand.
         (cqql-python-shell-send-region)
       (cqql-python-shell-resend-last-command)))
 
+  (defun cqql-python-reformat-buffer ()
+    "Reformat the current buffer."
+    (interactive)
+    (isortify-buffer)
+    (blacken-buffer))
+
   (defun cqql-enable-company-anaconda ()
     "Use anaconda as a company backend."
     (add-to-list 'company-backends 'company-anaconda))
@@ -811,6 +817,7 @@ Put emacs into distraction-free writing mode on demand.
   (use-package python
     :bind (:map python-mode-map
                 ("C-c D" . #'realgud:pdb)
+                ("C-c f" . #'cqql-python-reformat-buffer)
                 ("C-c C-l" . #'cqql-python-shell-send-line)
                 ("C-c C-r" . #'cqql-python-shell-send-region-dwim)
                 ("C-c t" . #'python-pytest-popup))
@@ -826,8 +833,6 @@ Put emacs into distraction-free writing mode on demand.
     (add-hook 'python-mode-hook #'eldoc-mode)
     (add-hook 'python-mode-hook #'subword-mode)
     (add-hook 'python-mode-hook #'pyenv-mode)
-    (add-hook 'python-mode-hook #'blacken-mode)
-    (add-hook 'python-mode-hook #'isortify-mode)
     (add-hook 'python-mode-hook #'python-docstring-mode)
     (add-hook 'python-mode-hook #'anaconda-mode)
     (add-hook 'python-mode-hook #'cqql-enable-company-anaconda))
