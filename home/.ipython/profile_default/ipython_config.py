@@ -14,5 +14,6 @@ except ImportError:
 c = get_config()
 c.InteractiveShellApp.exec_lines = [
     import_if_available("numpy", "np"),
-    import_if_available("matplotlib.pyplot", "pp")
+    import_if_available("matplotlib.pyplot", "pp"),
+    import_if_available("torch")
 ]
