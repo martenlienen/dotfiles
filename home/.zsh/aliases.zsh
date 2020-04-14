@@ -33,3 +33,5 @@ alias grbi="git rebase --interactive"
 alias grbc="git rebase --continue"
 alias grba="git rebase --abort"
 alias grbs="git rebase --skip"
+
+alias ipy="ipython"
