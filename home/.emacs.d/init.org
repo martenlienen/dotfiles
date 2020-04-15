@@ -830,6 +830,8 @@ Put emacs into distraction-free writing mode on demand.
             python-shell-interpreter-args "--simple-prompt")
       (push "ipython" python-shell-completion-native-disabled-interpreters))
 
+    (setq python-fill-docstring-style 'pep-257-nn)
+
     (add-hook 'python-mode-hook #'eldoc-mode)
     (add-hook 'python-mode-hook #'subword-mode)
     (add-hook 'python-mode-hook #'pyenv-mode)
