@@ -52,8 +52,8 @@
                 web-mode-css-indent-offset 2
                 web-mode-attr-indent-offset 2)
 
-  ;; Line breaks at 80 characters
-  (setq-default fill-column 80)
+  ;; Line breaks at 90 characters
+  (setq-default fill-column 90)
 
   ;; I don't like the GNU style of two spaces after a period
   (setq-default sentence-end-double-space nil)
