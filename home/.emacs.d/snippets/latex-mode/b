@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Brackets
+# key: b
+# --
+\left[ $0 \right]

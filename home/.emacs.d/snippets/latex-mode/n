@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Norm
+# key: n
+# --
+\left\| $0 \right\|

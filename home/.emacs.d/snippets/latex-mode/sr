@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: Set with restriction
-# key: sr
-# --
-\\{ $1 \\mid $2 \\}$0

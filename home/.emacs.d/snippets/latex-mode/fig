@@ -1,10 +1,10 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: figure
+# name: Figure
 # key: fig
 # --
 \begin{figure}[h]
   \centering
-  $0
-  \caption{$1}${2:
-  \label{fig:$3}}
+  \includegraphics[width=\textwidth]{$1}
+  \caption{$2}${3:
+  \label{fig:$4}}
 \end{figure}
