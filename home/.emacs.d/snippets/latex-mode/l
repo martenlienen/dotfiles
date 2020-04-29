@@ -2,4 +2,4 @@
 # name: label
 # key: l
 # --
-\label{$0}
+\label{`(isnip-latex-label-prefix)`$0}
