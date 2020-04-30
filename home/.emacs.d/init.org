@@ -982,6 +982,7 @@ Put emacs into distraction-free writing mode on demand.
     (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
     (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
     (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
+    (add-hook 'LaTeX-mode-hook 'reftex-mode)
 #+END_SRC
 
 LaTeX tables are really horrible to create and edit for most simple
