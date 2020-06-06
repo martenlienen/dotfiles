@@ -99,62 +99,19 @@ end
 
 task :system => [:system_packages, :system_conf]
 
-task :yay do
-  if not system("pacman -Q yay")
-    sh <<END
-basedir=$(pwd)
-
-# Create build directory
-dir=$(mktemp -d)
-cd $dir
-
-# Clone yay package
-git clone https://aur.archlinux.org/yay.git
-
-# Build and install
-cd yay
-makepkg --syncdeps --install --noconfirm
-
-cd "${basedir}"
-rm -rf $dir
-END
-  end
-end
-
-task :system_packages => [:yay, :system_conf] do
+task :system_packages => [:system_conf] do
   sh <<END
-# Desktop manager
-dm="sddm"
-
-# Desktop environment
-de="plasma kdebase i3-wm wmctrl nitrogen xdotool"
-
-# Display backlight
-backlight="redshift light"
-
-# Desktop Utilities
-de_utils="rofi"
-
-# Fonts
-fonts="ttf-fira-sans ttf-fira-mono ttf-fira-code"
-
-# Fix for bluetooth speakers
-audio="pulseaudio-bluetooth"
-
-# Security
-security="firehol"
-
-# Taking screenshots
-screenshot="maim slop"
+# Python compilation requirements
+pyenv="make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev"
 
 # Terminal and shell
 shell="rxvt-unicode bash-completion zsh"
 
 # Cryptography
-crypto="openssl openssh gnome-keyring"
+crypto="ssh"
 
 # Utilities
-utils="htop tree rsync tab"
+utils="htop tree rsync"
 
 # Network utilities
 netutils="nmap tcpdump dnsutils"
@@ -163,25 +120,16 @@ netutils="nmap tcpdump dnsutils"
 programming="git vim emacs ripgrep nodejs npm"
 
 # Web
-web="firefox chromium"
+web="firefox chromium-browser"
 
-yay -S --needed --noconfirm $dm $de $de_utils $fonts $audio $security \
-    $screenshot $shell $crypto $utils $netutils $programming $web $backlight
+sudo apt-get install --no-install-recommends --assume-yes \
+     $pyenv $shell $crypto $utils $netutils $programming $web
 
-# Start desktop manager on boot
-sudo systemctl enable sddm.service
-
-# Connect to the internet
-sudo systemctl enable NetworkManager.service
-
-# Autostart the firewall
-sudo systemctl enable firehol.service
-
-# Autostart redshift
-systemctl --user enable redshift.service
-
-# Add user to the video group so that they can use light
-sudo usermod --append --groups video "${USER}"
+sudo ufw default allow outgoing
+sudo ufw default deny incoming
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
 END
 end
 
