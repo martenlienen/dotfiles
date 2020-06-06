@@ -1,0 +1,6 @@
+# Keyboard layout
+#
+# Displays current keyboard layout.
+[keyboard-layout]
+label=⌨ 
+interval=persist
