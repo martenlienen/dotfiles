@@ -67,7 +67,6 @@
 
 ;; VCS
 (quelpa 'magit)
-(quelpa 'magit-todos)
 (quelpa 'git-timemachine)
 
 ;; Syntax checking
