@@ -67,7 +67,7 @@ WORDCHARS=$(echo $WORDCHARS | sed -e 's:/::')
 bindkey -M emacs "^P" history-substring-search-up
 bindkey -M emacs "^N" history-substring-search-down
 
-. ~/.zsh/aliases.zsh
+. ~/.local/zsh/aliases.zsh
 
 # Read system-local settings
 if [[ -r ~/.local/zshrc ]]; then
