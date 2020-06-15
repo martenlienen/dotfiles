@@ -2,9 +2,10 @@
 
 import json
 import os
+import shutil
 import subprocess
 
-SPOTIFY_PATH = "/usr/bin/spotify"
+SPOTIFY_PATH = shutil.which("spotify")
 I3MSG_PATH = "/usr/bin/i3-msg"
 
 
