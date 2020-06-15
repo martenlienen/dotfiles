@@ -1,8 +1,7 @@
 alias s="sudo"
 
-alias p="pacman"
-alias sp="sudo pacman"
-alias spu="sudo pacman -Syu"
+alias au="sudo apt update"
+alias aU="sudo apt upgrade"
 
 alias l="ls -lh"
 
