@@ -7,6 +7,9 @@ tags
 # Emacs backups
 .#*
 
+# Microsoft Office backups
+~$*
+
 # Python virtualenv settings
 .python-version
 
