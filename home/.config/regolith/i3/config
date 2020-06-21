@@ -109,13 +109,13 @@ bindsym $mod+Shift+space exec rofi -show run -theme $rofiTheme
 ## Navigate // Window by Name // <><Ctrl> Space ##
 bindsym $mod+Ctrl+space exec rofi -show window -theme $rofiTheme
 
-## Launch // Hotkeys Help // <><Shift> ? ##
-bindsym $mod+Shift+question $run /usr/bin/remontoire-toggle
+## Launch // Toggle alluvium // <> ? ##
+bindsym $mod+Shift+question $run alluvium --toggle
 
 ## Launch // Screenshot Area // <> p ##
 bindsym $mod+p $run gnome-screenshot --area
 
-## Launch // Screenshot Area // <><Shift> p ##
+## Launch // Screenshot // <><Shift> p ##
 bindsym $mod+Shift+p $run gnome-screenshot --interactive
 
 ## Launch // Calculator // Calculator ##
@@ -128,24 +128,25 @@ bindsym $mod+Shift+n exec /usr/bin/nautilus --new-window
 ## Launch // Notification Viewer // <> n ##
 bindsym $mod+n exec /usr/bin/rofication-gui
 
-## Settings // Settings Mode // <><Shift> s ##
+## Settings // Enter Settings Mode // <> F11 ##
 mode "Settings" {
     ## Settings // Control Center // c ##
-    bindsym c exec gnome-control-center
+    bindsym c exec gnome-control-center; mode "default"
 
     ## Settings // Display // d ##
-    bindsym d exec gnome-control-center display
+    bindsym d exec gnome-control-center display; mode "default"
 
     ## Settings // Wifi // w ##
-    bindsym w exec gnome-control-center wifi
+    bindsym w exec gnome-control-center wifi; mode "default"
 
     ## Settings // Bluetooth // b ##
-    bindsym b exec gnome-control-center bluetooth
+    bindsym b exec gnome-control-center bluetooth; mode "default"
 
-    bindsym Ctrl+g mode "default"
+    ## Settings // Exit Settings Mode // Escape or <Ctrl> g ##
     bindsym Escape mode "default"
+    bindsym Ctrl+g mode "default"
 }
-bindsym $mod+Shift+s mode "Settings"
+bindsym $mod+F11 mode "Settings"; $run alluvium --mode Settings --quit-on-default
 
 ###############################################################################
 # Window and Workspace Navigation
@@ -185,11 +186,11 @@ bindsym $mod+Down move workspace to output down
 bindsym $mod+Up move workspace to output up
 bindsym $mod+Right move workspace to output right
 
-## Modify // Window Fullscreen Toggle // <><Shift> f ##
-bindsym $mod+Shift+f fullscreen toggle
+## Modify // Window Fullscreen Toggle // <> f ##
+bindsym $mod+f fullscreen toggle
 
-## Modify // Window Floating Toggle // <> f ##
-bindsym $mod+f floating toggle
+## Modify // Window Floating Toggle // <><Shift> f ##
+bindsym $mod+Shift+f floating toggle
 
 ## Modify // Tile/Float Focus Toggle // <><Shift> t ##
 bindsym $mod+Shift+t focus mode_toggle
@@ -238,7 +239,7 @@ bindsym $mod+Shift+q [con_id="__focused__"] $run kill -9 $(xdotool getwindowfocu
 ## Session // Lock Screen // <> Escape ##
 bindsym $mod+Escape $run dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
 
-## Session // Enter Session Mode // F12 ##
+## Session // Enter Session Mode // <> F12 ##
 mode "Session" {
     ## Session // Reload i3 Config // c ##
     bindsym c reload; mode "default"
@@ -261,17 +262,18 @@ mode "Session" {
     ## Session // Sleep // s ##
     bindsym s $run systemctl suspend; mode "default"
 
-    bindsym Ctrl+g mode "default"
+    ## Session // Exit Session Mode // Escape or <Ctrl> g ##
     bindsym Escape mode "default"
+    bindsym Ctrl+g mode "default"
 }
-bindsym F12 mode "Session"
+bindsym $mod+F12 mode "Session"; $run alluvium --mode Session --quit-on-default
 
 ###############################################################################
 # Window Resize and Gaps
 ###############################################################################
 
 ## Resize // Enter Resize Mode // <> r ##
-mode "Resize Mode" {
+mode "Resize" {
         # These bindings trigger as soon as you enter the resize mode
 
         ## Resize // Resize Window // ↑ ↓ ← → ##
@@ -302,12 +304,11 @@ mode "Resize Mode" {
         bindsym Shift+minus gaps inner current minus 12
         bindsym Shift+plus gaps inner current plus 12
 
-        ## Resize // Exit Resize Mode // Escape or Enter ##
-        bindsym Return mode "default"
+        ## Resize // Exit Resize Mode // Escape or <Ctrl> g ##
         bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+        bindsym Ctrl+g mode "default"
 }
-bindsym $mod+r mode "Resize Mode"
+bindsym $mod+r mode "Resize"
 
 
 ###############################################################################
