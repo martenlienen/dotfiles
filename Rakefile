@@ -32,8 +32,7 @@ task :dotfiles do
   # Update the font cache
   sh "fc-cache"
 
-  # Reload X resources database
-  sh "xrdb ~/.Xresources"
+  sh "regolith-look refresh"
 end
 
 multitask :tools => [:pyenv, :pyenv_virtualenv, :vim_plug, :antigen]
