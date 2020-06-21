@@ -996,15 +996,15 @@ them to LaTeX!
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-    (add-hook 'LaTeX-mode-hook (lambda () (setq word-wrap t)))
+  (add-hook 'LaTeX-mode-hook (lambda () (setq word-wrap t)))
 
-    (add-hook 'LaTeX-mode-hook
-              (lambda ()
-                (setq TeX-electric-sub-and-superscript t
-                      TeX-save-query nil
-                      TeX-view-program-selection '((output-pdf "Okular"))
-                      ;; Otherwise minted can't find pygments
-                      TeX-command-extra-options "-shell-escape"))))
+  (add-hook 'LaTeX-mode-hook
+            (lambda ()
+              (setq TeX-electric-sub-and-superscript t
+                    TeX-save-query nil
+                    ;; Otherwise minted can't find pygments
+                    TeX-command-extra-options "-shell-escape")
+              (setf (cdr (assoc 'output-pdf TeX-view-program-selection)) (list "Evince")))))
 #+END_SRC
 
 ** org
