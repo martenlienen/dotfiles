@@ -68,6 +68,7 @@ floating_maximum_size -1 x -1
 
 for_window [class="Gnome-control-center"] floating enable
 for_window [class="Seafile Client"] floating enable
+for_window [class="SimpleScreenRecorder"] floating enable
 
 # Start spotify floating, centered and borderless
 for_window [class="Spotify"] floating enable; border none; resize set width 1500; resize set height 800; move position center
