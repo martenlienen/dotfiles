@@ -2,4 +2,4 @@
 # name: Curly braces
 # key: c
 # --
-\left\{ $0 \right\}
+\left\\{ $0 \right\\}
