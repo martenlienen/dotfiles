@@ -10,6 +10,9 @@ tags
 # Microsoft Office backups
 ~$*
 
+# Windows files
+Thumbs.db*
+
 # Python virtualenv settings
 .python-version
 
