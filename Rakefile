@@ -33,6 +33,11 @@ task :dotfiles do
   sh "fc-cache"
 
   sh "regolith-look refresh"
+
+  sh <<END
+systemctl --user enable redshift-gtk.service
+systemctl --user start redshift-gtk.service
+END
 end
 
 multitask :tools => [:pyenv, :pyenv_virtualenv, :vim_plug, :antigen]
@@ -110,7 +115,7 @@ shell="rxvt-unicode bash-completion zsh"
 crypto="ssh"
 
 # Utilities
-utils="htop tree rsync"
+utils="htop tree rsync redshift-gtk"
 
 # Network utilities
 netutils="nmap tcpdump dnsutils"
