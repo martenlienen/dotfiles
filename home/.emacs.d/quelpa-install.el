@@ -1,10 +1,11 @@
+(require 'package)
 (package-initialize)
 
-(if (require 'quelpa nil t)
-    (quelpa-self-upgrade)
+(unless (package-installed-p 'quelpa)
   (with-temp-buffer
-    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
-    (eval-buffer)))
+    (url-insert-file-contents "https://github.com/quelpa/quelpa/raw/master/quelpa.el")
+    (eval-buffer)
+    (quelpa-self-upgrade)))
 
 ;; Package configuration
 (quelpa 'use-package)
