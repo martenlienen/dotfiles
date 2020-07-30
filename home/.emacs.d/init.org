@@ -284,16 +284,6 @@ of functions.
 ** Window Management
 
 #+BEGIN_SRC emacs-lisp
-  (use-package shackle
-    :config
-    (setq shackle-rules '(("*magit-commit*" :select nil)
-                          ("\*Flycheck.+\*" :select nil :regexp t)
-                          (t :select t)))
-
-    (shackle-mode))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
   (use-package ace-window
     :bind ("M-i" . ace-window))
 #+END_SRC

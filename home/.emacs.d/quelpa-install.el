@@ -48,7 +48,6 @@
 (quelpa 'monokai-theme)
 (quelpa 'smart-mode-line)
 (quelpa 'rainbow-delimiters)
-(quelpa 'shackle)
 (quelpa 'highlight-symbol)
 (quelpa 'discover-my-major)
 (quelpa 'helpful)
