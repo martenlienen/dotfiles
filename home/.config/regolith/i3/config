@@ -114,7 +114,11 @@ bindsym $mod+Ctrl+space exec rofi -show window -theme $rofiTheme
 bindsym $mod+Shift+question $run alluvium --toggle
 
 ## Launch // Screenshot Area // <> p ##
-bindsym $mod+p $run gnome-screenshot --area
+#
+# Bind on release because gnome-screenshot --area will try to perform a grab instantly
+# which does not work when i3 is still holding some lock or so, see
+# https://www.reddit.com/r/i3wm/wiki/faq/screenshot_binding
+bindsym --release $mod+p $run gnome-screenshot --area
 
 ## Launch // Screenshot // <><Shift> p ##
 bindsym $mod+Shift+p $run gnome-screenshot --interactive
