@@ -35,3 +35,4 @@ alias grba="git rebase --abort"
 alias grbs="git rebase --skip"
 
 alias ipy="ipython"
+alias lab="jupyter lab"
