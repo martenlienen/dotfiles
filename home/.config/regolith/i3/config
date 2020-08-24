@@ -241,9 +241,6 @@ bindsym $mod+q [con_id="__focused__"] kill
 ## Session // Terminate App // <><Shift> q ##
 bindsym $mod+Shift+q [con_id="__focused__"] $run kill -9 $(xdotool getwindowfocus getwindowpid)
 
-## Session // Lock Screen // <> Escape ##
-bindsym $mod+Escape $run dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
-
 ## Session // Enter Session Mode // <> F12 ##
 mode "Session" {
     ## Session // Reload i3 Config // c ##
@@ -254,6 +251,9 @@ mode "Session" {
 
     ## Session // Restart i3 // <Shift> r ##
     bindsym Shift+r restart; mode "default"
+
+    ## Session // Lock Screen // l ##
+    bindsym l $run dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock; mode "default"
 
     ## Session // Logout // e ##
     bindsym e $run /usr/bin/gnome-session-quit --logout; mode "default"
