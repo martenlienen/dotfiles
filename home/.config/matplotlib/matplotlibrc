@@ -6,6 +6,3 @@ font.size: 11
 font.family: serif
 font.serif: Computer Modern Roman
 font.monospace: Computer Modern Typewriter
-
-# Use LaTeX for text rendering
-text.usetex: True
