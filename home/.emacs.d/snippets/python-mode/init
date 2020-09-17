@@ -3,4 +3,6 @@
 # key: init
 # --
 def __init__(self${1:$$(isnip-python-maybe-prepend-comma yas-text)}):
+    super().__init__()
+
     ${1:$(isnip-python-args-to-assignments yas-text)}$0
