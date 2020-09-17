@@ -27,7 +27,7 @@
 (defun isnip-python-args-to-assignments (text)
   "Convert a string of arguments to a string of self assignments."
   (if (string= text "")
-      "pass"
+      ""
     (cl-flet ((make-assignment (arg) (format "self.%s = %s" arg arg))
               (indent (line) (concat (s-repeat (current-indentation) " ")
                                      line)))
