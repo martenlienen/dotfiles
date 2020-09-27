@@ -62,6 +62,7 @@
 ;; Autocomplete
 (quelpa 'lsp-mode)
 (quelpa 'lsp-ui)
+(quelpa '(lsp-julia :fetcher github :repo "non-Jedi/lsp-julia" :files (:defaults "languageserver")))
 (quelpa 'company)
 (quelpa 'company-lsp)
 
@@ -104,6 +105,10 @@
 (quelpa 'anaconda-mode)
 (quelpa 'company-anaconda)
 (quelpa 'ein)
+
+;; Julia
+(quelpa 'julia-mode)
+(quelpa 'julia-repl)
 
 ;; Anything web related
 (quelpa 'web-mode)

@@ -38,8 +38,11 @@
   (setq confirm-nonexistent-file-or-buffer nil)
   (setq ido-create-new-buffer 'always)
 
-  ;; Only GC every 20 MB
-  (setq gc-cons-threshold 20000000)
+  ;; Only GC every 100 MB
+  (setq gc-cons-threshold (* 100 1024 1024))
+
+  ;; Read 1M at a time from processes. Important for LSP performance.
+  (setq read-process-output-max (* 1024 1024))
 
   ;; Indent with 2 spaces
   (setq-default indent-tabs-mode nil
@@ -76,6 +79,11 @@ Automatically jump to origin file and line when an the point is on an error.
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'compilation-mode-hook #'next-error-follow-minor-mode)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ;; Start a server for emacsclient
+  (server-start)
 #+END_SRC
 
 * Packages
@@ -541,7 +549,8 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
     (setq lsp-auto-guess-root t
           lsp-auto-require-clients nil
           lsp-auto-configure t)
-
+    :hook ((julia-mode . lsp))
+    :commands (lsp)
     :config
     (define-advice lsp--render-string (:filter-args (args) replace-html-spaces)
       "Replace HTML space entities from Microsoft's python language server with actual spaces."
@@ -583,6 +592,10 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
     :bind (:map lsp-ui-mode-map
                 ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
                 ([remap xref-find-references] . lsp-ui-peek-find-references)))
+
+  (use-package lsp-julia
+    :init
+    (setq lsp-julia-package-dir nil))
 #+END_SRC
 
 ** Auto-Completion
@@ -837,6 +850,19 @@ Put emacs into distraction-free writing mode on demand.
   (use-package pip-requirements)
 
   (use-package ein)
+#+END_SRC
+
+** Julia
+
+#+BEGIN_SRC emacs-lisp
+  (use-package julia-mode)
+
+  (use-package julia-repl
+    :hook ((julia-mode . julia-repl-mode))
+    :config
+    (add-to-list 'julia-repl-captures (kbd "M-i"))
+
+    (add-hook 'julia-repl-hook #'julia-repl-use-emacsclient))
 #+END_SRC
 
 ** Emacs Lisp
