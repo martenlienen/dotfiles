@@ -90,10 +90,10 @@
 (quelpa 'macrostep)
 
 ;; C/C++
-(quelpa 'cquery)
-(quelpa 'cmake-mode)
-(quelpa 'google-c-style)
-(quelpa 'clang-format)
+;; (quelpa 'cquery)
+;; (quelpa 'cmake-mode)
+;; (quelpa 'google-c-style)
+;; (quelpa 'clang-format)
 
 ;; Python
 (quelpa 'pyenv-mode)
@@ -111,11 +111,11 @@
 (quelpa 'julia-repl)
 
 ;; Anything web related
-(quelpa 'web-mode)
+;; (quelpa 'web-mode)
 
 ;; Javascript
-(quelpa 'js2-mode)
-(quelpa 'js2-refactor)
+;; (quelpa 'js2-mode)
+;; (quelpa 'js2-refactor)
 
 ;; Rust
 (quelpa 'rust-mode)

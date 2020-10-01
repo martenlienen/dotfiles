@@ -887,25 +887,33 @@ Put emacs into distraction-free writing mode on demand.
     (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode))
 #+END_SRC
 
-** javascript
+** Shell
 
 #+BEGIN_SRC emacs-lisp
-  (use-package js2-mode
-    :mode (("\\.js\\'" . js2-mode) ("\\.jsx\\'" . js2-mode))
-    :interpreter "node"
-    :config
-    (require 'js2-refactor)
-
-    (setq-default js2-basic-offset 2)
-    (setf js2-highlight-level 3
-          js2-include-node-externs t)
-
-    (js2r-add-keybindings-with-prefix "C-c r")
-
-    (add-hook 'js2-mode-hook 'subword-mode))
+  (use-package sh-script
+    :mode ("PKGBUILD\\'" . sh-mode)
+    :config  (setq-default sh-basic-offset 2))
 #+END_SRC
 
-** C/C++
+** Rust
+
+#+BEGIN_SRC emacs-lisp
+  (use-package rust-mode
+    :config
+    (add-hook 'rust-mode-hook #'flycheck-mode)
+    (add-hook 'rust-mode-hook #'racer-mode)
+    (add-hook 'rust-mode-hook #'cargo-minor-mode))
+
+  (use-package racer
+    :config
+    (add-hook 'racer-mode-hook #'eldoc-mode))
+
+  (use-package flycheck
+    :config
+    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+#+END_SRC
+
+** COMMENT C/C++
 
 #+BEGIN_SRC emacs-lisp
   (use-package cc-mode
@@ -945,30 +953,22 @@ Put emacs into distraction-free writing mode on demand.
   (use-package cmake-mode)
 #+END_SRC
 
-** Shell
+** COMMENT javascript
 
 #+BEGIN_SRC emacs-lisp
-  (use-package sh-script
-    :mode ("PKGBUILD\\'" . sh-mode)
-    :config  (setq-default sh-basic-offset 2))
-#+END_SRC
-
-** Rust
-
-#+BEGIN_SRC emacs-lisp
-  (use-package rust-mode
+  (use-package js2-mode
+    :mode (("\\.js\\'" . js2-mode) ("\\.jsx\\'" . js2-mode))
+    :interpreter "node"
     :config
-    (add-hook 'rust-mode-hook #'flycheck-mode)
-    (add-hook 'rust-mode-hook #'racer-mode)
-    (add-hook 'rust-mode-hook #'cargo-minor-mode))
+    (require 'js2-refactor)
 
-  (use-package racer
-    :config
-    (add-hook 'racer-mode-hook #'eldoc-mode))
+    (setq-default js2-basic-offset 2)
+    (setf js2-highlight-level 3
+          js2-include-node-externs t)
 
-  (use-package flycheck
-    :config
-    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+    (js2r-add-keybindings-with-prefix "C-c r")
+
+    (add-hook 'js2-mode-hook 'subword-mode))
 #+END_SRC
 
 * Text Formats
