@@ -24,7 +24,7 @@ ELISP.include(ORG_FILES.ext(".el"))
 ORG_FILES.gsub!(/^home/, Dir.home)
 ELISP.gsub!(/^home/, Dir.home)
 
-task :default => [:dotfiles, :tools, :packages, :linting]
+task :default => [:dotfiles, :tools, :packages]
 
 task :dotfiles do
   sh "find home -maxdepth 1 -mindepth 1 -exec cp --recursive --preserve=mode {} #{Dir.home} \\;"
