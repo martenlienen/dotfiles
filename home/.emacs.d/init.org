@@ -871,8 +871,18 @@ Put emacs into distraction-free writing mode on demand.
 #+BEGIN_SRC emacs-lisp
   (use-package julia-mode)
 
+  (defun cqql-julia-repl-with-sysimage ()
+    "Start a julia REPL with a sysimage in the project root."
+    (interactive)
+    (let* ((project-root (locate-dominating-file (buffer-file-name) "Project.toml"))
+           (sysimage (if project-root (f-join project-root "sysimage.so")))
+           (julia-repl-switches (if (f-exists-p sysimage) (concat "--sysimage " sysimage))))
+      (julia-repl)))
+
   (use-package julia-repl
     :hook ((julia-mode . julia-repl-mode))
+    :bind (:map julia-repl-mode-map
+           ("C-c C-z" . cqql-julia-repl-with-sysimage))
     :config
     (add-to-list 'julia-repl-captures (kbd "M-i"))
 
