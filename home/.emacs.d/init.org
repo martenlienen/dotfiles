@@ -229,6 +229,7 @@ of functions.
       (counsel-rg nil root)))
 
   (use-package ivy
+    :delight (ivy-mode counsel-mode)
     :bind (("C-x C-f" . cqql-find-file)
            ("C-s" . swiper)
            ("M-x" . counsel-M-x)
@@ -329,6 +330,7 @@ of functions.
 
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
+    :delight
     :init
     (setq projectile-keymap-prefix (kbd "C-x p"))
     (setq projectile-completion-system 'ivy)
@@ -390,6 +392,7 @@ active them.
 
 #+BEGIN_SRC emacs-lisp
   (use-package smartparens
+    :delight
     :init
     (require 'hydra)
     (defhydra hydra-smartparens (:hint nil)
@@ -475,6 +478,7 @@ active them.
 
 #+BEGIN_SRC emacs-lisp
   (use-package wrap-region
+    :delight
     :config (wrap-region-global-mode t))
 #+END_SRC
 
@@ -535,6 +539,7 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 
 #+BEGIN_SRC emacs-lisp
   (use-package beginend
+    :delight (beginend-global-mode beginend-org-mode)
     :config
     (beginend-global-mode))
 #+END_SRC
@@ -608,6 +613,7 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 
 #+BEGIN_SRC emacs-lisp
   (use-package company
+    :delight
     :bind ("C-M-SPC" . company-complete)
     :init
     (setf company-idle-delay 0
@@ -648,6 +654,7 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet
+    :delight yas-minor-mode
     :config
     (setf yas-fallback-behavior 'call-other-command
           yas-snippet-dirs '("~/.emacs.d/snippets"))
@@ -711,6 +718,7 @@ Put emacs into distraction-free writing mode on demand.
 
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
+    :delight
     :config
     (setq flycheck-textlint-config ".config/textlintrc.yml")
     (add-to-list 'flycheck-textlint-plugin-alist '(tex-mode . "latex2e"))
@@ -1033,6 +1041,7 @@ them to LaTeX!
                        org-default-notes-file)))
 
   (use-package org
+    :delight org-indent-mode
     :init
     (setf org-directory "~/notes"
           org-agenda-files (list org-directory)

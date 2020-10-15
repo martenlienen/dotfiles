@@ -48,6 +48,7 @@
 ;; UI
 (quelpa 'monokai-theme)
 (quelpa 'smart-mode-line)
+(quelpa 'delight)
 (quelpa 'rainbow-delimiters)
 (quelpa 'highlight-symbol)
 (quelpa 'discover-my-major)
