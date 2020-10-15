@@ -539,6 +539,12 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
     (beginend-global-mode))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+  (use-package smartscan
+    :delight
+    :hook (prog-mode . smartscan-mode))
+#+END_SRC
+
 * Code Intelligence
 
 ** Language Server Protocol (LSP)

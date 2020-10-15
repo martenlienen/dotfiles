@@ -40,6 +40,7 @@
 (quelpa 'visual-regexp)
 (quelpa 'hydra)
 (quelpa 'beginend)
+(quelpa 'smartscan)
 
 ;; Convenience
 (quelpa 'dictcc)
