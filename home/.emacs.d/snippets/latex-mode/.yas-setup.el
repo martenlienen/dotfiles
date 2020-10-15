@@ -7,10 +7,10 @@
 (defun isnip-latex-to-label (text)
   (s-dashed-words text))
 
-(cl-defun isnip-latex-last-macro (&optional (n 1))
-  "Find the name of the N-th last macro."
+(defun isnip-latex-last-macro (&optional n)
+  "Find the name of the N th last macro."
   (save-excursion
-    (cl-loop repeat n do (search-backward "\\"))
+    (cl-loop repeat (or n 1) do (search-backward "\\"))
     (forward-char)
     (word-at-point)))
 
