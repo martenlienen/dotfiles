@@ -3,7 +3,7 @@
 
 ;; Install packages from ELPA first because quelpa only knows MELPA
 (require 'cl-lib)
-(let ((elpa-packages '(auctex spinner)))
+(let ((elpa-packages '(auctex rich-minority spinner)))
   (unless package-archive-contents
     (package-refresh-contents))
 
