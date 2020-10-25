@@ -154,7 +154,8 @@ it uses an interactive shell instead of a login one which would not read my
 ** Theme
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'monokai t)
+  (load-theme 'darktooth t)
+  (darktooth-modeline-three)
 #+END_SRC
 
 ** Mode Line
