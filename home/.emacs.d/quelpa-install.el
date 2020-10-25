@@ -1,6 +1,15 @@
 (require 'package)
 (package-initialize)
 
+;; Install packages from ELPA first because quelpa only knows MELPA
+(require 'cl-lib)
+(let ((elpa-packages '(auctex spinner)))
+  (unless package-archive-contents
+    (package-refresh-contents))
+
+  (cl-loop for pkg in elpa-packages
+           unless (package-installed-p pkg) do (package-install pkg)))
+
 (unless (package-installed-p 'quelpa)
   (with-temp-buffer
     (url-insert-file-contents "https://github.com/quelpa/quelpa/raw/master/quelpa.el")
@@ -46,7 +55,7 @@
 (quelpa 'dictcc)
 
 ;; UI
-(quelpa 'monokai-theme)
+(quelpa 'darktooth-theme)
 (quelpa 'smart-mode-line)
 (quelpa 'delight)
 (quelpa 'rainbow-delimiters)
