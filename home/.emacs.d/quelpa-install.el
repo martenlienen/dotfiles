@@ -21,8 +21,8 @@
 (quelpa 'use-package-chords)
 
 ;; My own package
-(quelpa '(cqql :fetcher file :path "home/.emacs.d/lisp/cqql.el"))
-(quelpa '(cqql-deadgrep :fetcher file :path "home/.emacs.d/lisp/cqql-deadgrep.el"))
+(quelpa `(cqql :fetcher file :path ,(expand-file-name "home/.emacs.d/lisp/cqql.el")))
+(quelpa `(cqql-deadgrep :fetcher file :path ,(expand-file-name "home/.emacs.d/lisp/cqql-deadgrep.el")))
 
 ;; Key bindings
 (quelpa 'free-keys)
