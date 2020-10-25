@@ -547,7 +547,10 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 
 #+BEGIN_SRC emacs-lisp
   (use-package smartscan
-    :hook (prog-mode . smartscan-mode))
+    :hook (prog-mode . smartscan-mode)
+    :custom
+    ;; Look for symbols instead of words so that it works with UTF-8 identifiers
+    (smartscan-symbol-selector "symbol"))
 #+END_SRC
 
 * Code Intelligence
