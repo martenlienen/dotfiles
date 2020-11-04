@@ -890,7 +890,8 @@ Put emacs into distraction-free writing mode on demand.
     (interactive)
     (let* ((project-root (locate-dominating-file (buffer-file-name) "Project.toml"))
            (sysimage (if project-root (f-join project-root "sysimage.so")))
-           (julia-repl-switches (if (f-exists-p sysimage) (concat "--sysimage " sysimage))))
+           (julia-repl-switches (when (and sysimage (f-exists-p sysimage))
+                                  (concat "--sysimage " sysimage))))
       (julia-repl)))
 
   (use-package julia-repl
