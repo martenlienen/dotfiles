@@ -871,15 +871,24 @@ Put emacs into distraction-free writing mode on demand.
 ** Julia
 
 #+BEGIN_SRC emacs-lisp
-    (defun cqql-vterm-backward-kill-word ()
-      "Kill previous word in vterm."
-      (interactive)
-      (vterm-send-key (kbd "C-w")))
+  (defun cqql-vterm-backward-kill-word ()
+    "Kill previous word in vterm."
+    (interactive)
+    (vterm-send-key (kbd "C-w")))
 
-    (use-package vterm
-      :bind (:map vterm-mode-map
-                  ("<C-backspace>" . cqql-vterm-backward-kill-word)
-                  ("M-i" . nil)))
+  (use-package vterm
+    :custom-face
+    (vterm-color-black ((t . (:foreground "#2E3440" :background "#7B8394"))))
+    (vterm-color-red ((t . (:foreground "#BF616A" :background "#D08770"))))
+    (vterm-color-green ((t . (:foreground "#A3BE8C" :background "#434C5E"))))
+    (vterm-color-yellow ((t . (:foreground "#EBCB8B" :background "#7B8394"))))
+    (vterm-color-blue ((t . (:foreground "#81A1C1" :background "#D8DEE9"))))
+    (vterm-color-magenta ((t . (:foreground "#5E81AC" :background "#B48EAD"))))
+    (vterm-color-cyan ((t . (:foreground "#88C0D0" :background "#E5E9F0"))))
+    (vterm-color-white ((t . (:foreground "#E5E9F0" :background "#ECEFF4"))))
+    :bind (:map vterm-mode-map
+                ("<C-backspace>" . cqql-vterm-backward-kill-word)
+                ("M-i" . nil)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
