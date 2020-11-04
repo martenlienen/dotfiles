@@ -38,7 +38,6 @@ set laststatus=2
 let mapleader = " "
 
 inoremap fd <Esc>
-inoremap <Esc> <Nop>
 
 nnoremap , :
 
