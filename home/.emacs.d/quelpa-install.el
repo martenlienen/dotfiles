@@ -119,7 +119,8 @@
 
 ;; Julia
 (quelpa 'julia-mode)
-(quelpa 'julia-repl)
+(quelpa 'vterm)
+(quelpa '(julia-repl :fetcher git :url "https://github.com/tpapp/julia-repl.git" :branch "tp/terminal-backends"))
 
 ;; Anything web related
 ;; (quelpa 'web-mode)

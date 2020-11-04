@@ -871,6 +871,18 @@ Put emacs into distraction-free writing mode on demand.
 ** Julia
 
 #+BEGIN_SRC emacs-lisp
+    (defun cqql-vterm-backward-kill-word ()
+      "Kill previous word in vterm."
+      (interactive)
+      (vterm-send-key (kbd "C-w")))
+
+    (use-package vterm
+      :bind (:map vterm-mode-map
+                  ("<C-backspace>" . cqql-vterm-backward-kill-word)
+                  ("M-i" . nil)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
   (use-package julia-mode)
 
   (defun cqql-julia-repl-with-sysimage ()
@@ -886,6 +898,8 @@ Put emacs into distraction-free writing mode on demand.
     :bind (:map julia-repl-mode-map
            ("C-c C-z" . cqql-julia-repl-with-sysimage))
     :config
+    (julia-repl-set-terminal-backend 'vterm)
+
     (add-to-list 'julia-repl-captures (kbd "M-i"))
 
     (add-hook 'julia-repl-hook #'julia-repl-use-emacsclient))
