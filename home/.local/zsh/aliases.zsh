@@ -36,3 +36,5 @@ alias grbs="git rebase --skip"
 
 alias ipy="ipython"
 alias lab="jupyter lab"
+
+alias jl="julia"
