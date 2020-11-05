@@ -912,9 +912,7 @@ Put emacs into distraction-free writing mode on demand.
     :config
     (julia-repl-set-terminal-backend 'vterm)
 
-    (add-to-list 'julia-repl-captures (kbd "M-i"))
-
-    (add-hook 'julia-repl-hook #'julia-repl-use-emacsclient))
+    (add-to-list 'julia-repl-captures (kbd "M-i")))
 #+END_SRC
 
 ** Emacs Lisp

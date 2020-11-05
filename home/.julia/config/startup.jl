@@ -20,3 +20,5 @@ if isdefined(Main, :PkgTemplates)
         plugins = [!CompatHelper, !TagBot]
     )
 end
+
+ENV["JULIA_EDITOR"] = haskey(ENV, "INSIDE_EMACS") ? "emacsclient" : "vim"
