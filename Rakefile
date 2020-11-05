@@ -87,6 +87,20 @@ task :vim_packages => [:vim_plug, :dotfiles] do
   sh "vim +PlugUpdate +qall"
 end
 
+task :rustup do
+  sh <<END
+if ! type cargo > /dev/null; then
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
+END
+end
+
+task :rust => :rustup do
+  sh <<END
+cargo install exa hexyl fd-find bat ripgrep tokei
+END
+end
+
 task :linting do
   sh <<END
 npm install --global --prefix ~/.local \
@@ -121,7 +135,7 @@ utils="htop tree rsync redshift-gtk"
 netutils="nmap tcpdump dnsutils"
 
 # Programming tools
-programming="git vim emacs ripgrep nodejs npm"
+programming="git vim emacs nodejs npm"
 
 # Web
 web="firefox chromium-browser"
