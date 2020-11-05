@@ -577,6 +577,8 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
                       :major-modes '(rust-mode)
                       :server-id 'rls))
 
+    (setq lsp-restart 'ignore)
+
     (require 'hydra)
     (defhydra hydra-lsp (:exit t :hint nil)
       "
