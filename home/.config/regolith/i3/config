@@ -102,11 +102,11 @@ bindsym $mod+s $run toggle_spotify.py
 
 set_from_resource $rofiTheme rofi.theme /etc/regolith/styles/lascaille/rofi.rasi
 
-## Launch // Application // <> Space ##
-bindsym $mod+space exec rofi -show drun -theme $rofiTheme
+## Launch // Command // <> Space ##
+bindsym $mod+space exec rofi -show run -theme $rofiTheme
 
-## Launch // Command // <><Shift> Space ##
-bindsym $mod+Shift+space exec rofi -show run -theme $rofiTheme
+## Launch // Application // <><Shift> Space ##
+bindsym $mod+Shift+space exec rofi -show drun -theme $rofiTheme
 
 ## Navigate // Window by Name // <><Ctrl> Space ##
 bindsym $mod+Ctrl+space exec rofi -show window -theme $rofiTheme
