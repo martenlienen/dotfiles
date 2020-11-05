@@ -6,6 +6,11 @@
   ;; Disable splash screen
   (setq inhibit-startup-message t)
 
+  ;; In some X/WM configurations (e.g. xpra with i3) emacs only fills its assigned frame to
+  ;; a multiple of the character width/height, leaving an ugly black border. This ensures
+  ;; that all frames always fill their space pixel perfect.
+  (setq frame-resize-pixelwise t)
+
   (setf ring-bell-function 'ignore)
 
   (setq-default cursor-type 'bar)
