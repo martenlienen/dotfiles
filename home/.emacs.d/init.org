@@ -878,6 +878,8 @@ Put emacs into distraction-free writing mode on demand.
     (vterm-send-key (kbd "C-w")))
 
   (use-package vterm
+    :custom
+    (vterm-max-scrollback 100000)
     :custom-face
     (vterm-color-black ((t . (:foreground "#2E3440" :background "#7B8394"))))
     (vterm-color-red ((t . (:foreground "#BF616A" :background "#D08770"))))
