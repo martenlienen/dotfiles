@@ -71,6 +71,9 @@ for_window [class="Seafile Client"] floating enable
 for_window [class="SimpleScreenRecorder"] floating enable
 for_window [class="gksqt"] floating enable
 
+# PyPlot windows, even if they are remote via xpra
+for_window [title="^Figure"] floating enable
+
 # Start spotify floating, centered and borderless
 for_window [class="Spotify"] floating enable; border none; resize set width 1500; resize set height 800; move position center
 
