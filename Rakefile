@@ -27,7 +27,7 @@ ELISP.gsub!(/^home/, Dir.home)
 task :default => [:dotfiles, :tools, :packages]
 
 task :dotfiles do
-  sh "find home -maxdepth 1 -mindepth 1 -exec cp --recursive --preserve=mode {} #{Dir.home} \\;"
+  sh "rsync --keep-dirlinks --archive home/ #{Dir.home}"
 
   # Update the font cache
   sh "fc-cache"
