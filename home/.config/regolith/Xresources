@@ -1,1 +1,44 @@
 i3-wm.gaps.inner.size: 12
+
+! Use the same colors for bold and non-bold text, i.e. green bold also use color
+! green
+URxvt*intensityStyles: False
+URxvt*jumpScroll: False
+URxvt*font: xft:Fantasque Sans Mono:size=13:hinting=false
+URxvt*scrollBar: False
+URxvt*scollTtyOutput: False
+URxvt*scollWithBuffer: True
+URxvt*scollTtyKeypress: True
+URxvt*internalBorder: 10px
+! Remove a black border around the window in WMs that respect size hints
+! This is only necessary in KWin
+! URxvt*externalBorder: 10px
+
+Emacs.menuBar: off
+Emacs.toolBar: off
+Emacs.verticalScrollBars: off
+Emacs.horizontalScrollBars: off
+Emacs.font: Noto Sans Mono-13:autohint=yes
+
+! Color theme [urxvt-snazzy](https://github.com/LeonGr/urxvt-snazzy)
+*background:   #282a36
+URxvt*background:   [97]#282a36
+*foreground:   #eff0eb
+*cursorColor:  #9aedfe
+
+*color0:      #33303b
+*color8:      #4f4b58
+*color1:      #ff5c57
+*color9:      #ff5c57
+*color2:      #5af78e
+*color10:     #5af78e
+*color3:      #f3f99d
+*color11:     #f3f99d
+*color4:      #57c7ff
+*color12:     #57c7ff
+*color5:      #ff6ac1
+*color13:     #ff6ac1
+*color6:      #9aedfe
+*color14:     #9aedfe
+*color7:      #eff0eb
+*color15:     #eff0eb

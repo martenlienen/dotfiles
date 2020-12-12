@@ -135,7 +135,7 @@ utils="htop tree rsync redshift-gtk"
 netutils="nmap tcpdump dnsutils"
 
 # Programming tools
-programming="git vim emacs nodejs npm"
+programming="git vim emacs nodejs npm fonts-noto"
 
 # Web
 web="firefox chromium-browser"
