@@ -123,7 +123,7 @@
 (quelpa '(julia-repl :fetcher git :url "https://github.com/tpapp/julia-repl.git" :branch "tp/terminal-backends"))
 
 ;; Anything web related
-;; (quelpa 'web-mode)
+(quelpa 'web-mode)
 
 ;; Javascript
 ;; (quelpa 'js2-mode)
