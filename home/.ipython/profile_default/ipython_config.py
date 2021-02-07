@@ -28,3 +28,4 @@ c.InteractiveShellApp.exec_lines = [
     import_if_available("matplotlib.pyplot", "pp"),
     import_if_available("torch"),
 ]
+c.TerminalInteractiveShell.confirm_exit = False
