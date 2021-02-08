@@ -857,9 +857,7 @@ Put emacs into distraction-free writing mode on demand.
     :config
     (setq python-docstring-sentence-end-double-space nil))
 
-  (use-package blacken
-    :config
-    (setq blacken-allow-py36 t))
+  (use-package blacken)
 
   (use-package pip-requirements)
 
