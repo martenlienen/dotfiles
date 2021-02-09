@@ -22,10 +22,12 @@ except ImportError:
 
 
 c = get_config()
+c.InteractiveShellApp.extensions = ["autoreload"]
 c.InteractiveShellApp.exec_lines = [
     import_if_available("numpy", "np", setup="rng = np.random.default_rng()"),
     import_if_available("pandas", "pd"),
     import_if_available("matplotlib.pyplot", "pp"),
     import_if_available("torch"),
+    "%autoreload 2"
 ]
 c.TerminalInteractiveShell.confirm_exit = False
