@@ -824,6 +824,12 @@ Put emacs into distraction-free writing mode on demand.
     "Use anaconda as a company backend."
     (add-to-list 'company-backends 'company-anaconda))
 
+  (defun cqql-enable-local-pyenv ()
+    (when-let ((buffer-path (buffer-file-name))
+               (pyenv-dir (locate-dominating-file buffer-path ".python-version"))
+               (mode (-> (f-join pyenv-dir ".python-version") f-read-text s-trim)))
+      (pyenv-mode-set mode)))
+
   (use-package python
     :bind (:map python-mode-map
                 ("C-c D" . #'realgud:pdb)
@@ -847,7 +853,8 @@ Put emacs into distraction-free writing mode on demand.
     (add-hook 'python-mode-hook #'pyenv-mode)
     (add-hook 'python-mode-hook #'python-docstring-mode)
     (add-hook 'python-mode-hook #'anaconda-mode)
-    (add-hook 'python-mode-hook #'cqql-enable-company-anaconda))
+    (add-hook 'python-mode-hook #'cqql-enable-company-anaconda)
+    (add-hook 'python-mode-hook #'cqql-enable-local-pyenv))
 
   (use-package python-pytest
     :bind (:map python-pytest-mode-map
