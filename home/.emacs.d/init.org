@@ -856,6 +856,11 @@ Put emacs into distraction-free writing mode on demand.
     (add-hook 'python-mode-hook #'cqql-enable-company-anaconda)
     (add-hook 'python-mode-hook #'cqql-enable-local-pyenv))
 
+  (use-package anaconda-mode
+    :bind (:map anaconda-mode-map
+                ;; xpra does not correctly transmit M-?
+                ("C-?" . #'anaconda-mode-show-doc)))
+
   (use-package python-pytest
     :bind (:map python-pytest-mode-map
                 ("q" . #'bury-buffer)))
