@@ -52,6 +52,9 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST
 
+# Enable extended pattern matching
+setopt KSH_GLOB
+
 # File and limits
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
 HISTSIZE=50000

@@ -86,10 +86,10 @@ function get_prompt {
     # While the directory is too long and there are at least three parts to it
     while [[ (${#directory} -ge 50) && (${#${directory//[^\/]}} -ge 2) ]]; do
       # Remove the ... from a previous iteration
-      directory="${directory/#?\/...\//${directory/%\/*/}/}"
+      directory="${directory/#?(~)\/...\//${directory/%\/*/}/}"
 
       # Replace the part after the first slash with ...
-      directory="${directory/#?\/[^\/]#\//${directory/%\/*/}/.../}"
+      directory="${directory/#?(~)\/[^\/]#\//${directory/%\/*/}/.../}"
     done
   fi
 
