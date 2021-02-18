@@ -4,6 +4,7 @@ alias au="sudo apt update"
 alias aU="sudo apt upgrade"
 
 alias l="ls -lh"
+alias e="exa"
 
 alias g="git"
 alias gst="git status"
