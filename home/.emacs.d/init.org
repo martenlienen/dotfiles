@@ -820,6 +820,27 @@ Put emacs into distraction-free writing mode on demand.
     (isortify-buffer)
     (blacken-buffer))
 
+  (define-advice isortify-call-bin (:override (input-buffer output-buffer) call-bin)
+    "Call the isort binary instead of the isort python module.
+
+  This avoids having to install isort into a development
+  environment and also a bad interaction where isort prints the
+  reset_all CSI at the end of a file if colorama is available.
+  "
+    (with-current-buffer input-buffer
+      (let ((process (make-process :name "isort"
+                                   :command `("isort" ,@(isortify-call-args))
+                                   :buffer output-buffer
+                                   :noquery t
+                                   :sentinel (lambda (process event)))))
+        (process-send-region process (point-min) (point-max))
+        (process-send-eof process)
+        (process-send-eof process)  ;; Close pipe twice on purpose to prevent deadlock.
+        (accept-process-output process nil nil t)
+        (while (process-live-p process)
+          (accept-process-output process nil nil t))
+        (process-exit-status process))))
+
   (defun cqql-enable-company-anaconda ()
     "Use anaconda as a company backend."
     (add-to-list 'company-backends 'company-anaconda))
