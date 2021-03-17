@@ -84,9 +84,9 @@ Automatically jump to origin file and line when an the point is on an error.
 
 #+BEGIN_SRC emacs-lisp
   ;; Start a server for emacsclient
-  (require 'server)
-  (unless (server-running-p)
-    (server-start))
+  ;; (require 'server)
+  ;; (unless (server-running-p)
+  ;;   (server-start))
 #+END_SRC
 
 * Packages
