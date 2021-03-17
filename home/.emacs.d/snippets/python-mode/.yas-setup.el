@@ -28,10 +28,12 @@
   "Convert a string of arguments to a string of self assignments."
   (if (string= text "")
       ""
-    (cl-flet ((make-assignment (arg) (format "self.%s = %s" arg arg))
+    (cl-flet ((strip-type-and-default (spec) (nth 0 (split-string spec ":\\|=")))
+              (make-assignment (arg) (format "self.%s = %s" arg arg))
               (indent (line) (concat (s-repeat (current-indentation) " ")
                                      line)))
-      (let* ((args (split-string text ", *" t))
+      (let* ((specs (split-string text ", *" t))
+             (args (mapcar #'strip-type-and-default specs))
              (assignments (mapcar #'make-assignment args))
              (indented (cons (car assignments)
                              (mapcar #'indent (cdr assignments)))))
