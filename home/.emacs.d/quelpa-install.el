@@ -63,6 +63,7 @@
 (quelpa 'highlight-symbol)
 (quelpa 'discover-my-major)
 (quelpa 'helpful)
+(quelpa 'which-key)
 (quelpa 'beacon)
 
 ;; Debugging
@@ -85,15 +86,19 @@
 ;; Syntax checking
 (quelpa 'flycheck)
 
-;; Searching
-(quelpa 'swiper)
-(quelpa 'ivy)
-(quelpa 'ivy-rich)
-(quelpa 'ivy-prescient)
-(quelpa 'counsel)
+;; Projects
 (quelpa 'projectile)
-(quelpa 'flx)
+
+;; Searching & selection
 (quelpa 'deadgrep)
+(quelpa 'selectrum)
+(quelpa 'prescient)
+(quelpa 'selectrum-prescient)
+(quelpa 'consult)
+(quelpa 'marginalia)
+(quelpa 'embark)
+(quelpa 'embark-consult)
+(quelpa 'orderless)
 
 ;; Markdown
 (quelpa 'markdown-mode)

@@ -219,36 +219,102 @@ of functions.
            ("C-c C-d" . helpful-at-point)))
 #+END_SRC
 
-** Better Selection
+** Searching & Selection
 
-~ivy/swiper~ is a light-weight completion front end for emacs.
+The ~selectrum~ ecosystem offers a rich combination of libraries and tools that integrate
+with emacs built-in APIs.
 
-#+BEGIN_SRC emacs-lisp
-  (defun cqql-counsel-rg-in-project-root ()
-    "Run counsel-rg in the project root."
-    (interactive)
-    (let ((root (condition-case nil (projectile-project-root) (error nil))))
-      ;; Search hidden files
-      (counsel-rg nil root)))
+#+BEGIN_SRC emacs-lisp  (use-package selectrum
+  (use-package orderless
+    :custom (completion-styles '(orderless)))
 
-  (use-package ivy
-    :bind (("C-x f" . counsel-find-file)
-           ("C-s" . swiper)
-           ("M-x" . counsel-M-x)
-           ("C-x 8" . counsel-unicode-char)
-           ("C-c s" . cqql-counsel-rg-in-project-root)
-           ("M-o" . ivy-resume)
-           ("C-x b" . counsel-switch-buffer))
+  (use-package selectrum
+    :custom
+    ;; Only highlight visible candidates. Slightly improves performance (says the docs)
+    (selectrum-refine-candidates-function #'orderless-filter)
+    (selectrum-highlight-candidates-function #'orderless-highlight-matches)
+    :config (selectrum-mode))
+
+  (use-package prescient
+    :config (prescient-persist-mode))
+
+  (use-package selectrum-prescient
+    :after (selectrum prescient)
+    :custom (selectrum-prescient-enable-filtering nil)
+    :config (selectrum-prescient-mode))
+
+  (use-package marginalia
+    :custom
+    (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+    :config (marginalia-mode))
+
+  (use-package consult
+    :custom
+    (consult-project-root-function #'projectile-project-root)
+    (consult-narrow-key "<")
+    (register-preview-delay 0)
+    (register-preview-function #'consult-register-format)
+    ;; Use consult to select xref locations with preview
+    (xref-show-xrefs-function #'consult-xref)
+    (xref-show-definitions-function #'consult-xref)
+    :bind (("C-s" . consult-line)
+           ("C-S-s" . isearch-forward)
+           ("C-c s" . consult-ripgrep)
+           ("C-x f" . find-file)
+           ("C-c M-o" . selectrum-repeat)
+           ("M-y" . consult-yank-pop)
+           ("C-x b" . consult-buffer)
+           ("C-x 4 b" . consult-buffer-other-window)
+           ("C-x 5 b" . consult-buffer-other-frame)
+           ("C-x M-:" . consult-complex-command)
+           ("C-c c" . hydra-consult/body)
+
+           ;; Isearch integration
+           :map isearch-mode-map
+           ("M-s l" . consult-line))
+
     :init
-    (setq ivy-count-format "%d/%d "
-          ivy-extra-directories (list ".")
-          ivy-re-builders-alist '((t . ivy--regex-ignore-order))
-          counsel-yank-pop-truncate-radius 3)
+    (defhydra hydra-consult (:exit t :hint nil)
+        "
+     Line^^       Region^^           Goto^^             Other
+    ----------------------------------------------------------
+     [_f_] find   [_k_] focus lines  [_m_] mark         [_a_] apropos
+     [_l_] locate [_K_] keep lines   [_M_] global mark  [_c_] mode command
+     [_e_] error                   [_o_] outline      [_b_] bookmark"
+        ("f" consult-find)
+        ("l" consult-locate)
+        ("K" consult-keep-lines)
+        ("k" consult-focus-lines)
+        ("e" consult-compile-error)
+        ("m" consult-mark)
+        ("M" consult-global-mark)
+        ("o" consult-outline)
+        ("a" consult-apropos)
+        ("c" consult-mode-command)
+        ("b" consult-bookmark)
+        ("<F3>" consult-kmacro))
+
+    ;; Optionally tweak the register preview window.
+    ;; This adds thin lines, sorting and hides the mode line of the window.
+    (advice-add #'register-preview :override #'consult-register-window))
+
+  (use-package embark
+    :bind ("M-o" . embark-act)
     :config
-    (ivy-mode)
-    (counsel-mode)
-    (ivy-rich-mode)
-    (ivy-prescient-mode))
+    (require 'which-key)
+    (setq embark-action-indicator
+          (lambda (map _target)
+            (which-key--show-keymap "Embark" map nil nil 'no-paging)
+            #'which-key--hide-popup-ignore-command)
+          embark-become-indicator embark-action-indicator))
+
+  ;; Consult users will also want the embark-consult package.
+  (use-package embark-consult
+    :after (embark consult)
+    :demand t ; only necessary if you have the hook below
+    ;; if you want to have consult previews as you move around an
+    ;; auto-updating embark collect buffer
+    :hook (embark-collect-mode . embark-consult-preview-minor-mode))
 #+END_SRC
 
 ** File search with rg
