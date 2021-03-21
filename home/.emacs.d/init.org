@@ -139,6 +139,15 @@ easily into one of the existing sections.
     (add-hook 'before-save-hook #'cqql-trim-whitespace))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+  (use-package tmp-buffer
+    :bind ("C-c n" . tmp-buffer))
+
+  (use-package window-extras
+    :bind (("C-c w t" . transpose-windows)
+           ("C-c w v" . toggle-window-split)))
+#+END_SRC
+
 ** PATH
 
 Teach emacs my modified ~PATH~ so that it can, for example, find local python

@@ -23,6 +23,8 @@
 ;; My own package
 (quelpa `(cqql :fetcher file :path ,(expand-file-name "home/.emacs.d/lisp/cqql.el")))
 (quelpa `(cqql-deadgrep :fetcher file :path ,(expand-file-name "home/.emacs.d/lisp/cqql-deadgrep.el")))
+(quelpa `(tmp-buffer :fetcher file :path ,(expand-file-name "home/.emacs.d/lisp/tmp-buffer.el")))
+(quelpa `(window-extras :fetcher file :path ,(expand-file-name "home/.emacs.d/lisp/window-extras.el")))
 
 ;; Key bindings
 (quelpa 'free-keys)
