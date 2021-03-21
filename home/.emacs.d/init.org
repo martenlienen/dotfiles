@@ -157,9 +157,9 @@ it uses an interactive shell instead of a login one which would not read my
 ** Theme
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'darktooth t)
+  (load-theme 'zerodark t)
   (set-mouse-color "light goldenrod yellow")
-  (darktooth-modeline-three)
+  (zerodark-setup-modeline-format)
 #+END_SRC
 
 ** Mode Line

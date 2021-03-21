@@ -56,6 +56,7 @@
 
 ;; UI
 (quelpa 'darktooth-theme)
+(quelpa 'zerodark-theme)
 (quelpa 'smart-mode-line)
 (quelpa 'delight)
 (quelpa 'rainbow-delimiters)
