@@ -751,17 +751,18 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 ** git
 
 #+BEGIN_SRC emacs-lisp
-  (use-package magit
-    :bind (("<f2>" . magit-status)
-           ("<f5>" . magit-file-dispatch))
-    :init
-    (setq magit-last-seen-setup-instructions "1.4.0"
-          magit-commit-ask-to-stage nil
-          magit-push-always-verify nil)
+    (use-package magit
+      :bind (("<f2>" . magit-status)
+             ("<f5>" . magit-file-dispatch))
+      :init
+      (setq magit-last-seen-setup-instructions "1.4.0"
+            magit-commit-ask-to-stage nil
+            magit-push-always-verify nil
+            magit-no-confirm '(set-and-push amend-published rebase-published))
 
-    :config
-    (require 'git-timemachine)
-    (transient-append-suffix 'magit-file-dispatch "t" (list 1 "T" "Timemachine" #'git-timemachine)))
+      :config
+      (require 'git-timemachine)
+      (transient-append-suffix 'magit-file-dispatch "t" (list 1 "T" "Timemachine" #'git-timemachine)))
 #+END_SRC
 
 ** dict.cc
