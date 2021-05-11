@@ -785,7 +785,7 @@ Put emacs into distraction-free writing mode on demand.
 #+BEGIN_SRC emacs-lisp
   (use-package darkroom
     :bind (:map text-mode-map
-                ("C-c D" . #'darkroom-mode))
+                ("<f7>" . #'darkroom-mode))
 
     :config
     (setq darkroom-text-scale-increase 1.5))
