@@ -773,8 +773,7 @@ Put emacs into distraction-free writing mode on demand.
 
 #+BEGIN_SRC emacs-lisp
   (use-package darkroom
-    :bind (:map text-mode-map
-                ("<f7>" . #'darkroom-mode))
+    :bind (("<f7>" . #'darkroom-mode))
 
     :config
     (setq darkroom-text-scale-increase 1.5))
