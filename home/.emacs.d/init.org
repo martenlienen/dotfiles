@@ -166,7 +166,7 @@ it uses an interactive shell instead of a login one which would not read my
 ** Theme
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'zerodark t)
+  (load-theme 'solarized-zenburn t)
   (set-mouse-color "light goldenrod yellow")
   (zerodark-setup-modeline-format)
 #+END_SRC
