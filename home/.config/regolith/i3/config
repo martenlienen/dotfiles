@@ -76,6 +76,7 @@ for_window [title="^Figure"] floating enable
 
 # Start spotify floating, centered and borderless
 for_window [class="Spotify"] floating enable; border none; resize set width 1500; resize set height 800; move position center
+for_window [class="Todoist"] floating enable; border none; move position center
 
 ###############################################################################
 # External programs launched with i3
@@ -101,7 +102,10 @@ bindsym $mod+Return exec /usr/bin/x-terminal-emulator
 bindsym $mod+Shift+Return exec gtk-launch $(xdg-settings get default-web-browser)
 
 ## Launch // Spotify // <> s ##
-bindsym $mod+s $run toggle_spotify.py
+bindsym $mod+s $run toggle_window.py spotify
+
+## Launch // Todoist // <> ` ##
+bindsym $mod+grave $run toggle_window.py todoist
 
 set_from_resource $rofiTheme rofi.theme /etc/regolith/styles/lascaille/rofi.rasi
 
