@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
-from argparse import ArgumentParser
 import json
-import os
 import shutil
 import subprocess
+from argparse import ArgumentParser
 
 I3MSG_PATH = "/usr/bin/i3-msg"
 
@@ -57,7 +56,7 @@ def program_runs(program):
 
 def start_program(program):
     path = shutil.which(program)
-    os.execl(path, path)
+    subprocess.Popen([path], start_new_session=True)
 
 
 def program_is_visible(workspace):
