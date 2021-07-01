@@ -59,7 +59,7 @@ def start_program(program):
     subprocess.Popen([path], start_new_session=True)
 
 
-def program_is_visible(workspace):
+def program_is_visible(workspace, program):
     class FoundIt(Exception):
         pass
 
@@ -67,7 +67,9 @@ def program_is_visible(workspace):
     # case if for example the focused window is on a workspace on a different screen that
     # is displayed concurrently.
     def search(node):
-        if node.get("focused") == True:
+        instance = node.get("window_properties", {}).get("instance")
+        is_focused = node.get("focused", False)
+        if is_focused and instance == program:
             raise FoundIt()
 
         if "nodes" in node:
@@ -113,7 +115,7 @@ def main():
     if program_runs(program):
         workspace = find_program_workspace(window_class)
 
-        if program_is_visible(workspace):
+        if program_is_visible(workspace, program):
             hide_program(window_class)
         elif program_is_on_scratchpad(workspace):
             show_program(window_class)
