@@ -52,6 +52,7 @@
 (quelpa 'hydra)
 (quelpa 'beginend)
 (quelpa 'smartscan)
+(quelpa 'iflipb)
 
 ;; Convenience
 (quelpa 'dictcc)

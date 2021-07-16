@@ -228,6 +228,15 @@ of functions.
            ("C-c C-d" . helpful-at-point)))
 #+END_SRC
 
+** Buffer Switching
+
+#+BEGIN_SRC emacs-lisp
+  (use-package iflipb
+    :bind (("<f6>" . iflipb-next-buffer)
+           ("M-<f6>" . iflipb-previous-buffer)
+           ("S-<f6>" . iflipb-kill-buffer)))
+#+END_SRC
+
 ** Searching & Selection
 
 The ~selectrum~ ecosystem offers a rich combination of libraries and tools that integrate
