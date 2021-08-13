@@ -1,6 +1,28 @@
 #+TITLE: init.el
 #+PROPERTY: header-args :tangle yes :results silent
 
+* straight.el
+
+#+BEGIN_SRC emacs-lisp
+  (setq straight-check-for-modifications nil)
+
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+
+  (straight-use-package 'use-package)
+  (straight-use-package 'hydra)
+#+END_SRC
+
 * Globals
 #+BEGIN_SRC emacs-lisp
   ;; Disable splash screen
@@ -94,16 +116,10 @@ Automatically jump to origin file and line when an the point is on an error.
 Packages are configured with the ~use-package~ macro.
 
 #+BEGIN_SRC emacs-lisp
-  ;; Make installed packages available for compilation as well as evaluation
-  (eval-and-compile
-    (package-initialize))
-
-  ;; Load use-package to configure packages
-  (eval-when-compile
-    (require 'use-package))
-  (require 'bind-key)
-  (use-package use-package-chords
-    :config (key-chord-mode t))
+    (require 'bind-key)
+    (use-package use-package-chords
+      :config (key-chord-mode t)
+      :straight t)
 #+END_SRC
 
 * Tramp Fix
@@ -128,6 +144,7 @@ easily into one of the existing sections.
 
 #+BEGIN_SRC emacs-lisp
   (use-package cqql
+    :straight (mlextras :local-repo "mlextras")
     :bind (("C-a" . cqql-go-to-beginning-of-line-dwim)
            ("M-D" . cqql-duplicate-text)
            ("C-S-k" . cqql-kill-line)
@@ -141,9 +158,11 @@ easily into one of the existing sections.
 
 #+BEGIN_SRC emacs-lisp
   (use-package tmp-buffer
+    :straight (mlextras :local-repo "mlextras")
     :bind ("C-c n" . tmp-buffer))
 
   (use-package window-extras
+    :straight (mlextras :local-repo "mlextras")
     :bind (("C-c w t" . transpose-windows)
            ("C-c w v" . toggle-window-split)))
 #+END_SRC
@@ -156,9 +175,10 @@ it uses an interactive shell instead of a login one which would not read my
 ~.zshenv~ file, where ~PATH~ is initialized.
 
 #+BEGIN_SRC emacs-lisp
-  (setq exec-path-from-shell-arguments "")
-
-  (exec-path-from-shell-initialize)
+  (use-package exec-path-from-shell
+    :straight t
+    :custom (exec-path-from-shell-arguments "")
+    :config (exec-path-from-shell-initialize))
 #+END_SRC
 
 * UI
@@ -166,20 +186,32 @@ it uses an interactive shell instead of a login one which would not read my
 ** Theme
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'solarized-zenburn t)
   (set-mouse-color "light goldenrod yellow")
-  (zerodark-setup-modeline-format)
+
+  ;; (use-package darktooth-theme
+  ;;   :straight t)
+
+  (use-package solarized-theme
+    :straight t
+    :config (load-theme 'solarized-zenburn t))
+
+  (use-package zerodark-theme
+    :straight t
+    :after flycheck
+    :config (zerodark-setup-modeline-format))
 #+END_SRC
 
 ** Mode Line
 
 #+BEGIN_SRC emacs-lisp
   (use-package rich-minority
+    :straight t
     :config
     ;; Hide all minor modes
     (setq rm-whitelist (list "")))
 
   (use-package smart-mode-line
+    :straight t
     :config
     (setf sml/theme 'respectful
           sml/no-confirm-load-theme t)
@@ -193,6 +225,7 @@ Save the minibuffer history.
 
 #+BEGIN_SRC emacs-lisp
   (use-package savehist
+    :straight t
     :config
     (setf history-length 200)
     (savehist-mode))
@@ -212,6 +245,7 @@ in a condensed format.
 
 #+BEGIN_SRC emacs-lisp
   (use-package discover-my-major
+    :straight t
     :bind ("C-h C-m" . discover-my-major))
 #+END_SRC
 
@@ -220,6 +254,7 @@ of functions.
 
 #+BEGIN_SRC emacs-lisp
   (use-package helpful
+    :straight t
     :bind (("C-h a" . helpful-command)
            ("C-h f" . helpful-callable)
            ("C-h v" . helpful-variable)
@@ -232,6 +267,7 @@ of functions.
 
 #+BEGIN_SRC emacs-lisp
   (use-package iflipb
+    :straight t
     :bind (("<f6>" . iflipb-next-buffer)
            ("M-<f6>" . iflipb-previous-buffer)
            ("S-<f6>" . iflipb-kill-buffer)))
@@ -242,11 +278,13 @@ of functions.
 The ~selectrum~ ecosystem offers a rich combination of libraries and tools that integrate
 with emacs built-in APIs.
 
-#+BEGIN_SRC emacs-lisp  (use-package selectrum
+#+BEGIN_SRC emacs-lisp
   (use-package orderless
+    :straight t
     :custom (completion-styles '(orderless)))
 
   (use-package selectrum
+    :straight t
     :custom
     ;; Only highlight visible candidates. Slightly improves performance (says the docs)
     (selectrum-refine-candidates-function #'orderless-filter)
@@ -254,19 +292,24 @@ with emacs built-in APIs.
     :config (selectrum-mode))
 
   (use-package prescient
+    :straight t
     :config (prescient-persist-mode))
 
   (use-package selectrum-prescient
+    :straight t
     :after (selectrum prescient)
     :custom (selectrum-prescient-enable-filtering nil)
     :config (selectrum-prescient-mode))
 
   (use-package marginalia
+    :straight t
     :custom
     (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
     :config (marginalia-mode))
 
   (use-package consult
+    :straight t
+    :after hydra
     :custom
     (consult-project-root-function #'projectile-project-root)
     (consult-narrow-key "<")
@@ -316,7 +359,10 @@ with emacs built-in APIs.
     ;; This adds thin lines, sorting and hides the mode line of the window.
     (advice-add #'register-preview :override #'consult-register-window))
 
+  (use-package which-key :straight t)
+
   (use-package embark
+    :straight t
     :bind ("M-o" . embark-act)
     :config
     (require 'which-key)
@@ -328,6 +374,7 @@ with emacs built-in APIs.
 
   ;; Consult users will also want the embark-consult package.
   (use-package embark-consult
+    :straight t
     :after (embark consult)
     :demand t ; only necessary if you have the hook below
     ;; if you want to have consult previews as you move around an
@@ -339,11 +386,14 @@ with emacs built-in APIs.
 
 #+BEGIN_SRC emacs-lisp
   (use-package deadgrep
-    :bind (("C-c S" . deadgrep)
-           :map deadgrep-mode-map
-           ("s" . cqql-deadgrep-search-term))
-    :config
-    (require 'cqql-deadgrep))
+    :straight t
+    :bind (("C-c S" . deadgrep)))
+
+  (use-package cqql-deadgrep
+    :straight (mlextras :local-repo "mlextras")
+    :after deadgrep
+    :bind (:map deadgrep-mode-map
+           ("s" . cqql-deadgrep-search-term)))
 #+END_SRC
 
 ** Highlighting
@@ -352,6 +402,7 @@ with emacs built-in APIs.
 
 #+BEGIN_SRC emacs-lisp
   (use-package beacon
+    :straight t
     :config
     (beacon-mode))
 #+END_SRC
@@ -360,6 +411,7 @@ with emacs built-in APIs.
 
 #+BEGIN_SRC emacs-lisp
   (use-package rainbow-delimiters
+    :straight t
     :config
     (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
@@ -370,6 +422,7 @@ with emacs built-in APIs.
 
 #+BEGIN_SRC emacs-lisp
   (use-package highlight-symbol
+    :straight t
     :config
     (add-hook 'prog-mode-hook 'highlight-symbol-mode)
 
@@ -380,6 +433,7 @@ with emacs built-in APIs.
 
 #+BEGIN_SRC emacs-lisp
   (use-package ace-window
+    :straight t
     :bind ("M-i" . ace-window))
 #+END_SRC
 
@@ -416,6 +470,7 @@ with emacs built-in APIs.
 
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
+    :straight t
     :bind (("C-x C-f" . projectile-find-file))
     :init
     (setq projectile-keymap-prefix (kbd "C-x p"))
@@ -430,9 +485,13 @@ with emacs built-in APIs.
 
 #+BEGIN_SRC emacs-lisp
   (use-package multiple-cursors
-    :init
-    (require 'hydra)
-    (require 'multiple-cursors)
+    :straight t
+    :after hydra
+    :bind (("C-c m" . hydra-multiple-cursors/body)
+           :map mc/keymap
+           ;; Make enter insert a newline instead of quitting mc
+           ("<return>" . nil))
+    :config
     (defhydra hydra-multiple-cursors (:hint nil)
       "
    Up^^             Down^^           Miscellaneous           % 2(mc/num-cursors) cursor%s(if (> (mc/num-cursors) 1) \"s\" \"\")
@@ -456,17 +515,14 @@ with emacs built-in APIs.
       ;; Help with click recognition in this hydra
       ("<down-mouse-1>" ignore)
       ("<drag-mouse-1>" ignore)
-      ("q" nil))
-    :bind (("C-c m" . hydra-multiple-cursors/body)
-           :map mc/keymap
-           ;; Make enter insert a newline instead of quitting mc
-           ("<return>" . nil)))
+      ("q" nil)))
 #+END_SRC
 
 ** SmartParens
 
 #+BEGIN_SRC emacs-lisp
   (use-package smartparens
+    :straight t
     :init
     (require 'hydra)
     (defhydra hydra-smartparens (:hint nil)
@@ -552,11 +608,13 @@ with emacs built-in APIs.
 
 #+BEGIN_SRC emacs-lisp
   (use-package wrap-region
+    :straight t
     :config (wrap-region-global-mode t))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
   (use-package expand-region
+    :straight t
     :bind (("M-m" . er/expand-region)
            ("M-M" . er/contract-region))
     :config
@@ -570,6 +628,7 @@ Gives you a visual preview at the point of replacement.
 
 #+BEGIN_SRC emacs-lisp
   (use-package visual-regexp
+    :straight t
     :bind (("C-c r" . vr/replace)
            ("C-c R" . vr/query-replace)))
 #+END_SRC
@@ -580,6 +639,7 @@ Quickly move to every word and character on screen.
 
 #+BEGIN_SRC emacs-lisp
   (use-package avy
+    :straight t
     :init
     (require 'hydra)
     (defhydra hydra-avy (:exit t :hint nil)
@@ -612,12 +672,14 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 
 #+BEGIN_SRC emacs-lisp
   (use-package beginend
+    :straight t
     :config
     (beginend-global-mode))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
   (use-package smartscan
+    :straight t
     :hook (prog-mode . smartscan-mode)
     :custom
     ;; Look for symbols instead of words so that it works with UTF-8 identifiers
@@ -630,6 +692,7 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 
 #+BEGIN_SRC emacs-lisp
   (use-package lsp-mode
+    :straight t
     :init
     (setq lsp-auto-guess-root t
           lsp-auto-require-clients nil
@@ -676,11 +739,13 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
     :bind (("C-c l" . hydra-lsp/body)))
 
   (use-package lsp-ui
+    :straight t
     :bind (:map lsp-ui-mode-map
                 ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
                 ([remap xref-find-references] . lsp-ui-peek-find-references)))
 
   (use-package lsp-julia
+    :straight (lsp-julia :fetcher github :repo "non-Jedi/lsp-julia" :files (:defaults "languageserver"))
     :init
     (setq lsp-julia-package-dir nil))
 #+END_SRC
@@ -689,6 +754,7 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 
 #+BEGIN_SRC emacs-lisp
   (use-package company
+    :straight t
     :bind ("C-M-SPC" . company-complete)
     :init
     (setf company-idle-delay 0
@@ -704,11 +770,14 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
     (global-company-mode t))
 
   (use-package company-dabbrev
+    :straight company
     :init
     (setf company-dabbrev-ignore-case 'keep-prefix
           company-dabbrev-ignore-invisible t
           company-dabbrev-downcase nil))
 
+  (use-package company-lsp
+    :after lsp)
 #+END_SRC
 
 ** Complete from elsewhere
@@ -729,6 +798,7 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet
+    :straight t
     :config
     (setf yas-fallback-behavior 'call-other-command
           yas-snippet-dirs '("~/.emacs.d/snippets"))
@@ -749,7 +819,12 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 ** git
 
 #+BEGIN_SRC emacs-lisp
+  (use-package git-timemachine
+    :straight t)
+
   (use-package magit
+    :straight t
+    :after git-timemachine
     :bind (("<f2>" . magit-status)
            ("M-<f2>" . magit-list-repositories)
            ("<f5>" . magit-file-dispatch))
@@ -773,7 +848,6 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
           '(("~/.dotfiles" . 1) ("~/src" . 2)))
 
     :config
-    (require 'git-timemachine)
     (transient-append-suffix 'magit-file-dispatch "t" (list 1 "T" "Timemachine" #'git-timemachine)))
 #+END_SRC
 
@@ -781,13 +855,16 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 
 #+BEGIN_SRC emacs-lisp
   (use-package dictcc
+    :straight t
     :bind ("C-c d" . dictcc))
 #+END_SRC
 
 ** Debugging
 
 #+BEGIN_SRC emacs-lisp
-  (use-package realgud)
+  (use-package realgud
+    :straight t
+    :defer t)
 #+END_SRC
 
 * Writing
@@ -796,6 +873,7 @@ Put emacs into distraction-free writing mode on demand.
 
 #+BEGIN_SRC emacs-lisp
   (use-package darkroom
+    :straight (darkroom :repo "joaotavora/darkroom" :fetcher "github")
     :bind (("<f7>" . #'darkroom-mode))
 
     :config
@@ -806,6 +884,7 @@ Put emacs into distraction-free writing mode on demand.
 
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
+    :straight t
     :config
     (setq flycheck-textlint-config ".config/textlintrc.yml")
     (add-to-list 'flycheck-textlint-plugin-alist '(tex-mode . "latex2e"))
@@ -819,7 +898,7 @@ Put emacs into distraction-free writing mode on demand.
 ** Python
 
 #+BEGIN_SRC emacs-lisp
-  (use-package pyenv-mode)
+  (use-package pyenv-mode :straight t)
 
   (defmacro with-pyenv (name &rest body)
     "Execute BODY with pyenv NAME activated."
@@ -907,26 +986,29 @@ Put emacs into distraction-free writing mode on demand.
     (isortify-buffer)
     (blacken-buffer))
 
-  (define-advice isortify-call-bin (:override (input-buffer output-buffer) call-bin)
-    "Call the isort binary instead of the isort python module.
+  (use-package isortify
+    :straight t
+    :config
+    (define-advice isortify-call-bin (:override (input-buffer output-buffer) call-bin)
+      "Call the isort binary instead of the isort python module.
 
   This avoids having to install isort into a development
   environment and also a bad interaction where isort prints the
   reset_all CSI at the end of a file if colorama is available.
   "
-    (with-current-buffer input-buffer
-      (let ((process (make-process :name "isort"
-                                   :command `("isort" ,@(isortify-call-args))
-                                   :buffer output-buffer
-                                   :noquery t
-                                   :sentinel (lambda (process event)))))
-        (process-send-region process (point-min) (point-max))
-        (process-send-eof process)
-        (process-send-eof process)  ;; Close pipe twice on purpose to prevent deadlock.
-        (accept-process-output process nil nil t)
-        (while (process-live-p process)
-          (accept-process-output process nil nil t))
-        (process-exit-status process))))
+      (with-current-buffer input-buffer
+        (let ((process (make-process :name "isort"
+                                     :command `("isort" ,@(isortify-call-args))
+                                     :buffer output-buffer
+                                     :noquery t
+                                     :sentinel (lambda (process event)))))
+          (process-send-region process (point-min) (point-max))
+          (process-send-eof process)
+          (process-send-eof process) ;; Close pipe twice on purpose to prevent deadlock.
+          (accept-process-output process nil nil t)
+          (while (process-live-p process)
+            (accept-process-output process nil nil t))
+          (process-exit-status process)))))
 
   (defun cqql-enable-company-anaconda ()
     "Use anaconda as a company backend."
@@ -965,23 +1047,30 @@ Put emacs into distraction-free writing mode on demand.
     (add-hook 'python-mode-hook #'cqql-enable-local-pyenv))
 
   (use-package anaconda-mode
+    :straight t
     :bind (:map anaconda-mode-map
                 ;; xpra does not correctly transmit M-?
                 ("C-?" . #'anaconda-mode-show-doc)))
 
+  (use-package company-anaconda
+    :straight t
+    :after (anaconda-mode company))
+
   (use-package python-pytest
+    :straight t
     :bind (:map python-pytest-mode-map
                 ("q" . #'bury-buffer)))
 
   (use-package python-docstring
+    :straight t
     :config
     (setq python-docstring-sentence-end-double-space nil))
 
-  (use-package blacken)
+  (use-package blacken :straight t)
 
-  (use-package pip-requirements)
+  (use-package pip-requirements :straight t)
 
-  (use-package ein)
+  (use-package ein :straight t)
 #+END_SRC
 
 ** Julia
@@ -993,6 +1082,7 @@ Put emacs into distraction-free writing mode on demand.
     (vterm-send-key (kbd "C-w")))
 
   (use-package vterm
+    :straight t
     :custom
     (vterm-max-scrollback 100000)
     :custom-face
@@ -1010,7 +1100,7 @@ Put emacs into distraction-free writing mode on demand.
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (use-package julia-mode)
+  (use-package julia-mode :straight t)
 
   (defun cqql-julia-repl-with-sysimage ()
     "Start a julia REPL with a sysimage in the project root."
@@ -1022,6 +1112,7 @@ Put emacs into distraction-free writing mode on demand.
       (julia-repl)))
 
   (use-package julia-repl
+    :straight t
     :hook ((julia-mode . julia-repl-mode))
     :bind (:map julia-repl-mode-map
            ("C-c C-z" . cqql-julia-repl-with-sysimage))
@@ -1039,7 +1130,7 @@ Put emacs into distraction-free writing mode on demand.
     (interactive)
     (ert t))
 
-  (use-package macrostep)
+  (use-package macrostep :straight t)
 
   (use-package lisp-mode
     :config
@@ -1064,17 +1155,27 @@ Put emacs into distraction-free writing mode on demand.
 ** Rust
 
 #+BEGIN_SRC emacs-lisp
+  (use-package racer :straight t)
+
+  (use-package cargo :straight t)
+
   (use-package rust-mode
+    :straight t
     :config
     (add-hook 'rust-mode-hook #'flycheck-mode)
     (add-hook 'rust-mode-hook #'racer-mode)
     (add-hook 'rust-mode-hook #'cargo-minor-mode))
 
   (use-package racer
+    :straight t
     :config
     (add-hook 'racer-mode-hook #'eldoc-mode))
 
+  (use-package  flycheck-rust :straight t)
+
   (use-package flycheck
+    :straight t
+    :after flycheck-rust
     :config
     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 #+END_SRC
@@ -1097,6 +1198,7 @@ Put emacs into distraction-free writing mode on demand.
 
 #+BEGIN_SRC emacs-lisp
   (use-package cquery
+    :straight t
     :config
     (setq cquery-project-root-function #'projectile-project-root
           cquery-extra-init-params (list :index '(:comments 2)
@@ -1108,6 +1210,7 @@ Put emacs into distraction-free writing mode on demand.
 
 #+BEGIN_SRC emacs-lisp
   (use-package google-c-style
+    :straight t
     :demand t
     :config
     (add-hook 'c-mode-common-hook #'google-set-c-style))
@@ -1116,13 +1219,14 @@ Put emacs into distraction-free writing mode on demand.
 *** Build Tools
 
 #+BEGIN_SRC emacs-lisp
-  (use-package cmake-mode)
+  (use-package cmake-mode :straight t)
 #+END_SRC
 
 ** COMMENT javascript
 
 #+BEGIN_SRC emacs-lisp
   (use-package js2-mode
+    :straight t
     :mode (("\\.js\\'" . js2-mode) ("\\.jsx\\'" . js2-mode))
     :interpreter "node"
     :config
@@ -1143,6 +1247,7 @@ Put emacs into distraction-free writing mode on demand.
 
 #+BEGIN_SRC emacs-lisp
   (use-package tex-mode
+    :straight auctex
     :mode ("\\.tex\\'" . LaTeX-mode)
     :config
     ;; Workaround for smartparens overwriting `
@@ -1193,6 +1298,7 @@ them to LaTeX!
                        org-default-notes-file)))
 
   (use-package org
+    :straight t
     :init
     (setf org-directory "~/notes"
           org-agenda-files (list org-directory)
@@ -1227,8 +1333,16 @@ Use some nice UTF-8 symbols to signify the nesting depth.
 
 #+BEGIN_SRC emacs-lisp
   (use-package org-bullets
+    :straight t
     :config
     (add-hook 'org-mode-hook 'org-bullets-mode))
+#+END_SRC
+
+** markdown
+
+#+BEGIN_SRC emacs-lisp
+  (use-package markdown-mode
+    :straight t)
 #+END_SRC
 
 ** reStructuredText
@@ -1254,6 +1368,7 @@ Use some nice UTF-8 symbols to signify the nesting depth.
       (insert (s-repeat repeat-length (char-to-string char)))))
 
   (use-package rst
+    :straight t
     :config
     (bind-key "<C-right>" #'cqql-underline rst-mode-map)
 
@@ -1263,13 +1378,14 @@ Use some nice UTF-8 symbols to signify the nesting depth.
 ** YAML
 
 #+BEGIN_SRC emacs-lisp
-  (use-package yaml-mode)
+  (use-package yaml-mode :straight t)
 #+END_SRC
 
 ** HTML/jinja2
 
 #+BEGIN_SRC emacs-lisp
     (use-package web-mode
+      :straight t
       :mode "\\.html\\.?"
       :config
       ;; Disable inserting closing parens etc. because we have smartparens already

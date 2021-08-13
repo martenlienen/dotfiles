@@ -19,10 +19,7 @@ end
 
 FILES = Find.find("home")
 ORG_FILES = FileList.new(FILES.select { |f| f.end_with? ".org" })
-ELISP = FileList.new(FILES.select { |f| f.end_with?(".el") })
-ELISP.include(ORG_FILES.ext(".el"))
 ORG_FILES.gsub!(/^home/, Dir.home)
-ELISP.gsub!(/^home/, Dir.home)
 
 task :default => [:dotfiles, :tools, :packages]
 
@@ -60,25 +57,11 @@ end
 
 multitask :packages => [:emacs, :vim_packages]
 
-task :emacs => [:quelpa, :compile_elisp]
-
-task :quelpa => :dotfiles do
-  sh "emacs --script home/.emacs.d/quelpa-install.el"
-end
-
-task :compile_elisp => :dotfiles do
+task :emacs => :dotfiles do
   ORG_FILES.each do |f|
     sh <<END
 emacs --quick --batch --eval \
       "(progn (require 'ob-tangle) (org-babel-tangle-file \\"#{f}\\"))"
-END
-  end
-
-  ELISP.each do |f|
-    # We are not using --quick because we want to have installed libraries
-    # available
-    sh <<END
-emacs --no-init-file --batch --funcall batch-byte-compile #{f}
 END
   end
 end
