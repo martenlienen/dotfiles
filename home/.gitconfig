@@ -1,3 +1,5 @@
+[init]
+  defaultBranch = main
 [core]
   excludesfile = ~/.gitignore
   editor = vim
