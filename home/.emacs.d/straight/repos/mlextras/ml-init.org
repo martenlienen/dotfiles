@@ -1,27 +1,15 @@
 #+TITLE: init.el
 #+PROPERTY: header-args :tangle yes :results silent
 
-* straight.el
+My emacs config is a package so that straight precompiles it.
 
 #+BEGIN_SRC emacs-lisp
-  ;; -*- lexical-binding: t; -*-
-  (setq straight-check-for-modifications nil)
+  ;;; ml-init.el --- My config as a package  -*- lexical-binding: t; -*-
 
-  (defvar bootstrap-version)
-  (let ((bootstrap-file
-         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-        (bootstrap-version 5))
-    (unless (file-exists-p bootstrap-file)
-      (with-current-buffer
-          (url-retrieve-synchronously
-           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-           'silent 'inhibit-cookies)
-        (goto-char (point-max))
-        (eval-print-last-sexp)))
-    (load bootstrap-file nil 'nomessage))
+  ;;; Commentary:
 
-  (straight-use-package 'use-package)
-  (straight-use-package 'hydra)
+  ;;; Code:
+
 #+END_SRC
 
 * Globals
@@ -123,10 +111,12 @@ Automatically jump to origin file and line when an the point is on an error.
 Packages are configured with the ~use-package~ macro.
 
 #+BEGIN_SRC emacs-lisp
-    (require 'bind-key)
-    (use-package use-package-chords
-      :config (key-chord-mode t)
-      :straight t)
+  (require 'bind-key)
+  (use-package use-package-chords
+    :config (key-chord-mode t)
+    :straight t)
+
+  (use-package hydra :straight t)
 #+END_SRC
 
 * Tramp Fix
@@ -1397,4 +1387,12 @@ Use some nice UTF-8 symbols to signify the nesting depth.
       :config
       ;; Disable inserting closing parens etc. because we have smartparens already
       (setq web-mode-enable-auto-pairing nil))
+#+END_SRC
+
+* Package Footer
+
+#+BEGIN_SRC emacs-lisp
+
+  (provide 'ml-init)
+  ;;; ml-init.el ends here
 #+END_SRC
