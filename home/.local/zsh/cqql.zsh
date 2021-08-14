@@ -112,4 +112,12 @@ $git_info %{$cyan%}($timestamp)%{$reset_color%}"
 # Enable prompt substitution
 setopt promptsubst
 
-PROMPT='$(get_prompt)'
+case "$TERM" in
+"dumb")
+  # Use a very simple prompt for TRAMP
+  PROMPT='> '
+  ;;
+*)
+  PROMPT='$(get_prompt)'
+  ;;
+esac
