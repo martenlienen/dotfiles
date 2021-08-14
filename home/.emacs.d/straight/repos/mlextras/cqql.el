@@ -4,6 +4,8 @@
 
 ;;; Code:
 
+(require 'cl-lib)
+
 (defun cqql-go-to-beginning-of-line-dwim ()
   "Toggle point between beginning of line and first non-whitespace character."
   (interactive)
