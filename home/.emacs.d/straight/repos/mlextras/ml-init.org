@@ -263,11 +263,22 @@ of functions.
 ** Buffer Switching
 
 #+BEGIN_SRC emacs-lisp
+  (defun iflipb-kill-this-buffer ()
+    "Same as `kill-buffer' but keep the iflipb buffer list state."
+    (interactive)
+    (kill-buffer (current-buffer))
+    (if (iflipb-first-iflipb-buffer-switch-command)
+        (setq last-command 'kill-buffer)
+      (if (< iflipb-current-buffer-index (length (iflipb-interesting-buffers)))
+          (iflipb-select-buffer iflipb-current-buffer-index)
+        (iflipb-select-buffer (1- iflipb-current-buffer-index)))
+      (setq last-command 'iflipb-kill-buffer)))
+
   (use-package iflipb
     :straight t
     :bind (("<f6>" . iflipb-next-buffer)
-           ("M-<f6>" . iflipb-previous-buffer)
-           ("S-<f6>" . iflipb-kill-buffer)))
+           ("S-<f6>" . iflipb-previous-buffer)
+           ("M-<f6>" . iflipb-kill-this-buffer)))
 #+END_SRC
 
 ** Searching & Selection
