@@ -1,5 +1,4 @@
 ;; -*- lexical-binding: t; -*-
-(setq straight-check-for-modifications nil)
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
