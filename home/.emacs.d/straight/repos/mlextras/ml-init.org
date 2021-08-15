@@ -119,18 +119,16 @@ Packages are configured with the ~use-package~ macro.
   (use-package hydra :straight t)
 #+END_SRC
 
-* Tramp Fix
-
-Tramp by default tries to look for the availability of various config options by
-running ~ssh~ against the host ~host.does.not.exist~ which leads to a wait until
-timeout if you are connected to a SpeedPort router. This can be prevented by
-setting the options before loading tramp.
+* Tramp
 
 #+BEGIN_SRC emacs-lisp
   (use-package tramp
     :init
-    (setq tramp-ssh-controlmaster-options
-          "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no"))
+    (setq tramp-default-method "ssh"
+          tramp-terminal-type "tramp"
+          tramp-connection-timeout 10
+          tramp-ssh-controlmaster-options
+          "-o ControlMaster=auto -o ControlPath='~/.ssh/tramp.%%C' -o ControlPersist=5m"))
 #+END_SRC
 
 * Utilities

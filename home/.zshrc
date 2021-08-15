@@ -1,3 +1,6 @@
+# Use the simplest possible terminal for TRAMP
+[[ $TERM == "tramp" ]] && unsetopt zle && PS1="$ " && return
+
 . ~/.antigen/antigen.zsh
 
 # Add local completions. compinit is called by antigen already
