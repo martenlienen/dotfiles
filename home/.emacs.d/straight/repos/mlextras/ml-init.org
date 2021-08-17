@@ -486,9 +486,18 @@ with emacs built-in APIs.
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
+  (defun ml-treemacs-dwim ()
+    "Toggle treemacs."
+    (interactive)
+    (if (and (eq (treemacs-current-visibility) 'visible)
+             treemacs--in-this-buffer)
+        (delete-window (treemacs-get-local-window))
+      (call-interactively #'treemacs-select-window)))
+
   (use-package treemacs
     :straight t
-    :bind (("<f8>" . treemacs-select-window)
+    :commands (treemacs-current-visibility)
+    :bind (("<f8>" . ml-treemacs-dwim)
            ("S-<f8>" . treemacs)))
 
   (use-package treemacs-projectile
