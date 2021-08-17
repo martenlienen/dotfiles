@@ -485,6 +485,17 @@ with emacs built-in APIs.
     (projectile-global-mode))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+  (use-package treemacs
+    :straight t
+    :bind (("<f8>" . treemacs-select-window)
+           ("S-<f8>" . treemacs)))
+
+  (use-package treemacs-projectile
+    :straight t
+    :after (treemacs projectile))
+#+END_SRC
+
 * Editing
 
 ** Multiple Cursors
