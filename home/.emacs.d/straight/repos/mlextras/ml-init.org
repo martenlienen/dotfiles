@@ -272,11 +272,18 @@ of functions.
         (iflipb-select-buffer (1- iflipb-current-buffer-index)))
       (setq last-command 'iflipb-kill-buffer)))
 
+  (defun ml-iflipb-ignore-special-except-some (bufname)
+    "Check if BUFNAME is a special buffer except for some special cases."
+    (or (and (string-prefix-p "*" bufname)
+             (not (string-prefix-p "*Org Src" bufname)))
+        (string-match-p "^magit\\(-[^:]+\\)?:" bufname)))
+
   (use-package iflipb
     :straight t
     :bind (("<f6>" . iflipb-next-buffer)
            ("S-<f6>" . iflipb-previous-buffer)
-           ("M-<f6>" . iflipb-kill-this-buffer)))
+           ("M-<f6>" . iflipb-kill-this-buffer))
+    :custom ((iflipb-ignore-buffers #'ml-iflipb-ignore-special-except-some)))
 #+END_SRC
 
 ** Searching & Selection
