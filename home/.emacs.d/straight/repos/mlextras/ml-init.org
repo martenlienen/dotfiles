@@ -845,6 +845,10 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 ** git
 
 #+BEGIN_SRC emacs-lisp
+  ;; Stop asking me all the time when I visit a source file from a packge built with
+  ;; straight.el (they symlink the .el files from the package repositories)
+  (setq vc-follow-symlinks t)
+
   (use-package git-timemachine
     :straight t)
 
