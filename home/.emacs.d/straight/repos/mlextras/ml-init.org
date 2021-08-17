@@ -505,7 +505,8 @@ with emacs built-in APIs.
     :straight t
     :commands (treemacs-current-visibility)
     :bind (("<f8>" . ml-treemacs-dwim)
-           ("S-<f8>" . treemacs)))
+           ("S-<f8>" . treemacs)
+           ("<mouse-1>" . treemacs-single-click-expand-action)))
 
   (use-package treemacs-projectile
     :straight t
