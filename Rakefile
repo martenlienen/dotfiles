@@ -29,11 +29,13 @@ task :dotfiles do
   # Update the font cache
   sh "fc-cache"
 
-  sh "regolith-look refresh"
+  sh "(which regolith-look && regolith-look refresh) || true"
 
   sh <<END
-systemctl --user enable redshift-gtk.service
-systemctl --user start redshift-gtk.service
+if systemctl --user --all --type service | grep -q redshift-gtk; then
+  systemctl --user enable redshift-gtk.service
+  systemctl --user start redshift-gtk.service
+fi
 END
 end
 
