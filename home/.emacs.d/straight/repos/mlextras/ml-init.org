@@ -506,7 +506,12 @@ with emacs built-in APIs.
     :commands (treemacs-current-visibility)
     :bind (("<f8>" . ml-treemacs-dwim)
            ("S-<f8>" . treemacs)
-           ("<mouse-1>" . treemacs-single-click-expand-action)))
+           ("<mouse-1>" . treemacs-single-click-expand-action))
+    :config
+    ;; Hide gitignored files via the toggle call instead of customizing the variable because
+    ;; we need the interactive behavior that happens in the toggle call to actually hide the
+    ;; files.
+    (treemacs-toggle-show-gitignored-files))
 
   (use-package treemacs-projectile
     :straight t
