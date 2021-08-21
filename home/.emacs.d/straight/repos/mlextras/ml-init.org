@@ -511,7 +511,7 @@ with emacs built-in APIs.
     ;; Hide gitignored files via the toggle call instead of customizing the variable because
     ;; we need the interactive behavior that happens in the toggle call to actually hide the
     ;; files.
-    (treemacs-toggle-show-gitignored-files))
+    (treemacs-hide-gitignored-files-mode t))
 
   (use-package treemacs-projectile
     :straight t
