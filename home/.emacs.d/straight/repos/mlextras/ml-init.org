@@ -275,7 +275,8 @@ of functions.
   (defun ml-iflipb-ignore-special-except-some (bufname)
     "Check if BUFNAME is a special buffer except for some special cases."
     (or (and (string-prefix-p "*" bufname)
-             (not (string-prefix-p "*Org Src" bufname)))
+             (not (string-prefix-p "*Org Src" bufname))
+             (not (string-prefix-p "*deadgrep" bufname)))
         (string-match-p "^magit\\(-[^:]+\\)?:" bufname)))
 
   (use-package iflipb
