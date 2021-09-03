@@ -284,7 +284,9 @@ of functions.
     :bind (("<f6>" . iflipb-next-buffer)
            ("S-<f6>" . iflipb-previous-buffer)
            ("M-<f6>" . iflipb-kill-this-buffer))
-    :custom ((iflipb-ignore-buffers #'ml-iflipb-ignore-special-except-some)))
+    :custom ((iflipb-ignore-buffers #'ml-iflipb-ignore-special-except-some)
+             (iflipb-current-buffer-template "[%.15s]")
+             (iflipb-other-buffer-template "%.15s")))
 #+END_SRC
 
 ** Searching & Selection
