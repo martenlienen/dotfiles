@@ -139,7 +139,7 @@ easily into one of the existing sections.
 
 #+BEGIN_SRC emacs-lisp
   (use-package cqql
-    :straight (mlextras :local-repo "mlextras")
+    :straight (cqql :local-repo "mlextras")
     :bind (("C-a" . cqql-go-to-beginning-of-line-dwim)
            ("M-D" . cqql-duplicate-text)
            ("C-S-k" . cqql-kill-line)
@@ -153,11 +153,11 @@ easily into one of the existing sections.
 
 #+BEGIN_SRC emacs-lisp
   (use-package tmp-buffer
-    :straight (mlextras :local-repo "mlextras")
+    :straight (tmp-buffer :local-repo "mlextras")
     :bind ("C-c n" . tmp-buffer))
 
   (use-package window-extras
-    :straight (mlextras :local-repo "mlextras")
+    :straight (window-extras :local-repo "mlextras")
     :bind (("C-c w t" . transpose-windows)
            ("C-c w v" . toggle-window-split)))
 #+END_SRC
@@ -406,7 +406,7 @@ with emacs built-in APIs.
     :bind (("<f9>" . deadgrep)))
 
   (use-package cqql-deadgrep
-    :straight (mlextras :local-repo "mlextras")
+    :straight (cqql-deadgrep :local-repo "mlextras")
     :after deadgrep
     :bind (("S-<f9>" . cqql-deadgrep-here)
            :map deadgrep-mode-map
