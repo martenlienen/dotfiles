@@ -401,12 +401,13 @@ with emacs built-in APIs.
 #+BEGIN_SRC emacs-lisp
   (use-package deadgrep
     :straight t
-    :bind (("C-c S" . deadgrep)))
+    :bind (("<f9>" . deadgrep)))
 
   (use-package cqql-deadgrep
     :straight (mlextras :local-repo "mlextras")
     :after deadgrep
-    :bind (:map deadgrep-mode-map
+    :bind (("S-<f9>" . ml-deadgrep-here)
+           :map deadgrep-mode-map
            ("s" . cqql-deadgrep-search-term)))
 #+END_SRC
 
