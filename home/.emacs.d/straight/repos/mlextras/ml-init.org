@@ -408,9 +408,13 @@ with emacs built-in APIs.
   (use-package cqql-deadgrep
     :straight (mlextras :local-repo "mlextras")
     :after deadgrep
-    :bind (("S-<f9>" . ml-deadgrep-here)
+    :bind (("S-<f9>" . cqql-deadgrep-here)
            :map deadgrep-mode-map
-           ("s" . cqql-deadgrep-search-term)))
+           ("s" . cqql-deadgrep-search-term)
+           ("d" . cqql-deadgrep-directory)
+           ("a" . cqql-deadgrep-file-type-all)
+           ("t" . cqql-deadgrep-file-type-type)
+           ("g" . cqql-deadgrep-file-type-glob)))
 #+END_SRC
 
 ** Highlighting
