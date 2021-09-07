@@ -414,7 +414,7 @@ with emacs built-in APIs.
            ("d" . cqql-deadgrep-directory)
            ("a" . cqql-deadgrep-file-type-all)
            ("t" . cqql-deadgrep-file-type-type)
-           ("g" . cqql-deadgrep-file-type-glob)))
+           ("S-g" . cqql-deadgrep-file-type-glob)))
 #+END_SRC
 
 ** Highlighting
