@@ -2,3 +2,5 @@
 
 # Disable system beeping (bell)
 xset b off
+
+xmodmap ~/.Xmodmap
