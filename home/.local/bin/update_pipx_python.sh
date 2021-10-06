@@ -10,8 +10,8 @@ for f in $(find ~/.local/pipx/ -type l -name "python*"); do
   executable=$(basename "${f}")
   new=$(pyenv which "${executable}")
   found=$?
-  rm $f
   if [[ $found -eq 0 ]]; then
+    rm $f
     ln --symbolic --no-target-directory "${new}" "${f}"
   fi
 done
