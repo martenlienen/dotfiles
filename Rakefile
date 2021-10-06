@@ -139,3 +139,11 @@ end
 task :system_conf do
   sh "sudo cp --recursive --force --preserve=mode etc usr /"
 end
+
+task :pipx do
+  # Yes, pipx should manage itself
+  packages = ["pipx", "black", "isort", "asciinema", "ansible"]
+  packages.each do |package|
+    sh "pipx install #{package}"
+  end
+end
