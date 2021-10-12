@@ -812,7 +812,8 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
                                  (list #'company-dabbrev-code
                                        #'company-keywords)
                                  #'company-files
-                                 #'company-dabbrev))
+                                 #'company-dabbrev)
+          company-global-modes (list 'not 'org-mode))
     :config
     (global-company-mode t))
 
