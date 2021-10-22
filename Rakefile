@@ -142,7 +142,7 @@ end
 
 task :pipx do
   # Yes, pipx should manage itself
-  packages = ["pipx", "black", "isort", "asciinema", "ansible"]
+  packages = ["pipx", "black", "isort", "asciinema", "ansible", "pip-tools"]
   packages.each do |package|
     sh "pipx install #{package}"
   end
