@@ -1025,6 +1025,36 @@ Put emacs into distraction-free writing mode on demand.
     (isortify-buffer)
     (blacken-buffer))
 
+  (defun cqql-imports-start ()
+    "Find the start position for the imports in the current buffer."
+    (save-excursion
+      (goto-char 0)
+      (if-let (import-end (re-search-forward "^[[:space:]]*\\(import\\|from\\)" nil t))
+          (- (point) 6)
+        (goto-char 0)
+        (if (looking-at-p "#!")
+            (progn
+              ;; Skip shebang line and optionally one empty line
+              (forward-line)
+              (if (looking-at-p "\n") (forward-line))
+              (beginning-of-line)
+              (point))
+          (point)))))
+
+  (defun cqql-import-package (package &optional names)
+    "Import PACKAGE, optionally importing just certain NAMES."
+    (interactive
+     (if current-prefix-arg
+         (list (read-string "from ")
+               (split-string (read-string "import ") "[[:space:]]*,[[:space:]]*"))
+       (list (read-string "import "))))
+    (let ((line (if names (format "from %s import %s" package (string-join names ", "))
+                  (format "import %s" package))))
+      (save-excursion
+        (goto-char (cqql-imports-start))
+        (insert line)
+        (insert "\n"))))
+
   (use-package isortify
     :straight t
     :config
@@ -1065,7 +1095,8 @@ Put emacs into distraction-free writing mode on demand.
                 ("C-c f" . #'cqql-python-reformat-buffer)
                 ("C-c C-l" . #'cqql-python-shell-send-line)
                 ("C-c C-r" . #'cqql-python-shell-send-region-dwim)
-                ("C-c t" . #'python-pytest-popup))
+                ("C-c t" . #'python-pytest-popup)
+                ("C-c i" . #'cqql-import-package))
 
     :config
     (when (executable-find "ipython")
