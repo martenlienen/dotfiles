@@ -952,19 +952,6 @@ Put emacs into distraction-free writing mode on demand.
 #+BEGIN_SRC emacs-lisp
   (use-package pyenv-mode :straight t)
 
-  (defmacro with-pyenv (name &rest body)
-    "Execute BODY with pyenv NAME activated."
-    (declare (indent defun))
-    `(let ((current (pyenv-mode-version)))
-       (unwind-protect
-           (progn
-             (pyenv-mode-set ,name)
-             ,@body)
-         ;; Ensure that the python environment is exactly the same as before
-         (if current
-             (pyenv-mode-set current)
-           (pyenv-mode-unset)))))
-
   (defun cqql-python-shell-send-line ()
     "Send the current line to inferior python process disregarding indentation."
     (interactive)
