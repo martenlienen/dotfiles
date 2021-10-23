@@ -963,6 +963,18 @@ Put emacs into distraction-free writing mode on demand.
                  (point))))
       (python-shell-send-string (buffer-substring start end))))
 
+  (defun cqql-python-shell-send-variable ()
+    "Send the python expression at point."
+    (interactive)
+    (save-excursion
+      (let (start end)
+        (skip-chars-backward "[:alnum:].")
+        (setq start (point))
+        (skip-chars-forward "[:alnum:].")
+        (setq end (point))
+        (let ((var (buffer-substring start end)))
+          (python-shell-send-string (format "print('%s'); print(%s)" var var))))))
+
   (require 'cl-lib)
 
   (defvar cqql-python-last-command nil
@@ -1095,6 +1107,7 @@ Put emacs into distraction-free writing mode on demand.
                 ("C-c f" . #'cqql-python-reformat-buffer)
                 ("C-c C-l" . #'cqql-python-shell-send-line)
                 ("C-c C-r" . #'cqql-python-shell-send-region-dwim)
+                ("C-c C-v" . #'cqql-python-shell-send-variable)
                 ("C-c t" . #'python-pytest-popup)
                 ("C-c i" . #'cqql-import-package))
 
