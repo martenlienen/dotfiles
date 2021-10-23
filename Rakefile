@@ -30,13 +30,6 @@ task :dotfiles do
   sh "fc-cache"
 
   sh "(which regolith-look && regolith-look refresh) || true"
-
-  sh <<END
-if systemctl --user --all --type service | grep -q redshift-gtk; then
-  systemctl --user enable redshift-gtk.service
-  systemctl --user start redshift-gtk.service
-fi
-END
 end
 
 multitask :tools => [:pyenv, :pyenv_virtualenv, :vim_plug, :antigen]
