@@ -55,6 +55,9 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST
 
+# Ignore commands starting with a space
+setopt HIST_IGNORE_SPACE
+
 # Enable extended pattern matching
 setopt KSH_GLOB
 
