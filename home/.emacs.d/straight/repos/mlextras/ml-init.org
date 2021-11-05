@@ -117,6 +117,8 @@ Packages are configured with the ~use-package~ macro.
     :straight t)
 
   (use-package hydra :straight t)
+
+  (use-package pretty-hydra :straight t)
 #+END_SRC
 
 * Tramp
@@ -146,7 +148,9 @@ easily into one of the existing sections.
            ("C-o" . cqql-open-line)
            ("C-S-o" . cqql-open-line-above)
            ("C-S-p" . cqql-move-text-up)
-           ("C-S-n" . cqql-move-text-down))
+           ("C-S-n" . cqql-move-text-down)
+           :map TeX-mode-map
+           ("<C-return>" #'cqql-latex-append-line-break))
     :config
     (add-hook 'before-save-hook #'cqql-trim-whitespace))
 #+END_SRC
@@ -1328,46 +1332,76 @@ Put emacs into distraction-free writing mode on demand.
 
 ** LaTeX
 
-#+BEGIN_SRC emacs-lisp
-  (use-package tex-mode
-    :straight auctex
-    :mode ("\\.tex\\'" . LaTeX-mode)
-    :config
-    ;; Workaround for smartparens overwriting `
-    (require 'smartparens-latex)
-
-    (require 'tex-site)
-    (require 'preview)
-
-    (require 'cqql)
-    (bind-key "<C-return>" #'cqql-latex-append-line-break TeX-mode-map)
-
-    (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
-    (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-    (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
-    (add-hook 'LaTeX-mode-hook 'reftex-mode)
-#+END_SRC
-
 LaTeX tables are really horrible to create and edit for most simple
 use-cases. But ~org-mode~ comes to our rescue. Simply enabling ~org-table-mode~
 gives you automatically resizing ASCII tables everywhere and you can even export
 them to LaTeX!
 
 #+BEGIN_SRC emacs-lisp
-    (add-hook 'LaTeX-mode-hook #'orgtbl-mode)
-    (add-hook 'LaTeX-mode-hook #'flycheck-mode)
+  (defun enable-word-wrap ()
+    "Enable word wrapping."
+    (interactive)
+    (setq word-wrap t))
+
+  (use-package tex
+    :straight auctex
+    :mode ("\\.tex\\'" . LaTeX-mode)
+    :custom ((TeX-auto-save t)
+             (TeX-parse-self t)
+             (TeX-save-query nil)
+             (prettify-symbols-unprettify-at-point 'right-edge))
+    :hook ((LaTeX-mode . TeX-source-correlate-mode)
+           (LaTeX-mode . TeX-PDF-mode)
+           (LaTeX-mode . prettify-symbols-mode)
+           (LaTeX-mode . reftex-mode)
+           (LaTeX-mode . flycheck-mode)
+           (LaTeX-mode . orgtbl-mode)
+           (LaTeX-mode . enable-word-wrap))
+    :config
+    ;; Workaround for smartparens overwriting `
+    (require 'smartparens-latex))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'LaTeX-mode-hook (lambda () (setq word-wrap t)))
+  (defvar cqql-preview-scale 1.35)
 
-  (add-hook 'LaTeX-mode-hook
-            (lambda ()
-              (setq TeX-electric-sub-and-superscript t
-                    TeX-save-query nil
-                    ;; Otherwise minted can't find pygments
-                    TeX-command-extra-options "-shell-escape")
-              (setf (cdr (assoc 'output-pdf TeX-view-program-selection)) (list "Evince")))))
+  (defun cqql-preview-scale-up ()
+    "Scale up previews."
+    (* cqql-preview-scale (funcall (preview-scale-from-face))))
+
+  (use-package reftex
+    :custom ((reftex-toc-follow-mode t)))
+
+  (use-package preview
+    :after tex
+    :custom ((preview-scale-function #'cqql-preview-scale-up)
+             (preview-auto-cache-preamble t))
+    :pretty-hydra
+    ((:quit-key "g" :title "preview" :color blue)
+     ("preview"
+      (("p" preview-at-point "at point")
+       ("d" preview-document "document")
+       ("b" preview-buffer "buffer")
+       ("s" preview-section "section")
+       ("r" preview-region "region")
+       ("e" preview-environment "environment"))
+      "clear"
+      (("P" preview-clearout-at-point "at point")
+       ("D" preview-clearout-document "document")
+       ("B" preview-clearout-buffer "buffer")
+       ("S" preview-clearout-section "section")
+       ("R" preview-clearout "region"))
+      "cache"
+      (("c" preview-cache-preamble "refresh preamble"))))
+    :bind (:map LaTeX-mode-map ("C-c p" . preview-hydra/body)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package cdlatex
+    :straight t
+    :after latex
+    :hook (LaTeX-mode . cdlatex-mode)
+    :custom (cdlatex-make-sub-superscript-roman-if-pressed-twice t))
 #+END_SRC
 
 ** org
