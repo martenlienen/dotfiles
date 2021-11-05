@@ -849,19 +849,22 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet
     :straight t
+    :demand t
+    :bind (:map yas-minor-mode-map
+                ("<tab>" . nil)
+                ("TAB" . nil))
     :config
-    (setf yas-fallback-behavior 'call-other-command
-          yas-snippet-dirs '("~/.emacs.d/snippets"))
-
     ;; Don't append newlines to snippet files
     (add-hook 'snippet-mode (lambda () (setq require-final-newline nil)))
 
-    (yas-global-mode t)
+    ;; `yas-maybe-expand' is not a function, so we cannot use :bind or bind-key and need to
+    ;; load yasnippet eagerly
+    (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
+    ;; Bind SPC globally because otherwise the fallthrough in `yas-maybe-expand` does not
+    ;; work
+    (define-key global-map (kbd "SPC") #'self-insert-command)
 
-    :bind (:map yas-minor-mode-map
-                (";" . 'yas-expand)
-                ("<tab>" . nil)
-                ("TAB" . nil)))
+    (yas-global-mode t))
 #+END_SRC
 
 * Integrations
