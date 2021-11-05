@@ -148,9 +148,7 @@ easily into one of the existing sections.
            ("C-o" . cqql-open-line)
            ("C-S-o" . cqql-open-line-above)
            ("C-S-p" . cqql-move-text-up)
-           ("C-S-n" . cqql-move-text-down)
-           :map TeX-mode-map
-           ("<C-return>" #'cqql-latex-append-line-break))
+           ("C-S-n" . cqql-move-text-down))
     :config
     (add-hook 'before-save-hook #'cqql-trim-whitespace))
 #+END_SRC
@@ -1343,6 +1341,13 @@ them to LaTeX!
     (interactive)
     (setq word-wrap t))
 
+  (defun cqql-latex-append-line-break ()
+    "Insert the \\\\ macro at the end of the line."
+    (interactive)
+    (save-excursion
+      (move-end-of-line nil)
+      (insert "\\\\")))
+
   (use-package tex
     :straight auctex
     :mode ("\\.tex\\'" . LaTeX-mode)
@@ -1357,6 +1362,8 @@ them to LaTeX!
            (LaTeX-mode . flycheck-mode)
            (LaTeX-mode . orgtbl-mode)
            (LaTeX-mode . enable-word-wrap))
+    :bind (:map TeX-mode-map
+                ("<C-return>" . #'cqql-latex-append-line-break))
     :config
     ;; Workaround for smartparens overwriting `
     (require 'smartparens-latex))

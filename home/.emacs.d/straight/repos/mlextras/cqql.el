@@ -119,13 +119,6 @@ first line of the region to the end of the last."
     (move-end-of-line nil)
     (insert ";")))
 
-(defun cqql-latex-append-line-break ()
-  "Insert the \\\\ macro at the end of the line."
-  (interactive)
-  (save-excursion
-    (move-end-of-line nil)
-    (insert "\\\\")))
-
 (defvar cqql-no-trimming-modes '()
   "A list of modes, that should not be whitespace-trimmed.")
 
