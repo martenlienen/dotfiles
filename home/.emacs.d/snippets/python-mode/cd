@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: class method
+# key: cd
+# --
+@classmethod
+def $1(cls${2:$$(isnip-python-maybe-prepend-comma yas-text)}):
+    $0
+    return cls()

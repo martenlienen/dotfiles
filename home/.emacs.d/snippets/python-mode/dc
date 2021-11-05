@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: dataclass
+# key: dc
+# --
+@dataclass
+class $1:
+    $0

@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: static method
+# key: sd
+# --
+@staticmethod
+def $1(${2:$$(isnip-python-maybe-prepend-comma yas-text)}):
+    $0
