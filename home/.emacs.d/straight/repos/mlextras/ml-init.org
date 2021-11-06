@@ -872,6 +872,9 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
     ;; work
     (define-key global-map (kbd "SPC") #'self-insert-command)
 
+    ;; Circumvent snippet expansion with shift
+    (define-key global-map (kbd "S-SPC") (lambda () (interactive) (insert " ")))
+
     (yas-global-mode t))
 #+END_SRC
 
