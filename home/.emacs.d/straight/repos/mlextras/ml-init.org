@@ -531,6 +531,15 @@ with emacs built-in APIs.
 
 * Editing
 
+** Better Defaults
+
+The dwim commands should just be the default in modern emacs.
+#+BEGIN_SRC emacs-lisp
+  (bind-keys ("M-u" . upcase-dwim)
+             ("M-l" . downcase-dwim)
+             ("M-c" . capitalize-dwim))
+#+END_SRC
+
 ** Multiple Cursors
 
 #+BEGIN_SRC emacs-lisp
