@@ -977,16 +977,36 @@ Put emacs into distraction-free writing mode on demand.
 #+BEGIN_SRC emacs-lisp
   (use-package pyenv-mode :straight t)
 
-  (defun cqql-python-shell-send-line ()
-    "Send the current line to inferior python process disregarding indentation."
+  (defun ml-python-statement-at-point ()
+    "Find the statement at point."
+    (let* ((statement-types '(future_import_statement
+                              import_statement
+                              import_from_statement
+                              print_statement
+                              assert_statement
+                              expression_statement
+                              return_statement
+                              delete_statement
+                              raise_statement
+                              pass_statement
+                              break_statement
+                              continue_statement
+                              global_statement
+                              nonlocal_statement
+                              exec_statement))
+           (this (tree-sitter-node-at-pos))
+           result)
+      (cl-loop until (or (not this) (seq-contains-p statement-types (tsc-node-type this)))
+               do (setq this (tsc-get-parent this)))
+      this))
+
+  (defun ml-python-shell-send-statement ()
+    "Send the statement surrounding point to inferior python process."
     (interactive)
-    (let ((start (save-excursion
-                   (back-to-indentation)
-                   (point)))
-          (end (save-excursion
-                 (end-of-line)
-                 (point))))
-      (python-shell-send-string (buffer-substring start end))))
+    (when-let ((stmt (ml-python-statement-at-point)))
+      (let ((code (buffer-substring-no-properties (tsc-node-start-position stmt)
+                                                  (tsc-node-end-position stmt))))
+        (python-shell-send-string code))))
 
   (defun cqql-python-shell-send-variable ()
     "Send the python expression at point."
@@ -1130,7 +1150,7 @@ Put emacs into distraction-free writing mode on demand.
     :bind (:map python-mode-map
                 ("C-c D" . #'realgud:pdb)
                 ("C-c f" . #'cqql-python-reformat-buffer)
-                ("C-c C-l" . #'cqql-python-shell-send-line)
+                ("C-c C-l" . #'ml-python-shell-send-statement)
                 ("C-c C-r" . #'cqql-python-shell-send-region-dwim)
                 ("C-c C-v" . #'cqql-python-shell-send-variable)
                 ("C-c t" . #'python-pytest-popup)
