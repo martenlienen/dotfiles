@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: Brackets
-# key: b
+# key: [
+# condition: (texmathp)
 # --
-\left[ $0 \right]
+\left[ $0 \right

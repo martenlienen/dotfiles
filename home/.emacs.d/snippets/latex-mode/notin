@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: Curly braces
-# key: {
+# name: not in
+# key: notin
 # condition: (texmathp)
 # --
-\left\\{ $0 \right\\
+\not\in 

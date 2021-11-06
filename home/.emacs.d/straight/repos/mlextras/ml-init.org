@@ -149,6 +149,7 @@ easily into one of the existing sections.
            ("C-S-o" . cqql-open-line-above)
            ("C-S-p" . cqql-move-text-up)
            ("C-S-n" . cqql-move-text-down))
+    :custom ((cqql-no-trimming-modes (list #'snippet-mode)))
     :config
     (add-hook 'before-save-hook #'cqql-trim-whitespace))
 #+END_SRC
@@ -1419,7 +1420,8 @@ them to LaTeX!
     :straight t
     :after latex
     :hook (LaTeX-mode . cdlatex-mode)
-    :custom (cdlatex-make-sub-superscript-roman-if-pressed-twice t))
+    :custom ((cdlatex-make-sub-superscript-roman-if-pressed-twice t)
+             (cdlatex-paired-parens "${[(")))
 #+END_SRC
 
 ** org

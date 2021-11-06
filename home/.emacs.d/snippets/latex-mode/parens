@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: Parenthesis
-# key: p
+# key: (
+# condition: (texmathp)
 # --
-\left( $0 \right)
+\left( $0 \right
