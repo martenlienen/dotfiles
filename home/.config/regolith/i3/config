@@ -91,6 +91,9 @@ $run /usr/bin/rofication-daemon
 # Hide the mouse pointer if unused for a duration
 $run /usr/bin/unclutter -b
 
+# Load nm-applet to provide auth dialogs for network access
+$run /usr/bin/nm-applet
+
 ###############################################################################
 # Launcher dialogs
 ###############################################################################
