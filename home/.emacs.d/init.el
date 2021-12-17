@@ -14,4 +14,4 @@
   (load bootstrap-file nil 'nomessage))
 
 (straight-use-package 'use-package)
-(use-package ml-init :straight (mlextras :local-repo "mlextras"))
+(use-package ml-init :straight (mlextras :local-repo "mlextras" :type nil))
