@@ -186,12 +186,9 @@ it uses an interactive shell instead of a login one which would not read my
 #+BEGIN_SRC emacs-lisp
   (set-mouse-color "light goldenrod yellow")
 
-  ;; (use-package darktooth-theme
-  ;;   :straight t)
-
-  (use-package solarized-theme
+  (use-package ample-theme
     :straight t
-    :config (load-theme 'solarized-zenburn t))
+    :config (load-theme 'ample-flat t))
 
   (use-package zerodark-theme
     :straight t
