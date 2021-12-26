@@ -17,8 +17,13 @@ def manage_git_repo(path, repo)
   end
 end
 
+def is_backup?(f)
+  file = File.basename(f)
+  file.start_with? "#" or file.start_with? ".#"
+end
+
 FILES = Find.find("home")
-ORG_FILES = FileList.new(FILES.select { |f| f.end_with? ".org" })
+ORG_FILES = FileList.new(FILES.select { |f| f.end_with? ".org" and not is_backup?(f)})
 ORG_FILES.gsub!(/^home/, Dir.home)
 
 task :default => [:dotfiles, :tools, :packages]
