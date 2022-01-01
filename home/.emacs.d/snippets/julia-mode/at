@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: abstract type
+# key: at
+# --
+abstract type $0 end
