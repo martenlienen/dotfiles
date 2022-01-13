@@ -28,6 +28,6 @@ c.InteractiveShellApp.exec_lines = [
     import_if_available("pandas", "pd"),
     import_if_available("matplotlib.pyplot", "pp"),
     import_if_available("torch"),
-    "%autoreload 2"
+    "%autoreload 3"
 ]
 c.TerminalInteractiveShell.confirm_exit = False
