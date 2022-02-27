@@ -334,7 +334,6 @@ with emacs built-in APIs.
     (register-preview-delay 0)
     (register-preview-function #'consult-register-format)
     ;; Use consult to select xref locations with preview
-    (xref-show-xrefs-function #'consult-xref)
     (xref-show-definitions-function #'consult-xref)
     :bind (("C-s" . consult-line)
            ("C-S-s" . isearch-forward)
