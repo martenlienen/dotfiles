@@ -1,8 +1,2 @@
 # Use Qt as a graphical backend
 backend: Qt5Agg
-
-# Default font size for thesis
-font.size: 11
-font.family: serif
-font.serif: Computer Modern Roman
-font.monospace: Computer Modern Typewriter
