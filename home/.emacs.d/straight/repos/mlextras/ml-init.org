@@ -753,12 +753,13 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 #+BEGIN_SRC emacs-lisp
   (use-package lsp-pyright :straight t)
   (use-package lsp-treemacs :straight t)
+  (use-package lsp-headerline
+    :custom ((lsp-headerline-breadcrumb-enable-diagnostics nil)))
 
   (use-package lsp-mode
     :straight t
-    :init
-    (setq lsp-auto-guess-root t
-          lsp-auto-configure t)
+    :custom ((lsp-auto-guess-root t)
+             (lsp-auto-configure t))
     :hook ((python-mode . lsp))
     :commands (lsp)
     :config
