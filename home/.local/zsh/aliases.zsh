@@ -35,6 +35,8 @@ alias grbc="git rebase --continue"
 alias grba="git rebase --abort"
 alias grbs="git rebase --skip"
 
+alias pe="pyenv"
+
 alias ipy="ipython"
 alias lab="jupyter lab"
 
