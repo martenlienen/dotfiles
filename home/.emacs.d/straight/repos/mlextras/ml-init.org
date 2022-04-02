@@ -800,7 +800,7 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
     :init
     (setf company-idle-delay 0
           company-minimum-prefix-length 2
-          company-show-numbers t
+          company-show-quick-access t
           company-selection-wrap-around t
           company-backends (list #'company-capf
                                  (list #'company-dabbrev-code
