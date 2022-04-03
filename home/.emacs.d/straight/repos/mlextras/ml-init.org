@@ -1114,6 +1114,10 @@ Put emacs into distraction-free writing mode on demand.
                (mode (-> (f-join pyenv-dir ".python-version") f-read-text s-trim)))
       (pyenv-mode-set mode)))
 
+  (defun ml-python-set-fill-column ()
+    "Use fill-column 88 as is the default in black."
+    (setq fill-column 88))
+
   (use-package python
     :bind (:map python-mode-map
                 ("C-c D" . #'realgud:pdb)
@@ -1139,6 +1143,7 @@ Put emacs into distraction-free writing mode on demand.
     (add-hook 'python-mode-hook #'pyenv-mode)
     (add-hook 'python-mode-hook #'python-docstring-mode)
     (add-hook 'python-mode-hook #'cqql-enable-local-pyenv)
+    (add-hook 'python-mode-hook #'ml-python-set-fill-column)
     (add-hook 'python-mode-hook #'tree-sitter-hl-mode))
 
   (use-package python-pytest
