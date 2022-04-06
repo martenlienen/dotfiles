@@ -784,7 +784,8 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
     :custom ((lsp-ui-peek-show-directory nil)
              (lsp-ui-sideline-enable nil)
              (lsp-ui-doc-enable nil))
-    :bind (:map lsp-ui-mode-map
+    :bind (("M-=" . lsp-ui-peek-find-references)
+           :map lsp-ui-mode-map
                 ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
                 ([remap xref-find-references] . lsp-ui-peek-find-references)))
 #+END_SRC
