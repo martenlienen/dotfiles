@@ -15,9 +15,6 @@ export EDITOR="vim"
 # Register the ripgrep config
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep"
 
-# Use the system libstdc++ because the emulator won't start otherwise
-export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
-
 # Read system-local settings
 if [[ -r ~/.local/zshenv ]]; then
   . ~/.local/zshenv

@@ -33,8 +33,6 @@ task :dotfiles do
 
   # Update the font cache
   sh "fc-cache"
-
-  sh "(which regolith-look && regolith-look refresh) || true"
 end
 
 multitask :tools => [:pyenv, :pyenv_virtualenv, :vim_plug, :antigen]
@@ -80,7 +78,7 @@ end
 
 task :rust => :rustup do
   sh <<END
-cargo install exa hexyl fd-find bat ripgrep tokei gping
+cargo install exa hexyl fd-find bat ripgrep tokei gping paru
 END
 end
 
@@ -103,44 +101,54 @@ task :system => [:system_packages, :system_conf]
 task :system_packages => [:system_conf] do
   sh <<END
 # Python compilation requirements
-pyenv="make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev"
+pyenv="base-devel openssl zlib xzmake"
 
 # Terminal and shell
-shell="rxvt-unicode bash-completion zsh ncurses-term tmux"
+shell="alacritty bash-completion zsh tmux"
 
 # Cryptography
-crypto="ssh"
+crypto="openssh"
 
 # Utilities
-utils="htop tree rsync redshift-gtk"
+utils="htop tree rsync redshift"
 
 # Network utilities
 netutils="nmap tcpdump dnsutils"
 
 # Programming tools
-programming="git vim emacs nodejs npm fonts-noto"
+programming="git vim emacs nodejs npm"
 
 # Web
-web="firefox chromium-browser"
+web="firefox chromium"
 
-sudo apt-get install --no-install-recommends --assume-yes \
-     $pyenv $shell $crypto $utils $netutils $programming $web
+sudo pacman -S --needed $pyenv $shell $crypto $utils $netutils $programming $web
 
-sudo ufw default allow outgoing
-sudo ufw default deny incoming
-sudo ufw allow ssh
-sudo ufw allow http
-sudo ufw allow https
+systemctl enable --now --user redshift.service
+
+aur_packages="snapd"
+
+paru -S --needed $aur_packages
+
+sudo systemctl enable --now snapd.socket
+
+snaps="todoist spotify"
+snap install $snaps
+
+# sudo ufw default allow outgoing
+# sudo ufw default deny incoming
+# sudo ufw allow ssh
+# sudo ufw allow http
+# sudo ufw allow https
 END
 end
 
 task :system_conf do
-  sh "sudo cp --recursive --force --preserve=mode etc usr /"
+  #sh "sudo cp --recursive --force --preserve=mode etc usr /"
 end
 
 task :pipx do
   # Yes, pipx should manage itself
-  packages = ["pipx", "alluvium", "black", "isort", "asciinema", "ansible-base", "python-lsp-server[rope]"]
+  packages = ["pipx", "black", "isort", "asciinema", "ansible-base", "python-lsp-server[rope]"]
   packages.each do |package|
     sh "pipx install #{package}"
   end
