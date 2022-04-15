@@ -1,0 +1,10 @@
+# Uncomment to enable the insane amount of default compose combinations
+# include "%L"
+
+<Multi_key> <a> : "ä"
+<Multi_key> <u> : "ü"
+<Multi_key> <o> : "ö"
+<Multi_key> <s> : "ß"
+<Multi_key> <A> : "Ä"
+<Multi_key> <U> : "Ü"
+<Multi_key> <O> : "Ö"
