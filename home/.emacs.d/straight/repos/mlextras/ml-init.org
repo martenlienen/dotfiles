@@ -847,13 +847,7 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 
     ;; `yas-maybe-expand' is not a function, so we cannot use :bind or bind-key and need to
     ;; load yasnippet eagerly
-    (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
-    ;; Bind SPC globally because otherwise the fallthrough in `yas-maybe-expand` does not
-    ;; work
-    (define-key global-map (kbd "SPC") #'self-insert-command)
-
-    ;; Circumvent snippet expansion with shift
-    (define-key global-map (kbd "S-SPC") (lambda () (interactive) (insert " ")))
+    (define-key yas-minor-mode-map (kbd ";") yas-maybe-expand)
 
     (yas-global-mode t))
 #+END_SRC
