@@ -1,0 +1,195 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+###################
+# Global Settings #
+###################
+
+set $mod Mod4
+set $run exec --no-startup-id
+
+##################
+# Borders & Gaps #
+##################
+
+# Small gaps when there are multiple windows
+gaps inner 10
+smart_gaps on
+
+# We don't need borders with gaps
+default_border none
+default_floating_border none
+
+##################
+# Extra Programs #
+##################
+
+# Compositor for transparency, shadows, etc.
+$run picom --daemon
+
+# Restore my wallpapers
+$run nitrogen --restore
+
+######################
+# Plasma Integration #
+######################
+
+# Kill the plasma background and splash screen
+for_window [title="Desktop — Plasma"] kill
+#for_window [class="ksplash"] kill
+
+# Float widget windows such as the audio control in the system tray
+for_window [class="plasmashell"] floating enable
+
+# Do not focus the desktop overlays such as the one that shows the current
+# volume when you change it
+no_focus [class="plasmashell"]
+
+# Plasma compatibility improvements
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [class="systemsettings"] floating enable
+for_window [class="plasmashell"] floating enable;
+for_window [class="Plasma"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [title="win7"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Kmix"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none
+no_focus [class="plasmashell" window_type="notification"]
+
+################
+# Window Rules #
+################
+
+for_window [class="Seafile Client"] floating enable
+for_window [class="zoom"] floating enable
+for_window [title="^Android Emulator"] floating enable
+for_window [class="Todoist"] floating enable; move position center
+for_window [class="Spotify"] floating enable; move position center
+
+################
+# Key Bindings #
+################
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Move workspace to other screen
+bindsym $mod+Left move workspace to output left
+bindsym $mod+Right move workspace to output right
+
+# Media keys (plasma takes care of most of them)
+bindsym XF86Calculator $run emacs -q -T i3-calculator --funcall=full-calc
+for_window [title="i3-calculator"] floating enable
+
+# F row
+bindsym $mod+F12 $run qdbus-qt5 org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Suspend
+# The parameter values are defined here [1]. 1 2 -1 means pre-select shutdown and wait for
+# confirmation.
+#
+# [1] https://github.com/KDE/plasma-workspace/blob/c97dddf20df5702eb429b37a8c10b2c2d8199d4e/libkworkspace/kworkspace.h
+bindsym $mod+Shift+F12 $run qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout 1 2 -1
+
+# Screenshots (without and with region selection)
+bindsym $mod+Print $run spectacle
+bindsym $mod+Shift+Print $run spectacle --region
+
+# Start a terminal
+bindsym $mod+Return $run alacritty
+
+# Kill focused window
+bindsym $mod+q kill
+
+# Start a program launcher
+bindsym $mod+space $run rofi -show drun
+bindsym $mod+Shift+space $run rofi -show run
+
+# Split in horizontal orientation
+bindsym $mod+c split h
+
+# Split in vertical orientation
+bindsym $mod+v split v
+
+# Enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (tabbed, toggle split)
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle tiling / floating
+bindsym $mod+Shift+f floating toggle
+
+# Make a floating window sticky, i.e. keep it visible across workspaces
+bindsym $mod+m sticky toggle
+
+# Toggle apps
+bindsym $mod+s $run toggle_window.py spotify
+bindsym $mod+grave $run toggle_window.py todoist
+
+# Mode for managing i3 itself
+set $mode_german "German: [a] ä  [u] ü  [o]  ö  [s]  ß"
+bindsym $mod+g mode $mode_german
+mode $mode_german {
+    bindsym --release a $run "xdotool getactivewindow windowactivate --sync type 'ä'"; mode "default"
+    bindsym --release shift+a $run "xdotool getactivewindow windowactivate --sync type 'Ä'"; mode "default"
+    bindsym --release o $run "xdotool getactivewindow windowactivate --sync type 'ö'"; mode "default"
+    bindsym --release shift+o $run "xdotool getactivewindow windowactivate --sync type 'Ö'"; mode "default"
+    bindsym --release u $run "xdotool getactivewindow windowactivate --sync type 'ü'"; mode "default"
+    bindsym --release shift+u $run "xdotool getactivewindow windowactivate --sync type 'Ü'"; mode "default"
+    bindsym --release s $run "xdotool getactivewindow windowactivate --sync type 'ß'"; mode "default"
+
+    bindsym Ctrl+g mode "default"
+}
+
+# Mode for managing i3 itself
+set $mode_i3 "i3: reload[i] [r]estart [e]xit"
+bindsym $mod+i mode $mode_i3
+mode $mode_i3 {
+    bindsym i reload
+    bindsym r restart
+    bindsym e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+    bindsym Ctrl+g mode "default"
+}
+
+## Basic bindings
+
+# Change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10

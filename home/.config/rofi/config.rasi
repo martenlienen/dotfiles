@@ -1,0 +1,6 @@
+configuration {
+  modi: "window,run,drun";
+  font: "mono 32";
+}
+
+@theme "Paper"

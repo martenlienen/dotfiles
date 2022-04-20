@@ -100,6 +100,9 @@ task :system => [:system_packages, :system_conf]
 
 task :system_packages => [:system_conf] do
   sh <<END
+# Desktop environment
+de="i3-gaps wmctrl nitrogen xdotool rofi"
+
 # Python compilation requirements
 pyenv="base-devel openssl zlib xzmake"
 
@@ -121,7 +124,7 @@ programming="git vim emacs nodejs npm"
 # Web
 web="firefox chromium"
 
-sudo pacman -S --needed $pyenv $shell $crypto $utils $netutils $programming $web
+sudo pacman -S --needed $de $pyenv $shell $crypto $utils $netutils $programming $web
 
 systemctl enable --now --user redshift.service
 
@@ -143,7 +146,7 @@ END
 end
 
 task :system_conf do
-  #sh "sudo cp --recursive --force --preserve=mode etc usr /"
+  sh "sudo cp --recursive --force --preserve=mode usr /"
 end
 
 task :pipx do
