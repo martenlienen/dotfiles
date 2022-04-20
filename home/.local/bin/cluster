@@ -1,0 +1,15 @@
+#!/bin/bash
+
+COMMAND=$1
+HOST=gpu
+CONNECTION="ssh://lienen@${HOST}"
+
+if [[ "$COMMAND" = "start" ]]; then
+  xpra start "$CONNECTION" --opengl=no --exit-with-children --start-child="zsh -c 'xrdb -merge ~/.config/regolith/Xresources; emacs'"
+elif [[ "$COMMAND" = "attach" ]]; then
+  xpra attach "$CONNECTION" --opengl=no
+elif [[ "$COMMAND" = "detach" ]]; then
+  xpra detach "$CONNECTION"
+elif [[ "$COMMAND" = "stop" ]]; then
+  xpra stop "$CONNECTION"
+fi
