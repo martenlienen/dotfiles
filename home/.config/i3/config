@@ -68,7 +68,8 @@ for_window [class="Seafile Client"] floating enable
 for_window [class="zoom"] floating enable
 for_window [title="^Android Emulator"] floating enable
 for_window [class="Todoist"] floating enable; move position center
-for_window [class="Spotify"] floating enable; move position center
+# Spotify starts out tiny, so resize it on start
+for_window [class="Spotify"] floating enable; resize set width 2800 px height 1600 px; move position center
 
 ################
 # Key Bindings #
