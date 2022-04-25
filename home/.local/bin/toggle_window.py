@@ -54,9 +54,9 @@ def program_runs(program):
     return pgrep.returncode == 0
 
 
-def start_program(program):
+def start_program(program, args: list[str]):
     path = shutil.which(program)
-    subprocess.Popen([path], start_new_session=True)
+    subprocess.Popen([path] + args, start_new_session=True)
 
 
 def program_is_visible(workspace, program):
@@ -103,10 +103,10 @@ def hide_program(window_class):
 def main():
     parser = ArgumentParser(description="Toggle a window to and from the scratchpad")
     parser.add_argument("--class", dest="window_class", help="WM_CLASS of the window")
-    parser.add_argument("program")
+    parser.add_argument("program", nargs="+", help="Program and options")
     args = parser.parse_args()
 
-    program = args.program
+    program, *program_args = args.program
     window_class = args.window_class
 
     if window_class is None:
@@ -125,7 +125,7 @@ def main():
             hide_program(window_class)
             show_program(window_class)
     else:
-        start_program(program)
+        start_program(program, program_args)
 
 
 if __name__ == "__main__":

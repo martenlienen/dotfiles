@@ -127,7 +127,7 @@ bindsym $mod+Shift+f floating toggle
 bindsym $mod+m sticky toggle
 
 # Toggle apps
-bindsym $mod+s $run toggle_window.py spotify
+bindsym $mod+s $run toggle_window.py -- spotify --force-device-scale-factor=2
 bindsym $mod+grave $run toggle_window.py todoist
 
 # Mode for managing i3 itself
