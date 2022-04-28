@@ -842,12 +842,20 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
                 ("<tab>" . nil)
                 ("TAB" . nil))
     :config
+    (setq-default yas-buffer-local-condition yas-not-string-or-comment-condition)
+
     ;; Don't append newlines to snippet files
     (add-hook 'snippet-mode (lambda () (setq require-final-newline nil)))
 
     ;; `yas-maybe-expand' is not a function, so we cannot use :bind or bind-key and need to
     ;; load yasnippet eagerly
-    (define-key yas-minor-mode-map (kbd ";") yas-maybe-expand)
+    (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
+    ;; Bind SPC globally because otherwise the fallthrough in `yas-maybe-expand` does not
+    ;; work
+    (define-key global-map (kbd "SPC") #'self-insert-command)
+
+    ;; Circumvent snippet expansion with shift
+    (define-key global-map (kbd "S-SPC") (lambda () (interactive) (insert " ")))
 
     (yas-global-mode t))
 #+END_SRC

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: if expression
+# key: if
+# condition: (not (isnip-beginning-of-line-p))
+# --
+if $1 else $0

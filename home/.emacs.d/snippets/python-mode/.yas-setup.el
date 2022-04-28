@@ -53,3 +53,11 @@
 (defun isnip-python-self-if-in-class ()
   "Returns 'self' if point is inside a class."
   (if (isnip-python-inside-class?) "self" ""))
+
+(defun isnip-beginning-of-line-p ()
+  "Is point at the beginning of a line semantically?"
+  (save-excursion
+    ;; Skip over the key of the triggering template
+    (backward-word)
+    (skip-chars-backward " \t")
+    (or (= (point) (point-min)) (char-equal (char-before) ?\n))))

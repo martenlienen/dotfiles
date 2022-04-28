@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: import
 # key: i
+# condition: (isnip-beginning-of-line-p)
 # --
 import $0
