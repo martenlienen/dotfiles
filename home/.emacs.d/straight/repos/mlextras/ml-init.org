@@ -754,7 +754,9 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
   (use-package lsp-treemacs :straight t)
   (use-package lsp-headerline
     :custom ((lsp-headerline-breadcrumb-enable-diagnostics nil)))
-  (use-package lsp-pyright :straight t)
+  (use-package lsp-pylsp
+    :custom ((lsp-pylsp-plugins-jedi-use-pyenv-environment t)
+             (lsp-pylsp-plugins-jedi-completion-fuzzy t)))
 
   (use-package lsp-mode
     :straight t
