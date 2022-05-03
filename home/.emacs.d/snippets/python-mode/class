@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: class
 # key: c
+# condition: (isnip-true-beginning-of-line-p)
 # --
 class $1:
     $0

@@ -61,3 +61,10 @@
     (backward-word)
     (skip-chars-backward " \t")
     (or (= (point) (point-min)) (char-equal (char-before) ?\n))))
+
+(defun isnip-true-beginning-of-line-p ()
+  "Is point at the actual beginning of a line (disregarding indentation)?"
+  (save-excursion
+    ;; Skip over the key of the triggering template
+    (backward-word)
+    (or (= (point) (point-min)) (char-equal (char-before) ?\n))))
