@@ -774,12 +774,7 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
            ("C-S-SPC" . nil))
     :config
     (setq lsp-headerline-arrow
-          (propertize ">" 'face 'lsp-headerline-breadcrumb-separator-face))
-
-    ;; Do not watch code from installed packages. This regex matches anywhere in the path on
-    ;; purpose, because the .pyenv root is recognized as a workspace root and therefore not
-    ;; checked itself. Only its subdirectories are checked against the ignored regexes.
-    (add-to-list 'lsp-file-watch-ignored-directories "/\\.pyenv/"))
+          (propertize ">" 'face 'lsp-headerline-breadcrumb-separator-face)))
 
   (use-package lsp-ui
     :straight t
