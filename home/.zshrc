@@ -6,6 +6,13 @@
 # Add local completions. compinit is called by antigen already
 fpath+=~/.local/zsh
 
+# Only recognize alpha-numeric characters as words. This needs to happen before the
+# plugins are loaded because syntax-highlighting and history-substring-search modify the
+# ZLE in such a way that they have to be loaded last. The uppercase B enables subword
+# style, i.e. word splitting on capital letters.
+autoload -U select-word-style
+select-word-style Bash
+
 # Install plugins
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
@@ -16,9 +23,6 @@ antigen apply
 
 # Load my theme
 . ~/.local/zsh/cqql.zsh
-
-# Use emacs bindings on the command line
-bindkey -e
 
 # Do not get in my way, when I type
 unsetopt correct
@@ -69,8 +73,8 @@ SAVEHIST=10000
 # Autocomplete case-insensitive for lowercase patterns and partial matches
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}" "r:|=*" "l:|=* r:|=*"
 
-# Accept / as a word separator
-WORDCHARS=$(echo $WORDCHARS | sed -e 's:/::')
+# Use emacs bindings on the command line
+bindkey -e
 
 # Use substring search
 bindkey -M emacs "^P" history-substring-search-up
