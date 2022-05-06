@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: method
 # key: d
+# condition: (isnip-beginning-of-line-p)
 # --
 def $1(`(isnip-python-self-if-in-class)`${2:$$(isnip-python-maybe-prepend-comma-in-class yas-text)}):
     $0
