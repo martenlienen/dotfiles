@@ -40,18 +40,15 @@
         (s-join "\n" indented)))))
 
 (defun isnip-python-inside-class? ()
-  "Returns t if point is inside a class."
+  "Return t if point is directly inside a class."
   (save-excursion
-    (let ((indentation (current-indentation))
-          (in-class? (looking-at "class")))
-      (while (and (> indentation 0) (not in-class?))
-        (python-nav-beginning-of-defun)
-        (setq indentation (current-indentation)
-              in-class? (looking-at "class")))
-      in-class?)))
+    (let ((indentation (current-indentation)))
+      (while (>= (current-indentation) indentation)
+        (python-nav-beginning-of-defun))
+      (looking-at "class"))))
 
 (defun isnip-python-self-if-in-class ()
-  "Returns 'self' if point is inside a class."
+  "Return 'self' if point is inside a class."
   (if (isnip-python-inside-class?) "self" ""))
 
 (defun isnip-beginning-of-line-p ()
