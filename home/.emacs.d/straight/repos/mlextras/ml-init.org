@@ -61,6 +61,12 @@ My emacs config is a package so that straight precompiles it.
                 web-mode-css-indent-offset 2
                 web-mode-attr-indent-offset 2)
 
+  ;; Store a few MB of undo history in each buffer. For example, isortify and blacken erase
+  ;; and recreate the whole buffer which can make the undo history grow pretty quickly.
+  (setq undo-limit (* 2 1024 1024)
+        undo-strong-limit (* 10 1024 1024)
+        undo-outer-limit (* 10 1024 1024))
+
   ;; Line breaks at 90 characters
   (setq-default fill-column 90)
 
