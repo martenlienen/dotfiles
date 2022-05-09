@@ -745,6 +745,18 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
     (smartscan-symbol-selector "symbol"))
 #+END_SRC
 
+** Undo
+
+Undoing can be quite tricky to keep track of mentally in emacs because the undo list also
+records undos. `vundo` presents the undo list as a tree structure.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package vundo
+    :straight t
+    :custom ((vundo-compact-display t))
+    :bind (("C-c C-/" . vundo)))
+#+END_SRC
+
 * Code Intelligence
 
 ** Tree Sitter
