@@ -50,7 +50,12 @@ def find_program_workspace(window_class):
 
 
 def program_runs(program):
-    pgrep = subprocess.run(["pgrep", program], stdout=subprocess.DEVNULL)
+    # We match against the process name, so that we don't match toggle_window itself.
+    # However, the process name is at most 16 null-terminated bytes [1], so we only
+    # search for the first 15 characters.
+    #
+    # [1] https://stackoverflow.com/questions/23534263/what-is-the-maximum-allowed-limit-on-the-length-of-a-process-name
+    pgrep = subprocess.run(["pgrep", program[:15]], stdout=subprocess.DEVNULL)
     return pgrep.returncode == 0
 
 
