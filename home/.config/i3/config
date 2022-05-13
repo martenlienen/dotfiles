@@ -70,6 +70,7 @@ for_window [title="^Android Emulator"] floating enable
 for_window [class="Todoist"] floating enable; move position center
 # Spotify starts out tiny, so resize it on start
 for_window [class="Spotify"] floating enable; resize set width 2800 px height 1600 px; move position center
+for_window [class="notion-app"] floating enable; resize set width 2400 px height 2000 px; move position center
 
 ################
 # Key Bindings #
@@ -127,9 +128,13 @@ bindsym $mod+Shift+f floating toggle
 # Make a floating window sticky, i.e. keep it visible across workspaces
 bindsym $mod+m sticky toggle
 
-# Toggle apps
+# Start apps
+bindsym $mod+Shift+n $run dolphin
+
+# Toggle background apps
 bindsym $mod+s $run toggle_window.py -- spotify --force-device-scale-factor=2
 bindsym $mod+grave $run toggle_window.py todoist
+bindsym $mod+n $run toggle_window.py notion-app-enhanced
 
 # Mode for managing i3 itself
 set $mode_german "German: [a] ä  [u] ü  [o]  ö  [s]  ß"
