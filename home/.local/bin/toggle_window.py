@@ -30,7 +30,8 @@ def find_program_workspace(window_class):
         if node.get("type") == "workspace":
             workspace = node
 
-        if node.get("window_properties", {}).get("class") == window_class:
+        class_name = node.get("window_properties", {}).get("class")
+        if class_name is not None and class_name.lower() == window_class.lower():
             raise WorkspaceException(workspace)
         else:
             if "nodes" in node:
@@ -98,11 +99,13 @@ def program_is_on_scratchpad(workspace):
 
 
 def show_program(window_class):
-    subprocess.run([I3MSG_PATH, f'[class="{window_class}"] scratchpad show; move position center'])
+    cmd = f'[class="(?i){window_class}"] scratchpad show; move position center'
+    subprocess.run([I3MSG_PATH, cmd])
 
 
 def hide_program(window_class):
-    subprocess.run([I3MSG_PATH, f'[class="{window_class}"] move scratchpad'])
+    cmd = f'[class="(?i){window_class}"] move scratchpad'
+    subprocess.run([I3MSG_PATH, cmd])
 
 
 def main():
