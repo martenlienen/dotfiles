@@ -98,8 +98,13 @@ def program_is_on_scratchpad(workspace):
     return "scratch" in workspace.get("name", "")
 
 
-def show_program(window_class):
-    cmd = f'[class="(?i){window_class}"] scratchpad show; move position center'
+def show_program(window_class, width=None, height=None):
+    cmd = f'[class="(?i){window_class}"] scratchpad show; '
+    if width is not None:
+        cmd += f'resize set width {width}px; '
+    if height is not None:
+        cmd += f'resize set height {height}px; '
+    cmd += 'move position center'
     subprocess.run([I3MSG_PATH, cmd])
 
 
@@ -111,11 +116,14 @@ def hide_program(window_class):
 def main():
     parser = ArgumentParser(description="Toggle a window to and from the scratchpad")
     parser.add_argument("--class", dest="window_class", help="WM_CLASS of the window")
+    parser.add_argument("--width", type=int, help="Resize window to this width")
+    parser.add_argument("--height", type=int, help="Resize window to this height")
     parser.add_argument("program", nargs="+", help="Program and options")
     args = parser.parse_args()
 
     program, *program_args = args.program
     window_class = args.window_class
+    width, height = args.width, args.height
 
     if window_class is None:
         window_class = program.title()
@@ -126,12 +134,12 @@ def main():
         if program_is_visible(workspace, program):
             hide_program(window_class)
         elif program_is_on_scratchpad(workspace):
-            show_program(window_class)
+            show_program(window_class, width, height)
         else:
             # The program is visible on a workspace other than the active one so we move
             # it here via the scratchpad
             hide_program(window_class)
-            show_program(window_class)
+            show_program(window_class, width, height)
     else:
         start_program(program, program_args)
 
