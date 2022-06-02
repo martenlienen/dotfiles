@@ -65,6 +65,7 @@ no_focus [class="plasmashell" window_type="notification"]
 ################
 
 for_window [class="Seafile Client"] floating enable
+for_window [class="matplotlib"] floating enable
 for_window [class="zoom"] floating enable
 for_window [title="^Android Emulator"] floating enable
 for_window [class="Todoist"] floating enable; move position center
