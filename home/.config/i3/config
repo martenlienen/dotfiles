@@ -89,7 +89,7 @@ bindsym XF86Calculator $run emacs -q -T i3-calculator --funcall=full-calc
 for_window [title="i3-calculator"] floating enable
 
 # F row
-bindsym $mod+F12 $run qdbus-qt5 org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Suspend
+bindsym $mod+F12 $run qdbus-qt5 org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Hibernate
 # The parameter values are defined here [1]. 1 2 -1 means pre-select shutdown and wait for
 # confirmation.
 #
