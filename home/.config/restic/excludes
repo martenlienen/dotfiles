@@ -1,0 +1,9 @@
+$HOME/.antigen
+$HOME/.cache
+$HOME/.cargo
+$HOME/.emacs.d
+$HOME/.ipython
+$HOME/.julia
+$HOME/.jupyter
+$HOME/.pyenv
+$HOME/.rustup
