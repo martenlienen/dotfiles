@@ -126,9 +126,6 @@ bindsym $mod+e layout toggle split
 # Toggle tiling / floating
 bindsym $mod+Shift+f floating toggle
 
-# Make a floating window sticky, i.e. keep it visible across workspaces
-bindsym $mod+m sticky toggle
-
 # Start apps
 bindsym $mod+Shift+n $run dolphin
 
@@ -136,6 +133,7 @@ bindsym $mod+Shift+n $run dolphin
 bindsym $mod+s $run toggle_window.py -- spotify --force-device-scale-factor=2
 bindsym $mod+grave $run toggle_window.py todoist
 bindsym $mod+n $run toggle_window.py --width 2400 --height 2000 notion-app-enhanced
+bindsym $mod+m $run toggle_window.py --width 2400 --height 2000 --class mattermost mattermost-desktop
 
 # Mode for managing i3 itself
 set $mode_german "German: [a] ä  [u] ü  [o]  ö  [s]  ß"
