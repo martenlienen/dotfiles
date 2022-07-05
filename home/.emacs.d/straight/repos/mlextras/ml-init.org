@@ -885,7 +885,8 @@ records undos. `vundo` presents the undo list as a tree structure.
   (setq vc-follow-symlinks t)
 
   (use-package git-timemachine
-    :straight t)
+    :straight (git-timemachine :host nil
+                               :repo "https://codeberg.org/pidu/git-timemachine.git"))
 
   (use-package magit
     :straight t
