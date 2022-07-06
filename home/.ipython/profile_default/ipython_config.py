@@ -29,6 +29,12 @@ c.InteractiveShellApp.exec_lines = [
     import_if_available("matplotlib.pyplot", "pp"),
     import_if_available("torch"),
     "%autoreload 3",
-    "%xmode verbose"
+    "%xmode verbose",
 ]
 c.TerminalInteractiveShell.confirm_exit = False
+
+# Render figures in hiDPI
+c.InlineBackend.figure_format = "retina"
+
+# Do not tighten the bounding box
+c.InlineBackend.print_figure_kwargs = {"bbox_inches": None}
