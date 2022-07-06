@@ -285,6 +285,7 @@ of functions.
 
   (use-package iflipb
     :straight t
+    :demand t
     :bind (("<f6>" . iflipb-next-buffer)
            ("S-<f6>" . iflipb-previous-buffer)
            ("M-<f6>" . iflipb-kill-this-buffer))
