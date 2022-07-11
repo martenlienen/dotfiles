@@ -8,6 +8,8 @@ alias e="exa -l"
 alias ea="exa -la"
 alias et="exa -T"
 
+alias wn="watch --interval 1 nvidia-smi"
+
 alias g="git"
 alias gst="git status"
 alias ga="git add"
