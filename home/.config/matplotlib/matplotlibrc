@@ -1,2 +1,5 @@
 # Use Qt as a graphical backend
 backend: Qt5Agg
+
+# HiDPI figures by default
+figure.dpi: 192

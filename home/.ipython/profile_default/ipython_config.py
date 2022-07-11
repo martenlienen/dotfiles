@@ -38,3 +38,6 @@ c.InlineBackend.figure_format = "retina"
 
 # Do not tighten the bounding box
 c.InlineBackend.print_figure_kwargs = {"bbox_inches": None}
+
+# Don't overwrite any rc settings during interactive use
+c.InlineBackend.rc = {}
