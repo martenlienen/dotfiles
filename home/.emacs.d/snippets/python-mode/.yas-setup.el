@@ -43,7 +43,7 @@
   "Return t if point is directly inside a class."
   (save-excursion
     (let ((indentation (current-indentation)))
-      (while (>= (current-indentation) indentation)
+      (while (and (> (current-indentation) 0) (>= (current-indentation) indentation))
         (python-nav-beginning-of-defun))
       (looking-at "class"))))
 
