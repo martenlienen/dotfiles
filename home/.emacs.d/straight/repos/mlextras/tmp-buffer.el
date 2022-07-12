@@ -13,6 +13,7 @@
     (?l . lisp-interaction-mode)
     (?p . python-mode)
     (?x . LaTeX-mode)
+    (?y . yaml-mode)
     (?f . fundamental-mode)
     (?? . tmp-buffer-prompt-for-mode))
   "List of major modes for temporary buffers and their hotkeys."
