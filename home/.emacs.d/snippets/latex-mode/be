@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: begin block
 # key: be
+# condition: (or (texmathp) (isnip-beginning-of-line-p))
 # --
 \begin{$1}
   $0
