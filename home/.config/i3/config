@@ -140,21 +140,6 @@ bindsym $mod+n $run toggle_window.py --width 2400 --height 2000 notion-app-enhan
 bindsym $mod+m $run toggle_window.py --width 2400 --height 2000 --class mattermost mattermost-desktop
 
 # Mode for managing i3 itself
-set $mode_german "German: [a] ä  [u] ü  [o]  ö  [s]  ß"
-bindsym $mod+g mode $mode_german
-mode $mode_german {
-    bindsym --release a $run "xdotool getactivewindow windowactivate --sync type 'ä'"; mode "default"
-    bindsym --release shift+a $run "xdotool getactivewindow windowactivate --sync type 'Ä'"; mode "default"
-    bindsym --release o $run "xdotool getactivewindow windowactivate --sync type 'ö'"; mode "default"
-    bindsym --release shift+o $run "xdotool getactivewindow windowactivate --sync type 'Ö'"; mode "default"
-    bindsym --release u $run "xdotool getactivewindow windowactivate --sync type 'ü'"; mode "default"
-    bindsym --release shift+u $run "xdotool getactivewindow windowactivate --sync type 'Ü'"; mode "default"
-    bindsym --release s $run "xdotool getactivewindow windowactivate --sync type 'ß'"; mode "default"
-
-    bindsym Ctrl+g mode "default"
-}
-
-# Mode for managing i3 itself
 set $mode_i3 "i3: reload[i] [r]estart [e]xit"
 bindsym $mod+i mode $mode_i3
 mode $mode_i3 {
