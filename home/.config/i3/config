@@ -72,9 +72,10 @@ for_window [class="Todoist"] floating enable; move position center
 for_window [class="Spotify"] floating enable; resize set width 2800 px height 1600 px; move position center
 for_window [class="notion-app"] floating enable; resize set width 2400 px height 2000 px; move position center
 
-# Zoom does not set a proper class for its windows, but these heuristics seem to catch all
-# their windows
+# Zoom does not set a proper class for some of its windows, but these heuristics seem to
+# catch all their windows
 for_window [title="^Zoom"] floating enable
+for_window [class="zoom"] floating enable
 for_window [class="^join\?action=join"] floating enable
 
 ################
