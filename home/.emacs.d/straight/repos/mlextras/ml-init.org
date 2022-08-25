@@ -141,9 +141,9 @@ Packages are configured with the ~use-package~ macro.
 
 * Utilities
 
-The ~cqql~ package (conspicuously named after myself) contains several a loose
-collection of utility functions and commands which is why it cannot be put
-easily into one of the existing sections.
+The ~cqql~ package (conspicuously named after myself) contains a loose collection of
+utility functions and commands which is why it cannot be put easily into one of the
+existing sections.
 
 #+BEGIN_SRC emacs-lisp
   (use-package cqql
@@ -159,6 +159,13 @@ easily into one of the existing sections.
     :config
     (add-hook 'before-save-hook #'cqql-trim-whitespace))
 #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package write-only
+    :straight (write-only :local-repo "mlextras" :type nil)
+    :bind (("S-<f7>" . write-only-mode)))
+#+END_SRC
+
 
 #+BEGIN_SRC emacs-lisp
   (use-package tmp-buffer
