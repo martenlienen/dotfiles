@@ -1377,6 +1377,9 @@ them to LaTeX!
   (defun enable-word-wrap ()
     "Enable word wrapping."
     (interactive)
+    ;; Disable line wrap fringe indicators
+    (make-variable-buffer-local 'fringe-indicator-alist)
+    (setf (alist-get 'continuation fringe-indicator-alist) nil)
     (setq word-wrap t))
 
   (defun cqql-latex-append-line-break ()
