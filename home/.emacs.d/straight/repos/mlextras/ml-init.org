@@ -1441,7 +1441,13 @@ them to LaTeX!
     :after latex
     :hook (LaTeX-mode . cdlatex-mode)
     :custom ((cdlatex-make-sub-superscript-roman-if-pressed-twice t)
-             (cdlatex-paired-parens "${[(")))
+             (cdlatex-paired-parens "${[("))
+    :bind (:map cdlatex-mode-map
+                ("(" . nil)
+                ("<" . nil)
+                ("[" . nil)
+                ("{" . nil)
+                ("|" . nil)))
 #+END_SRC
 
 ** org
