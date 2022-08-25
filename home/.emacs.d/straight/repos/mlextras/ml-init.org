@@ -1408,7 +1408,8 @@ them to LaTeX!
     (* cqql-preview-scale (funcall (preview-scale-from-face))))
 
   (use-package reftex
-    :custom ((reftex-toc-follow-mode t)))
+    :custom ((reftex-toc-follow-mode t)
+             (reftex-cite-format 'natbib)))
 
   (use-package preview
     :after tex
