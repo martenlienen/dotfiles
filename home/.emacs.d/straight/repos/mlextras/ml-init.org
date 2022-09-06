@@ -1159,7 +1159,9 @@ Put emacs into distraction-free writing mode on demand.
                 ("C-c C-r" . #'cqql-python-shell-send-region-dwim)
                 ("C-c C-v" . #'cqql-python-shell-send-variable)
                 ("C-c t" . #'python-pytest-popup)
-                ("C-c i" . #'cqql-import-package))
+                ("C-c i" . #'cqql-import-package)
+                ("C-c <left>" . #'python-indent-shift-left)
+                ("C-c <right>" . #'python-indent-shift-right))
 
     :config
     (when (executable-find "ipython")

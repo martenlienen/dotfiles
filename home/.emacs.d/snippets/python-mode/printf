@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: printf
+# key: pf
+# --
+print(f"{$0 = }")
