@@ -503,7 +503,6 @@ with emacs built-in APIs.
     :bind (("C-x C-f" . projectile-find-file))
     :init
     (setq projectile-keymap-prefix (kbd "C-x p"))
-    (setq projectile-completion-system 'ivy)
     :config
     (projectile-global-mode))
 #+END_SRC
