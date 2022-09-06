@@ -312,26 +312,18 @@ The ~selectrum~ ecosystem offers a rich combination of libraries and tools that 
 with emacs built-in APIs.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package orderless
-    :straight t
-    :custom (completion-styles '(orderless)))
-
   (use-package selectrum
     :straight t
-    :custom
-    ;; Only highlight visible candidates. Slightly improves performance (says the docs)
-    (selectrum-refine-candidates-function #'orderless-filter)
-    (selectrum-highlight-candidates-function #'orderless-highlight-matches)
     :config (selectrum-mode))
 
   (use-package prescient
     :straight t
+    :custom ((prescient-filter-method '(fuzzy initialism literal regexp)))
     :config (prescient-persist-mode))
 
   (use-package selectrum-prescient
     :straight t
     :after (selectrum prescient)
-    :custom (selectrum-prescient-enable-filtering nil)
     :config (selectrum-prescient-mode))
 
   (use-package marginalia
