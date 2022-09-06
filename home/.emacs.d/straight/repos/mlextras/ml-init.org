@@ -83,6 +83,11 @@ My emacs config is a package so that straight precompiles it.
   ;; Yank at point instead of position of cursor
   (setf mouse-yank-at-point t)
 
+  ;; Never re-center during scrolling and keep some distance between point and the window
+  ;; margin
+  (setq scroll-conservatively 101
+        scroll-margin 3)
+
   ;; I do not like accidentally freezing my emacs instance
   (global-set-key (kbd "C-z") nil)
 
