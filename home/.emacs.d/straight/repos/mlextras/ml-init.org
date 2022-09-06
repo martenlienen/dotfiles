@@ -811,7 +811,10 @@ records undos. `vundo` presents the undo list as a tree structure.
     :custom ((lsp-headerline-breadcrumb-enable-diagnostics nil)))
   (use-package lsp-pylsp
     :custom ((lsp-pylsp-plugins-jedi-use-pyenv-environment t)
-             (lsp-pylsp-plugins-jedi-completion-fuzzy t)))
+             (lsp-pylsp-plugins-jedi-completion-fuzzy nil)
+             (lsp-pylsp-plugins-jedi-completion-include-params nil)
+             (lsp-pylsp-plugins-flake8-enabled nil)
+             (lsp-pylsp-plugins-mccabe-enabled nil)))
 
   (use-package lsp-mode
     :straight t
