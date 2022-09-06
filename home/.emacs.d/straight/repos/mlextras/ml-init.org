@@ -310,7 +310,15 @@ of functions.
 
 #+BEGIN_SRC emacs-lisp
   (use-package vertico
-    :straight t
+    :straight (vertico :files ("*" "extensions/*" (:exclude ".git"))
+                       :includes (vertico-buffer
+                                  vertico-directory
+                                  vertico-flat
+                                  vertico-indexed
+                                  vertico-mouse
+                                  vertico-quick
+                                  vertico-repeat
+                                  vertico-reverse))
     :custom
     (vertico-cycle t)
     :config
@@ -323,6 +331,13 @@ of functions.
 
     ;; Enable recursive minibuffers
     (setq enable-recursive-minibuffers t))
+
+  (use-package vertico-repeat
+    :straight nil
+    :after vertico
+    :bind ("C-c o" . vertico-repeat)
+    :config
+    (add-hook 'minibuffer-setup-hook #'vertico-repeat-save))
 
   (defun ml/orderless-flex-if-twiddle (pattern _index _total)
     "Match PATTERN with flex matching if it starts with a twiddle."
