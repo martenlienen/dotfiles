@@ -40,6 +40,11 @@ alias grba="git rebase --abort"
 alias grbs="git rebase --skip"
 
 alias pe="pyenv"
+alias pev="pyenv version"
+alias pevs="pyenv versions"
+alias pei="pyenv install"
+alias pel="pyenv local"
+alias pes="pyenv shell"
 
 alias ipy="ipython"
 alias lab="jupyter lab"
