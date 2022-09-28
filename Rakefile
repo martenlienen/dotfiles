@@ -156,3 +156,7 @@ task :pipx do
     sh "pipx install #{package}"
   end
 end
+
+task :optimus do
+  sh "sudo cp optimus-manager.conf /etc/optimus-manager"
+end
