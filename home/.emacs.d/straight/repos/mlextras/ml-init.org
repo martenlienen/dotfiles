@@ -166,13 +166,6 @@ existing sections.
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (use-package write-only
-    :straight (write-only :local-repo "mlextras" :type nil)
-    :bind (("S-<f7>" . write-only-mode)))
-#+END_SRC
-
-
-#+BEGIN_SRC emacs-lisp
   (use-package tmp-buffer
     :straight (tmp-buffer :local-repo "mlextras" :type nil)
     :bind ("C-c n" . tmp-buffer))
@@ -993,6 +986,10 @@ Put emacs into distraction-free writing mode on demand.
 
     :config
     (setq darkroom-text-scale-increase 1.5))
+
+  (use-package focus
+    :straight t
+    :bind (("S-<f7>" . #'focus-mode)))
 #+END_SRC
 
 ** Linting
