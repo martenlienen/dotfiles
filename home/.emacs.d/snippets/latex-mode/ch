@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: chapter
+# key: ch
+# --
+\chapter{$1}\label{ch:${1:$(isnip-latex-to-label yas-text)}}
