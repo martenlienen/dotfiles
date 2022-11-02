@@ -199,9 +199,9 @@ it uses an interactive shell instead of a login one which would not read my
     :straight t
     :if (display-graphic-p))
 
-  (use-package nord-theme
+  (use-package solarized-theme
     :straight t
-    :config (load-theme 'nord t))
+    :config (load-theme 'solarized-light t))
 
   (use-package doom-modeline
     :straight t
