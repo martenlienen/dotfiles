@@ -195,6 +195,10 @@ it uses an interactive shell instead of a login one which would not read my
 ** Theme
 
 #+BEGIN_SRC emacs-lisp
+  (use-package all-the-icons
+    :straight t
+    :if (display-graphic-p))
+
   (use-package nord-theme
     :straight t
     :config (load-theme 'nord t))
