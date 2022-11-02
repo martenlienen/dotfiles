@@ -1,4 +1,5 @@
 alias s="sudo"
+alias xo="xdg-open"
 
 alias au="sudo apt update"
 alias aU="sudo apt upgrade"
