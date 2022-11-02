@@ -203,28 +203,18 @@ it uses an interactive shell instead of a login one which would not read my
     :straight t
     :config (load-theme 'nord t))
 
-  (use-package zerodark-theme
+  (use-package doom-modeline
     :straight t
-    :after flycheck
-    :config (zerodark-setup-modeline-format))
-#+END_SRC
-
-** Mode Line
-
-#+BEGIN_SRC emacs-lisp
-  (use-package rich-minority
-    :straight t
+    :hook (after-init . doom-modeline-mode)
     :config
-    ;; Hide all minor modes
-    (setq rm-whitelist (list "")))
-
-  (use-package smart-mode-line
-    :straight t
-    :config
-    (setf sml/theme 'respectful
-          sml/no-confirm-load-theme t)
-
-    (sml/setup))
+    (setq doom-modeline-buffer-modification-icon nil)
+    (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
+    (doom-modeline-def-modeline 'ml-line
+      '(bar window-number matches follow buffer-info buffer-position selection-info word-count)
+      '(compilation misc-info repl lsp minor-modes input-method process vcs checker major-mode))
+    (defun ml-setup-doom-modeline ()
+      (doom-modeline-set-modeline 'ml-line 'default))
+    (add-hook 'doom-modeline-mode-hook 'ml-setup-doom-modeline))
 #+END_SRC
 
 ** Minibuffer
