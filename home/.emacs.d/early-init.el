@@ -23,3 +23,4 @@
 
 ;; Ensure that the mouse cursor is always visible on dark themes
 (add-to-list 'default-frame-alist '(mouse-color . "palegoldenrod"))
+(add-to-list 'default-frame-alist '(internal-border-width . 20))
