@@ -201,7 +201,14 @@ it uses an interactive shell instead of a login one which would not read my
 
   (use-package solarized-theme
     :straight t
-    :config (load-theme 'solarized-light t))
+    :config
+    (load-theme 'solarized-light t)
+
+    ;; For some reason, the underline is not aligned with the bottom of the mode line.
+    ;; Instead, it crosses straight through the mode line, giving it an uneasy look, so we
+    ;; just distable it.
+    (set-face-underline 'mode-line nil)
+    (set-face-underline 'mode-line-inactive nil))
 
   (use-package doom-modeline
     :straight t
