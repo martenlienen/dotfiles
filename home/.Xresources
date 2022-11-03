@@ -16,7 +16,7 @@ Emacs.menuBar: off
 Emacs.toolBar: off
 Emacs.verticalScrollBars: off
 Emacs.horizontalScrollBars: off
-Emacs.font: Noto Sans Mono-13:autohint=yes
+Emacs.font: Noto Sans Mono-11:autohint=yes
 
 ! Copyright (c) 2016-present Arctic Ice Studio <development@arcticicestudio.com>
 ! Copyright (c) 2016-present Sven Greb <code@svengreb.de>
