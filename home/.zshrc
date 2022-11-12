@@ -22,7 +22,7 @@ antigen bundle zsh-users/zsh-history-substring-search
 antigen apply
 
 # Load my theme
-. ~/.local/zsh/cqql.zsh
+. ~/.local/zsh/theme.zsh
 
 # Do not get in my way, when I type
 unsetopt correct
