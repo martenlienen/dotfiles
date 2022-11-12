@@ -15,6 +15,9 @@ export EDITOR="vim"
 # Register the ripgrep config
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep"
 
+# Use ipdb as the default python debugger
+export PYTHONBREAKPOINT="ipdb.set_trace"
+
 # Read system-local settings
 if [[ -r ~/.local/zshenv ]]; then
   . ~/.local/zshenv
