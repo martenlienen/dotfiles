@@ -47,6 +47,7 @@ alias pei="pyenv install"
 alias pel="pyenv local"
 alias pes="pyenv shell"
 
+alias py="python"
 alias ipy="ipython"
 alias lab="jupyter lab"
 
