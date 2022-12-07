@@ -101,7 +101,7 @@ task :system => [:system_packages, :system_conf]
 task :system_packages => [:system_conf] do
   sh <<END
 # Desktop environment
-de="i3-gaps wmctrl nitrogen xdotool rofi"
+de="i3-gaps wmctrl nitrogen xdotool rofi libinput-gestures"
 
 # Python compilation requirements
 pyenv="base-devel openssl zlib xzmake"
