@@ -1135,19 +1135,26 @@ Put emacs into distraction-free writing mode on demand.
               (point))
           (point)))))
 
-  (defun cqql-import-package (package &optional names)
-    "Import PACKAGE, optionally importing just certain NAMES."
-    (interactive
-     (if current-prefix-arg
-         (list (read-string "from ")
-               (split-string (read-string "import ") "[[:space:]]*,[[:space:]]*"))
-       (list (read-string "import "))))
-    (let ((line (if names (format "from %s import %s" package (string-join names ", "))
-                  (format "import %s" package))))
+  (defun cqql-python-import ()
+    "Insert and edit a new `import' statement."
+    (interactive)
+    (save-window-excursion
       (save-excursion
         (goto-char (cqql-imports-start))
-        (insert line)
-        (insert "\n"))))
+        (insert "import \n")
+        (backward-char)
+        (recursive-edit))))
+
+  (defun cqql-python-from-import ()
+    "Insert and edit a new `from .. import' statement."
+    (interactive)
+    (save-window-excursion
+      (save-excursion
+        (goto-char (cqql-imports-start))
+        (insert "fi \n")
+        (backward-char 2)
+        (yas-expand)
+        (recursive-edit))))
 
   (use-package isortify
     :straight t
@@ -1191,7 +1198,8 @@ Put emacs into distraction-free writing mode on demand.
                 ("C-c C-r" . #'cqql-python-shell-send-region-dwim)
                 ("C-c C-v" . #'cqql-python-shell-send-variable)
                 ("C-c t" . #'python-pytest-popup)
-                ("C-c i" . #'cqql-import-package)
+                ("C-c i" . #'cqql-python-import)
+                ("C-c I" . #'cqql-python-from-import)
                 ("C-c <left>" . #'python-indent-shift-left)
                 ("C-c <right>" . #'python-indent-shift-right))
 
