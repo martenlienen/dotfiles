@@ -236,6 +236,20 @@ Save the minibuffer history.
     (savehist-mode))
 #+END_SRC
 
+Close the minibuffer when it loses focus.
+
+#+BEGIN_SRC emacs-lisp
+  (defun kill-unfocused-minibuffer (_frame)
+    "Kill the minibuffer if it is active but does not have focus."
+    (when (and
+           (>= (recursion-depth) 1)
+           (active-minibuffer-window)
+           (not (minibuffer-window-active-p (selected-window))))
+      (abort-recursive-edit)))
+
+  (add-hook 'window-selection-change-functions 'kill-unfocused-minibuffer)
+#+END_SRC
+
 ** eldoc
 
 #+BEGIN_SRC emacs-lisp
