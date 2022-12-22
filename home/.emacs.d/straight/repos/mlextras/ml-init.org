@@ -1534,11 +1534,19 @@ them to LaTeX!
           org-default-notes-file "notes.org"
           org-crypt-key nil
           org-tags-exclude-from-inheritance (list "crypt")
-          org-startup-indented t
           org-M-RET-may-split-line nil
           org-enforce-todo-dependencies t
           org-enforce-todo-checkbox-dependencies t
-          org-agenda-start-on-weekday nil)
+          org-agenda-start-on-weekday nil
+
+          ;; Edit settings
+          org-catch-invisible-edits 'show-and-error
+          org-special-ctrl-a/e t
+
+          ;; Org styling, hide markup etc.
+          org-hide-emphasis-markers t
+          org-pretty-entities t
+          org-ellipsis "…")
 
     :config
     (require 'org-crypt)
@@ -1555,18 +1563,19 @@ them to LaTeX!
      'org-babel-load-languages
      org-babel-load-languages)
 
-    (add-hook 'org-mode-hook #'flycheck-mode))
+    (add-hook 'org-mode-hook #'flycheck-mode)
+
+    (set-face-underline 'org-block-begin-line nil)
+    (set-face-attribute 'org-block-end-line nil :overline nil))
 #+END_SRC
 
-Use some nice UTF-8 symbols to signify the nesting depth.
+Give org a modern look.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package org-superstar
+  (use-package org-modern
     :straight t
-    :custom ((org-superstar-headline-bullets-list '("◉" "◈" "○" "▷"))
-             (org-superstar-cycle-headline-bullets nil))
     :config
-    (add-hook 'org-mode-hook 'org-superstar-mode))
+    (add-hook 'org-mode-hook 'org-modern-mode))
 #+END_SRC
 
 ** markdown
