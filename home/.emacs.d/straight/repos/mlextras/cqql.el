@@ -21,12 +21,12 @@
          (column (current-column))
          (text-start (save-excursion
                        (if region?
-                           (setf (point) (region-beginning)))
+                           (goto-char (region-beginning)))
                        (beginning-of-line)
                        (point)))
          (text-end (save-excursion
                      (if region?
-                         (setf (point) (region-end)))
+                         (goto-char (region-end)))
                      (end-of-line)
                      (point)))
          (mark? (mark))
@@ -39,10 +39,10 @@
     (forward-line lines)
     (let ((insert-start (point)))
       (insert text)
-      (setf (point) (+ insert-start point-offset))
+      (goto-char (+ insert-start point-offset))
       (when (and region? mark?)
-        (setf (mark) (+ insert-start mark-offset)
-              deactivate-mark nil)))))
+        (set-mark (+ insert-start mark-offset))
+        (setq deactivate-mark nil)))))
 
 (defun cqql-move-text-up (lines)
   "Move the current line or region LINES lines up."
@@ -64,12 +64,12 @@ first line of the region to the end of the last."
          (pos (point))
          (text-start (save-excursion
                        (if region?
-                           (setf (point) (region-beginning)))
+                           (goto-char (region-beginning)))
                        (beginning-of-line)
                        (point)))
          (text-end (save-excursion
                      (if region?
-                         (setf (point) (region-end)))
+                         (goto-char (region-end)))
                      (end-of-line)
                      (point)))
          (mark? (mark))
@@ -77,16 +77,16 @@ first line of the region to the end of the last."
          (text (buffer-substring text-start text-end))
          (new-pos (+ 1 pos (* times (length text)))))
     (if region?
-        (setf (point) text-end))
+        (goto-char text-end))
     (dotimes (i times)
       (end-of-line)
       (insert "\n")
       (insert text))
-    (setf (point) new-pos
-          deactivate-mark nil)
+    (goto-char new-pos)
+    (setq deactivate-mark nil)
     (when (and region? mark?)
-      (setf (mark) (+ 1 mark? (* times (length text)))
-            deactivate-mark nil))))
+      (set-mark (+ 1 mark? (* times (length text))))
+      (setq deactivate-mark nil))))
 
 (defun cqql-open-line ()
   "Create a new line below and put point into it."
@@ -110,7 +110,7 @@ first line of the region to the end of the last."
     (kill-line 1)
     (move-end-of-line nil)
     (when (< pos (point))
-      (setf (point) pos))))
+      (goto-char pos))))
 
 (defun cqql-c-append-semicolon ()
   "Insert semicolon at the end of the line."
@@ -123,7 +123,7 @@ first line of the region to the end of the last."
   "A list of modes, that should not be whitespace-trimmed.")
 
 (defun cqql-trim-whitespace ()
-  (when (not (seq-contains cqql-no-trimming-modes major-mode))
+  (when (not (seq-contains-p cqql-no-trimming-modes major-mode))
     (delete-trailing-whitespace)))
 
 (provide 'cqql)
