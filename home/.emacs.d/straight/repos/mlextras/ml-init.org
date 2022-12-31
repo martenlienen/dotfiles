@@ -1627,12 +1627,12 @@ Give org a modern look.
 ** HTML/jinja2
 
 #+BEGIN_SRC emacs-lisp
-    (use-package web-mode
-      :straight t
-      :mode "\\.html\\.?"
-      :config
-      ;; Disable inserting closing parens etc. because we have smartparens already
-      (setq web-mode-enable-auto-pairing nil))
+  (use-package web-mode
+    :straight t
+    :mode "\\.html\\.?"
+    :config
+    ;; Disable inserting closing parens etc. because we have smartparens already
+    (setq web-mode-enable-auto-pairing nil))
 #+END_SRC
 
 * Package Footer
