@@ -28,8 +28,8 @@ My emacs config is a package so that straight precompiles it.
         initial-major-mode 'emacs-lisp-mode)
 
   ;; Enable X clipboards
-  (setf x-select-enable-clipboard t
-        x-select-enable-primary t)
+  (setf select-enable-clipboard t
+        select-enable-primary t)
 
   ;; Put more information into the frame title
   (setf frame-title-format '("" invocation-name ": %b - " mode-name))
