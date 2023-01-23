@@ -78,7 +78,7 @@ end
 
 task :rust => :rustup do
   sh <<END
-cargo install exa hexyl fd-find bat ripgrep tokei gping paru
+cargo install exa hexyl fd-find bat ripgrep tokei gping just paru
 END
 end
 
