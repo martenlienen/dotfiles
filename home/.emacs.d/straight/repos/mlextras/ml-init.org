@@ -712,12 +712,6 @@ The dwim commands should just be the default in modern emacs.
 ** Region
 
 #+BEGIN_SRC emacs-lisp
-  (use-package wrap-region
-    :straight t
-    :config (wrap-region-global-mode t))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
   (use-package expand-region
     :straight t
     :bind (("M-m" . er/expand-region)
