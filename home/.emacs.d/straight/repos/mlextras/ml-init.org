@@ -628,6 +628,7 @@ The dwim commands should just be the default in modern emacs.
 #+BEGIN_SRC emacs-lisp
   (use-package smartparens
     :straight t
+    :demand t
     :init
     (require 'hydra)
     (defhydra hydra-smartparens (:hint nil)
