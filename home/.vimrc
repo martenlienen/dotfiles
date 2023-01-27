@@ -2,25 +2,6 @@
 set nocompatible
 filetype off
 
-call plug#begin()
-
-" General editing
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-endwise'
-Plug 'Lokaltog/vim-easymotion'
-Plug 'tomtom/tcomment_vim'
-Plug 'Raimondi/delimitMate'
-Plug 'kana/vim-textobj-user'
-
-" VIM enhancements
-Plug 'tpope/vim-dispatch'
-
-" Handling files
-Plug 'wincent/Command-T'
-let g:CommandTAlwaysShowDotFiles = 1
-
-call plug#end()
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Status line
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -52,13 +33,6 @@ nnoremap <Up> :wincmd +<CR>
 nnoremap <Down> :wincmd -<CR>
 nnoremap <Left> :wincmd <<CR>
 nnoremap <Right> :wincmd ><CR>
-
-" Search for word under cursor in current directory
-nnoremap <Leader># :Ag<CR>
-
-" Git
-nnoremap <Leader>gg :Gstatus<CR>
-nnoremap <Leader>gc :Gcommit -a<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

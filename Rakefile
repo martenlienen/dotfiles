@@ -35,7 +35,7 @@ task :dotfiles do
   sh "fc-cache"
 end
 
-multitask :tools => [:pyenv, :pyenv_virtualenv, :vim_plug, :antigen]
+multitask :tools => [:pyenv, :pyenv_virtualenv, :antigen]
 
 task :pyenv do
   manage_git_repo "#{Dir.home}/.pyenv", "https://github.com/yyuu/pyenv.git"
@@ -45,15 +45,11 @@ task :pyenv_virtualenv => :pyenv do
   manage_git_repo "#{Dir.home}/.pyenv/plugins/pyenv-virtualenv", "https://github.com/yyuu/pyenv-virtualenv.git"
 end
 
-task :vim_plug do
-  manage_git_repo "#{Dir.home}/.vim/plug", "https://github.com/junegunn/vim-plug.git"
-end
-
 task :antigen do
   manage_git_repo "#{Dir.home}/.antigen", "https://github.com/zsh-users/antigen.git"
 end
 
-multitask :packages => [:emacs, :vim_packages]
+multitask :packages => [:emacs]
 
 task :emacs => :dotfiles do
   ORG_FILES.each do |f|
@@ -62,10 +58,6 @@ emacs --quick --batch --eval \
       "(progn (require 'ob-tangle) (org-babel-tangle-file \\"#{f}\\"))"
 END
   end
-end
-
-task :vim_packages => [:vim_plug, :dotfiles] do
-  sh "vim +PlugUpdate +qall"
 end
 
 task :rustup do
