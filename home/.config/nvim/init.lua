@@ -44,8 +44,12 @@ require("packer").startup(function(use)
   }
 
   -- Git related plugins
+  use {
+    "TimUntersberger/neogit",
+    requires = "nvim-lua/plenary.nvim",
+    config = 1,
+  }
   use "tpope/vim-fugitive"
-  use "tpope/vim-rhubarb"
   use "lewis6991/gitsigns.nvim"
 
   use "navarasu/onedark.nvim" -- Theme inspired by Atom
@@ -165,6 +169,8 @@ require("indent_blankline").setup {
   char = "┊",
   show_trailing_blankline_indent = false,
 }
+
+require("neogit").setup()
 
 -- Gitsigns
 -- See `:help gitsigns.txt`
