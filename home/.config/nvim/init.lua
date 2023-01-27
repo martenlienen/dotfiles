@@ -130,6 +130,9 @@ vim.o.completeopt = "menuone,noselect"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.keymap.set({ "i" }, "fd", "<Esc>")
+vim.keymap.set({ "n" }, ",", ":")
+
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
