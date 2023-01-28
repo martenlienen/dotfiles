@@ -24,3 +24,7 @@
 ;; Ensure that the mouse cursor is always visible on dark themes
 (add-to-list 'default-frame-alist '(mouse-color . "palegoldenrod"))
 (add-to-list 'default-frame-alist '(internal-border-width . 20))
+
+(when (not (display-graphic-p))
+  ;; Disable menu bar in the terminal UI because there the Xresources are not available
+  (menu-bar-mode -1))

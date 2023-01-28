@@ -201,6 +201,7 @@ it uses an interactive shell instead of a login one which would not read my
 
   (use-package solarized-theme
     :straight t
+    :demand t
     :config
     (load-theme 'solarized-light t)
 
@@ -209,6 +210,14 @@ it uses an interactive shell instead of a login one which would not read my
     ;; just distable it.
     (set-face-underline 'mode-line nil)
     (set-face-underline 'mode-line-inactive nil))
+
+  (use-package nord-theme
+    :straight t
+    :demand t)
+
+  (if (display-graphic-p)
+      (load-theme 'solarized-light t)
+    (load-theme 'nord t))
 
   (use-package doom-modeline
     :straight t
