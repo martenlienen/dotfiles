@@ -839,6 +839,8 @@ records undos. `vundo` presents the undo list as a tree structure.
            (lsp-mode . lsp-enable-which-key-integration))
     :commands (lsp)
     :bind (("C-?" . lsp-describe-thing-at-point)
+           ;; Extra binding for terminal UI
+           ("C-c ?" . lsp-describe-thing-at-point)
            ("<f10>" . lsp-rename)
            ("S-<f10>" . lsp-execute-code-action)
            :map lsp-mode-map
