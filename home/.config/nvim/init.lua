@@ -140,6 +140,8 @@ vim.g.maplocalleader = " "
 vim.keymap.set({ "i" }, "fd", "<Esc>")
 vim.keymap.set({ "n" }, ",", ":")
 
+vim.keymap.set({ "n" }, "<F2>", require("neogit").open)
+
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
