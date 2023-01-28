@@ -190,6 +190,19 @@ it uses an interactive shell instead of a login one which would not read my
     :config (exec-path-from-shell-initialize))
 #+END_SRC
 
+** Terminal UI
+
+~term-key~ configures emacs and the terminal to communicate arbitrary key combinations, such
+C-S-o, via escape codes. Without this, it is not possible to send these key combinations
+to emacs running in a terminal.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package term-keys
+    :straight (term-keys :repo "CyberShadow/term-keys" :host github)
+    :if (not (display-graphic-p))
+    :config (term-keys-mode t))
+#+END_SRC
+
 * UI
 
 ** Theme
@@ -201,7 +214,7 @@ it uses an interactive shell instead of a login one which would not read my
 
   (use-package solarized-theme
     :straight t
-    :demand t
+    :if (display-graphic-p)
     :config
     (load-theme 'solarized-light t)
 
@@ -213,11 +226,8 @@ it uses an interactive shell instead of a login one which would not read my
 
   (use-package nord-theme
     :straight t
-    :demand t)
-
-  (if (display-graphic-p)
-      (load-theme 'solarized-light t)
-    (load-theme 'nord t))
+    :if (not (display-graphic-p))
+    :config (load-theme 'nord t))
 
   (use-package doom-modeline
     :straight t
@@ -1002,7 +1012,7 @@ Put emacs into distraction-free writing mode on demand.
 
 #+BEGIN_SRC emacs-lisp
   (use-package darkroom
-    :straight (darkroom :repo "joaotavora/darkroom" :fetcher "github")
+    :straight (darkroom :repo "joaotavora/darkroom" :host github)
     :bind (("<f7>" . #'darkroom-mode))
 
     :config
