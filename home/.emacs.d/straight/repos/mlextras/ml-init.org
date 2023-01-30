@@ -197,9 +197,31 @@ C-S-o, via escape codes. Without this, it is not possible to send these key comb
 to emacs running in a terminal.
 
 #+BEGIN_SRC emacs-lisp
+  (defun ml/want-key-p (key mods)
+    "Predicate for which keys should be encoded by term-keys."
+    (or
+     ;; Any of the defaults
+     (term-keys/want-key-p-def key mods)
+     (seq-let (shift control meta super hyper alt) mods
+       (and
+        ;; We don't care about Super/Hyper/Alt modifiers
+        (not super) (not hyper) (not alt)
+
+        ;; Any modifier plus F key
+        (string-match-p "^F[0-9]\\{1,2\\}$" key)))))
+
+  (defun ml/generate-alacritty-term-keys ()
+    "Generate the alacritty term-keys configuration."
+    (interactive)
+    (require 'term-keys-alacritty)
+    (with-temp-buffer
+      (insert (term-keys/alacritty-config))
+      (write-region (point-min) (point-max) "~/.config/alacritty/term-keys.yml")))
+
   (use-package term-keys
     :straight (term-keys :repo "CyberShadow/term-keys" :host github)
     :if (not (display-graphic-p))
+    :custom ((term-keys/want-key-p-func #'ml/want-key-p))
     :config (term-keys-mode t))
 #+END_SRC
 
