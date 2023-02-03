@@ -207,8 +207,8 @@ to emacs running in a terminal.
         ;; We don't care about Super/Hyper/Alt modifiers
         (not super) (not hyper) (not alt)
 
-        ;; Any modifier plus F key
-        (string-match-p "^F[0-9]\\{1,2\\}$" key)))))
+        ;; F keys + at least one modifier
+        (and (string-match-p "^F[0-9]\\{1,2\\}$" key) (or shift control meta))))))
 
   (defun ml/generate-alacritty-term-keys ()
     "Generate the alacritty term-keys configuration."
