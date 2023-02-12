@@ -877,6 +877,40 @@ records undos. `vundo` presents the undo list as a tree structure.
     :custom ((lsp-headerline-breadcrumb-enable-diagnostics nil)
              (lsp-headerline-arrow
               (propertize ">" 'face 'lsp-headerline-breadcrumb-separator-face))))
+
+  (defun ml/pyenv-path-from-name (name)
+    "Get the pyenv environment root path from its NAME."
+    (with-environment-variables (("PYENV_VERSION" name))
+      (f-parent (f-parent (f-canonical (shell-command-to-string "pyenv which python"))))))
+
+  (defun ml/pyenv-from-file (file)
+    "Find the pyenv environment for FILE."
+    (let ((file (f-canonical file))
+          (pyenv-root (f-canonical (f-full "~/.pyenv"))))
+      (ml/pyenv-path-from-name
+       (if-let ((version-file (locate-dominating-file file ".python-version")))
+           (f-read (f-join version-file ".python-version"))
+         (if (f-ancestor-of-p pyenv-root file)
+             ;; If we are inside the pyenv directory, choose the closest surrounding
+             ;; environment
+             (seq-let (versions? version envs? env) (f-split (f-relative file pyenv-root))
+               (if (string= versions? "versions")
+                   (if (string= envs? "envs") env version)
+                 ;; As a last resort, choose the global environment
+                 nil))
+           ;; As a last resort, choose the global environment
+           nil)))))
+
+  (defun ml/pylsp-get-pyenv-environment ()
+    "Get the pyenv environment for the current workspace.
+
+  <ENV>/bin/python is the corresponding Python executable."
+    (if lsp-pylsp-plugins-jedi-environment
+        lsp-pylsp-plugins-jedi-environment
+      (when lsp-pylsp-plugins-jedi-use-pyenv-environment
+        (let ((root (lsp-seq-first (lsp-find-roots-for-workspace lsp--cur-workspace (lsp-session)))))
+          (ml/pyenv-from-file root)))))
+
   (use-package lsp-pylsp
     :after lsp-mode
     :custom ((lsp-pylsp-plugins-jedi-use-pyenv-environment t)
@@ -884,7 +918,9 @@ records undos. `vundo` presents the undo list as a tree structure.
              (lsp-pylsp-plugins-jedi-completion-include-params nil)
              (lsp-pylsp-plugins-jedi-completion-include-class-objects nil)
              (lsp-pylsp-plugins-flake8-enabled nil)
-             (lsp-pylsp-plugins-mccabe-enabled nil)))
+             (lsp-pylsp-plugins-mccabe-enabled nil))
+    :config
+    (advice-add 'lsp-pylsp-get-pyenv-environment :override #'ml/pylsp-get-pyenv-environment))
 
   (use-package lsp-ui
     :straight t
