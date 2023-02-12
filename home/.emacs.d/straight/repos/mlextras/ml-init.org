@@ -587,6 +587,9 @@ of functions.
     :init
     (setq projectile-keymap-prefix (kbd "C-x p"))
     :config
+    ;; Mark pyenv virtual environments as projects
+    (add-to-list 'projectile-project-root-files-bottom-up "pyvenv.cfg")
+
     (projectile-global-mode))
 #+END_SRC
 
