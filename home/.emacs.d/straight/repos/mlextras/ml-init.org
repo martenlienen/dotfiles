@@ -823,7 +823,7 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 
 #+BEGIN_SRC emacs-lisp
   (use-package smartscan
-    :straight t
+    :straight (smartscan :repo "martenlienen/smart-scan" :branch "no-message" :host github)
     :hook (prog-mode . smartscan-mode)
     :custom
     ;; Look for symbols instead of words so that it works with UTF-8 identifiers
