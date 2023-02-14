@@ -295,7 +295,22 @@ Close the minibuffer when it loses focus.
 
 #+BEGIN_SRC emacs-lisp
   (use-package eldoc
-    :config (setf eldoc-idle-delay 0.2))
+    ;; Set the commands obarray size to some prime large enough to hold all commands that we
+    ;; register below
+    :init (setq eldoc-message-commands-table-size 293)
+    :custom ((eldoc-idle-delay 0.2))
+    :config
+    ;; Apparently, eldoc is loaded even before early-init.el?! Therefore, the obarray
+    ;; setting above never has an effect and resize the obarray here manually.
+    (let ((old-commands eldoc-message-commands))
+      (setq eldoc-message-commands (make-vector eldoc-message-commands-table-size 0))
+      (cl-loop for sym being the symbols of old-commands
+               do (eldoc-add-command sym)))
+
+    ;; Register additional movement commands that should trigger eldoc
+    (with-eval-after-load 'smartparens (eldoc-add-command-completions "sp-"))
+    (with-eval-after-load 'avy (eldoc-add-command-completions "avy-"))
+    (with-eval-after-load 'smartscan (eldoc-add-command-completions "smartscan-")))
 #+END_SRC
 
 ** Better Help
