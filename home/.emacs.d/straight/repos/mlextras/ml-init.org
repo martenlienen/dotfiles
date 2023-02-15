@@ -1426,6 +1426,12 @@ Put emacs into distraction-free writing mode on demand.
     :config  (setq-default sh-basic-offset 2))
 #+END_SRC
 
+** Justfile
+
+#+BEGIN_SRC emacs-lisp
+  (use-package just-mode :straight t)
+#+END_SRC
+
 ** Rust
 
 #+BEGIN_SRC emacs-lisp
