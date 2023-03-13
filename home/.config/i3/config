@@ -21,6 +21,9 @@ smart_gaps on
 default_border none
 default_floating_border none
 
+# Use a larger font for title bars, e.g. in tabbed layout
+font pango:Noto Sans Mono 11
+
 ##################
 # Extra Programs #
 ##################
