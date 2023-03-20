@@ -24,6 +24,7 @@ except ImportError:
 c = get_config()
 c.InteractiveShellApp.extensions = ["autoreload"]
 c.InteractiveShellApp.exec_lines = [
+    "from pathlib import Path",
     import_if_available("numpy", "np", setup="rng = np.random.default_rng()"),
     import_if_available("pandas", "pd"),
     import_if_available("matplotlib.pyplot", "pp", setup="pp.style.use('marten')"),
