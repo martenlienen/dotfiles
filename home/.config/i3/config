@@ -40,6 +40,7 @@ $run nitrogen --restore
 
 # Kill the plasma background and splash screen
 for_window [title="Desktop — Plasma"] kill
+for_window [title="Desktop @ QRect"] kill
 
 # Float widget windows such as the audio control in the system tray
 for_window [class="plasmashell"] floating enable
