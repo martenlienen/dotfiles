@@ -1558,7 +1558,6 @@ them to LaTeX!
            (LaTeX-mode . prettify-symbols-mode)
            (LaTeX-mode . reftex-mode)
            (LaTeX-mode . flycheck-mode)
-           (LaTeX-mode . orgtbl-mode)
            (LaTeX-mode . enable-word-wrap))
     :bind (:map TeX-mode-map
                 ("<C-return>" . #'cqql-latex-append-line-break))
