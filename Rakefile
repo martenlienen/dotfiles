@@ -90,6 +90,30 @@ end
 
 task :system => [:system_packages, :system_conf]
 
+task :ubuntu_vm => [:system_conf] do
+  sh <<END
+# Python compilation requirements
+pyenv="build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev"
+
+# Terminal and shell
+shell="bash-completion zsh tmux"
+
+# Cryptography
+crypto="openssh-client"
+
+# Utilities
+utils="htop tree rsync"
+
+# Network utilities
+netutils="nmap tcpdump dnsutils"
+
+# Programming tools
+programming="git vim emacs nodejs npm"
+
+sudo apt-get install $pyenv $shell $crypto $utils $netutils $programming
+END
+end
+
 task :system_packages => [:system_conf] do
   sh <<END
 # Desktop environment
