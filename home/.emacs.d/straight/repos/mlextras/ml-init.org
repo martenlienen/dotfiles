@@ -892,8 +892,7 @@ records undos. `vundo` presents the undo list as a tree structure.
              (lsp-auto-configure t)
              (lsp-signature-doc-lines 1)
              (lsp-keymap-prefix nil))
-    :hook ((python-mode . lsp)
-           (lsp-mode . lsp-enable-which-key-integration))
+    :hook ((lsp-mode . lsp-enable-which-key-integration))
     :commands (lsp)
     :bind (("C-?" . lsp-describe-thing-at-point)
            ;; Extra binding for terminal UI
@@ -933,15 +932,27 @@ records undos. `vundo` presents the undo list as a tree structure.
            ;; As a last resort, choose the global environment
            nil)))))
 
+  ;; Mark any string as a safe value in .dir-locals.el
+  (put 'conda-project-env-path 'safe-local-variable #'stringp)
+
+  (defun ml/pylsp-get-conda-environment ()
+    "Get the conda environment for the current buffer."
+    (when (boundp 'conda-anaconda-home)
+      (if (bound-and-true-p conda-project-env-path)
+          conda-project-env-path
+        (conda--infer-env-from-buffer))))
+
   (defun ml/pylsp-get-pyenv-environment ()
     "Get the pyenv environment for the current workspace.
 
   <ENV>/bin/python is the corresponding Python executable."
     (if lsp-pylsp-plugins-jedi-environment
         lsp-pylsp-plugins-jedi-environment
-      (when lsp-pylsp-plugins-jedi-use-pyenv-environment
-        (let ((root (lsp-seq-first (lsp-find-roots-for-workspace lsp--cur-workspace (lsp-session)))))
-          (ml/pyenv-from-file root)))))
+      (if-let (conda-env (ml/pylsp-get-conda-environment))
+          conda-env
+        (when lsp-pylsp-plugins-jedi-use-pyenv-environment
+          (if-let ((root (lsp-seq-first (lsp-find-roots-for-workspace lsp--cur-workspace (lsp-session)))))
+            (ml/pyenv-from-file root))))))
 
   (use-package lsp-pylsp
     :after lsp-mode
@@ -961,8 +972,8 @@ records undos. `vundo` presents the undo list as a tree structure.
              (lsp-ui-doc-enable nil))
     :bind (("M-=" . lsp-ui-peek-find-references)
            :map lsp-ui-mode-map
-                ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
-                ([remap xref-find-references] . lsp-ui-peek-find-references)))
+           ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+           ([remap xref-find-references] . lsp-ui-peek-find-references)))
 #+END_SRC
 
 ** Auto-Completion
@@ -1136,6 +1147,24 @@ Put emacs into distraction-free writing mode on demand.
 ** Python
 
 #+BEGIN_SRC emacs-lisp
+  (defun ml/conda--infer-env-from-buffer ()
+    "Fix a bug in the conda.el version."
+    (when-let (working-dir (or (-some-> (buffer-file-name) f-dirname) default-directory))
+      (or
+       (conda--get-name-from-env-yml (conda--find-env-yml working-dir))
+       (when (or
+              conda-activate-base-by-default
+              ;; conda.el compares against nil instead of :json-false
+              (not (eq (alist-get 'auto_activate_base (conda--get-config)) :json-false)))
+         "base"))))
+
+  (use-package conda
+    :straight t
+    :if (f-dir-p (getenv "MAMBA_ROOT"))
+    :custom ((conda-anaconda-home (getenv "MAMBA_ROOT")))
+    :config
+    (advice-add 'conda--infer-env-from-buffer :override #'ml/conda--infer-env-from-buffer))
+
   (use-package pyenv-mode :straight t)
 
   (defun ml-python-statement-at-point ()
@@ -1304,7 +1333,7 @@ Put emacs into distraction-free writing mode on demand.
             (accept-process-output process nil nil t))
           (process-exit-status process)))))
 
-  (defun cqql-enable-local-pyenv ()
+  (defun ml-enable-local-pyenv ()
     (when-let ((buffer-path (buffer-file-name))
                (pyenv-dir (locate-dominating-file buffer-path ".python-version"))
                (mode (-> (f-join pyenv-dir ".python-version") f-read-text s-trim)))
@@ -1341,9 +1370,18 @@ Put emacs into distraction-free writing mode on demand.
     (add-hook 'python-mode-hook #'subword-mode)
     (add-hook 'python-mode-hook #'pyenv-mode)
     (add-hook 'python-mode-hook #'python-docstring-mode)
-    (add-hook 'python-mode-hook #'cqql-enable-local-pyenv)
     (add-hook 'python-mode-hook #'ml-python-set-fill-column)
-    (add-hook 'python-mode-hook #'tree-sitter-hl-mode))
+    (add-hook 'python-mode-hook #'tree-sitter-hl-mode)
+
+    (add-hook 'python-mode-hook #'lsp)
+
+    ;; Activate pyenv or conda environments before running the language server
+    (add-hook 'python-mode-hook #'ml-enable-local-pyenv)
+    (add-hook 'python-mode-hook #'conda-env-activate-for-buffer)
+
+    ;; Add this hook last so that it is executed first and local variables (such as the
+    ;; conda path) are read from .dir-locals.el before the other hooks run
+    (add-hook 'python-mode-hook #'hack-local-variables))
 
   (use-package python-pytest
     :straight t
