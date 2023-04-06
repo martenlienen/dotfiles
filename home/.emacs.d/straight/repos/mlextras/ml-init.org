@@ -199,16 +199,28 @@ to emacs running in a terminal.
 #+BEGIN_SRC emacs-lisp
   (defun ml/want-key-p (key mods)
     "Predicate for which keys should be encoded by term-keys."
-    (or
-     ;; Any of the defaults
-     (term-keys/want-key-p-def key mods)
-     (seq-let (shift control meta super hyper alt) mods
+    (seq-let (shift control meta super hyper alt) mods
+      (or
+       ;; Any of the defaults
+       (and (term-keys/want-key-p-def key mods)
+            ;; Minus C-S- keybindings used by wezterm
+            (not (and shift control)))
        (and
         ;; We don't care about Super/Hyper/Alt modifiers
         (not super) (not hyper) (not alt)
 
-        ;; F keys + at least one modifier
-        (and (string-match-p "^F[0-9]\\{1,2\\}$" key) (or shift control meta))))))
+        (or
+         ;; F keys + at least one modifier
+         (and (string-match-p "^F[0-9]\\{1,2\\}$" key) (or shift control meta))
+
+         ;; C-M- combinations with letters
+         (and control meta (string-match-p "^[a-zA-Z]$" key))
+
+         ;; Re-add some C-S- bindings I use in emacs
+         (and control shift (string-match-p "^[oknps]$" key))
+
+         ;; Add my text duplication binding
+         (and meta shift (string-equal key "d")))))))
 
   (defun ml/generate-alacritty-term-keys ()
     "Generate the alacritty term-keys configuration."
