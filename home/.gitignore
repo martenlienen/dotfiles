@@ -7,6 +7,9 @@ tags
 # Emacs backups
 .#*
 
+# Emacs local settings
+.dir-locals.el
+
 # Microsoft Office backups
 ~$*
 
