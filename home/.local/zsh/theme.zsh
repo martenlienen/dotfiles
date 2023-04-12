@@ -89,6 +89,16 @@ function get_prompt {
     fi
   fi
 
+  local tmux_info=""
+  if [[ -z $TMUX ]]; then
+    if tmux has-session &> /dev/null; then
+      local sessions=("${(@f)$(tmux ls -F "#{session_name}" 2> /dev/null)}")
+      if [[ ${#sessions} -gt 0 ]]; then
+        tmux_info=" 🦥 $(IFS=,; echo "${sessions[*]}")"
+      fi
+    fi
+  fi
+
   local directory="${PWD/#$HOME/~}"
   if [[ ${#directory} -ge 50 ]]; then
     # While the directory is too long and there are at least three parts to it
@@ -107,7 +117,7 @@ function get_prompt {
 %{$white_bold%}@\
 %{$white_no_bold%}$HOST: \
 %{$yellow_bold%}$directory%{$reset_color%}\
-$git_info$pyenv_info %{$cyan%}($timestamp)%{$reset_color%}"
+$git_info$pyenv_info$tmux_info %{$cyan%}($timestamp)%{$reset_color%}"
 
   local prompt_char="%{$white_bold%}$omega"
   if [[ $last_cmd_status -ne 0 ]]; then
