@@ -225,7 +225,10 @@ to emacs running in a terminal.
          (and control shift (string-match-p "^[oknps]$" key))
 
          ;; Add my text duplication binding
-         (and meta shift (string-equal key "d")))))))
+         (and meta shift (string-equal key "d"))
+
+         ;; Space bar + at least one modifier
+         (and (string-equal key "space") (or shift control meta)))))))
 
   (defun ml/generate-alacritty-term-keys ()
     "Generate the alacritty term-keys configuration."
