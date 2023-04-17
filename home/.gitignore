@@ -10,6 +10,9 @@ tags
 # Emacs local settings
 .dir-locals.el
 
+# Emacs project markers
+.projectile
+
 # Microsoft Office backups
 ~$*
 
