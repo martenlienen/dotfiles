@@ -1620,8 +1620,28 @@ them to LaTeX!
     :custom ((reftex-toc-follow-mode t)
              (reftex-cite-format 'natbib)))
 
+  (defun ml/consult-bibtex-local ()
+    "Insert a citation from the document-local bibtex."
+    (interactive)
+    (let ((macro (and (require 'reftex-parse nil t)
+                      (setq macro (reftex-what-macro 1)))))
+      (when (or (not macro)
+                (not (stringp (car macro)))
+                (not (string-match "\\`\\\\cite\\|cite\\'" (car macro))))
+        ;; We are not in a \cite command, so insert \citep by default
+        (insert "\\citep{}")
+        (backward-char)))
+    (let ((bibtex-completion-bibliography (bibtex-completion-find-local-bibliography)))
+      (call-interactively #'consult-bibtex)))
+
+  (use-package consult-bibtex
+    :after latex
+    :straight '(consult-bibtex :repo "mohkale/consult-bibtex" :host github)
+    :custom ((bibtex-completion-cite-prompt-for-optional-arguments nil))
+    :bind (:map LaTeX-mode-map ("C-c c" . #'ml/consult-bibtex-local)))
+
   (use-package preview
-    :after tex
+    :after latex
     :custom ((preview-scale-function #'cqql-preview-scale-up)
              (preview-auto-cache-preamble t))
     :pretty-hydra
