@@ -470,33 +470,12 @@ of functions.
            ("C-x 4 b" . consult-buffer-other-window)
            ("C-x 5 b" . consult-buffer-other-frame)
            ("C-x M-:" . consult-complex-command)
-           ("C-c c" . hydra-consult/body)
 
            ;; Isearch integration
            :map isearch-mode-map
            ("M-s l" . consult-line))
 
     :init
-    (defhydra hydra-consult (:exit t :hint nil)
-        "
-     Line^^       Region^^           Goto^^             Other
-    ----------------------------------------------------------
-     [_f_] find   [_k_] focus lines  [_m_] mark         [_a_] apropos
-     [_l_] locate [_K_] keep lines   [_M_] global mark  [_c_] mode command
-     [_e_] error                   [_o_] outline      [_b_] bookmark"
-        ("f" consult-find)
-        ("l" consult-locate)
-        ("K" consult-keep-lines)
-        ("k" consult-focus-lines)
-        ("e" consult-compile-error)
-        ("m" consult-mark)
-        ("M" consult-global-mark)
-        ("o" consult-outline)
-        ("a" consult-apropos)
-        ("c" consult-mode-command)
-        ("b" consult-bookmark)
-        ("<F3>" consult-kmacro))
-
     ;; Optionally tweak the register preview window.
     ;; This adds thin lines, sorting and hides the mode line of the window.
     (advice-add #'register-preview :override #'consult-register-window))
