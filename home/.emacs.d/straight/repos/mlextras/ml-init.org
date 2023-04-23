@@ -934,7 +934,7 @@ records undos. `vundo` presents the undo list as a tree structure.
           conda-env
         (when lsp-pylsp-plugins-jedi-use-pyenv-environment
           (if-let ((root (lsp-seq-first (lsp-find-roots-for-workspace lsp--cur-workspace (lsp-session)))))
-            (ml/pyenv-from-file root))))))
+              (ml/pyenv-from-file root))))))
 
   (use-package lsp-pylsp
     :after lsp-mode
@@ -1142,10 +1142,14 @@ Put emacs into distraction-free writing mode on demand.
 
   (use-package conda
     :straight t
-    :if (f-dir-p (getenv "MAMBA_ROOT"))
+    :after python
+    :if (and (f-dir-p (getenv "MAMBA_ROOT"))
+             (or (executable-find "conda") (executable-find "mamba")))
     :custom ((conda-anaconda-home (getenv "MAMBA_ROOT")))
     :config
-    (advice-add 'conda--infer-env-from-buffer :override #'ml/conda--infer-env-from-buffer))
+    (advice-add 'conda--infer-env-from-buffer :override #'ml/conda--infer-env-from-buffer)
+
+    (add-hook 'python-mode-hook #'conda-env-activate-for-buffer))
 
   (use-package pyenv-mode :straight t)
 
@@ -1359,7 +1363,6 @@ Put emacs into distraction-free writing mode on demand.
 
     ;; Activate pyenv or conda environments before running the language server
     (add-hook 'python-mode-hook #'ml-enable-local-pyenv)
-    (add-hook 'python-mode-hook #'conda-env-activate-for-buffer)
 
     ;; Add this hook last so that it is executed first and local variables (such as the
     ;; conda path) are read from .dir-locals.el before the other hooks run
