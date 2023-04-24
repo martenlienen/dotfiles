@@ -89,6 +89,11 @@ function get_prompt {
     fi
   fi
 
+  local conda_info=""
+  if [[ -n $CONDA_DEFAULT_ENV ]]; then
+    conda_info=" %{$green%}🐉%{$reset_color%} ${CONDA_DEFAULT_ENV}"
+  fi
+
   local tmux_info=""
   if [[ -z $TMUX ]]; then
     if tmux has-session &> /dev/null; then
@@ -117,7 +122,7 @@ function get_prompt {
 %{$white_bold%}@\
 %{$white_no_bold%}$HOST: \
 %{$yellow_bold%}$directory%{$reset_color%}\
-$git_info$pyenv_info$tmux_info %{$cyan%}($timestamp)%{$reset_color%}"
+$git_info$pyenv_info$conda_info$tmux_info %{$cyan%}($timestamp)%{$reset_color%}"
 
   local prompt_char="%{$white_bold%}$omega"
   if [[ $last_cmd_status -ne 0 ]]; then
