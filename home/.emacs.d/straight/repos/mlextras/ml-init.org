@@ -958,6 +958,19 @@ records undos. `vundo` presents the undo list as a tree structure.
            ([remap xref-find-references] . lsp-ui-peek-find-references)))
 #+END_SRC
 
+** Github Copilot
+
+#+BEGIN_SRC emacs-lisp
+  (use-package editorconfig
+    :straight t
+    :config
+    (editorconfig-mode))
+
+  (use-package copilot
+    :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+    :ensure t)
+#+END_SRC
+
 ** Auto-Completion
 
 #+BEGIN_SRC emacs-lisp
