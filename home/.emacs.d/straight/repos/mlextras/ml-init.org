@@ -1143,7 +1143,7 @@ Put emacs into distraction-free writing mode on demand.
   (use-package conda
     :straight t
     :after python
-    :if (and (f-dir-p (getenv "MAMBA_ROOT"))
+    :if (and (file-directory-p (getenv "MAMBA_ROOT"))
              (or (executable-find "conda") (executable-find "mamba")))
     :custom ((conda-anaconda-home (getenv "MAMBA_ROOT")))
     :config
