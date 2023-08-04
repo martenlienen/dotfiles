@@ -623,6 +623,20 @@ of functions.
 ** Window Management
 
 #+BEGIN_SRC emacs-lisp
+  (use-package popper
+    :straight t
+    :bind ("<f5>" . popper-cycle)
+    :custom ((popper-reference-buffers '("\\*ielm\\*$"
+                                         "\\*lsp-help\\*$"))
+             (popper-group-function #'popper-group-by-project))
+    :config
+    (popper-mode)
+    (popper-echo-mode))
+
+  (use-package shackle
+    :straight (shackle :host nil :repo "https://depp.brause.cc/shackle.git")
+    :config (shackle-mode))
+
   (use-package ace-window
     :straight t
     :bind ("M-i" . ace-window))
@@ -1119,7 +1133,7 @@ records undos. `vundo` presents the undo list as a tree structure.
     :after git-timemachine
     :bind (("<f2>" . magit-status)
            ("M-<f2>" . magit-list-repositories)
-           ("<f5>" . magit-file-dispatch))
+           ("S-<f2>" . magit-file-dispatch))
     :init
     (setq magit-last-seen-setup-instructions "1.4.0"
           magit-commit-ask-to-stage nil
