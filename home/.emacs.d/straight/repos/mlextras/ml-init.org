@@ -228,7 +228,7 @@ to emacs running in a terminal.
          (and meta shift (string-equal key "d"))
 
          ;; Space bar + at least one modifier
-         (and (string-equal key "space") (or shift control meta)))))))
+         (and (string-equal key "space") (or control meta)))))))
 
   (defun ml/generate-alacritty-term-keys ()
     "Generate the alacritty term-keys configuration."
