@@ -70,7 +70,7 @@ end
 
 task :rust => :rustup do
   sh <<END
-cargo install exa hexyl fd-find bat ripgrep tokei gping just paru
+cargo install exa hexyl fd-find bat ripgrep tokei gping just
 END
 end
 
@@ -90,13 +90,17 @@ end
 
 task :system => [:system_packages, :system_conf]
 
-task :ubuntu_vm => [:system_conf] do
+task :system_packages => [:system_conf] do
   sh <<END
+# Desktop environment
+de="i3 rofi"
+# libinput-gestures"
+
 # Python compilation requirements
 pyenv="build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev"
 
 # Terminal and shell
-shell="bash-completion zsh tmux"
+shell="alacritty bash-completion zsh tmux"
 
 # Cryptography
 crypto="openssh-client"
@@ -108,61 +112,23 @@ utils="htop tree rsync"
 netutils="nmap tcpdump dnsutils"
 
 # Programming tools
-programming="git vim emacs nodejs npm"
-
-sudo apt-get install $pyenv $shell $crypto $utils $netutils $programming
-END
-end
-
-task :system_packages => [:system_conf] do
-  sh <<END
-# Desktop environment
-de="i3-gaps wmctrl nitrogen xdotool rofi libinput-gestures"
-
-# Python compilation requirements
-pyenv="base-devel openssl zlib xzmake"
-
-# Terminal and shell
-shell="alacritty bash-completion zsh tmux"
-
-# Cryptography
-crypto="openssh"
-
-# Utilities
-utils="htop tree rsync redshift"
-
-# Network utilities
-netutils="nmap tcpdump dnsutils"
-
-# Programming tools
-programming="git vim emacs nodejs npm"
+programming="git vim emacs"
 
 # Web
-web="firefox chromium"
+web="chromium"
 
-sudo pacman -S --needed $de $pyenv $shell $crypto $utils $netutils $programming $web
+sudo apt-get install $pyenv $cryptography
 
-systemctl enable --now --user redshift.service
+# Install dev tools from debian unstable
+sudo apt-get install -t unstable $de $shell $utils $netutils $programming $web
 
-aur_packages="snapd"
-
-paru -S --needed $aur_packages
-
-sudo systemctl enable --now snapd.socket
-
-snaps="todoist spotify"
-snap install $snaps
-
-# sudo ufw default allow outgoing
-# sudo ufw default deny incoming
-# sudo ufw allow ssh
-# sudo ufw allow http
-# sudo ufw allow https
+#snaps="todoist spotify"
+#snap install $snaps
 END
 end
 
 task :system_conf do
-  sh "sudo cp --recursive --force --preserve=mode usr /"
+  sh "sudo cp --recursive --force --preserve=mode etc /"
 end
 
 task :pipx do
