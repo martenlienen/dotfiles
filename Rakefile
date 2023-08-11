@@ -93,7 +93,7 @@ task :system => [:system_packages, :system_conf]
 task :system_packages => [:system_conf] do
   sh <<END
 # Desktop environment
-de="i3 rofi"
+de="i3 picom rofi nitrogen"
 # libinput-gestures"
 
 # Python compilation requirements
@@ -129,6 +129,12 @@ end
 
 task :system_conf do
   sh "sudo cp --recursive --force --preserve=mode etc /"
+end
+
+task :i3_in_plasma do
+  sh "systemctl --user daemon-reload"
+  sh "systemctl --user mask plasma-kwin_x11.service"
+  sh "systemctl --user enable plasma-i3.service"
 end
 
 task :pipx do
