@@ -93,7 +93,7 @@ task :system => [:system_packages, :system_conf]
 task :system_packages => [:system_conf] do
   sh <<END
 # Desktop environment
-de="i3 picom rofi nitrogen"
+de="i3 picom rofi nitrogen redshift-gtk"
 # libinput-gestures"
 
 # Python compilation requirements
@@ -143,6 +143,10 @@ task :i3_in_plasma do
   sh "systemctl --user daemon-reload"
   sh "systemctl --user mask plasma-kwin_x11.service"
   sh "systemctl --user enable plasma-i3.service"
+end
+
+task :redshift do
+  sh "systemctl --user enable redshift-gtk.service"
 end
 
 task :pipx do
