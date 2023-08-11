@@ -31,8 +31,10 @@ font pango:Noto Sans Mono 11
 # Compositor for transparency, shadows, etc.
 $run picom --daemon
 
-# Restore my wallpapers
-$run nitrogen --restore
+# Restore my wallpapers. Nitrogen needs to be delayed until something happens, though I
+# could not find out what it is. If you run nitrogen immediately upon login, the
+# background stays black.
+$run sleep 1 && nitrogen --restore
 
 ######################
 # Plasma Integration #
