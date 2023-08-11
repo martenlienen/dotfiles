@@ -52,26 +52,13 @@ def find_program_workspace(window_class):
 
 
 def program_runs(program):
-    if program == "mattermost-desktop":
-        # Mattermost is an electron application which makes it a bit harder to
-        # determine, if it is running. We manually check all running processes if any of
-        # them look like mattermost.
-        root = Path("/proc")
-        for proc_dir in root.iterdir():
-            cmdline_f = proc_dir / "cmdline"
-            if cmdline_f.is_file():
-               cmdline = cmdline_f.read_text()
-               if "electron" in cmdline and "mattermost-desktop" in cmdline:
-                   return True
-        return False
-    else:
-        # We match against the process name, so that we don't match toggle_window
-        # itself. However, the process name is at most 16 null-terminated bytes [1], so
-        # we only search for the first 15 characters.
-        #
-        # [1] https://stackoverflow.com/questions/23534263/what-is-the-maximum-allowed-limit-on-the-length-of-a-process-name
-        pgrep = subprocess.run(["pgrep", program[:15]], stdout=subprocess.DEVNULL)
-        return pgrep.returncode == 0
+    # We match against the process name, so that we don't match toggle_window itself.
+    # However, the process name is at most 16 null-terminated bytes [1], so we only
+    # search for the first 15 characters.
+    #
+    # [1] https://stackoverflow.com/questions/23534263/what-is-the-maximum-allowed-limit-on-the-length-of-a-process-name
+    pgrep = subprocess.run(["pgrep", program[:15]], stdout=subprocess.DEVNULL)
+    return pgrep.returncode == 0
 
 
 def start_program(program, args: list[str]):

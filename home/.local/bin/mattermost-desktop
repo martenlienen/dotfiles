@@ -1,0 +1,2 @@
+#!/bin/sh
+kioclient exec /var/lib/flatpak/exports/share/applications/com.mattermost.Desktop.desktop

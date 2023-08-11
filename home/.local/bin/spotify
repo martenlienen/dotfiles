@@ -1,0 +1,2 @@
+#!/bin/sh
+kioclient exec ~/.local/share/applications/com.spotify.Client.desktop

@@ -117,14 +117,22 @@ programming="git vim emacs"
 # Web
 web="chromium"
 
+# Applications
+apps="flatpak notion-app-enhanced"
+
 sudo apt-get install $pyenv $cryptography
 
 # Install dev tools from debian unstable
-sudo apt-get install -t unstable $de $shell $utils $netutils $programming $web
-
-#snaps="todoist spotify"
-#snap install $snaps
+sudo apt-get install -t unstable $de $shell $utils $netutils $programming $web $apps
 END
+end
+
+task :flathub => [:system_packages] do
+  sh "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
+  sh "flatpak install flathub com.spotify.Client"
+  sh "flatpak install flathub com.todoist.Todoist"
+  sh "flatpak install flathub com.mattermost.Desktop"
+  sh "flatpak install flathub us.zoom.Zoom"
 end
 
 task :system_conf do
