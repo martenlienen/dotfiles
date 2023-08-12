@@ -36,6 +36,9 @@ $run picom --daemon
 # background stays black.
 $run sleep 1 && nitrogen --restore
 
+# Enforce dynamic layouts
+$run i3-layouts
+
 ######################
 # Plasma Integration #
 ######################
@@ -160,6 +163,27 @@ mode $mode_i3 {
     bindsym Ctrl+g mode "default"
 }
 
+set $mode_i3layouts "layouts: [v]stack [h]stack [3]columns [n]one"
+set $i3l vstack to workspace 1
+set $i3l vstack to workspace 2
+set $i3l vstack to workspace 3
+set $i3l vstack to workspace 4
+set $i3l vstack to workspace 5
+set $i3l vstack to workspace 6
+set $i3l vstack to workspace 7
+set $i3l vstack to workspace 8
+set $i3l vstack to workspace 9
+set $i3l vstack to workspace 10
+bindsym $mod+o mode $mode_i3layouts
+mode $mode_i3layouts {
+    bindsym v $run i3l vstack; mode "default"
+    bindsym h $run i3l hstack; mode "default"
+    bindsym 3 $run i3l 3columns; mode "default"
+    bindsym n $run i3l none; mode "default"
+
+    bindsym Ctrl+g mode "default"
+}
+
 ## Basic bindings
 
 # Change focus
@@ -169,10 +193,10 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 # Move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h exec i3l move left
+bindsym $mod+Shift+j exec i3l move down
+bindsym $mod+Shift+k exec i3l move up
+bindsym $mod+Shift+l exec i3l move right
 
 # Switch to workspace
 bindsym $mod+1 workspace 1

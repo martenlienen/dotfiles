@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Convenience script to communicate with i3-layouts
+i3-msg -t send_tick "i3-layouts $*"

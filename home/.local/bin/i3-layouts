@@ -1,0 +1,3 @@
+#!/bin/sh
+
+PYTHONPATH=~/.local/i3-layouts /usr/bin/python3 -m i3l.connect
