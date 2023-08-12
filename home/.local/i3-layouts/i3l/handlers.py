@@ -125,7 +125,9 @@ def on_window_floating(layouts: Layouts, state: State):
         logger.debug(f'[ipc] window floating event - container:{e.container.id}:{e.container.window}')
         if is_floating_container(e.container):
             if not state.is_last_container_rebuilt(e.container):
-                state.rebuild_action.container_id_to_focus = e.container.id
+                # This line erroneously forced focus on floating windows even with no_focus,
+                # e.g. plasma volume or backlight notifications
+                #state.rebuild_action.container_id_to_focus = e.container.id
                 on_window_close(layouts, state)(i3l, e)
             else:
                 state.rebuild_action.last_container_rebuilt = None
