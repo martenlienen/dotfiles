@@ -468,9 +468,9 @@ of functions.
                                   vertico-mouse
                                   vertico-quick
                                   vertico-repeat
-                                  vertico-reverse))
-    :custom
-    (vertico-cycle t)
+                                  vertico-reverse
+                                  vertico-multiform))
+    :custom (vertico-cycle t)
     :config
     (vertico-mode)
 
@@ -488,6 +488,15 @@ of functions.
     :bind ("C-c o" . vertico-repeat)
     :config
     (add-hook 'minibuffer-setup-hook #'vertico-repeat-save))
+
+  (use-package vertico-multiform
+    :straight nil
+    :after vertico
+    :custom ((vertico-multiform-commands '((consult-buffer flat)))
+             (vertico-multiform-categories '((file flat)
+                                             (buffer flat)
+                                             (t reverse))))
+    :config (vertico-multiform-mode t))
 
   (defun ml/orderless-flex-if-twiddle (pattern _index _total)
     "Match PATTERN with flex matching if it starts with a twiddle."
