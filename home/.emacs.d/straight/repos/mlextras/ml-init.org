@@ -636,15 +636,19 @@ of functions.
     :straight t
     :bind ("<f5>" . popper-cycle)
     :custom ((popper-reference-buffers '("\\*ielm\\*$"
-                                         "\\*lsp-help\\*$"))
-             (popper-group-function #'popper-group-by-project))
+                                         "\\*lsp-help\\*$"
+                                         "^\\*helpful"))
+             (popper-group-function #'popper-group-by-project)
+             (popper-display-control nil))
     :config
     (popper-mode)
     (popper-echo-mode))
 
   (use-package shackle
     :straight (shackle :host nil :repo "https://depp.brause.cc/shackle.git")
-    :config (shackle-mode))
+    :custom ((shackle-rules '(("^\\*helpful" . (:regexp t :popup t :align right :size 70))
+                              ((:custom popper-popup-p) . (:popup t :align bottom)))))
+    :config (shackle-mode t))
 
   (use-package ace-window
     :straight t
