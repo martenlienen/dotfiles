@@ -638,7 +638,7 @@ of functions.
     :custom ((popper-reference-buffers '("\\*ielm\\*$"
                                          "\\*lsp-help\\*$"
                                          "^\\*helpful"))
-             (popper-group-function #'popper-group-by-project)
+             (popper-group-function nil)
              (popper-display-control nil))
     :config
     (popper-mode)
