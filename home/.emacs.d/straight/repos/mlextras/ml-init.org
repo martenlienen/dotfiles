@@ -25,7 +25,7 @@ My emacs config is a package so that straight precompiles it.
 
   ;; Configure the *scratch* buffer
   (setf initial-scratch-message ""
-        initial-major-mode 'emacs-lisp-mode)
+        initial-major-mode #'emacs-lisp-mode)
 
   ;; Enable X clipboards
   (setf select-enable-clipboard t
@@ -298,7 +298,10 @@ before the install the upstream version.
     (add-hook 'org-mode-hook #'flycheck-mode)
 
     (set-face-underline 'org-block-begin-line nil)
-    (set-face-attribute 'org-block-end-line nil :overline nil))
+    (set-face-attribute 'org-block-end-line nil :overline nil)
+
+    (setq initial-major-mode #'org-mode
+          initial-scratch-message "#+TITLE: \n#+AUTHOR: Marten Lienen\n\n"))
 #+END_SRC
 
 Give org a modern look.

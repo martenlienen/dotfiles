@@ -19,7 +19,8 @@
 (add-hook 'emacs-startup-hook #'ml-restore-file-name-handler-alist)
 
 ;; Disable splash screen
-(setq inhibit-startup-message t)
+(setq inhibit-startup-message t
+      inhibit-startup-echo-area-message t)
 
 ;; Ensure that the mouse cursor is always visible on dark themes
 (add-to-list 'default-frame-alist '(mouse-color . "palegoldenrod"))
