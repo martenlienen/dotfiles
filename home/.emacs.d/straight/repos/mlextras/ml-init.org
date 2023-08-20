@@ -965,8 +965,19 @@ records undos. `vundo` presents the undo list as a tree structure.
 ** Tree Sitter
 
 #+BEGIN_SRC emacs-lisp
-  (use-package tree-sitter :straight t)
-  (use-package tree-sitter-langs :straight t)
+  (use-package treesit-auto
+    :straight t
+    :if (version<= "29" emacs-version)
+    :custom ((treesit-auto-install 'prompt))
+    :config
+    (global-treesit-auto-mode))
+
+  (use-package tree-sitter
+    :straight t
+    :if (version< emacs-version "29"))
+  (use-package tree-sitter-langs
+    :straight t
+    :if (version< emacs-version "29"))
 #+END_SRC
 
 ** Language Server Protocol (LSP)
