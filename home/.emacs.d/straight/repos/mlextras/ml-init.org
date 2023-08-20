@@ -1171,6 +1171,13 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     (yas-global-mode t))
 #+END_SRC
 
+** ChatGPT
+
+#+BEGIN_SRC emacs-lisp
+  (use-package gptel
+    :straight t)
+#+END_SRC
+
 * Integrations
 
 ** git
