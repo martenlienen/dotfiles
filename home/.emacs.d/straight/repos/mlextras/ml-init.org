@@ -1291,7 +1291,7 @@ Put emacs into distraction-free writing mode on demand.
     :config
     (advice-add 'conda--infer-env-from-buffer :override #'ml/conda--infer-env-from-buffer)
 
-    (add-hook 'python-mode-hook #'conda-env-activate-for-buffer))
+    (add-hook 'python-base-mode-hook #'conda-env-activate-for-buffer))
 
   (use-package pyenv-mode :straight t)
 
@@ -1464,21 +1464,21 @@ Put emacs into distraction-free writing mode on demand.
 
     (setq python-fill-docstring-style 'pep-257-nn)
 
-    (add-hook 'python-mode-hook #'eldoc-mode)
-    (add-hook 'python-mode-hook #'subword-mode)
-    (add-hook 'python-mode-hook #'pyenv-mode)
-    (add-hook 'python-mode-hook #'python-docstring-mode)
-    (add-hook 'python-mode-hook #'ml-python-set-fill-column)
-    (add-hook 'python-mode-hook #'tree-sitter-hl-mode)
+    (add-hook 'python-base-mode-hook #'eldoc-mode)
+    (add-hook 'python-base-mode-hook #'subword-mode)
+    (add-hook 'python-base-mode-hook #'pyenv-mode)
+    (add-hook 'python-base-mode-hook #'python-docstring-mode)
+    (add-hook 'python-base-mode-hook #'ml-python-set-fill-column)
+    (add-hook 'python-base-mode-hook #'tree-sitter-hl-mode)
 
-    (add-hook 'python-mode-hook #'lsp)
+    (add-hook 'python-base-mode-hook #'lsp)
 
     ;; Activate pyenv or conda environments before running the language server
-    (add-hook 'python-mode-hook #'ml-enable-local-pyenv)
+    (add-hook 'python-base-mode-hook #'ml-enable-local-pyenv)
 
     ;; Add this hook last so that it is executed first and local variables (such as the
     ;; conda path) are read from .dir-locals.el before the other hooks run
-    (add-hook 'python-mode-hook #'hack-local-variables))
+    (add-hook 'python-base-mode-hook #'hack-local-variables))
 
   (use-package python-pytest
     :straight t
