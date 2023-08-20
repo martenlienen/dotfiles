@@ -638,7 +638,8 @@ of functions.
     :straight t
     :bind (("<f5>" . popper-toggle-latest)
            ("S-<f5>" . popper-cycle)
-           ("M-S-<f5>" . popper-cycle-backwards))
+           ("M-S-<f5>" . popper-cycle-backwards)
+           ("M-<f5>" . popper-kill-latest-popup))
     :custom ((popper-reference-buffers '("\\*ielm\\*$"
                                          "\\*lsp-help\\*$"
                                          "^\\*helpful"))
@@ -651,7 +652,7 @@ of functions.
   (use-package shackle
     :after popper
     :straight (shackle :host nil :repo "https://depp.brause.cc/shackle.git")
-    :custom ((shackle-rules '(("^\\*helpful" . (:regexp t :align right))
+    :custom ((shackle-rules '((("^\\*helpful" "^\\*lsp-help\\*$") . (:regexp t :align right))
                               ((:custom popper-popup-p) . (:popup t :align bottom)))))
     :config (shackle-mode t))
 
