@@ -61,11 +61,10 @@ My emacs config is a package so that straight precompiles it.
                 web-mode-css-indent-offset 2
                 web-mode-attr-indent-offset 2)
 
-  ;; Store a few MB of undo history in each buffer. For example, isortify and blacken erase
-  ;; and recreate the whole buffer which can make the undo history grow pretty quickly.
-  (setq undo-limit (* 2 1024 1024)
-        undo-strong-limit (* 10 1024 1024)
-        undo-outer-limit (* 10 1024 1024))
+  ;; Store a few MB of undo history in each buffer
+  (setq undo-limit (* 64 1024 1024)
+        undo-strong-limit (* 128 1024 1024)
+        undo-outer-limit (* 512 1024 1024))
 
   ;; Line breaks at 90 characters
   (setq-default fill-column 90)
@@ -960,6 +959,15 @@ records undos. `vundo` presents the undo list as a tree structure.
     :bind (("C-c C-/" . vundo)))
 #+END_SRC
 
+Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-all default.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package undo-fu
+    :straight t
+    :bind (("C-/" . #'undo-fu-only-undo)
+           ("M-/" . #'undo-fu-only-redo)))
+#+END_SRC
+
 ** Formatting
 
 #+BEGIN_SRC emacs-lisp
@@ -1117,7 +1125,7 @@ records undos. `vundo` presents the undo list as a tree structure.
 
 #+BEGIN_SRC emacs-lisp
   (use-package hippie-exp
-    :bind ("M-/" . hippie-expand)
+    :bind ("C-z" . hippie-expand)
     :init
     (setf hippie-expand-try-functions-list
           '(try-expand-dabbrev-visible
