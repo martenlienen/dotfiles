@@ -14,4 +14,8 @@
   (load bootstrap-file nil 'nomessage))
 
 (straight-use-package 'use-package)
-(use-package ml-init :straight (mlextras :local-repo "mlextras" :type nil))
+(use-package ml-init
+  :straight (mlextras :local-repo "mlextras" :type nil
+                      ;; Somehow the use-package blocks are not executed in my compiled
+                      ;; init file, so we disable compilation for now.
+                      :build (:not compile)))
