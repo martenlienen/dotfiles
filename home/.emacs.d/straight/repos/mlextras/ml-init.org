@@ -635,6 +635,7 @@ of functions.
 
 #+BEGIN_SRC emacs-lisp
   (use-package popper
+    :demand t
     :straight t
     :bind (("<f5>" . popper-toggle-latest)
            ("S-<f5>" . popper-cycle)
