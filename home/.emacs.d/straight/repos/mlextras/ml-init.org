@@ -1490,9 +1490,8 @@ Put emacs into distraction-free writing mode on demand.
     (setq fill-column 88))
 
   (use-package python
-    :bind (:map python-mode-map
+    :bind (:map python-ts-mode-map
                 ("C-c D" . #'realgud:pdb)
-                ("C-c f" . #'cqql-python-reformat-buffer)
                 ("C-c C-l" . #'ml-python-shell-send-statement)
                 ("C-c C-r" . #'cqql-python-shell-send-region-dwim)
                 ("C-c C-v" . #'cqql-python-shell-send-variable)
