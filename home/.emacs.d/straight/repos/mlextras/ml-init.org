@@ -652,7 +652,8 @@ of functions.
   (use-package shackle
     :after popper
     :straight (shackle :host nil :repo "https://depp.brause.cc/shackle.git")
-    :custom ((shackle-rules '((("^\\*lsp-help\\*$") . (:regexp t :align bottom :size 12))
+    :custom ((shackle-rules '((("*Warnings*") . (:ignore t))
+                              (("^\\*lsp-help\\*$") . (:regexp t :align bottom :size 12))
                               (("^\\*helpful") . (:regexp t :align right))
                               ((:custom popper-popup-p) . (:popup t :align bottom)))))
     :config (shackle-mode t))
