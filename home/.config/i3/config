@@ -76,6 +76,7 @@ for_window [class="Todoist"] floating enable; move position center
 for_window [class="Spotify"] floating enable; move position center
 for_window [class="Mattermost"] floating enable; move position center
 for_window [class="notion-app"] floating enable; move position center
+for_window [class="firefox" title="^Paypal Checkout"] floating enable
 
 # Zoom does not set a proper class for some of its windows, but these heuristics seem to
 # catch all their windows
