@@ -995,13 +995,6 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     :custom ((treesit-auto-install 'prompt))
     :config
     (global-treesit-auto-mode))
-
-  (use-package tree-sitter
-    :straight t
-    :if (version< emacs-version "29"))
-  (use-package tree-sitter-langs
-    :straight t
-    :if (version< emacs-version "29"))
 #+END_SRC
 
 ** Language Server Protocol (LSP)
@@ -1363,10 +1356,10 @@ Put emacs into distraction-free writing mode on demand.
                               global_statement
                               nonlocal_statement
                               exec_statement))
-           (this (tree-sitter-node-at-pos))
+           (this (treesit-node-at (point)))
            result)
       (cl-loop until (or (not this) (seq-contains-p statement-types (tsc-node-type this)))
-               do (setq this (tsc-get-parent this)))
+               do (setq this (treesit-node-parent this)))
       this))
 
   (defun ml-python-shell-send-statement ()
@@ -1519,7 +1512,6 @@ Put emacs into distraction-free writing mode on demand.
     (add-hook 'python-base-mode-hook #'pyenv-mode)
     (add-hook 'python-base-mode-hook #'python-docstring-mode)
     (add-hook 'python-base-mode-hook #'ml-python-set-fill-column)
-    (add-hook 'python-base-mode-hook #'tree-sitter-hl-mode)
 
     (add-hook 'python-base-mode-hook #'lsp)
 
