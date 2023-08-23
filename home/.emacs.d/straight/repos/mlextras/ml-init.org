@@ -297,10 +297,7 @@ before the install the upstream version.
     (add-hook 'org-mode-hook #'flycheck-mode)
 
     (set-face-underline 'org-block-begin-line nil)
-    (set-face-attribute 'org-block-end-line nil :overline nil)
-
-    (setq initial-major-mode #'org-mode
-          initial-scratch-message "#+TITLE: \n#+AUTHOR: Marten Lienen\n\n"))
+    (set-face-attribute 'org-block-end-line nil :overline nil))
 #+END_SRC
 
 Give org a modern look.
