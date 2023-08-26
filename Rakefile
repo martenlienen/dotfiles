@@ -151,10 +151,11 @@ end
 
 task :pipx do
   # Yes, pipx should manage itself
-  packages = ["pipx", "black", "isort", "asciinema", "ansible-base", "python-lsp-server[rope]"]
+  packages = ["pipx", "black", "isort", "asciinema", "ansible-base", "python-lsp-server"]
   packages.each do |package|
     sh "pipx install #{package}"
   end
+  sh "pipx inject python-lsp-server pylsp-rope"
 end
 
 task :optimus do
