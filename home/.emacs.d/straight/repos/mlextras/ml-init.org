@@ -1092,7 +1092,9 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
 #+BEGIN_SRC emacs-lisp
   (use-package company
     :straight t
-    :bind ("C-M-SPC" . company-complete)
+    :bind (("C-M-SPC" . company-complete)
+           :map company-active-map
+           ("<tab>" . nil))
     :init
     (setf company-idle-delay 0
           company-minimum-prefix-length 2
@@ -1113,6 +1115,22 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     (setf company-dabbrev-ignore-case 'keep-prefix
           company-dabbrev-ignore-invisible t
           company-dabbrev-downcase nil))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package copilot
+    :straight (copilot :repo "zerolfx/copilot.el" :files ("dist" "*.el") :host github)
+    :demand t
+    :bind (:map prog-mode-map
+                ("<tab>" . ml/copilot-accept-or-indent))
+    :init
+    (defun ml/copilot-accept-or-indent ()
+      (interactive)
+      (if (and (bound-and-true-p copilot-mode) (copilot--overlay-visible))
+          (call-interactively #'copilot-accept-completion)
+        (call-interactively #'indent-for-tab-command)))
+    :config
+    (add-hook 'prog-mode-hook 'copilot-mode))
 #+END_SRC
 
 ** Complete from elsewhere
@@ -1211,6 +1229,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
 
   (use-package gptel
     :straight t
+    :demand t
     :pretty-hydra
     ((:quit-key "g" :title "GPT" :color blue)
      ("Code"
