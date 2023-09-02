@@ -494,6 +494,7 @@ of functions.
     :custom ((vertico-multiform-commands '((consult-buffer flat)))
              (vertico-multiform-categories '((file flat)
                                              (buffer flat)
+                                             (consult-location)
                                              (t reverse))))
     :config (vertico-multiform-mode t))
 
