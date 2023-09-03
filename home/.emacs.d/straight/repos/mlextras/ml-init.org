@@ -347,6 +347,14 @@ Give org a modern look.
     (defun ml-setup-doom-modeline ()
       (doom-modeline-set-modeline 'ml-line 'default))
     (add-hook 'doom-modeline-mode-hook 'ml-setup-doom-modeline))
+
+  (with-eval-after-load 'all-the-icons
+    (with-eval-after-load 'nerd-icons
+      (defun ml/install-fonts ()
+        "Install fonts provided by various packages."
+        (interactive)
+        (call-interactively #'all-the-icons-install-fonts)
+        (call-interactively #'nerd-icons-install-fonts))))
 #+END_SRC
 
 ** Minibuffer
