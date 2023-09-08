@@ -30,7 +30,7 @@ c.InteractiveShellApp.exec_lines = [
     import_if_available("matplotlib.pyplot", "pp", setup="pp.style.use('marten')"),
     import_if_available("torch"),
     "%autoreload 3",
-    "%xmode verbose",
+    "%xmode context",
 ]
 c.TerminalInteractiveShell.confirm_exit = False
 
