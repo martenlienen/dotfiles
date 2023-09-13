@@ -156,6 +156,7 @@ task :pipx do
     sh "pipx install #{package}"
   end
   sh "pipx inject python-lsp-server pylsp-rope"
+  sh "pipx inject python-lsp-server python-lsp-ruff"
 end
 
 task :optimus do
