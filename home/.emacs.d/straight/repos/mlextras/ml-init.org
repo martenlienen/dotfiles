@@ -643,10 +643,10 @@ of functions.
   (use-package popper
     :demand t
     :straight t
-    :bind (("<f5>" . popper-toggle-latest)
-           ("S-<f5>" . popper-cycle)
-           ("M-S-<f5>" . popper-cycle-backwards)
-           ("M-<f5>" . popper-kill-latest-popup))
+    :bind (("<f12>" . popper-toggle)
+           ("S-<f12>" . popper-cycle)
+           ("M-S-<f12>" . popper-cycle-backwards)
+           ("M-<f12>" . popper-kill-latest-popup))
     :custom ((popper-reference-buffers '("\\*ielm\\*$"
                                          "\\*lsp-help\\*$"
                                          "^\\*helpful"))
@@ -1264,8 +1264,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     :straight t
     :after git-timemachine
     :bind (("<f2>" . magit-status)
-           ("M-<f2>" . magit-list-repositories)
-           ("S-<f2>" . magit-file-dispatch))
+           ("<f5>" . magit-file-dispatch))
     :init
     (setq magit-last-seen-setup-instructions "1.4.0"
           magit-commit-ask-to-stage nil
