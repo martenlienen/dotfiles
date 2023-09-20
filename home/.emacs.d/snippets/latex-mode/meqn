@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: Multi-line equation with number
+# name: Unnumbered multi-line equation
 # key: meqn
 # --
-\begin{align}
+\begin{align*}
   $0
-\end{align}
+\end{align*}

@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: One line equation with number
+# name: Unnumbered equation
 # key: eqn
 # --
-\begin{equation}
+\begin{equation*}
   $0
-\end{equation}
+\end{equation*}
