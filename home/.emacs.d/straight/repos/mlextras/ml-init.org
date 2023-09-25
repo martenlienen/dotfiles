@@ -1763,12 +1763,18 @@ them to LaTeX!
     (setf (alist-get 'continuation fringe-indicator-alist) nil)
     (setq word-wrap t))
 
-  (defun cqql-latex-append-line-break ()
-    "Insert the \\\\ macro at the end of the line."
+  (defun ml/latex-narrow-to-section ()
+    "Narrow to the current LaTeX section including its subsections."
     (interactive)
-    (save-excursion
-      (move-end-of-line nil)
-      (insert "\\\\")))
+    (let ((section-start
+           (save-excursion
+             (if (re-search-backward "\\\\section\\b" nil t)
+                 (point) (error "No section start found"))))
+          (section-end
+           (save-excursion
+             (if (re-search-forward "\\\\section\\b" nil t)
+                 (match-beginning 0) (point-max)))))
+      (narrow-to-region section-start section-end)))
 
   (use-package tex
     :straight auctex
@@ -1784,7 +1790,7 @@ them to LaTeX!
            (LaTeX-mode . flycheck-mode)
            (LaTeX-mode . enable-word-wrap))
     :bind (:map TeX-mode-map
-                ("<C-return>" . #'cqql-latex-append-line-break))
+                ("C-x n s" . #'ml/latex-narrow-to-section))
     :config
     ;; Workaround for smartparens overwriting `
     (require 'smartparens-latex))
