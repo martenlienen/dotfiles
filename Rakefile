@@ -99,6 +99,9 @@ de="i3 python3-i3ipc picom rofi nitrogen redshift-gtk autorandr"
 # Python compilation requirements
 pyenv="build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev"
 
+# Borg backup requirements
+borg="libssl-dev liblz4-dev libzstd-dev libxxhash-dev"
+
 # Terminal and shell
 shell="alacritty bash-completion zsh tmux"
 
@@ -120,7 +123,7 @@ web="chromium"
 # Applications
 apps="flatpak notion-app-enhanced"
 
-sudo apt-get install $pyenv $cryptography
+sudo apt-get install $pyenv $borg $cryptography
 
 # Install dev tools from debian unstable
 sudo apt-get install -t unstable $de $shell $utils $netutils $programming $web $apps
@@ -151,7 +154,15 @@ end
 
 task :pipx do
   # Yes, pipx should manage itself
-  packages = ["pipx", "black", "isort", "asciinema", "ansible-base", "python-lsp-server"]
+  packages = [
+    "pipx",
+    "black",
+    "isort",
+    "asciinema",
+    "python-lsp-server",
+    "borgbackup >= 2.0.0a0",
+    "borgmatic",
+  ]
   packages.each do |package|
     sh "pipx install #{package}"
   end
