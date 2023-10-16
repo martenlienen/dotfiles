@@ -149,7 +149,13 @@ task :i3_in_plasma do
 end
 
 task :redshift do
-  sh "systemctl --user enable redshift-gtk.service"
+  sh "systemctl --user daemon-reload"
+  sh "systemctl --user enable --now redshift-gtk.service"
+end
+
+task :borgmatic do
+  sh "systemctl --user daemon-reload"
+  sh "systemctl --user enable --now borgmatic.timer"
 end
 
 task :pipx do
