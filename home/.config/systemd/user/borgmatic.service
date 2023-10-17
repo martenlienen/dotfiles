@@ -11,5 +11,11 @@ Restart=no
 # doesn't support this (pre-240 or so), you may have to remove this option.
 LogRateLimitIntervalSec=0
 
+# When the system wakes from suspend, it can still be in the `suspend` state when this service is
+# triggered which makes systemd-inhibit fail to inhibit the suspend state and refuse to run
+# borgmatic. So we just sleep a little.
+#
+# https://github.com/systemd/systemd/issues/14045
+ExecStartPre=/bin/sleep 5s
 WorkingDirectory=%h
 ExecStart=systemd-inhibit --who="borgmatic" --what="sleep:shutdown" --why="Prevent interrupting scheduled backup" %h/.local/bin/borgmatic --verbosity -2 --syslog-verbosity 1
