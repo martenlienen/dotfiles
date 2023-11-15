@@ -1081,7 +1081,8 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
              (lsp-pylsp-plugins-jedi-completion-include-params nil)
              (lsp-pylsp-plugins-jedi-completion-include-class-objects nil)
              (lsp-pylsp-plugins-flake8-enabled nil)
-             (lsp-pylsp-plugins-mccabe-enabled nil))
+             (lsp-pylsp-plugins-mccabe-enabled nil)
+             (lsp-pylsp-plugins-rope-autoimport-enabled t))
     :config
     (advice-add 'lsp-pylsp-get-pyenv-environment :override #'ml/pylsp-get-pyenv-environment))
 
