@@ -154,7 +154,7 @@ exclude_if_present:
 # encryption. Quote the value if it contains punctuation, so it parses
 # correctly. And backslash any quote or backslash literals as well.
 # Defaults to not set.
-encryption_passphrase: {passphrase}
+encryption_passphrase: "{passphrase}"
 
 # Number of seconds between each checkpoint during a long-running
 # backup. See https://borgbackup.readthedocs.io/en/stable/faq.html for
