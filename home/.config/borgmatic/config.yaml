@@ -299,10 +299,10 @@ keep_daily: 7
 keep_weekly: 4
 
 # Number of monthly archives to keep.
-keep_monthly: 6
+keep_monthly: 12
 
 # Number of yearly archives to keep.
-keep_yearly: 2
+keep_yearly: 10
 
 # Deprecated. When pruning or checking archives, only consider archive
 # names starting with this prefix. Borg placeholders can be used. See
