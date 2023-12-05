@@ -166,14 +166,14 @@ task :pipx do
     "isort",
     "asciinema",
     "python-lsp-server",
-    "borgbackup >= 2.0.0a0",
-    "borgmatic",
+    "borgbackup>=2.0.0a0",
   ]
   packages.each do |package|
     sh "pipx install #{package}"
   end
   sh "pipx inject python-lsp-server pylsp-rope"
   sh "pipx inject python-lsp-server python-lsp-ruff"
+  sh "pipx inject --include-apps borgbackup borgmatic"
 end
 
 task :optimus do
