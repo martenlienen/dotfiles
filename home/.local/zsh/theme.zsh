@@ -85,7 +85,7 @@ function get_prompt {
   if whence pyenv > /dev/null; then
     local pyenv_version="$(pyenv version-name)"
     if [[ "${pyenv_version}" != "$(pyenv global)" ]]; then
-      pyenv_info=" %{$blue%}🐉%{$reset_color%} $(pyenv version-name)"
+      pyenv_info=" %{$blue%}🐉%{$reset_color%} ${pyenv_version}"
     fi
   fi
 
