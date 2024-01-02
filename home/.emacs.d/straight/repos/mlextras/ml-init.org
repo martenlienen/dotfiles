@@ -1250,21 +1250,6 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     :bind ("C-c g" . gptel-hydra/body))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
-  (use-package shell-maker
-    :straight (:host github :repo "xenodium/chatgpt-shell" :files ("shell-maker.el"))
-    :init
-    (advice-add #'shell-maker-welcome-message :override #'ignore))
-
-  (use-package chatgpt-shell
-    :requires shell-maker
-    :straight (:host github :repo "xenodium/chatgpt-shell" :files ("chatgpt-shell.el"))
-    :custom
-    ((chatgpt-shell-openai-key
-      (lambda ()
-        (auth-source-pick-first-password :host "api.openai.com")))))
-#+END_SRC
-
 * Integrations
 
 ** git
