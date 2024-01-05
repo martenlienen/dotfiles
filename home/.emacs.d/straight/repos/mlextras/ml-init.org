@@ -1219,7 +1219,9 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     (cl-loop for file in (directory-files "~/.emacs.d/directives" t "\\.txt\\'")
              for filename = (intern (file-name-sans-extension (file-name-nondirectory file)))
              for file-contents = (f-read-text file)
-             do (setf (cdr (assoc filename gptel-directives)) file-contents)))
+             do (if-let ((pair (assoc filename gptel-directives)))
+                    (setf (cdr pair) file-contents)
+                  (push (cons filename file-contents) gptel-directives))))
 #+END_SRC
 
 * Integrations
