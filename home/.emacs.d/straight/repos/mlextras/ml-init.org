@@ -1198,56 +1198,18 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
 ** ChatGPT
 
 #+BEGIN_SRC emacs-lisp
-  (defvar ml/gpt-code-complete-system
-    (concat "You are a programming expert that writes correct, efficient code. "
-            "You use vectorization wherever possible and add comments about high-level "
-            "intentions and non-obvious implentation details."
-            "Your code takes care of all reasonable edge cases and failure modes. "
-            "An ellipsis ... is a placeholder that you replace with code as required by "
-            "the context and nearby comments. "
-            "Additionally, you complete any provided code snippet at the end as "
-            "required by context and nearby comments. "
-            "You respond with the completed code and nothing else.")
-    "System message for code completion.")
-  (defvar ml/gpt-code-complete-prompt "Complete the following piece of code:
-  ### CODE START ###
-  %s
-  ### CODE END ###" "Prompt template for code completion.")
-
-  (defvar ml/gpt-code-explain-system
-    (concat "You are a knowledgeable code expert that explains pieces of code "
-            "correctly and succinctly. Your explanations begin with an overall "
-            "summary of the meaning and goal of the code and end with a "
-            "piece-by-piece walkthrough.")
-    "System message for code explanation.")
-  (defvar ml/gpt-code-explain-prompt "Explain the following piece of code:
-  ### CODE START ###
-  %s
-  ### CODE END ###" "Prompt template for code explanation.")
-
-  (defun ml/gpt-code-complete ()
-    "Ask GPT to complete a piece of code."
-    (interactive)
-    (gptel-request (format ml/gpt-code-complete-prompt
-                           (buffer-substring (region-beginning) (region-end)))
-                   :system ml/gpt-code-complete-system))
-
-  (defun ml/gpt-code-explain ()
-    "Ask GPT to explain a piece of code."
-    (interactive)
-    (gptel-request (format ml/gpt-code-explain-prompt
-                           (buffer-substring (region-beginning) (region-end)))
-                   :system ml/gpt-code-explain-system))
-
   (use-package gptel
     :straight t
-    :demand t
-    :pretty-hydra
-    ((:quit-key "g" :title "GPT" :color blue)
-     ("Code"
-      (("e" ml/gpt-code-explain "explain")
-       ("c" ml/gpt-code-complete "complete"))))
-    :bind ("C-c g" . gptel-hydra/body))
+    :commands (gptel gptel-send)
+    :custom ((gptel-default-mode #'org-mode))
+    :bind (("C-c g" . gptel-send)
+           :map gptel-mode-map
+           ("C-c G" . gptel-set-topic))
+    :config
+    (cl-loop for file in (directory-files "~/.emacs.d/directives" t "\\.txt\\'")
+             for filename = (intern (file-name-sans-extension (file-name-nondirectory file)))
+             for file-contents = (f-read-text file)
+             do (setf (cdr (assoc filename gptel-directives)) file-contents)))
 #+END_SRC
 
 * Integrations
@@ -1255,7 +1217,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
 ** git
 
 #+BEGIN_SRC emacs-lisp
-  ;; Stop asking me all the time when I visit a source file from a packge built with
+  ;; Stop asking me all the time when I visit a source file from a package built with
   ;; straight.el (they symlink the .el files from the package repositories)
   (setq vc-follow-symlinks t)
 
