@@ -1210,7 +1210,13 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
   (use-package gptel
     :straight t
     :commands (gptel gptel-send)
-    :custom ((gptel-default-mode #'org-mode))
+    :custom ((gptel-default-mode #'org-mode)
+             (gptel-prompt-prefix-alist '((org-mode . "*Prompt*: ")
+                                          (markdown-mode . "**Prompt**: ")
+                                          (text-mode . "Prompt: ")))
+             (gptel-response-prefix-alist '((org-mode . "*Response*: ")
+                                            (markdown-mode . "**Response**: ")
+                                            (text-mode . "Response: "))))
     :hook ((gptel-mode . visual-line-mode))
     :bind (("C-c g" . gptel-send)
            :map gptel-mode-map
