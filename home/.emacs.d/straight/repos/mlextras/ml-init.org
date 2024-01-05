@@ -357,6 +357,15 @@ Give org a modern look.
         (call-interactively #'nerd-icons-install-fonts))))
 #+END_SRC
 
+** Display
+
+#+BEGIN_SRC emacs-lisp
+  (use-package visual-fill-column
+    :straight t
+    :config
+    (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
+#+END_SRC
+
 ** Minibuffer
 
 Save the minibuffer history.
@@ -1202,6 +1211,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     :straight t
     :commands (gptel gptel-send)
     :custom ((gptel-default-mode #'org-mode))
+    :hook ((gptel-mode . visual-line-mode))
     :bind (("C-c g" . gptel-send)
            :map gptel-mode-map
            ("C-c G" . gptel-set-topic))
