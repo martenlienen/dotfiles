@@ -1222,12 +1222,17 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
            :map gptel-mode-map
            ("C-c G" . gptel-set-topic))
     :config
-    (cl-loop for file in (directory-files "~/.emacs.d/directives" t "\\.txt\\'")
-             for filename = (intern (file-name-sans-extension (file-name-nondirectory file)))
-             for file-contents = (f-read-text file)
-             do (if-let ((pair (assoc filename gptel-directives)))
-                    (setf (cdr pair) file-contents)
-                  (push (cons filename file-contents) gptel-directives))))
+    (defun ml/gptel-reload-directives ()
+      "Reload my custom directives from disk."
+      (interactive)
+      (cl-loop for file in (directory-files "~/.emacs.d/directives" t "\\.txt\\'")
+               for filename = (intern (file-name-sans-extension (file-name-nondirectory file)))
+               for file-contents = (f-read-text file)
+               do (if-let ((pair (assoc filename gptel-directives)))
+                      (setf (cdr pair) file-contents)
+                    (push (cons filename file-contents) gptel-directives))))
+
+    (ml/gptel-reload-directives))
 #+END_SRC
 
 * Integrations
