@@ -102,6 +102,10 @@ My emacs config is a package so that straight precompiles it.
 
   (add-hook 'minibuffer-setup-hook #'ml-defer-garbage-collection-h)
   (add-hook 'minibuffer-exit-hook #'ml-restore-garbage-collection-h)
+
+  ;; Enable convenient editing of symmetrically encrypted files
+  (setq epa-file-cache-passphrase-for-symmetric-encryption t
+        epa-pinentry-mode 'loopback)
 #+END_SRC
 
 Automatically jump to origin file and line when an the point is on an error.
