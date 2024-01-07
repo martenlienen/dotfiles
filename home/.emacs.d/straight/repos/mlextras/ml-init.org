@@ -683,6 +683,19 @@ of functions.
     :bind ("M-i" . ace-window))
 #+END_SRC
 
+*** Perspectives
+
+#+BEGIN_SRC emacs-lisp
+  (use-package perspective
+    :straight t
+    :demand t
+    :custom ((persp-mode-prefix-key (kbd "C-c p"))
+             (persp-state-default-file (concat user-emacs-directory "perspective-state")))
+    :hook ((kill-emacs . persp-state-save))
+    :config
+    (persp-mode))
+#+END_SRC
+
 ** Buffer Management
 
 #+BEGIN_SRC emacs-lisp
@@ -757,6 +770,11 @@ of functions.
   (use-package treemacs-projectile
     :straight t
     :after (treemacs projectile))
+
+  (use-package treemacs-perspective
+    :straight t
+    :after (treemacs perspective)
+    :config (treemacs-set-scope-type 'Perspectives))
 #+END_SRC
 
 * Editing
