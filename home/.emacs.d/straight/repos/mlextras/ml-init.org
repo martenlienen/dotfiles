@@ -1,5 +1,6 @@
 #+TITLE: init.el
 #+PROPERTY: header-args :tangle yes :results silent
+#+STARTUP: overview
 
 My emacs config is a package so that straight precompiles it.
 
