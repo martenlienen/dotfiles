@@ -320,6 +320,7 @@ Give org a modern look.
     :if (display-graphic-p))
 
   (use-package solarized-theme
+    :disabled
     :straight t
     :if (display-graphic-p)
     :config
@@ -330,6 +331,13 @@ Give org a modern look.
     ;; just distable it.
     (set-face-underline 'mode-line nil)
     (set-face-underline 'mode-line-inactive nil))
+
+  (use-package timu-spacegrey-theme
+    :straight t
+    :if (display-graphic-p)
+    :custom (timu-spacegrey-flavour "light")
+    :config
+    (load-theme 'timu-spacegrey t))
 
   (use-package nord-theme
     :straight t
