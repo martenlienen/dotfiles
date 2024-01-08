@@ -336,12 +336,10 @@ Give org a modern look.
     (set-face-underline 'mode-line nil)
     (set-face-underline 'mode-line-inactive nil))
 
-  (use-package timu-spacegrey-theme
+  (use-package color-theme-sanityinc-tomorrow
     :straight t
-    :if (display-graphic-p)
-    :custom (timu-spacegrey-flavour "light")
     :config
-    (load-theme 'timu-spacegrey t))
+    (load-theme 'sanityinc-tomorrow-day t))
 
   (use-package nord-theme
     :straight t
