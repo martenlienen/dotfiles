@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Babel source code block for emacs lisp
+# key: elisp
+# --
+#+BEGIN_SRC emacs-lisp
+$0
+#+END_SRC
