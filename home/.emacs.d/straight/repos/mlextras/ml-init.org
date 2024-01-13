@@ -1249,7 +1249,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     :hook ((gptel-mode . visual-line-mode))
     :bind (("C-c g" . gptel-send)
            :map gptel-mode-map
-           ("C-c G" . gptel-set-topic))
+           ("C-c T" . gptel-set-topic))
     :config
     (defun ml/gptel-reload-directives ()
       "Reload my custom directives from disk."
@@ -1311,6 +1311,22 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
   (use-package dictcc
     :straight t
     :bind ("C-c d" . dictcc))
+#+END_SRC
+
+** google
+
+#+BEGIN_SRC emacs-lisp
+  (defun ml/google-search-region (query)
+    "Search QUERY on google."
+    (interactive
+     (list (cond ((use-region-p)
+                  (buffer-substring-no-properties (region-beginning) (region-end)))
+                 (current-prefix-arg (read-string "Google: "))
+                 (t (buffer-substring-no-properties (line-beginning-position)
+                                                    (line-end-position))))))
+    (browse-url (concat "https://www.google.com/search?q=" (url-hexify-string query))))
+
+  (global-set-key (kbd "C-c G") 'ml/google-search-region)
 #+END_SRC
 
 ** Debugging
