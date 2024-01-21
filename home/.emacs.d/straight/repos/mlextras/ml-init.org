@@ -301,6 +301,10 @@ before the install the upstream version.
 
     (set-face-underline 'org-block-begin-line nil)
     (set-face-attribute 'org-block-end-line nil :overline nil))
+
+  (use-package org-download
+    :straight t
+    :after org)
 #+END_SRC
 
 Give org a modern look.
