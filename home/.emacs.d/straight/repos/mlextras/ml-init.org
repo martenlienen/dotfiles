@@ -264,42 +264,40 @@ before the install the upstream version.
 
   (use-package org
     :straight t
-    :init
-    (setf org-directory "~/notes"
-          org-agenda-files (list org-directory)
-          org-default-notes-file "notes.org"
-          org-crypt-key nil
-          org-tags-exclude-from-inheritance (list "crypt")
-          org-M-RET-may-split-line nil
-          org-enforce-todo-dependencies t
-          org-enforce-todo-checkbox-dependencies t
-          org-agenda-start-on-weekday nil
+    :custom
+    (org-directory "~/notes")
+    (org-agenda-files (list org-directory))
+    (org-default-notes-file "notes.org")
+    (org-crypt-key nil)
+    (org-tags-exclude-from-inheritance (list "crypt"))
+    (org-M-RET-may-split-line nil)
+    (org-enforce-todo-dependencies t)
+    (org-enforce-todo-checkbox-dependencies t)
+    (org-agenda-start-on-weekday nil)
+    (org-reverse-note-order t)
 
-          ;; Edit settings
-          org-catch-invisible-edits 'show-and-error
-          org-special-ctrl-a/e t
+    ;; Edit settings
+    (org-catch-invisible-edits 'show-and-error)
+    (org-special-ctrl-a/e t)
 
-          ;; Org styling, hide markup etc.
-          org-hide-emphasis-markers t
-          org-pretty-entities t
-          org-ellipsis "…")
+    ;; Org styling, hide markup etc.
+    (org-hide-emphasis-markers t)
+    (org-pretty-entities t)
+    (org-ellipsis "…")
 
+    (org-src-fontify-natively t)
+    (org-babel-load-languages '((emacs-lisp . t)
+                                (python . t)
+                                (shell . t)))
+    :hook (org-mode-hook . flycheck-mode)
     :config
     (require 'org-crypt)
     (org-crypt-use-before-save-magic)
-
-    ;; Configure org-babel
-    (setf org-src-fontify-natively t
-          org-babel-load-languages '((emacs-lisp . t)
-                                     (python . t)
-                                     (shell . t)))
 
     ;; Load language support
     (org-babel-do-load-languages
      'org-babel-load-languages
      org-babel-load-languages)
-
-    (add-hook 'org-mode-hook #'flycheck-mode)
 
     (set-face-underline 'org-block-begin-line nil)
     (set-face-attribute 'org-block-end-line nil :overline nil))
