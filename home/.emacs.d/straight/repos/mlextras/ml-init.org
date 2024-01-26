@@ -289,6 +289,14 @@ before the install the upstream version.
     (org-babel-load-languages '((emacs-lisp . t)
                                 (python . t)
                                 (shell . t)))
+    :custom-face
+    (org-document-title ((t . (:height 2.0))))
+    (org-level-1 ((t . (:height 1.75))))
+    (org-level-2 ((t . (:height 1.5))))
+    (org-level-3 ((t . (:height 1.33))))
+    (org-level-4 ((t . (:height 1.2))))
+    (org-level-5 ((t . (:height 1.1))))
+    (org-level-6 ((t . (:height 1.0))))
     :hook (org-mode-hook . flycheck-mode)
     :config
     (require 'org-crypt)
