@@ -1259,7 +1259,9 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
       (interactive)
       (cl-loop for file in (directory-files "~/.emacs.d/directives" t "\\.txt\\'")
                for filename = (intern (file-name-sans-extension (file-name-nondirectory file)))
-               for file-contents = (f-read-text file)
+               ;; Replace newlines with spaces, because org-mode does not support newlines
+               ;; in properties.
+               for file-contents = (s-replace "\n" " " (f-read-text file))
                do (if-let ((pair (assoc filename gptel-directives)))
                       (setf (cdr pair) file-contents)
                     (push (cons filename file-contents) gptel-directives))))
