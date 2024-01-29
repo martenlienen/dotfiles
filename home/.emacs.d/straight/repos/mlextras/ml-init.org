@@ -1391,6 +1391,13 @@ Put emacs into distraction-free writing mode on demand.
 
 * Programming Languages
 
+** All Text
+
+#+BEGIN_SRC emacs-lisp
+  (use-package text-mode
+    :hook (text-mode . visual-line-mode))
+#+END_SRC
+
 ** Python
 
 #+BEGIN_SRC emacs-lisp
