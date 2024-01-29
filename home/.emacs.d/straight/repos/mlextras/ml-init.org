@@ -1186,9 +1186,12 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     :init
     (defun ml/copilot-accept-or-indent ()
       (interactive)
-      (if (and (bound-and-true-p copilot-mode) (copilot--overlay-visible))
-          (call-interactively #'copilot-accept-completion)
-        (call-interactively #'indent-for-tab-command)))
+      (cond
+       ((and (bound-and-true-p copilot-mode) (copilot--overlay-visible))
+        (call-interactively #'copilot-accept-completion))
+       ((yas-active-snippets)
+        (call-interactively #'yas-next-field))
+       (t (call-interactively #'indent-for-tab-command))))
     :config
     (add-hook 'prog-mode-hook 'copilot-mode))
 #+END_SRC
