@@ -162,8 +162,7 @@ task :pipx do
   # Yes, pipx should manage itself
   packages = [
     "pipx",
-    "black",
-    "isort",
+    "ruff",
     "asciinema",
     "python-lsp-server",
     "borgbackup>=2.0.0a0",
