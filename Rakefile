@@ -121,7 +121,7 @@ programming="git vim emacs"
 web="chromium"
 
 # Applications
-apps="flatpak notion-app-enhanced"
+apps="flatpak"
 
 sudo apt-get install $pyenv $borg $cryptography
 

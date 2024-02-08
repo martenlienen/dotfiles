@@ -75,7 +75,7 @@ for_window [title="^Android Emulator"] floating enable
 for_window [class="Todoist"] floating enable; move position center
 for_window [class="Spotify"] floating enable; move position center
 for_window [class="Mattermost"] floating enable; move position center
-for_window [class="notion-app"] floating enable; move position center
+for_window [class="obsidian"] floating enable; move position center
 for_window [class="firefox" title="^Paypal Checkout"] floating enable
 
 # Zoom does not set a proper class for some of its windows, but these heuristics seem to
@@ -145,7 +145,7 @@ bindsym $mod+Shift+n $run dolphin
 # Toggle background apps
 bindsym $mod+s $run toggle_window.py -- spotify --force-device-scale-factor=2
 bindsym $mod+grave $run toggle_window.py todoist
-bindsym $mod+n $run toggle_window.py --width 1800 --height 1500 notion-app-enhanced
+bindsym $mod+o $run toggle_window.py --width 2300 --height 1600 obsidian
 bindsym $mod+m $run toggle_window.py --width 1800 --height 1500 --class mattermost mattermost-desktop
 
 # Mode for managing i3 itself
@@ -170,7 +170,7 @@ set $i3l vstack to workspace 7
 set $i3l vstack to workspace 8
 set $i3l vstack to workspace 9
 set $i3l vstack to workspace 10
-bindsym $mod+o mode $mode_i3layouts
+bindsym $mod+n mode $mode_i3layouts
 mode $mode_i3layouts {
     bindsym v $run i3l vstack; mode "default"
     bindsym h $run i3l hstack; mode "default"
