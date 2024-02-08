@@ -106,6 +106,31 @@ My emacs config is a package so that straight precompiles it.
   ;; Enable convenient editing of symmetrically encrypted files
   (setq epa-file-cache-passphrase-for-symmetric-encryption t
         epa-pinentry-mode 'loopback)
+
+  ;; Improve buffer switching defaults as recommended by Mickey Petersen [1]
+  ;;
+  ;; [1] https://www.masteringemacs.org/article/demystifying-emacs-window-manager
+  (setq switch-to-buffer-in-dedicated-window 'pop
+        switch-to-buffer-obey-display-actions t)
+
+  (setq display-buffer-alist
+        '(("\\*Warnings\\*" (display-buffer-no-window) (allow-no-window . t))
+          ((or "^\\*Help\\*$" "^\\*helpful")
+           (display-buffer-reuse-mode-window display-buffer-in-side-window)
+           (side . right)
+           (window-width . 80))
+          ((or (major-mode . magit-process-mode)
+               (major-mode . magit-revision-mode)
+               (major-mode . magit-diff-mode)
+               (major-mode . magit-stash-mode)
+               (major-mode . magit-status-mode))
+           (display-buffer-pop-up-window)
+           (inhibit-same-window . t)))
+
+        ;; Display buffers in the selected window by default
+        display-buffer-base-action
+        '((display-buffer-reuse-window
+           display-buffer-same-window)))
 #+END_SRC
 
 Automatically jump to origin file and line when an the point is on an error.
@@ -682,21 +707,13 @@ of functions.
            ("M-<f12>" . popper-kill-latest-popup))
     :custom ((popper-reference-buffers '("\\*ielm\\*$"
                                          "\\*lsp-help\\*$"
-                                         "^\\*helpful"))
+                                         "^\\*helpful"
+                                         "^\\*Help\\*$"))
              (popper-group-function nil)
              (popper-display-control nil))
     :config
     (popper-mode)
     (popper-echo-mode))
-
-  (use-package shackle
-    :after popper
-    :straight (shackle :host nil :repo "https://depp.brause.cc/shackle.git")
-    :custom ((shackle-rules '((("*Warnings*") . (:ignore t))
-                              (("^\\*lsp-help\\*$") . (:regexp t :align bottom :size 12))
-                              (("^\\*helpful") . (:regexp t :align right))
-                              ((:custom popper-popup-p) . (:popup t :align bottom)))))
-    :config (shackle-mode t))
 
   (use-package ace-window
     :straight t
@@ -1307,6 +1324,8 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     :after git-timemachine
     :bind (("<f2>" . magit-status)
            ("<f5>" . magit-file-dispatch))
+    :custom
+    (magit-display-buffer-function #'display-buffer)
     :init
     (setq magit-last-seen-setup-instructions "1.4.0"
           magit-commit-ask-to-stage nil
