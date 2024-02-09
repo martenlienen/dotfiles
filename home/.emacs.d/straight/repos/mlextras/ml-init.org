@@ -408,6 +408,8 @@ Give org a modern look.
 #+BEGIN_SRC emacs-lisp
   (use-package visual-fill-column
     :straight t
+    :custom
+    (visual-fill-column-enable-sensible-window-split t)
     :config
     (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
 #+END_SRC
