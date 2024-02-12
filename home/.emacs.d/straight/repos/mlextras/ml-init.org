@@ -226,9 +226,7 @@ it uses an interactive shell instead of a login one which would not read my
 
 ** Terminal UI
 
-~term-key~ configures emacs and the terminal to communicate arbitrary key combinations, such
-C-S-o, via escape codes. Without this, it is not possible to send these key combinations
-to emacs running in a terminal.
+~term-key~ configures emacs and the terminal to communicate arbitrary key combinations, such as C-S-o, via escape codes. Without this, it is not possible to send these key combinations to emacs running in a terminal.
 
 #+BEGIN_SRC emacs-lisp
   (defun ml/want-key-p (key mods)
@@ -268,6 +266,7 @@ to emacs running in a terminal.
       (write-region (point-min) (point-max) "~/.config/alacritty/term-keys.yml")))
 
   (use-package term-keys
+    :disabled
     :straight (term-keys :repo "CyberShadow/term-keys" :host github)
     :if (not (display-graphic-p))
     :custom ((term-keys/want-key-p-func #'ml/want-key-p))
