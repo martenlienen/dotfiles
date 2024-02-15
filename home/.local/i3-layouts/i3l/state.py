@@ -114,9 +114,10 @@ class Context:
         return len(containers) > 0
 
     def sorted_containers(self) -> List[Con]:
+        n = len(self.containers)
         return sorted(
             self.containers,
-            key=lambda container: self.workspace_sequence.get_order(container.id),
+            key=lambda container: self.workspace_sequence.get_order(container.id) or n,
         )
 
     def workspace_width(self, ratio: float = 1.0) -> int:
