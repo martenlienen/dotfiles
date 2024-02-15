@@ -122,8 +122,7 @@ My emacs config is a package so that straight precompiles it.
           ((or (major-mode . magit-process-mode)
                (major-mode . magit-revision-mode)
                (major-mode . magit-diff-mode)
-               (major-mode . magit-stash-mode)
-               (major-mode . magit-status-mode))
+               (major-mode . magit-stash-mode))
            (display-buffer-pop-up-window)
            (inhibit-same-window . t)))
 
