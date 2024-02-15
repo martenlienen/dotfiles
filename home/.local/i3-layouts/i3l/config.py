@@ -13,7 +13,7 @@ class Variable:
         self.value = value
 
     @staticmethod
-    def extract_var(command) -> Optional['Variable']:
+    def extract_var(command) -> Optional["Variable"]:
         match = re.match('set[\t ]+(\\$[^ \t]*)[\t ]+("?[^"]*"?)', command)
         if match:
             try:
@@ -30,17 +30,24 @@ class WorkspaceLayout:
         self.workspace_name = workspace_name
 
     @classmethod
-    def load(cls, i3_config: ConfigReply) -> List['WorkspaceLayout']:
-        i3_vars = {'$i3l': []}
-        for command in i3_config.config.split('\n'):
+    def load(cls, i3_config: ConfigReply) -> List["WorkspaceLayout"]:
+        i3_vars = {"$i3l": []}
+        for command in i3_config.config.split("\n"):
             var = Variable.extract_var(command)
-            if var is not None and var.name != '$i3l':
+            if var is not None and var.name != "$i3l":
                 i3_vars[var.name] = var.value
             elif var is not None:
                 i3_vars[var.name].append(var.value)
 
-        i3l_options = [' '.join([i3_vars[token] if token.startswith('$') else token for token in i3l_option.split(' ')])
-                       for i3l_option in i3_vars['$i3l']]
+        i3l_options = [
+            " ".join(
+                [
+                    i3_vars[token] if token.startswith("$") else token
+                    for token in i3l_option.split(" ")
+                ]
+            )
+            for i3l_option in i3_vars["$i3l"]
+        ]
         workspace_layouts = []
         for i3l_option in i3l_options:
             workspace_layout = cls._create_workspace_layout(i3l_option)
@@ -49,15 +56,21 @@ class WorkspaceLayout:
         return workspace_layouts
 
     @staticmethod
-    def _create_workspace_layout(i3l_option) -> Optional['WorkspaceLayout']:
+    def _create_workspace_layout(i3l_option) -> Optional["WorkspaceLayout"]:
         match = re.match('([^ ]*) (.*) ?to workspace "?([^"]*)"?', i3l_option)
         if match:
             try:
                 layout_name = match.group(1)
-                layout_params = match.group(2).rstrip().split(' ') if len(match.group(2).rstrip()) > 0 else []
+                layout_params = (
+                    match.group(2).rstrip().split(" ")
+                    if len(match.group(2).rstrip()) > 0
+                    else []
+                )
                 workspace_name = match.group(3)
                 return WorkspaceLayout(layout_name, layout_params, workspace_name)
             except IndexError:
-                logger.error(f'[config] Invalid workspace layout definition: {i3l_option}')
+                logger.error(
+                    f"[config] Invalid workspace layout definition: {i3l_option}"
+                )
                 return None
         return None
