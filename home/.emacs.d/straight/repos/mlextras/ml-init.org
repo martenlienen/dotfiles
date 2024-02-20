@@ -1302,8 +1302,6 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
       (when (seq-some (lambda (prop) (string-prefix-p "GPTEL_" prop))
                       (org-buffer-property-keys))
         (gptel-mode))))
-
-
 #+END_SRC
 
 * Integrations
