@@ -183,12 +183,15 @@ class RebuildAction:
     def _containers_after(
         con_id: int, containers: List[Con], workspace_sequence: WorkspaceSequence
     ) -> List[RebuildContainer]:
+        con_order = workspace_sequence.get_order(con_id)
+        if con_order is None:
+            return []
         return [
             RebuildContainer(con)
             for con in containers
             if con_id == 0
-            or workspace_sequence.get_order(con.id)
-            >= workspace_sequence.get_order(con_id)
+            or (candidate_order := workspace_sequence.get_order(con.id)) is None
+            or candidate_order >= con_order
         ]
 
     def start_rebuild(
