@@ -4,6 +4,8 @@
 
 ;;; Code:
 
+(require 'deadgrep)
+
 (defun cqql-deadgrep-search-term ()
   "Change the search term in deadgrep."
   (interactive)

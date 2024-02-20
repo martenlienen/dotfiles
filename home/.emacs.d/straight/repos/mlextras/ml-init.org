@@ -652,7 +652,6 @@ of functions.
 
   (use-package cqql-deadgrep
     :straight (cqql-deadgrep :local-repo "mlextras" :type nil)
-    :after deadgrep
     :bind (("S-<f9>" . cqql-deadgrep-here)
            :map deadgrep-mode-map
            ("s" . cqql-deadgrep-search-term)
