@@ -1638,8 +1638,6 @@ Put emacs into distraction-free writing mode on demand.
     (setq python-docstring-sentence-end-double-space nil))
 
   (use-package pip-requirements :straight t)
-
-  (use-package ein :straight t)
 #+END_SRC
 
 ** Julia
