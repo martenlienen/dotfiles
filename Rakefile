@@ -93,11 +93,13 @@ task :system => [:system_packages, :system_conf]
 task :system_packages => [:system_conf] do
   sh <<END
 # Desktop environment
-de="i3 python3-i3ipc picom rofi nitrogen redshift-gtk autorandr"
+de="i3-wm python3-i3ipc picom rofi nitrogen redshift-gtk autorandr"
 # libinput-gestures"
 
 # Python compilation requirements
-pyenv="build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev"
+pyenv="build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl libncursesw5-dev xz-utils tk-dev libxml2-dev libffi-dev liblzma-dev"
+# The pyenv wiki says that the following is also required but I cannot install it on debian bookworm and it seems to work without it
+# "libxmlsec1-dev"
 
 # Borg backup requirements
 borg="libssl-dev liblz4-dev libzstd-dev libxxhash-dev"
@@ -109,24 +111,24 @@ shell="alacritty bash-completion zsh tmux"
 crypto="openssh-client"
 
 # Utilities
-utils="htop tree rsync"
+utils="htop tree rsync nodejs npm"
 
 # Network utilities
 netutils="nmap tcpdump dnsutils"
 
 # Programming tools
-programming="git vim emacs"
+programming="git vim"
 
 # Web
-web="chromium"
+web="firefox chromium thunderbird"
 
 # Applications
 apps="flatpak"
 
-sudo apt-get install $pyenv $borg $cryptography
+sudo apt-get install $de $shell $utils $netutils $programming $web $apps $pyenv $borg $cryptography
 
-# Install dev tools from debian unstable
-sudo apt-get install -t unstable $de $shell $utils $netutils $programming $web $apps
+# Install a recent emacs
+sudo apt-get install -t bookworm-backports emacs
 END
 end
 
@@ -136,6 +138,7 @@ task :flathub => [:system_packages] do
   sh "flatpak install flathub com.todoist.Todoist"
   sh "flatpak install flathub com.mattermost.Desktop"
   sh "flatpak install flathub us.zoom.Zoom"
+  sh "flatpak install flathub md.obsidian.Obsidian"
 end
 
 task :system_conf do
