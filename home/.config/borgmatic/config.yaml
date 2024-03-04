@@ -3,8 +3,7 @@
 # For example, if you have a constant named "hostname" with the value
 # "myhostname", then the string "{hostname}" will be replaced with
 # "myhostname" in the configuration file.
-constants:
-    !include ~/.ssh/borgmatic.yaml
+constants: !include ~/.ssh/borgmatic.yaml
 
 # List of source directories and files to back up. Globs and tildes
 # are expanded. Do not backslash spaces in path names.
@@ -21,8 +20,8 @@ constants:
 # ReadWritePaths list. Prior to borgmatic 1.7.10, repositories was a
 # list of plain path strings.
 repositories:
-    - path: ssh://borg@{hostname}/./
-      label: backupserver
+  - path: ssh://borg@{hostname}/./
+    label: backupserver
 
 # Working directory for the "borg create" command. Tildes are
 # expanded. Useful for backing up using relative paths. See
@@ -90,7 +89,7 @@ patterns:
 # experimental. See the output of "borg help patterns" for more
 # details.
 # patterns_from:
-    # - /etc/borgmatic/patterns
+# - /etc/borgmatic/patterns
 
 # Any paths matching these patterns are excluded from backups. Globs
 # and tildes are expanded. Note that a glob pattern must either start
@@ -112,7 +111,7 @@ patterns:
 # Exclude directories that contain a file with the given filenames.
 # Defaults to not set.
 exclude_if_present:
-    - .nobackup
+  - .nobackup
 
 # If true, the exclude_if_present filename is included in backups.
 # Defaults to false, meaning that the exclude_if_present filename is
@@ -232,7 +231,7 @@ ssh_command: ssh -p {port}
 # "{hostname}-{now:%Y-%m-%dT%H:%M:%S.%f}". When running actions like
 # rlist, info, or check, borgmatic automatically tries to match only
 # archives created with this name format.
-archive_name_format: 'data-{now}'
+archive_name_format: "data-{now}"
 
 # A Borg pattern for filtering down the archives used by borgmatic
 # actions that operate on multiple archives. For Borg 1.x, use a shell
@@ -309,24 +308,24 @@ keep_yearly: 10
 # List of one or more consistency checks to run on a periodic basis
 # (if "frequency" is set) or every time borgmatic runs checks (if
 # "frequency" is omitted).
-checks:
-    # Name of consistency check to run: "repository",
-    # "archives", "data", and/or "extract". Set to "disabled"
-    # to disable all consistency checks. "repository" checks
-    # the consistency of the repository, "archives" checks all
-    # of the archives, "data" verifies the integrity of the
-    # data within the archives, and "extract" does an
-    # extraction dry-run of the most recent archive. Note that
-    # "data" implies "archives".
-    - name: disabled
+# checks:
+  # Name of consistency check to run: "repository",
+  # "archives", "data", and/or "extract". Set to "disabled"
+  # to disable all consistency checks. "repository" checks
+  # the consistency of the repository, "archives" checks all
+  # of the archives, "data" verifies the integrity of the
+  # data within the archives, and "extract" does an
+  # extraction dry-run of the most recent archive. Note that
+  # "data" implies "archives".
+  # - name: disabled
 
-      # How frequently to run this type of consistency check (as
-      # a best effort). The value is a number followed by a unit
-      # of time. E.g., "2 weeks" to run this consistency check
-      # no more than every two weeks for a given repository or
-      # "1 month" to run it no more than monthly. Defaults to
-      # "always": running this check every time checks are run.
-      # frequency: 2 weeks
+    # How frequently to run this type of consistency check (as
+    # a best effort). The value is a number followed by a unit
+    # of time. E.g., "2 weeks" to run this consistency check
+    # no more than every two weeks for a given repository or
+    # "1 month" to run it no more than monthly. Defaults to
+    # "always": running this check every time checks are run.
+    # frequency: 2 weeks
 
 # Paths or labels for a subset of the configured "repositories" (see
 # above) on which to run consistency checks. Handy in case some of
@@ -343,6 +342,15 @@ checks:
 # Apply color to console output. Can be overridden with --no-color
 # command-line flag. Defaults to true.
 # color: false
+
+# List of one or more actions to skip running for this configuration
+# file, even if specified on the command-line (explicitly or
+# implicitly). This is handy for append-only configurations where you
+# never want to run "compact" or checkless configuration where you
+# want to skip "check". Defaults to not skipping any actions.
+skip_actions:
+  - compact
+  - check
 
 # List of one or more shell commands or scripts to execute before all
 # the actions for each repository.
