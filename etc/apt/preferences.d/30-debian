@@ -1,7 +1,0 @@
-Package: *
-Pin: release n=jammy
-Pin-Priority: 800
-
-Package: *
-Pin: release a=unstable
-Pin-Priority: 750
