@@ -74,9 +74,10 @@ cargo install exa hexyl fd-find bat ripgrep tokei gping just
 END
 end
 
-task :linting do
+task :npm do
   sh <<END
 npm install --global --prefix ~/.local \
+            prettier \
             textlint \
             textlint-plugin-latex2e \
             textlint-plugin-rst \
