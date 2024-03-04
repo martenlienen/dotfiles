@@ -121,7 +121,7 @@ netutils="nmap tcpdump dnsutils"
 programming="git vim"
 
 # Web
-web="firefox chromium thunderbird"
+web="firefox chromium thunderbird evince"
 
 # Applications
 apps="flatpak"
