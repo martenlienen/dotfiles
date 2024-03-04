@@ -102,7 +102,7 @@ pyenv="build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlit
 # "libxmlsec1-dev"
 
 # Borg backup requirements
-borg="libssl-dev liblz4-dev libzstd-dev libxxhash-dev"
+borg="libssl-dev liblz4-dev libzstd-dev libxxhash-dev libacl1-dev"
 
 # Terminal and shell
 shell="alacritty bash-completion zsh tmux"
