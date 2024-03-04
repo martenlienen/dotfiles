@@ -94,7 +94,7 @@ task :system => [:system_packages, :system_conf]
 task :system_packages => [:system_conf] do
   sh <<END
 # Desktop environment
-de="i3-wm python3-i3ipc picom rofi nitrogen redshift-gtk autorandr"
+de="i3-wm python3-i3ipc picom rofi nitrogen redshift-gtk autorandr xdotool"
 # libinput-gestures"
 
 # Python compilation requirements
