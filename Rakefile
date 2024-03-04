@@ -171,7 +171,7 @@ task :pipx do
     "borgbackup>=2.0.0a0",
   ]
   packages.each do |package|
-    sh "pipx install #{package}"
+    sh "pipx install '#{package}'"
   end
   sh "pipx inject python-lsp-server pylsp-rope"
   sh "pipx inject python-lsp-server python-lsp-ruff"
