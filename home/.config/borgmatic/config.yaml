@@ -78,17 +78,12 @@ one_file_system: true
 # contains leading punctuation, so it parses correctly. Note that only
 # one of "patterns" and "source_directories" may be used.
 patterns:
-    - R /home/ml
-    # Backup some dot directories from my home dir
-    - '+ /.ssh'
-    - '+ /.thunderbird'
-    - '+ /.mozilla'
-    - '+ /.config'
-    - '+ /.dotfiles'
-    # Exclude all other dot dirs
-    - '- /.*'
-    # And backup everything else
-    - '+ **'
+  - R /home/ml
+  # The content of this directory is somehow messed up and can trigger all kinds of
+  # weird behavior
+  - "! pp:home/ml/.local/share/containers"
+  # And backup everything else
+  - "+ **"
 
 # Read include/exclude patterns from one or more separate named files,
 # one pattern per line. Note that Borg considers this option
