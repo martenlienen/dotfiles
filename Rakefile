@@ -169,7 +169,7 @@ task :pipx do
     "ruff",
     "asciinema",
     "python-lsp-server",
-    "borgbackup>=2.0.0a0",
+    "borgbackup==2.0.0b7",
   ]
   packages.each do |package|
     sh "pipx install '#{package}'"
