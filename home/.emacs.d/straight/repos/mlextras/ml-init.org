@@ -1282,6 +1282,9 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
            :map gptel-mode-map
            ("C-c T" . gptel-set-topic))
     :config
+    ;; Register claude backend
+    (gptel-make-anthropic "Claude" :stream t :key #'gptel-api-key-from-auth-source)
+
     (defun ml/gptel-reload-directives ()
       "Reload my custom directives from disk."
       (interactive)
