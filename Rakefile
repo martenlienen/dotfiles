@@ -179,7 +179,3 @@ task :pipx do
   sh "pipx inject python-lsp-server python-lsp-ruff"
   sh "pipx inject --include-apps borgbackup borgmatic"
 end
-
-task :optimus do
-  sh "sudo cp optimus-manager.conf /etc/optimus-manager"
-end
