@@ -140,6 +140,7 @@ task :flathub => [:system_packages] do
   sh "flatpak install flathub com.mattermost.Desktop"
   sh "flatpak install flathub us.zoom.Zoom"
   sh "flatpak install flathub md.obsidian.Obsidian"
+  sh "flatpak install flathub org.zotero.Zotero"
 end
 
 task :system_conf do
