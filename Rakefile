@@ -169,6 +169,7 @@ task :pipx do
     "pipx",
     "ruff",
     "asciinema",
+    "youtube-dl",
     "python-lsp-server",
     "borgbackup==2.0.0b7",
   ]
