@@ -123,10 +123,12 @@ programming="git vim"
 # Web
 web="firefox chromium thunderbird evince"
 
+latex="texlive texlive-latex-extra texlive-science"
+
 # Applications
 apps="flatpak"
 
-sudo apt-get install $de $shell $utils $netutils $programming $web $apps $pyenv $borg $cryptography
+sudo apt-get install $de $shell $utils $netutils $programming $web $apps $pyenv $borg $cryptography $latex
 
 # Install a recent emacs
 sudo apt-get install -t bookworm-backports emacs
