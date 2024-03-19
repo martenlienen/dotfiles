@@ -19,3 +19,6 @@
   abbrevCommit = true
 [credential]
   helper = store
+[rerere]
+  enabled = true
+  autoupdate = true
