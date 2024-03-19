@@ -648,17 +648,41 @@ of functions.
 #+BEGIN_SRC emacs-lisp
   (use-package deadgrep
     :straight t
-    :bind (("<f9>" . deadgrep)))
-
-  (use-package cqql-deadgrep
-    :straight (cqql-deadgrep :local-repo "mlextras" :type nil)
-    :bind (("S-<f9>" . cqql-deadgrep-here)
+    :bind (("<f9>" . deadgrep)
+           ("S-<f9>" . ml-deadgrep-here)
            :map deadgrep-mode-map
-           ("s" . cqql-deadgrep-search-term)
-           ("d" . cqql-deadgrep-directory)
-           ("a" . cqql-deadgrep-file-type-all)
-           ("t" . cqql-deadgrep-file-type-type)
-           ("S-g" . cqql-deadgrep-file-type-glob)))
+           ("s" . deadgrep-search-term)
+           ("d" . deadgrep-directory)
+           ("a" . ml-deadgrep-file-type-all)
+           ("t" . ml-deadgrep-file-type-type)
+           ("S-g" . ml-deadgrep-file-type-glob))
+    :config
+    (defun ml-deadgrep-file-type (type)
+      "Set the file type to TYPE."
+      (let ((button (make-button 0 0 :type 'deadgrep-file-type 'file-type type)))
+        (deadgrep--file-type button)))
+
+    (defun ml-deadgrep-file-type-all ()
+      "Search all file types in deadgrep."
+      (interactive)
+      (ml-deadgrep-file-type 'all))
+
+    (defun ml-deadgrep-file-type-type ()
+      "Search certain file types in deadgrep."
+      (interactive)
+      (ml-deadgrep-file-type 'type))
+
+    (defun ml-deadgrep-file-type-glob ()
+      "Select file types by glob in deadgrep."
+      (interactive)
+      (ml-deadgrep-file-type 'glob))
+
+    (defun ml-deadgrep-here ()
+      "Run a deadgrep search in the current buffer's directory."
+      (interactive)
+      (let* ((root default-directory)
+             (deadgrep-project-root-function (lambda () root)))
+        (call-interactively #'deadgrep))))
 #+END_SRC
 
 ** Highlighting
@@ -1199,7 +1223,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     :demand t
     :bind (:map prog-mode-map
                 ("<tab>" . ml/copilot-accept-or-indent))
-    :init
+    :config
     (defun ml/copilot-accept-or-indent ()
       (interactive)
       (cond
@@ -1208,7 +1232,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
        ((yas-active-snippets)
         (call-interactively #'yas-next-field))
        (t (call-interactively #'indent-for-tab-command))))
-    :config
+
     (add-hook 'prog-mode-hook 'copilot-mode))
 #+END_SRC
 
