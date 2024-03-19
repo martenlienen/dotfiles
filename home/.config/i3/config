@@ -37,7 +37,7 @@ $run picom --daemon
 $run sleep 1 && nitrogen --restore
 
 # Enforce dynamic layouts
-$run i3-layouts
+$run "i3-layouts >> ~/.local/i3-layouts.log 2>&1"
 
 ######################
 # Plasma Integration #
