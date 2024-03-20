@@ -13,6 +13,7 @@
   rebase = true
 [rebase]
   autostash = true
+  updateRefs = true
 [format]
   pretty = format:%C(yellow)%ar%C(reset) by %an <%C(italic)%ae%Creset> - %C(cyan italic)%h%n  %C(bold)%s
 [log]
