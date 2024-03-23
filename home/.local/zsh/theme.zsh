@@ -85,13 +85,13 @@ function get_prompt {
   if whence pyenv > /dev/null; then
     local pyenv_version="$(pyenv version-name)"
     if [[ "${pyenv_version}" != "$(pyenv global)" ]]; then
-      pyenv_info=" %{$blue%}🐉%{$reset_color%} ${pyenv_version}"
+      pyenv_info=" %{$blue%}🐍%{$reset_color%} ${pyenv_version}"
     fi
   fi
 
   local conda_info=""
   if [[ -n $CONDA_DEFAULT_ENV ]]; then
-    conda_info=" %{$green%}🐉%{$reset_color%} ${CONDA_DEFAULT_ENV}"
+    conda_info=" %{$green%}🐍%{$reset_color%} ${CONDA_DEFAULT_ENV}"
   fi
 
   local tmux_info=""
