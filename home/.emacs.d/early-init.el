@@ -26,6 +26,6 @@
 (add-to-list 'default-frame-alist '(mouse-color . "palegoldenrod"))
 (add-to-list 'default-frame-alist '(internal-border-width . 20))
 
-(when (not (display-graphic-p))
-  ;; Disable menu bar in the terminal UI because there the Xresources are not available
-  (menu-bar-mode -1))
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
