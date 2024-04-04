@@ -1330,7 +1330,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
              (gptel-response-prefix-alist '((org-mode . "*Response*: ")
                                             (markdown-mode . "**Response**: ")
                                             (text-mode . "Response: ")))
-             (gptel-model "gpt-4-1106-preview"))
+             (gptel-model "gpt-4-turbo-preview"))
     :hook ((gptel-mode . visual-line-mode)
            (org-mode . ml/maybe-enable-gptel-mode))
     :bind (("C-c g" . gptel-send)
