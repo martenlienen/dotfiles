@@ -974,6 +974,10 @@ The dwim commands should just be the default in modern emacs.
       ("q" nil)
       ("g" nil))
     :config
+    ;; Smartparens defines this alias for backwards compatibility but somehow it does not
+    ;; work, so I just define it myself
+    (defalias 'sp--syntax-class-to-char 'syntax-class-to-char)
+
     (require 'smartparens-config)
 
     (bind-keys :map smartparens-mode-map
