@@ -1918,7 +1918,14 @@ them to LaTeX!
       (narrow-to-region section-start section-end)))
 
   (use-package tex
-    :straight auctex
+    ;; AUCTeX now needs an explicit configuration step to create tex-site.el from
+    ;; tex-site.el.in, so I muddled together this recipe
+    :straight '(auctex
+                :type git
+                :url "git://git.savannah.gnu.org/auctex.git"
+                :depends s
+                :pre-build ("make" "tex-site.el")
+                :files ("*" (:exclude ".git")))
     :mode ("\\.tex\\'" . LaTeX-mode)
     :custom ((TeX-auto-save t)
              (TeX-parse-self t)
