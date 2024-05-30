@@ -533,7 +533,8 @@ of functions.
     (or (and (string-prefix-p "*" bufname)
              (not (string-prefix-p "*Org Src" bufname))
              (not (string-prefix-p "*deadgrep" bufname))
-             (not (string-prefix-p "*ielm" bufname)))
+             (not (string-prefix-p "*ielm" bufname))
+             (not (string-prefix-p "*Chat" bufname)))
         (string-match-p "^magit\\(-[^:]+\\)?:" bufname)))
 
   (use-package iflipb
