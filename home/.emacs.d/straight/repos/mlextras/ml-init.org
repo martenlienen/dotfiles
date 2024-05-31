@@ -1297,6 +1297,23 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
       (skip-chars-backward " \t")
       (or (= (point) (point-min)) (char-equal (char-before) ?\n))))
 
+  (defvar ml-treesit-not-string-or-comment-condition
+    (lambda ()
+      (if (s-ends-with-p "-ts-mode" (symbol-name major-mode))
+          (let* ((node (treesit-node-at (point)))
+                 (type (treesit-node-type node)))
+            (message "Node type: %s %s" node type)
+            ;; Allow expansion in front of a string (string_start)
+            (if (or (s-equals-p type "string") (s-equals-p type "string_end")
+                    (and (s-equals-p type "comment")
+                         ;; Allow expansion in front of a comment
+                         (< (treesit-node-start node) (point))
+                         (<= (point) (treesit-node-end node))))
+                '(require-snippet-condition . force-in-comment)
+              t))
+        (funcall yas-not-string-or-comment-condition)))
+    "Return non-nil if point is not in a string or comment (as determined by tree-sitter).")
+
   (use-package yasnippet
     :straight t
     :demand t
@@ -1304,7 +1321,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
                 ("<tab>" . nil)
                 ("TAB" . nil))
     :config
-    (setq-default yas-buffer-local-condition yas-not-string-or-comment-condition)
+    (setq-default yas-buffer-local-condition ml-treesit-not-string-or-comment-condition)
 
     ;; Don't append newlines to snippet files
     (add-hook 'snippet-mode (lambda () (setq require-final-newline nil)))
