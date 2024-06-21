@@ -37,7 +37,7 @@ local white_no_bold=$fg_no_bold[white]
 
 local highlight_bg=$bg[red]
 
-local omega="ω"
+local prompt_symbol="λ"
 
 # The following two functions have been taken from oh-my-zsh so that I can avoid
 # loading all the rest of it. Saves 0.05s on every shell start.
@@ -124,7 +124,7 @@ function get_prompt {
 %{$yellow_bold%}$directory%{$reset_color%}\
 $git_info$pyenv_info$conda_info$tmux_info %{$cyan%}($timestamp)%{$reset_color%}"
 
-  local prompt_char="%{$white_bold%}$omega"
+  local prompt_char="%{$white_bold%}$prompt_symbol"
   if [[ $last_cmd_status -ne 0 ]]; then
     prompt_char="%{$red_bold%}!"
   fi
