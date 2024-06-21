@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: log=getLogger()
+# key: log=
+# condition: (isnip-beginning-of-line-p)
+# --
+log = logging.getLogger(__name__)
