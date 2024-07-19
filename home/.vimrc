@@ -1,6 +1,4 @@
-" vundle requirements
-set nocompatible
-filetype off
+filetype plugin indent on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Status line
