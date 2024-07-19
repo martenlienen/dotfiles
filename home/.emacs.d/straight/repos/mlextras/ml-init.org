@@ -1676,7 +1676,7 @@ Put emacs into distraction-free writing mode on demand.
                 ("C-c C-l" . #'ml-python-shell-send-statement)
                 ("C-c C-r" . #'cqql-python-shell-send-region-dwim)
                 ("C-c C-v" . #'cqql-python-shell-send-variable)
-                ("C-c t" . #'python-pytest-popup)
+                ("C-c t" . #'python-pytest-dispatch)
                 ("C-c i" . #'cqql-python-import)
                 ("C-c I" . #'cqql-python-from-import)
                 ("C-c <left>" . #'python-indent-shift-left)
