@@ -357,6 +357,11 @@ Give org a modern look.
 ** Theme
 
 #+BEGIN_SRC emacs-lisp
+  (use-package solaire-mode
+    :straight t
+    :config
+    (solaire-global-mode t))
+
   (use-package all-the-icons
     :straight t
     :if (display-graphic-p))
@@ -375,14 +380,24 @@ Give org a modern look.
     (set-face-underline 'mode-line-inactive nil))
 
   (use-package color-theme-sanityinc-tomorrow
+    :disabled
     :straight t
+    :if (display-graphic-p)
     :config
     (load-theme 'sanityinc-tomorrow-day t))
 
-  (use-package nord-theme
+  (use-package stimmung-themes
+    :disabled
     :straight t
-    :if (not (display-graphic-p))
-    :config (load-theme 'nord t))
+    :if (display-graphic-p)
+    :config
+    (load-theme 'stimmung-themes-light t))
+
+  (use-package doom-themes
+    :straight t
+    :if (display-graphic-p)
+    :config
+    (load-theme 'doom-tomorrow-day t))
 
   (use-package doom-modeline
     :straight t
@@ -391,11 +406,16 @@ Give org a modern look.
     (setq doom-modeline-buffer-modification-icon nil)
     (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
     (doom-modeline-def-modeline 'ml-line
-      '(bar window-number matches follow buffer-info buffer-position selection-info word-count)
-      '(compilation misc-info repl lsp minor-modes input-method process vcs checker major-mode))
+      '(bar window-number matches follow buffer-info buffer-position selection-info)
+      '(compilation misc-info repl lsp minor-modes input-method process vcs))
     (defun ml-setup-doom-modeline ()
       (doom-modeline-set-modeline 'ml-line 'default))
     (add-hook 'doom-modeline-mode-hook 'ml-setup-doom-modeline))
+
+  (use-package nord-theme
+    :straight t
+    :if (not (display-graphic-p))
+    :config (load-theme 'nord t))
 
   (with-eval-after-load 'all-the-icons
     (with-eval-after-load 'nerd-icons
