@@ -1,0 +1,33 @@
+# Mariana
+colors:
+  # Default colors
+  primary:
+    background: '0x343d46'
+    foreground: '0xd8dee9'
+
+  # Cursor colors
+  cursor:
+    text:   '0xfeffff'
+    cursor: '0xfbbb6a'
+
+  # Normal colors
+  normal:
+    black:   '0x000000'
+    red:     '0xec5f66'
+    green:   '0x99c794'
+    yellow:  '0xf9ae58'
+    blue:    '0x6699cc'
+    magenta: '0xc695c6'
+    cyan:    '0x5fb4b4'
+    white:   '0xf7f7f7'
+
+  # Bright colors
+  bright:
+    black:   '0x333333'
+    red:     '0xf97b58'
+    green:   '0xacd1a8'
+    yellow:  '0xfac761'
+    blue:    '0x85add6'
+    magenta: '0xd8b6d8'
+    cyan:    '0x82c4c4'
+    white:   '0xfeffff'
