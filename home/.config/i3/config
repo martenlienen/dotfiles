@@ -52,6 +52,7 @@ for_window [class="plasmashell"] floating enable
 
 # Plasma compatibility improvements
 for_window [window_role="pop-up"] floating enable
+for_window [window_role="alert"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [class="systemsettings"] floating enable
 for_window [class="plasmashell"] floating enable;
