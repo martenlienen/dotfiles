@@ -74,21 +74,6 @@ cargo install exa hexyl fd-find bat ripgrep tokei gping just
 END
 end
 
-task :npm do
-  sh <<END
-npm install --global --prefix ~/.local \
-            prettier \
-            textlint \
-            textlint-plugin-latex2e \
-            textlint-plugin-rst \
-            textlint-rule-write-good \
-            textlint-rule-no-start-duplicated-conjunction \
-            textlint-rule-max-comma \
-            textlint-rule-stop-words \
-            textlint-rule-alex
-END
-end
-
 task :system => [:system_packages, :system_conf]
 
 task :system_packages => [:system_conf] do
@@ -112,7 +97,7 @@ shell="alacritty bash-completion zsh tmux"
 crypto="openssh-client"
 
 # Utilities
-utils="htop tree rsync nodejs npm"
+utils="htop tree rsync"
 
 # Network utilities
 netutils="nmap tcpdump dnsutils"
