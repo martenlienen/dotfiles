@@ -73,7 +73,7 @@ end
 
 task :rust => :rustup do
   sh <<END
-cargo install exa hexyl fd-find bat ripgrep tokei gping just
+cargo install exa hexyl fd-find bat ripgrep tokei gping viu
 END
 end
 
