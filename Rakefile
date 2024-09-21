@@ -33,6 +33,9 @@ task :dotfiles do
 
   # Update the font cache
   sh "fc-cache"
+
+  # Reload the kitty configuration
+  sh "pkill -SIGUSR1 kitty || true"
 end
 
 multitask :tools => [:pyenv, :pyenv_virtualenv, :antigen]
@@ -91,7 +94,7 @@ pyenv="build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlit
 borg="libssl-dev liblz4-dev libzstd-dev libxxhash-dev libacl1-dev"
 
 # Terminal and shell
-shell="alacritty bash-completion zsh tmux"
+shell="bash-completion zsh tmux"
 
 # Cryptography
 crypto="openssh-client"

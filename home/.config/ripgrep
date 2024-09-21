@@ -2,3 +2,6 @@
 --hidden
 # but not .git directories
 --glob=!.git/
+# Make files and line numbers links
+
+--hyperlink-format=kitty

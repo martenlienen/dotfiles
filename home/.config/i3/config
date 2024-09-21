@@ -113,7 +113,7 @@ bindsym $mod+Print $run spectacle
 bindsym $mod+Shift+Print $run spectacle --region
 
 # Start a terminal
-bindsym $mod+Return $run alacritty
+bindsym $mod+Return $run kitty
 
 # Browser
 bindsym $mod+Shift+Return $run firefox
