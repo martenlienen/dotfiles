@@ -1,0 +1,14 @@
+includes = ["repo.toml"]
+
+[global]
+prevent-sleep = true
+
+[default]
+base-dir = "/home/ml"
+run-after-fail = "notify-send \"restic backup failed: $ERROR_STDERR\""
+
+[default.backup]
+schedule = "20:00"
+exclude-file = ["$HOME/.config/restic/excludes"]
+source-relative = true
+source = ["."]

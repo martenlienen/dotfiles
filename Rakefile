@@ -82,16 +82,13 @@ task :system => [:system_packages, :system_conf]
 task :system_packages => [:system_conf] do
   sh <<END
 # Desktop environment
-de="i3-wm python3-i3ipc picom rofi nitrogen redshift-gtk autorandr xdotool"
+de="i3-wm python3-i3ipc picom rofi nitrogen redshift-gtk autorandr xdotool libnotify-bin"
 # libinput-gestures"
 
 # Python compilation requirements
 pyenv="build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl libncursesw5-dev xz-utils tk-dev libxml2-dev libffi-dev liblzma-dev"
 # The pyenv wiki says that the following is also required but I cannot install it on debian bookworm and it seems to work without it
 # "libxmlsec1-dev"
-
-# Borg backup requirements
-borg="libssl-dev liblz4-dev libzstd-dev libxxhash-dev libacl1-dev"
 
 # Terminal and shell
 shell="bash-completion zsh tmux"
@@ -116,7 +113,7 @@ latex="texlive texlive-latex-extra texlive-science"
 # Applications
 apps="flatpak"
 
-sudo apt-get install $de $shell $utils $netutils $programming $web $apps $pyenv $borg $cryptography $latex
+sudo apt-get install $de $shell $utils $netutils $programming $web $apps $pyenv $cryptography $latex
 
 # Install a recent emacs
 sudo apt-get install -t bookworm-backports emacs
@@ -148,9 +145,8 @@ task :redshift do
   sh "systemctl --user enable --now redshift-gtk.service"
 end
 
-task :borgmatic do
-  sh "systemctl --user daemon-reload"
-  sh "systemctl --user enable --now borgmatic.timer"
+task :resticprofile do
+  sh "resticprofile schedule"
 end
 
 task :pipx do
@@ -161,12 +157,10 @@ task :pipx do
     "asciinema",
     "youtube-dl",
     "python-lsp-server",
-    "borgbackup==2.0.0b7",
   ]
   packages.each do |package|
     sh "pipx install '#{package}'"
   end
   sh "pipx inject python-lsp-server pylsp-rope"
   sh "pipx inject python-lsp-server python-lsp-ruff"
-  sh "pipx inject --include-apps borgbackup borgmatic"
 end
