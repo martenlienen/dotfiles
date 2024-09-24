@@ -1,0 +1,23 @@
+[Unit]
+Description=resticprofile backup for profile default in /home/ml/.config/resticprofile/profiles.toml
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+
+WorkingDirectory=%h
+Environment="RESTICPROFILE_SCHEDULE_ID=%h/.config/resticprofile/profiles.toml:backup@default"
+Environment="HOME=%h"
+
+Restart=no
+# Prevent rate limiting of borgmatic log events
+LogRateLimitIntervalSec=0
+
+# When the system wakes from suspend, it can still be in the `suspend` state when this
+# service is triggered which makes systemd-inhibit fail to inhibit the suspend state and
+# refuse to run borgmatic. So we just sleep a little.
+#
+# https://github.com/systemd/systemd/issues/14045
+ExecStartPre=/bin/sleep 5s
+ExecStart=systemd-inhibit --who="restic" --what="sleep:shutdown" --why="Prevent interrupting scheduled backup" %h/.local/restic/resticprofile_0.28.0_linux_amd64 --no-prio --no-ansi --config %h/.config/resticprofile/profiles.toml run-schedule backup@default

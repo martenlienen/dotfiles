@@ -145,8 +145,9 @@ task :redshift do
   sh "systemctl --user enable --now redshift-gtk.service"
 end
 
-task :resticprofile do
-  sh "resticprofile schedule"
+task :resticprofile => [:dotfiles] do
+  sh "systemctl --user daemon-reload"
+  sh "systemctl --user enable resticprofile-backup@profile-default.timer"
 end
 
 task :pipx do
