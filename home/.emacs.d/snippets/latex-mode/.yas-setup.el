@@ -19,6 +19,7 @@
    (let ((environment (LaTeX-current-environment)))
      (pcase environment
        ((or "equation" "equation*" "align" "align*") "eq:")
+       ((or "theorem" "proposition" "lemma" "corollary") "thm:")
        ((or "figure") "fig:")))
    (let ((macro (isnip-latex-last-macro 2)))
      (message macro)

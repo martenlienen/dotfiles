@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: ref
+# name: cref
 # key: r
 # --
-\ref{$0}
+\cref{$0}
