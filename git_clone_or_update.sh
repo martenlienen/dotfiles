@@ -6,5 +6,5 @@ repo=$2
 if [[ -d "$path" ]]; then
   (cd "$path" && git pull)
 else
-  git clone "$path" "$repo"
+  git clone "$repo" "$path"
 fi

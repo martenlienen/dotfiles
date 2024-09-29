@@ -27,6 +27,9 @@ export PYTHONBREAKPOINT="ipdb.set_trace"
 # Enable swipe left/right gestures in firefox
 export MOZ_ENABLE_WAYLAND="1"
 
+# Use the ssh-agent started by systemd
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
 # Read system-local settings
 if [[ -r ~/.local/zshenv ]]; then
   . ~/.local/zshenv

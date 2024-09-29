@@ -134,10 +134,8 @@ My emacs config is a package so that straight precompiles it.
         '((display-buffer-reuse-window
            display-buffer-same-window)))
 
-  ;; Set font for high DPI displays
-  (internal-set-lisp-face-attribute
-   'default :font (font-spec :family "Fira Code"
-                             :size 12.0 :dpi 144))
+  (set-face-attribute
+   'default nil :font (font-spec :family "Fira Code" :size 12.0))
 #+END_SRC
 
 Automatically jump to origin file and line when an the point is on an error.

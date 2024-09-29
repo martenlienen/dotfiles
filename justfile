@@ -1,7 +1,6 @@
 alias d := dotfiles
 alias e := emacs
 alias p := packages
-alias s := services
 
 default: dotfiles tools
 
@@ -15,8 +14,6 @@ packages:
   packages=(
     # Tuxedo hardware control
     tuxedo-control-center-bin
-    # Desktop and window management
-    gdm sway polkit fuzzel
     # Applications
     firefox chromium thunderbird evince kitty
     # Terminal & command line tools
@@ -36,11 +33,9 @@ packages:
   )
   yay -S --needed ${packages[@]}
 
-services:
-  systemctl enable gdm.service
-
 user-services:
   systemctl --user enable resticprofile-backup@profile-default.timer
+  systemctl --user enable --now ssh-agent.service
 
 emacs: dotfiles
   #!/bin/sh
