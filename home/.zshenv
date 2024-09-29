@@ -24,8 +24,8 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep"
 # Use ipdb as the default python debugger
 export PYTHONBREAKPOINT="ipdb.set_trace"
 
-# Enable swipe left/right gestures in firefox in X.org
-export MOZ_USE_XINPUT2="1"
+# Enable swipe left/right gestures in firefox
+export MOZ_ENABLE_WAYLAND="1"
 
 # Read system-local settings
 if [[ -r ~/.local/zshenv ]]; then
