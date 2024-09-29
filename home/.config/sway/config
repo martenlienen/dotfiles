@@ -1,0 +1,229 @@
+# Read `man 5 sway` for a complete reference.
+
+###################
+# Global Settings #
+###################
+
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term kitty
+
+###########
+# Outputs #
+###########
+
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+
+##########
+# Inputs #
+##########
+
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+######################
+# Idle configuration #
+######################
+
+# Example configuration:
+#
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+##################
+# Borders & Gaps #
+##################
+
+# Small gaps when there are multiple windows
+gaps inner 10
+smart_gaps on
+
+# We don't need borders with gaps
+default_border none
+default_floating_border none
+
+# Use a larger font for title bars, e.g. in tabbed layout
+font pango:Noto Sans Mono 11
+
+##################
+# Extra Programs #
+##################
+
+# Enforce dynamic layouts
+exec "i3-layouts >> ~/.local/i3-layouts.log 2>&1"
+
+################
+# Window Rules #
+################
+
+for_window [class="matplotlib"] floating enable
+for_window [title="^Android Emulator"] floating enable
+for_window [class="Todoist"] floating enable; move position center
+for_window [class="Spotify"] floating enable; move position center
+for_window [class="Mattermost"] floating enable; move position center
+for_window [class="obsidian"] floating enable; move position center
+for_window [class="dolphin"] floating enable
+for_window [class="firefox" title="^Paypal Checkout"] floating enable
+
+# Zoom does not set a proper class for some of its windows, but these heuristics seem to
+# catch all their windows
+for_window [title="^Zoom"] floating enable
+for_window [class="zoom"] floating enable
+for_window [class="^join\?action=join"] floating enable
+
+################
+# Key Bindings #
+################
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Move workspace to other screen
+bindsym $mod+Left move workspace to output left
+bindsym $mod+Right move workspace to output right
+
+# Media keys (plasma takes care of most of them)
+bindsym XF86Calculator exec emacs -q -T i3-calculator --funcall=full-calc
+for_window [title="i3-calculator"] floating enable
+
+# F row
+# The parameter values are defined here [1]. 1 2 -1 means pre-select shutdown and wait for
+# confirmation.
+#
+# [1] https://github.com/KDE/plasma-workspace/blob/c97dddf20df5702eb429b37a8c10b2c2d8199d4e/libkworkspace/kworkspace.h
+bindsym $mod+F12 exec qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout 1 2 -1
+
+# Screenshots (without and with region selection)
+bindsym $mod+Print exec spectacle
+bindsym $mod+Shift+Print exec spectacle --region
+
+# Start a terminal
+bindsym $mod+Return exec kitty
+
+# Browser
+bindsym $mod+Shift+Return exec firefox
+
+# Kill focused window
+bindsym $mod+q kill
+
+# Start a program launcher
+bindsym $mod+space exec fuzzel
+bindsym $mod+Shift+space exec rofi -show run
+
+# Split in horizontal orientation
+bindsym $mod+c split h
+
+# Split in vertical orientation
+bindsym $mod+v split v
+
+# Enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (tabbed, toggle split)
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle tiling / floating
+bindsym $mod+Shift+f floating toggle
+
+# Start apps
+bindsym $mod+Shift+n exec dolphin
+
+# Toggle background apps
+bindsym $mod+s exec toggle_window.py -- spotify --force-device-scale-factor=2
+bindsym $mod+grave exec toggle_window.py todoist
+bindsym $mod+o exec toggle_window.py --width 2300 --height 1600 obsidian
+bindsym $mod+m exec toggle_window.py --width 1800 --height 1500 --class mattermost mattermost-desktop
+
+# Mode for managing sway itself
+set $mode_sway "sway: reload[i] [r]estart [e]xit"
+bindsym $mod+i mode $mode_sway
+mode $mode_sway {
+    bindsym i reload
+    bindsym r restart
+    bindsym e exec "sway-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your X session.' -b 'Yes, exit sway' 'sway-msg exit'"
+
+    bindsym Ctrl+g mode "default"
+}
+
+set $mode_i3layouts "layouts: [v]stack [h]stack [3]columns [n]one"
+set $i3l vstack to workspace 1
+set $i3l vstack to workspace 2
+set $i3l vstack to workspace 3
+set $i3l vstack to workspace 4
+set $i3l vstack to workspace 5
+set $i3l vstack to workspace 6
+set $i3l vstack to workspace 7
+set $i3l vstack to workspace 8
+set $i3l vstack to workspace 9
+set $i3l vstack to workspace 10
+bindsym $mod+n mode $mode_i3layouts
+mode $mode_i3layouts {
+    bindsym v exec i3l vstack; mode "default"
+    bindsym h exec i3l hstack; mode "default"
+    bindsym 3 exec i3l 3columns; mode "default"
+    bindsym n exec i3l none; mode "default"
+
+    bindsym Ctrl+g mode "default"
+}
+
+## Basic bindings
+
+# Change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# Move focused window
+bindsym $mod+Shift+$left exec i3l move left
+bindsym $mod+Shift+$down exec i3l move down
+bindsym $mod+Shift+$up exec i3l move up
+bindsym $mod+Shift+$right exec i3l move right
+
+# Switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# Include default extras that, for example, set environment variables via systemd
+include /etc/sway/config.d/*
