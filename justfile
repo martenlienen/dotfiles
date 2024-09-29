@@ -14,6 +14,8 @@ packages:
   packages=(
     # Tuxedo hardware control
     tuxedo-control-center-bin
+    # Snapshots
+    btrfs-assistant snapper-support
     # Applications
     firefox chromium thunderbird evince kitty
     # Terminal & command line tools
