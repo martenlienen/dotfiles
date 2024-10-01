@@ -104,21 +104,17 @@ for (let window of workspace.stackingOrder) {
 }
 
 if (target_window !== null) {
-    if (target_window.desktops.includes(workspace.currentDesktop) && !target_window.minimized && !window_is_covered(target_window, workspace.currentDesktop)) {
+    let output_geometry = workspace.activeScreen.geometry;
+    if (rects_overlap(output_geometry, target_window.frameGeometry) && !target_window.minimized && !window_is_covered(target_window, workspace.currentDesktop)) {
         target_window.minimized = true;
     } else {
-        // Compute the desktop dimensions from the complete workspace / desktop grid
-        let desktop_width = workspace.workspaceWidth / workspace.desktopGridWidth;
-        let desktop_height = workspace.workspaceHeight / workspace.desktopGridHeight;
-
         // Center the window
         target_window.frameGeometry = {
-            x: (desktop_width / 2) - (target_window.width / 2),
-            y: (desktop_height / 2) - (target_window.height / 2),
+            x: output_geometry.x + (output_geometry.width / 2) - (target_window.width / 2),
+            y: output_geometry.y + (output_geometry.height / 2) - (target_window.height / 2),
             width: target_window.width,
             height: target_window.height,
         }
-
 
         target_window.desktops = workspace.currentDesktop;
         target_window.minimized = false;
