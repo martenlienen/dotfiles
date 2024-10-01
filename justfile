@@ -22,6 +22,7 @@ packages:
     zsh tmux htop just tree rsync
     # Network tools
     nmap tcpdump dnsutils nmon iftop
+    networkmanager-openvpn
     # Cryptography
     openssh keepassxc
     # Programming. npm is required by emacs-copilot
