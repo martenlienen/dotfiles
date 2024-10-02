@@ -1959,7 +1959,7 @@ them to LaTeX!
                  (match-beginning 0) (point-max)))))
       (narrow-to-region section-start section-end)))
 
-  (use-package tex
+  (use-package tex-mode
     :straight auctex
     :mode ("\\.tex\\'" . LaTeX-mode)
     :custom ((TeX-auto-save t)
@@ -1972,12 +1972,76 @@ them to LaTeX!
            (LaTeX-mode . prettify-symbols-mode)
            (LaTeX-mode . reftex-mode)
            (LaTeX-mode . flycheck-mode)
-           (LaTeX-mode . enable-word-wrap))
+           (LaTeX-mode . enable-word-wrap)
+           (LaTeX-mode . ml-latex-bold-tensors))
     :bind (:map TeX-mode-map
                 ("C-x n s" . #'ml/latex-narrow-to-section))
+    :init
+    (defun ml-latex-bold-tensors ()
+      ;; Display vector and matrix symbols in bold
+      (font-lock-add-keywords
+       nil
+       `((,(rx (seq
+                (group (seq "\\"
+                            (or (seq (any "vm") (any "a-z"))
+                                (seq "m" (any "A-Z"))
+                                (seq "v" (or "alpha" "beta" "gamma" "delta" "epsilon" "zeta"
+                                             "eta" "theta" "iota" "kappa" "lambda" "mu" "nu"
+                                             "xi" "omicron" "pi" "rho" "sigma" "tau" "upsilon"
+                                             "phi" "chi" "psi" "omega"))
+                                (seq "m" (or "Gamma" "Delta" "Lambda" "Phi" "Pi" "Psi" "Sigma"
+                                             "Theta" "Upsilon" "Xi" "Omega")))))
+                (or (not (in "a-z" "A-Z")) word-end)))
+          1 'bold))))
     :config
     ;; Workaround for smartparens overwriting `
-    (require 'smartparens-latex))
+    (require 'smartparens-latex)
+
+    (setq tex--prettify-symbols-alist
+          (append tex--prettify-symbols-alist
+                  '(("\\R" . ?ℝ))
+                  ;; Add symbols for the common vector and matrix notation from
+                  ;; math_commands.tex
+                  '(("\\valpha" . ?α)
+                    ("\\vbeta" . ?β)
+                    ("\\vgamma" . ?γ)
+                    ("\\vdelta" . ?δ)
+                    ("\\vepsilon" . ?ϵ)
+                    ("\\vzeta" . ?ζ)
+                    ("\\veta" . ?η)
+                    ("\\vtheta" . ?θ)
+                    ("\\viota" . ?ι)
+                    ("\\vkappa" . ?κ)
+                    ("\\vlambda" . ?λ)
+                    ("\\vmu" . ?μ)
+                    ("\\vnu" . ?ν)
+                    ("\\vxi" . ?ξ)
+                    ;; There is no \omicron because it looks like a latin o.
+                    ("\\vpi" . ?π)
+                    ("\\vrho" . ?ρ)
+                    ("\\vsigma" . ?σ)
+                    ("\\vtau" . ?τ)
+                    ("\\vupsilon" . ?υ)
+                    ("\\vphi" . ?ϕ)
+                    ("\\vchi" . ?χ)
+                    ("\\vpsi" . ?ψ)
+                    ("\\vomega" . ?ω)
+                    ;; Uppercase Greek letters.
+                    ("\\mGamma" . ?Γ)
+                    ("\\mDelta" . ?Δ)
+                    ("\\mLambda" . ?Λ)
+                    ("\\mPhi" . ?Φ)
+                    ("\\mPi" . ?Π)
+                    ("\\mPsi" . ?Ψ)
+                    ("\\mSigma" . ?Σ)
+                    ("\\mTheta" . ?Θ)
+                    ("\\mUpsilon" . ?Υ)
+                    ("\\mXi" . ?Ξ)
+                    ("\\mOmega" . ?Ω))
+                  (cl-loop for c from ?a to ?z
+                           collect (cons (format "\\v%c" c) (char-to-string c)))
+                  (cl-loop for c from ?A to ?Z
+                           collect (cons (format "\\m%c" c) (char-to-string c))))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
