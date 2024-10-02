@@ -1130,8 +1130,9 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
   (use-package apheleia
     :straight t
     :config
-    (setf (alist-get 'python-mode apheleia-mode-alist) '(ruff ruff-isort))
-    (setf (alist-get 'python-ts-mode apheleia-mode-alist) '(ruff ruff-isort))
+    (setf (alist-get 'python-mode apheleia-mode-alist) '(ruff ruff-isort)
+          (alist-get 'python-ts-mode apheleia-mode-alist) '(ruff ruff-isort)
+          (alist-get 'latexindent apheleia-formatters) '("latexindent" "--logfile=/dev/null" "--local"))
 
     (apheleia-global-mode t))
 #+END_SRC
