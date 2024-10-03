@@ -29,6 +29,7 @@ packages:
     git vim emacs-wayland ttf-fira-code npm
     # Latex
     texlive
+    perl-yaml-tiny perl-file-homedir
     # Application containers
     flatpak
     # pyenv dependencies to compile python
