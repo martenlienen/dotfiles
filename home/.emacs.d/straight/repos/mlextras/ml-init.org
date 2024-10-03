@@ -194,10 +194,7 @@ existing sections.
            ("C-S-o" . cqql-open-line-above)
            ("C-S-p" . cqql-move-text-up)
            ("C-S-n" . cqql-move-text-down))
-    :custom ((cqql-no-trimming-modes (list #'snippet-mode)))
     :config
-    (add-hook 'before-save-hook #'cqql-trim-whitespace)
-
     ;; For some reason, M-S-d sends C-M-_ ? in wezterm, so just add a duplicate binding
     (let ((keymap (make-sparse-keymap)))
       (define-key keymap (kbd "?") #'cqql-duplicate-text)
@@ -1135,6 +1132,17 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
           (alist-get 'latexindent apheleia-formatters) '("latexindent" "--logfile=/dev/null" "--local"))
 
     (apheleia-global-mode t))
+#+END_SRC
+
+** White Space
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ws-butler
+    :straight (ws-butler :repo "hlissner/ws-butler" :host github)
+    :config
+    (add-to-list 'ws-butler-global-exempt-modes 'snippet-mode)
+
+    (ws-butler-global-mode))
 #+END_SRC
 
 * Code Intelligence

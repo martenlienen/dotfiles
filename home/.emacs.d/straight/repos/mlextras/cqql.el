@@ -119,12 +119,5 @@ first line of the region to the end of the last."
     (move-end-of-line nil)
     (insert ";")))
 
-(defvar cqql-no-trimming-modes '()
-  "A list of modes, that should not be whitespace-trimmed.")
-
-(defun cqql-trim-whitespace ()
-  (when (not (seq-contains-p cqql-no-trimming-modes major-mode))
-    (delete-trailing-whitespace)))
-
 (provide 'cqql)
 ;;; cqql.el ends here
