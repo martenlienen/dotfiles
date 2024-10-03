@@ -704,6 +704,7 @@ of functions.
            ("a" . ml-deadgrep-file-type-all)
            ("t" . ml-deadgrep-file-type-type)
            ("S-g" . ml-deadgrep-file-type-glob))
+    :custom ((deadgrep-extra-arguments '("--no-config" "--hidden" "--glob=!.git/")))
     :config
     (defun ml-deadgrep-file-type (type)
       "Set the file type to TYPE."
