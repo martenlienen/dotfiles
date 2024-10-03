@@ -1,4 +1,4 @@
-;;; cqql.el --- My custom functions
+;;; mlutils.el --- My custom functions
 
 ;;; Commentary:
 
@@ -6,7 +6,7 @@
 
 (require 'cl-lib)
 
-(defun cqql-go-to-beginning-of-line-dwim ()
+(defun ml-go-to-beginning-of-line-dwim ()
   "Toggle point between beginning of line and first non-whitespace character."
   (interactive)
   (let ((prev-pos (point)))
@@ -14,7 +14,7 @@
     (when (= prev-pos (point))
       (move-beginning-of-line nil))))
 
-(defun cqql-move-text (lines)
+(defun ml-move-text (lines)
   "Move the current line or region LINES lines."
   (interactive "p")
   (let* ((region? (use-region-p))
@@ -44,17 +44,17 @@
         (set-mark (+ insert-start mark-offset))
         (setq deactivate-mark nil)))))
 
-(defun cqql-move-text-up (lines)
+(defun ml-move-text-up (lines)
   "Move the current line or region LINES lines up."
   (interactive "p")
-  (cqql-move-text (- lines)))
+  (ml-move-text (- lines)))
 
-(defun cqql-move-text-down (lines)
+(defun ml-move-text-down (lines)
   "Move the current line or region LINES lines down."
   (interactive "p")
-  (cqql-move-text lines))
+  (ml-move-text lines))
 
-(defun cqql-duplicate-text (times)
+(defun ml-duplicate-text (times)
   "Duplicate the current line or region TIMES times.
 
 If the region is active, it duplicates from the start of the
@@ -88,13 +88,13 @@ first line of the region to the end of the last."
       (set-mark (+ 1 mark? (* times (length text))))
       (setq deactivate-mark nil))))
 
-(defun cqql-open-line ()
+(defun ml-open-line ()
   "Create a new line below and put point into it."
   (interactive)
   (move-end-of-line nil)
   (newline-and-indent))
 
-(defun cqql-open-line-above ()
+(defun ml-open-line-above ()
   "Create a new line above point and move point into it."
   (interactive)
   (move-beginning-of-line nil)
@@ -102,7 +102,7 @@ first line of the region to the end of the last."
   (forward-line -1)
   (indent-according-to-mode))
 
-(defun cqql-kill-line ()
+(defun ml-kill-line ()
   "Kill the current line."
   (interactive)
   (let ((pos (point)))
@@ -112,5 +112,5 @@ first line of the region to the end of the last."
     (when (< pos (point))
       (goto-char pos))))
 
-(provide 'cqql)
-;;; cqql.el ends here
+(provide 'mlutils)
+;;; mlutils.el ends here

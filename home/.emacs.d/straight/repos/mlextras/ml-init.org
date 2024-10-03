@@ -180,24 +180,24 @@ Packages are configured with the ~use-package~ macro.
 
 * Utilities
 
-The ~cqql~ package (conspicuously named after myself) contains a loose collection of
+The ~ml~ package (conspicuously named after myself) contains a loose collection of
 utility functions and commands which is why it cannot be put easily into one of the
 existing sections.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package cqql
-    :straight (cqql :local-repo "mlextras" :type nil)
-    :bind (("C-a" . cqql-go-to-beginning-of-line-dwim)
-           ("M-D" . cqql-duplicate-text)
-           ("C-S-k" . cqql-kill-line)
-           ("C-o" . cqql-open-line)
-           ("C-S-o" . cqql-open-line-above)
-           ("C-S-p" . cqql-move-text-up)
-           ("C-S-n" . cqql-move-text-down))
+  (use-package mlutils
+    :straight (ml :local-repo "mlextras" :type nil)
+    :bind (("C-a" . ml-go-to-beginning-of-line-dwim)
+           ("M-D" . ml-duplicate-text)
+           ("C-S-k" . ml-kill-line)
+           ("C-o" . ml-open-line)
+           ("C-S-o" . ml-open-line-above)
+           ("C-S-p" . ml-move-text-up)
+           ("C-S-n" . ml-move-text-down))
     :config
     ;; For some reason, M-S-d sends C-M-_ ? in wezterm, so just add a duplicate binding
     (let ((keymap (make-sparse-keymap)))
-      (define-key keymap (kbd "?") #'cqql-duplicate-text)
+      (define-key keymap (kbd "?") #'ml-duplicate-text)
       (define-key global-map (kbd "C-M-_") keymap)))
 #+END_SRC
 
@@ -281,7 +281,7 @@ Configure org-mode early to ensure that no package loads the built-in version of
 before the install the upstream version.
 
 #+BEGIN_SRC emacs-lisp
-  (defun cqql-open-notes-file ()
+  (defun ml-open-notes-file ()
     "Open the default org file."
     (interactive)
     (find-file (concat org-directory
@@ -1588,7 +1588,7 @@ Put emacs into distraction-free writing mode on demand.
                                                   (tsc-node-end-position stmt))))
         (python-shell-send-string code))))
 
-  (defun cqql-python-shell-send-variable ()
+  (defun ml-python-shell-send-variable ()
     "Send the python expression at point."
     (interactive)
     (save-excursion
@@ -1602,10 +1602,10 @@ Put emacs into distraction-free writing mode on demand.
 
   (require 'cl-lib)
 
-  (defvar cqql-python-last-command nil
+  (defvar ml-python-last-command nil
     "Stores the last sent region for resending.")
 
-  (defun cqql-python-shell-send-region ()
+  (defun ml-python-shell-send-region ()
     "Send the current region to inferior python process stripping indentation."
     (interactive)
     (let* ((start (save-excursion
@@ -1640,23 +1640,23 @@ Put emacs into distraction-free writing mode on demand.
                             do (delete-char 1))
                    (forward-line 1)))
         (setq command (buffer-string)))
-      (setq cqql-python-last-command command)
+      (setq ml-python-last-command command)
       (python-shell-send-string command)))
 
-  (defun cqql-python-shell-resend-last-command ()
+  (defun ml-python-shell-resend-last-command ()
     "Resend the last command to the inferior python process."
     (interactive)
-    (when cqql-python-last-command
-      (python-shell-send-string cqql-python-last-command)))
+    (when ml-python-last-command
+      (python-shell-send-string ml-python-last-command)))
 
-  (defun cqql-python-shell-send-region-dwim ()
+  (defun ml-python-shell-send-region-dwim ()
     "Send active region or resend last region."
     (interactive)
     (if (use-region-p)
-        (cqql-python-shell-send-region)
-      (cqql-python-shell-resend-last-command)))
+        (ml-python-shell-send-region)
+      (ml-python-shell-resend-last-command)))
 
-  (defun cqql-imports-start ()
+  (defun ml-imports-start ()
     "Find the start position for the imports in the current buffer."
     (save-excursion
       (goto-char 0)
@@ -1672,22 +1672,22 @@ Put emacs into distraction-free writing mode on demand.
               (point))
           (point)))))
 
-  (defun cqql-python-import ()
+  (defun ml-python-import ()
     "Insert and edit a new `import' statement."
     (interactive)
     (save-window-excursion
       (save-excursion
-        (goto-char (cqql-imports-start))
+        (goto-char (ml-imports-start))
         (insert "import \n")
         (backward-char)
         (recursive-edit))))
 
-  (defun cqql-python-from-import ()
+  (defun ml-python-from-import ()
     "Insert and edit a new `from .. import' statement."
     (interactive)
     (save-window-excursion
       (save-excursion
-        (goto-char (cqql-imports-start))
+        (goto-char (ml-imports-start))
         (insert "fi \n")
         (backward-char 2)
         (yas-expand)
@@ -1707,11 +1707,11 @@ Put emacs into distraction-free writing mode on demand.
     :bind (:map python-ts-mode-map
                 ("C-c D" . #'realgud:pdb)
                 ("C-c C-l" . #'ml-python-shell-send-statement)
-                ("C-c C-r" . #'cqql-python-shell-send-region-dwim)
-                ("C-c C-v" . #'cqql-python-shell-send-variable)
+                ("C-c C-r" . #'ml-python-shell-send-region-dwim)
+                ("C-c C-v" . #'ml-python-shell-send-variable)
                 ("C-c t" . #'python-pytest-dispatch)
-                ("C-c i" . #'cqql-python-import)
-                ("C-c I" . #'cqql-python-from-import)
+                ("C-c i" . #'ml-python-import)
+                ("C-c I" . #'ml-python-from-import)
                 ("C-c <left>" . #'python-indent-shift-left)
                 ("C-c <right>" . #'python-indent-shift-right))
 
@@ -1756,7 +1756,7 @@ Put emacs into distraction-free writing mode on demand.
 ** Julia
 
 #+BEGIN_SRC emacs-lisp
-  (defun cqql-vterm-backward-kill-word ()
+  (defun ml-vterm-backward-kill-word ()
     "Kill previous word in vterm."
     (interactive)
     (vterm-send-key (kbd "C-w")))
@@ -1775,14 +1775,14 @@ Put emacs into distraction-free writing mode on demand.
     (vterm-color-cyan ((t . (:foreground "#88C0D0" :background "#E5E9F0"))))
     (vterm-color-white ((t . (:foreground "#E5E9F0" :background "#ECEFF4"))))
     :bind (:map vterm-mode-map
-                ("<C-backspace>" . cqql-vterm-backward-kill-word)
+                ("<C-backspace>" . ml-vterm-backward-kill-word)
                 ("M-i" . nil)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
   (use-package julia-mode :straight t)
 
-  (defun cqql-julia-repl-with-sysimage ()
+  (defun ml-julia-repl-with-sysimage ()
     "Start a julia REPL with a sysimage in the project root."
     (interactive)
     (let* ((project-root (locate-dominating-file (buffer-file-name) "Project.toml"))
@@ -1795,7 +1795,7 @@ Put emacs into distraction-free writing mode on demand.
     :straight t
     :hook ((julia-mode . julia-repl-mode))
     :bind (:map julia-repl-mode-map
-           ("C-c C-z" . cqql-julia-repl-with-sysimage))
+           ("C-c C-z" . ml-julia-repl-with-sysimage))
     :config
     (julia-repl-set-terminal-backend 'vterm)
 
@@ -1805,7 +1805,7 @@ Put emacs into distraction-free writing mode on demand.
 ** Emacs Lisp
 
 #+BEGIN_SRC emacs-lisp
-  (defun cqql-run-all-ert-tests ()
+  (defun ml-run-all-ert-tests ()
     "Run all ert tests defined."
     (interactive)
     (ert t))
@@ -1815,7 +1815,7 @@ Put emacs into distraction-free writing mode on demand.
   (use-package lisp-mode
     :config
     (bind-key "C-h C-f" 'find-function emacs-lisp-mode-map)
-    (bind-key "C-c e t" 'cqql-run-all-ert-tests emacs-lisp-mode-map)
+    (bind-key "C-c e t" 'ml-run-all-ert-tests emacs-lisp-mode-map)
     (bind-key "C-c e b" 'eval-buffer emacs-lisp-mode-map)
     (bind-key "C-c e m" 'macrostep-expand emacs-lisp-mode-map)
 
@@ -2060,11 +2060,11 @@ them to LaTeX!
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (defvar cqql-preview-scale 1.35)
+  (defvar ml-preview-scale 1.35)
 
-  (defun cqql-preview-scale-up ()
+  (defun ml-preview-scale-up ()
     "Scale up previews."
-    (* cqql-preview-scale (funcall (preview-scale-from-face))))
+    (* ml-preview-scale (funcall (preview-scale-from-face))))
 
   (use-package reftex
     :custom ((reftex-toc-follow-mode t)
@@ -2092,7 +2092,7 @@ them to LaTeX!
 
   (use-package preview
     :after latex
-    :custom ((preview-scale-function #'cqql-preview-scale-up)
+    :custom ((preview-scale-function #'ml-preview-scale-up)
              (preview-auto-cache-preamble t))
     :pretty-hydra
     ((:quit-key "g" :title "preview" :color blue)
@@ -2139,29 +2139,29 @@ them to LaTeX!
 ** reStructuredText
 
 #+BEGIN_SRC emacs-lisp
-  (defun cqql-length-of-line ()
+  (defun ml-length-of-line ()
     "Return length of the current line."
     (save-excursion
       (- (progn (end-of-line) (point))
          (progn (beginning-of-line) (point)))))
 
-  (defun cqql-underline ()
+  (defun ml-underline ()
     "Repeat the character at point until it stretches the length of
     the previous line."
     (interactive)
     (let* ((char (preceding-char))
            (prev-length (save-excursion
                           (forward-line -1)
-                          (cqql-length-of-line)))
+                          (ml-length-of-line)))
            (curr-length (save-excursion
-                          (cqql-length-of-line)))
+                          (ml-length-of-line)))
            (repeat-length (max 0 (- prev-length curr-length))))
       (insert (s-repeat repeat-length (char-to-string char)))))
 
   (use-package rst
     :straight t
     :config
-    (bind-key "<C-right>" #'cqql-underline rst-mode-map)
+    (bind-key "<C-right>" #'ml-underline rst-mode-map)
 
     (add-hook 'rst-mode-hook #'flycheck-mode))
 #+END_SRC
