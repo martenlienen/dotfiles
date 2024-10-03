@@ -1881,13 +1881,19 @@ Put emacs into distraction-free writing mode on demand.
 #+BEGIN_SRC emacs-lisp
   (use-package cc-mode
     :mode ("\\.h\\'" . c++-mode)
+    :init
+    (defun ml-c-append-semicolon ()
+      "Insert semicolon at the end of the line."
+      (interactive)
+      (save-excursion
+        (move-end-of-line nil)
+        (insert ";")))
+    :bind (:map c-mode-base-map
+                ("<C-return>" . #'ml-c-append-semicolon)
+                ("C-c C-c" . #'recompile)
+                ("C-c C-o" . #'ff-find-other-file)
+                ("C-c f" . #'clang-format-buffer))
     :config
-    (require 'cqql)
-    (bind-key "<C-return>" #'cqql-c-append-semicolon c-mode-base-map)
-    (bind-key "C-c C-c" #'recompile c-mode-base-map)
-    (bind-key "C-c C-o" #'ff-find-other-file c-mode-base-map)
-    (bind-key "C-c f" #'clang-format-buffer c-mode-base-map)
-
     (add-hook 'c++-mode-hook #'subword-mode)
     (add-hook 'c++-mode-hook #'eglot-ensure))
 #+END_SRC

@@ -112,12 +112,5 @@ first line of the region to the end of the last."
     (when (< pos (point))
       (goto-char pos))))
 
-(defun cqql-c-append-semicolon ()
-  "Insert semicolon at the end of the line."
-  (interactive)
-  (save-excursion
-    (move-end-of-line nil)
-    (insert ";")))
-
 (provide 'cqql)
 ;;; cqql.el ends here
