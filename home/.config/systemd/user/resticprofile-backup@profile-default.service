@@ -19,5 +19,5 @@ LogRateLimitIntervalSec=0
 # refuse to run borgmatic. So we just sleep a little.
 #
 # https://github.com/systemd/systemd/issues/14045
-ExecStartPre=/bin/sleep 5s
+ExecStartPre=/bin/sleep 20s
 ExecStart=systemd-inhibit --who="restic" --what="sleep:shutdown" --why="Prevent interrupting scheduled backup" %h/.local/restic/resticprofile_0.28.0_linux_amd64 --no-prio --no-ansi --config %h/.config/resticprofile/profiles.toml run-schedule backup@default
