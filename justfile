@@ -19,7 +19,7 @@ packages:
     # Applications
     firefox chromium thunderbird evince kitty
     # Terminal & command line tools
-    zsh tmux htop just tree rsync
+    zsh tmux htop just tree rsync jq
     # Network tools
     nmap tcpdump dnsutils nmon iftop
     networkmanager-openvpn
