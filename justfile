@@ -77,3 +77,7 @@ pipx:
 
 pipx-upgrade:
   pipx upgrade-all --include-injected
+
+upgrade: tools pipx-upgrade rust
+  antigen update
+  flatpak update
