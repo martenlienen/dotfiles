@@ -77,3 +77,7 @@ pipx:
 
 pipx-upgrade:
   pipx upgrade-all --include-injected
+
+upgrade: tools pipx-upgrade rust
+  flatpak update -y
+  zsh -ic "antigen update"
