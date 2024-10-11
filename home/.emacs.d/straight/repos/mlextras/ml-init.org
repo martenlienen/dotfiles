@@ -1998,7 +1998,8 @@ them to LaTeX!
        nil
        `((,(rx (seq
                 (group (seq "\\"
-                            (or (seq (any "vm") (any "a-z"))
+                            (or "vzero"
+                                (seq (any "vm") (any "a-z"))
                                 (seq "m" (any "A-Z"))
                                 (seq "v" (or "alpha" "beta" "gamma" "delta" "epsilon" "zeta"
                                              "eta" "theta" "iota" "kappa" "lambda" "mu" "nu"
@@ -2017,7 +2018,8 @@ them to LaTeX!
                   '(("\\R" . ?ℝ))
                   ;; Add symbols for the common vector and matrix notation from
                   ;; math_commands.tex
-                  '(("\\valpha" . ?α)
+                  '(("\\vzero" . ?0)
+                    ("\\valpha" . ?α)
                     ("\\vbeta" . ?β)
                     ("\\vgamma" . ?γ)
                     ("\\vdelta" . ?δ)
