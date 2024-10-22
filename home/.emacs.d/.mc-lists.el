@@ -12,7 +12,9 @@
         cqql-kill-line
         cqql-open-line
         cqql-open-line-above
+        cycle-spacing
         delete-horizontal-space
+        downcase-dwim
         electric-newline-and-maybe-indent
         hydra-multiple-cursors/mc/insert-letters-and-exit
         hydra-multiple-cursors/nil
@@ -34,6 +36,7 @@
         hydra-smartparens/sp-wrap-square
         indent-for-tab-command
         kill-region
+        ml-go-to-beginning-of-line-dwim
         org-beginning-of-line
         org-delete-char
         org-end-of-line
