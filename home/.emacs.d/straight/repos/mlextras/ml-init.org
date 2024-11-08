@@ -2179,7 +2179,8 @@ them to LaTeX!
 #+BEGIN_SRC emacs-lisp
   (use-package web-mode
     :straight t
-    :mode "\\.html\\.?"
+    :mode
+    ("\\.phtml\\'" "\\.php\\'" "\\.tpl\\'" "\\.[agj]sp\\'" "\\.as[cp]x\\'" "\\.erb\\'" "\\.mustache\\'" "\\.djhtml\\'" "\\.ejs\\'")
     :config
     ;; Disable inserting closing parens etc. because we have smartparens already
     (setq web-mode-enable-auto-pairing nil))
