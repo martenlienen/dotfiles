@@ -185,6 +185,12 @@ utility functions and commands which is why it cannot be put easily into one of 
 existing sections.
 
 #+BEGIN_SRC emacs-lisp
+  (defun ml-insert-random-seed ()
+    "Insert a random 32-bit integer at point (64-bit with prefix arg)."
+    (interactive)
+    (let ((seed (random (ash 1 (if current-prefix-arg 64 32)))))
+      (insert (format "%d" seed))))
+
   (use-package mlutils
     :straight (ml :local-repo "mlextras" :type nil)
     :bind (("C-a" . ml-go-to-beginning-of-line-dwim)
@@ -193,7 +199,8 @@ existing sections.
            ("C-o" . ml-open-line)
            ("C-S-o" . ml-open-line-above)
            ("C-S-p" . ml-move-text-up)
-           ("C-S-n" . ml-move-text-down))
+           ("C-S-n" . ml-move-text-down)
+           ("C-c 0" . ml-insert-random-seed))
     :config
     ;; For some reason, M-S-d sends C-M-_ ? in wezterm, so just add a duplicate binding
     (let ((keymap (make-sparse-keymap)))
