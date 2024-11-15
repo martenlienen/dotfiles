@@ -53,6 +53,8 @@ rustup:
   if ! command -v cargo 2>&1 > /dev/null; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   fi
+  rustup self update
+  rustup update
 
 rust: rustup
   cargo install exa hexyl fd-find bat ripgrep tokei gping viu
