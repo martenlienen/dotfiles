@@ -367,10 +367,6 @@ Give org a modern look.
     :config
     (solaire-global-mode t))
 
-  (use-package all-the-icons
-    :straight t
-    :if (display-graphic-p))
-
   (use-package solarized-theme
     :disabled
     :straight t
@@ -877,11 +873,20 @@ of functions.
     :bind (("<f8>" . ml-treemacs-dwim)
            ("S-<f8>" . treemacs)
            ("<mouse-1>" . treemacs-single-click-expand-action))
+    :custom ((treemacs-width 30)
+             (treemacs-indentation 1))
     :config
     ;; Hide gitignored files via the toggle call instead of customizing the variable because
     ;; we need the interactive behavior that happens in the toggle call to actually hide the
     ;; files.
     (treemacs-hide-gitignored-files-mode t))
+
+  (use-package treemacs-nerd-icons
+    :straight t
+    :defer t
+    :after treemacs
+    :init (require 'treemacs-nerd-icons)
+    :config (treemacs-load-theme "nerd-icons"))
 
   (use-package treemacs-projectile
     :straight t
