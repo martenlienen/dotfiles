@@ -1152,6 +1152,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
 #+BEGIN_SRC emacs-lisp
   (use-package ws-butler
     :straight (ws-butler :repo "hlissner/ws-butler" :host github)
+    :custom ((ws-butler-keep-whitespace-before-point nil))
     :config
     (add-to-list 'ws-butler-global-exempt-modes 'snippet-mode)
 
