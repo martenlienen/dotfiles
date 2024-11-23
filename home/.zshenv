@@ -22,7 +22,7 @@ export EDITOR="vim"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep"
 
 # Use ipdb as the default python debugger
-export PYTHONBREAKPOINT="pudb.set_trace"
+export PYTHONBREAKPOINT="ipdb.set_trace"
 
 # Enable swipe left/right gestures in firefox
 export MOZ_ENABLE_WAYLAND="1"
