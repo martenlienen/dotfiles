@@ -5,6 +5,7 @@ import shutil
 import subprocess
 import tempfile
 from argparse import ArgumentParser
+from datetime import datetime
 from pathlib import Path
 
 
@@ -44,14 +45,51 @@ def kwin_run_script(script: str):
         )
 
 
-def program_runs(program):
-    # We match against the process name, so that we don't match toggle_window itself.
-    # However, the process name is at most 16 null-terminated bytes [1], so we only
-    # search for the first 15 characters.
-    #
-    # [1] https://stackoverflow.com/questions/23534263/what-is-the-maximum-allowed-limit-on-the-length-of-a-process-name
-    pgrep = subprocess.run(["pgrep", program[:15]], stdout=subprocess.DEVNULL)
-    return pgrep.returncode == 0
+def window_exists(
+    window_name: str | None, window_class: str | None, window_caption: str | None
+):
+    script = """
+let window_name = WINDOW_NAME;
+let window_class = WINDOW_CLASS;
+let window_caption = new RegExp(WINDOW_CAPTION);
+let target_window = null;
+for (let window of workspace.stackingOrder) {
+    if (window.resourceName != window_name && window.resourceClass != window_class) {
+        continue;
+    }
+    if (!window_caption.test(window.caption)) {
+        continue;
+    }
+
+    target_window = window;
+    break;
+}
+
+if (target_window !== null) {
+    console.log("WINDOW_EXISTS")
+} else {
+    console.log("WINDOW_MISSING")
+}
+"""
+
+    if window_name is None:
+        script = script.replace("WINDOW_NAME", "null")
+    else:
+        script = script.replace("WINDOW_NAME", f'"{window_name}"')
+    if window_class is None:
+        script = script.replace("WINDOW_CLASS", "null")
+    else:
+        script = script.replace("WINDOW_CLASS", f'"{window_class}"')
+    if window_caption is None:
+        script = script.replace("WINDOW_CAPTION", "")
+    else:
+        script = script.replace("WINDOW_CAPTION", f'"{window_caption}"')
+
+    since = datetime.now()
+    kwin_run_script(script)
+    cmd = ["journalctl", "_COMM=kwin_wayland", "-o", "cat", "--since", str(since)]
+    script_out = subprocess.run(cmd, check=True, capture_output=True, text=True)
+    return "WINDOW_EXISTS" in script_out.stdout
 
 
 def start_program(program, args: list[str]):
@@ -59,7 +97,9 @@ def start_program(program, args: list[str]):
     subprocess.Popen([path] + args, start_new_session=True)
 
 
-def toggle_program(window_name: str | None, window_class: str | None):
+def toggle_program(
+    window_name: str | None, window_class: str | None, window_caption: str | None
+):
     toggle_script_template = """
 function rects_overlap(rect_a, rect_b) {
     return !(rect_a.x + rect_a.width <= rect_b.x ||
@@ -95,12 +135,18 @@ function window_is_covered(window, desktop) {
 
 let window_name = WINDOW_NAME;
 let window_class = WINDOW_CLASS;
+let window_caption = new RegExp(WINDOW_CAPTION);
 let target_window = null;
 for (let window of workspace.stackingOrder) {
-    if (window.resourceName == window_name || window.resourceClass == window_class) {
-        target_window = window;
-        break;
+    if (window.resourceName != window_name && window.resourceClass != window_class) {
+        continue;
     }
+    if (!window_caption.test(window.caption)) {
+        continue;
+    }
+
+    target_window = window;
+    break;
 }
 
 if (target_window !== null) {
@@ -132,6 +178,10 @@ if (target_window !== null) {
         toggle_script = toggle_script.replace("WINDOW_CLASS", "null")
     else:
         toggle_script = toggle_script.replace("WINDOW_CLASS", f'"{window_class}"')
+    if window_caption is None:
+        toggle_script = toggle_script.replace("WINDOW_CAPTION", "")
+    else:
+        toggle_script = toggle_script.replace("WINDOW_CAPTION", f'"{window_caption}"')
     kwin_run_script(toggle_script)
 
 
@@ -139,20 +189,24 @@ def main():
     parser = ArgumentParser(description="Start or toggle a program")
     parser.add_argument("--name", dest="window_name", help="WM_NAME of the window")
     parser.add_argument("--class", dest="window_class", help="WM_CLASS of the window")
+    parser.add_argument(
+        "--caption", dest="window_caption", help="Regexp matching the window title"
+    )
     parser.add_argument("program", nargs="+", help="Program and options")
     args = parser.parse_args()
 
     program, *program_args = args.program
     window_name = args.window_name
     window_class = args.window_class
+    window_caption = args.window_caption
 
     if window_name is None:
         window_name = program
     if window_class is None:
         window_class = program.title()
 
-    if program_runs(program):
-        toggle_program(window_name, window_class)
+    if window_exists(window_name, window_class, window_caption):
+        toggle_program(window_name, window_class, window_caption)
     else:
         start_program(program, program_args)
 

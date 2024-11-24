@@ -1,0 +1,5 @@
+#!/bin/bash
+
+vault_name=$1
+
+toggle_window.py --name "obsidian" --caption " - ${vault_name} - " xdg-open "obsidian://open?vault=${vault_name}"
