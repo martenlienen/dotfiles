@@ -18,6 +18,7 @@
   pretty = format:%C(yellow)%ar%C(reset) by %an <%C(italic)%ae%Creset> - %C(cyan italic)%h%n  %C(bold)%s
 [log]
   abbrevCommit = true
+  follow = true
 [credential]
   helper = store
 [rerere]
