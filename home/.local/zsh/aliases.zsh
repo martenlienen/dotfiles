@@ -54,4 +54,3 @@ alias lab="jupyter lab"
 alias jl="julia"
 
 alias icat="kitten icat"
-alias ssh="kitten ssh"
