@@ -1390,6 +1390,25 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
 ** ChatGPT
 
 #+BEGIN_SRC emacs-lisp
+  (defun ml-create-or-edit-directive ()
+    "Create or edit one of my LLM directives."
+    (interactive)
+    (let ((directory "~/.emacs.d/directives/")
+          (file (read-file-name "Choose LLM Directive file: " "~/.emacs.d/directives/")))
+      (unless (file-directory-p directory)
+        (make-directory directory t))
+      (find-file file)))
+
+  (defhydra gptel-hydra (:hint nil :exit t)
+    ("g" gptel "gptel")
+    ("m" gptel-menu "Menu")
+    ("s" gptel-send "Send")
+    ("a" gptel-add "Add context")
+    ("f" gptel-add-file "Add file")
+    ("r" gptel-rewrite "Rewrite/Refactor")
+    ("d" ml-create-or-edit-directive "Edit directives")
+    ("A" gptel-abort "Abort"))
+
   (use-package gptel
     :straight t
     :commands (gptel gptel-send)
@@ -1403,7 +1422,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
              (gptel-model "gpt-4o"))
     :hook ((gptel-mode . visual-line-mode)
            (org-mode . ml/maybe-enable-gptel-mode))
-    :bind (("C-c g" . gptel-send)
+    :bind (("C-c g" . gptel-hydra/body)
            :map gptel-mode-map
            ("C-c T" . gptel-set-topic))
     :config
