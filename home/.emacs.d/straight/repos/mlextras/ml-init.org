@@ -189,9 +189,9 @@ existing sections.
 
 #+BEGIN_SRC emacs-lisp
   (defun ml-insert-random-seed ()
-    "Insert a random 32-bit integer at point (64-bit with prefix arg)."
+    "Insert a random 64-bit integer at point (32-bit with prefix arg)."
     (interactive)
-    (let ((seed (random (ash 1 (if current-prefix-arg 64 32)))))
+    (let ((seed (random (ash 1 (if current-prefix-arg 32 64)))))
       (insert (format "%d" seed))))
 
   (use-package mlutils
