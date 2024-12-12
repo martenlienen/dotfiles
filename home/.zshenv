@@ -7,7 +7,7 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 . ~/.local/zsh/pyenv.zsh
 
 # Initialize mamba
-export MAMBA_ROOT="$HOME/.mambaforge"
+export MAMBA_ROOT="$HOME/.miniforge"
 if [[ -d $MAMBA_ROOT ]]; then
   . ~/.local/zsh/mamba.zsh
 fi
