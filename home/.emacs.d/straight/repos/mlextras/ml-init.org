@@ -389,6 +389,14 @@ Give org a modern look.
       (doom-modeline-set-modeline 'ml-line 'default))
     (add-hook 'doom-modeline-mode-hook 'ml-setup-doom-modeline))
 
+  (use-package circadian
+    :straight t
+    :ensure t
+    :config
+    (setq circadian-themes '(("8:00" . doom-tomorrow-day)
+                             ("20:00" . doom-tomorrow-night)))
+    (circadian-setup))
+
   (use-package nord-theme
     :straight t
     :if (not (display-graphic-p))
