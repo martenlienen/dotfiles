@@ -370,33 +370,6 @@ Give org a modern look.
     :config
     (solaire-global-mode t))
 
-  (use-package solarized-theme
-    :disabled
-    :straight t
-    :if (display-graphic-p)
-    :config
-    (load-theme 'solarized-light t)
-
-    ;; For some reason, the underline is not aligned with the bottom of the mode line.
-    ;; Instead, it crosses straight through the mode line, giving it an uneasy look, so we
-    ;; just distable it.
-    (set-face-underline 'mode-line nil)
-    (set-face-underline 'mode-line-inactive nil))
-
-  (use-package color-theme-sanityinc-tomorrow
-    :disabled
-    :straight t
-    :if (display-graphic-p)
-    :config
-    (load-theme 'sanityinc-tomorrow-day t))
-
-  (use-package stimmung-themes
-    :disabled
-    :straight t
-    :if (display-graphic-p)
-    :config
-    (load-theme 'stimmung-themes-light t))
-
   (use-package doom-themes
     :straight t
     :if (display-graphic-p)
