@@ -8,7 +8,7 @@
 
 (defcustom tmp-buffer-mode-alist
   '((?o . org-mode)
-    (?t . text-mode)
+    (?t . toml-ts-mode)
     (?m . markdown-mode)
     (?l . lisp-interaction-mode)
     (?p . python-mode)
