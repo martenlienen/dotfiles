@@ -169,200 +169,7 @@ Packages are configured with the ~use-package~ macro.
   (use-package pretty-hydra :straight t)
 #+END_SRC
 
-* Tramp
-
-#+BEGIN_SRC emacs-lisp
-  (use-package tramp
-    :init
-    (setq tramp-default-method "ssh"
-          tramp-terminal-type "tramp"
-          tramp-connection-timeout 10
-          tramp-ssh-controlmaster-options
-          "-o ControlMaster=auto -o ControlPath='~/.ssh/tramp.%%C' -o ControlPersist=5m"))
-#+END_SRC
-
-* Utilities
-
-The ~ml~ package (conspicuously named after myself) contains a loose collection of
-utility functions and commands which is why it cannot be put easily into one of the
-existing sections.
-
-#+BEGIN_SRC emacs-lisp
-  (defun ml-insert-random-seed ()
-    "Insert a random 64-bit integer at point (32-bit with prefix arg)."
-    (interactive)
-    (let ((seed (random (ash 1 (if current-prefix-arg 32 64)))))
-      (insert (format "%d" seed))))
-
-  (use-package mlutils
-    :straight (ml :local-repo "mlextras" :type nil)
-    :bind (("C-a" . ml-go-to-beginning-of-line-dwim)
-           ("M-D" . ml-duplicate-text)
-           ("C-S-k" . ml-kill-line)
-           ("C-o" . ml-open-line)
-           ("C-S-o" . ml-open-line-above)
-           ("C-S-p" . ml-move-text-up)
-           ("C-S-n" . ml-move-text-down)
-           ("C-c 0" . ml-insert-random-seed))
-    :config
-    ;; For some reason, M-S-d sends C-M-_ ? in wezterm, so just add a duplicate binding
-    (let ((keymap (make-sparse-keymap)))
-      (define-key keymap (kbd "?") #'ml-duplicate-text)
-      (define-key global-map (kbd "C-M-_") keymap)))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-  (use-package tmp-buffer
-    :straight (tmp-buffer :local-repo "mlextras" :type nil)
-    :bind ("C-c n" . tmp-buffer))
-
-  (use-package window-extras
-    :straight (window-extras :local-repo "mlextras" :type nil)
-    :bind (("C-c w t" . transpose-windows)
-           ("C-c w v" . toggle-window-split)))
-#+END_SRC
-
-** PATH
-
-Teach emacs my modified ~PATH~ so that it can, for example, find local python
-installations. We have to set ~exec-path-from-shell-arguments~ to ~""~ so that
-it uses an interactive shell instead of a login one which would not read my
-~.zshenv~ file, where ~PATH~ is initialized.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package exec-path-from-shell
-    :straight t
-    :custom (exec-path-from-shell-arguments "")
-    :config (exec-path-from-shell-initialize))
-#+END_SRC
-
-** Terminal UI
-
-~term-key~ configures emacs and the terminal to communicate arbitrary key combinations, such as C-S-o, via escape codes. Without this, it is not possible to send these key combinations to emacs running in a terminal.
-
-#+BEGIN_SRC emacs-lisp
-  (defun ml/want-key-p (key mods)
-    "Predicate for which keys should be encoded by term-keys."
-    (seq-let (shift control meta super hyper alt) mods
-      (or
-       ;; Any of the defaults
-       (and (term-keys/want-key-p-def key mods)
-            ;; Minus C-S- keybindings used by wezterm
-            (not (and shift control)))
-       (and
-        ;; We don't care about Super/Hyper/Alt modifiers
-        (not super) (not hyper) (not alt)
-
-        (or
-         ;; F keys + at least one modifier
-         (and (string-match-p "^F[0-9]\\{1,2\\}$" key) (or shift control meta))
-
-         ;; C-M- combinations with letters
-         (and control meta (string-match-p "^[a-zA-Z]$" key))
-
-         ;; Re-add some C-S- bindings I use in emacs
-         (and control shift (string-match-p "^[oknps]$" key))
-
-         ;; Add my text duplication binding
-         (and meta shift (string-equal key "d"))
-
-         ;; Space bar + at least one modifier
-         (and (string-equal key "space") (or control meta)))))))
-
-  (defun ml/generate-alacritty-term-keys ()
-    "Generate the alacritty term-keys configuration."
-    (interactive)
-    (require 'term-keys-alacritty)
-    (with-temp-buffer
-      (insert (term-keys/alacritty-config))
-      (write-region (point-min) (point-max) "~/.config/alacritty/term-keys.yml")))
-
-  (use-package term-keys
-    :disabled
-    :straight (term-keys :repo "CyberShadow/term-keys" :host github)
-    :if (not (display-graphic-p))
-    :custom ((term-keys/want-key-p-func #'ml/want-key-p))
-    :config (term-keys-mode t))
-#+END_SRC
-
-* org
-
-Configure org-mode early to ensure that no package loads the built-in version of org-mode
-before the install the upstream version.
-
-#+BEGIN_SRC emacs-lisp
-  (defun ml-open-notes-file ()
-    "Open the default org file."
-    (interactive)
-    (find-file (concat org-directory
-                       "/"
-                       org-default-notes-file)))
-
-  (use-package org
-    :straight t
-    :custom
-    (org-directory "~/notes")
-    (org-agenda-files (list org-directory))
-    (org-default-notes-file "notes.org")
-    (org-crypt-key nil)
-    (org-tags-exclude-from-inheritance (list "crypt"))
-    (org-M-RET-may-split-line nil)
-    (org-enforce-todo-dependencies t)
-    (org-enforce-todo-checkbox-dependencies t)
-    (org-agenda-start-on-weekday nil)
-    (org-reverse-note-order t)
-
-    ;; Edit settings
-    (org-catch-invisible-edits 'show-and-error)
-    (org-special-ctrl-a/e t)
-
-    ;; Org styling, hide markup etc.
-    (org-hide-emphasis-markers t)
-    (org-pretty-entities t)
-    (org-ellipsis "…")
-
-    (org-src-fontify-natively t)
-    (org-babel-load-languages '((emacs-lisp . t)
-                                (python . t)
-                                (shell . t)))
-    :custom-face
-    (org-document-title ((t . (:height 2.0))))
-    (org-level-1 ((t . (:height 1.75))))
-    (org-level-2 ((t . (:height 1.5))))
-    (org-level-3 ((t . (:height 1.33))))
-    (org-level-4 ((t . (:height 1.2))))
-    (org-level-5 ((t . (:height 1.1))))
-    (org-level-6 ((t . (:height 1.0))))
-    :hook (org-mode-hook . flycheck-mode)
-    :config
-    (require 'org-crypt)
-    (org-crypt-use-before-save-magic)
-
-    ;; Load language support
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     org-babel-load-languages)
-
-    (set-face-underline 'org-block-begin-line nil)
-    (set-face-attribute 'org-block-end-line nil :overline nil))
-
-  (use-package org-download
-    :straight t
-    :after org)
-#+END_SRC
-
-Give org a modern look.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package org-modern
-    :straight t
-    :config
-    (add-hook 'org-mode-hook 'org-modern-mode))
-#+END_SRC
-
-* UI
-
-** Theme
+* Theme
 
 #+BEGIN_SRC emacs-lisp
   (use-package solaire-mode
@@ -372,9 +179,7 @@ Give org a modern look.
 
   (use-package doom-themes
     :straight t
-    :if (display-graphic-p)
-    :config
-    (load-theme 'doom-tomorrow-day t))
+    :if (display-graphic-p))
 
   (use-package doom-modeline
     :straight t
@@ -881,6 +686,199 @@ of functions.
     :after (treemacs perspective)
     :config (treemacs-set-scope-type 'Perspectives))
 #+END_SRC
+
+* Tramp
+
+#+BEGIN_SRC emacs-lisp
+  (use-package tramp
+    :init
+    (setq tramp-default-method "ssh"
+          tramp-terminal-type "tramp"
+          tramp-connection-timeout 10
+          tramp-ssh-controlmaster-options
+          "-o ControlMaster=auto -o ControlPath='~/.ssh/tramp.%%C' -o ControlPersist=5m"))
+#+END_SRC
+
+* Utilities
+
+The ~ml~ package (conspicuously named after myself) contains a loose collection of
+utility functions and commands which is why it cannot be put easily into one of the
+existing sections.
+
+#+BEGIN_SRC emacs-lisp
+  (defun ml-insert-random-seed ()
+    "Insert a random 64-bit integer at point (32-bit with prefix arg)."
+    (interactive)
+    (let ((seed (random (ash 1 (if current-prefix-arg 32 64)))))
+      (insert (format "%d" seed))))
+
+  (use-package mlutils
+    :straight (ml :local-repo "mlextras" :type nil)
+    :bind (("C-a" . ml-go-to-beginning-of-line-dwim)
+           ("M-D" . ml-duplicate-text)
+           ("C-S-k" . ml-kill-line)
+           ("C-o" . ml-open-line)
+           ("C-S-o" . ml-open-line-above)
+           ("C-S-p" . ml-move-text-up)
+           ("C-S-n" . ml-move-text-down)
+           ("C-c 0" . ml-insert-random-seed))
+    :config
+    ;; For some reason, M-S-d sends C-M-_ ? in wezterm, so just add a duplicate binding
+    (let ((keymap (make-sparse-keymap)))
+      (define-key keymap (kbd "?") #'ml-duplicate-text)
+      (define-key global-map (kbd "C-M-_") keymap)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package tmp-buffer
+    :straight (tmp-buffer :local-repo "mlextras" :type nil)
+    :bind ("C-c n" . tmp-buffer))
+
+  (use-package window-extras
+    :straight (window-extras :local-repo "mlextras" :type nil)
+    :bind (("C-c w t" . transpose-windows)
+           ("C-c w v" . toggle-window-split)))
+#+END_SRC
+
+** PATH
+
+Teach emacs my modified ~PATH~ so that it can, for example, find local python
+installations. We have to set ~exec-path-from-shell-arguments~ to ~""~ so that
+it uses an interactive shell instead of a login one which would not read my
+~.zshenv~ file, where ~PATH~ is initialized.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package exec-path-from-shell
+    :straight t
+    :custom (exec-path-from-shell-arguments "")
+    :config (exec-path-from-shell-initialize))
+#+END_SRC
+
+** Terminal UI
+
+~term-key~ configures emacs and the terminal to communicate arbitrary key combinations, such as C-S-o, via escape codes. Without this, it is not possible to send these key combinations to emacs running in a terminal.
+
+#+BEGIN_SRC emacs-lisp
+  (defun ml/want-key-p (key mods)
+    "Predicate for which keys should be encoded by term-keys."
+    (seq-let (shift control meta super hyper alt) mods
+      (or
+       ;; Any of the defaults
+       (and (term-keys/want-key-p-def key mods)
+            ;; Minus C-S- keybindings used by wezterm
+            (not (and shift control)))
+       (and
+        ;; We don't care about Super/Hyper/Alt modifiers
+        (not super) (not hyper) (not alt)
+
+        (or
+         ;; F keys + at least one modifier
+         (and (string-match-p "^F[0-9]\\{1,2\\}$" key) (or shift control meta))
+
+         ;; C-M- combinations with letters
+         (and control meta (string-match-p "^[a-zA-Z]$" key))
+
+         ;; Re-add some C-S- bindings I use in emacs
+         (and control shift (string-match-p "^[oknps]$" key))
+
+         ;; Add my text duplication binding
+         (and meta shift (string-equal key "d"))
+
+         ;; Space bar + at least one modifier
+         (and (string-equal key "space") (or control meta)))))))
+
+  (defun ml/generate-alacritty-term-keys ()
+    "Generate the alacritty term-keys configuration."
+    (interactive)
+    (require 'term-keys-alacritty)
+    (with-temp-buffer
+      (insert (term-keys/alacritty-config))
+      (write-region (point-min) (point-max) "~/.config/alacritty/term-keys.yml")))
+
+  (use-package term-keys
+    :disabled
+    :straight (term-keys :repo "CyberShadow/term-keys" :host github)
+    :if (not (display-graphic-p))
+    :custom ((term-keys/want-key-p-func #'ml/want-key-p))
+    :config (term-keys-mode t))
+#+END_SRC
+
+* org
+
+Configure org-mode early to ensure that no package loads the built-in version of org-mode
+before the install the upstream version.
+
+#+BEGIN_SRC emacs-lisp
+  (defun ml-open-notes-file ()
+    "Open the default org file."
+    (interactive)
+    (find-file (concat org-directory
+                       "/"
+                       org-default-notes-file)))
+
+  (use-package org
+    :straight t
+    :custom
+    (org-directory "~/notes")
+    (org-agenda-files (list org-directory))
+    (org-default-notes-file "notes.org")
+    (org-crypt-key nil)
+    (org-tags-exclude-from-inheritance (list "crypt"))
+    (org-M-RET-may-split-line nil)
+    (org-enforce-todo-dependencies t)
+    (org-enforce-todo-checkbox-dependencies t)
+    (org-agenda-start-on-weekday nil)
+    (org-reverse-note-order t)
+
+    ;; Edit settings
+    (org-catch-invisible-edits 'show-and-error)
+    (org-special-ctrl-a/e t)
+
+    ;; Org styling, hide markup etc.
+    (org-hide-emphasis-markers t)
+    (org-pretty-entities t)
+    (org-ellipsis "…")
+
+    (org-src-fontify-natively t)
+    (org-babel-load-languages '((emacs-lisp . t)
+                                (python . t)
+                                (shell . t)))
+    :custom-face
+    (org-document-title ((t . (:height 2.0))))
+    (org-level-1 ((t . (:height 1.75))))
+    (org-level-2 ((t . (:height 1.5))))
+    (org-level-3 ((t . (:height 1.33))))
+    (org-level-4 ((t . (:height 1.2))))
+    (org-level-5 ((t . (:height 1.1))))
+    (org-level-6 ((t . (:height 1.0))))
+    :hook (org-mode-hook . flycheck-mode)
+    :config
+    (require 'org-crypt)
+    (org-crypt-use-before-save-magic)
+
+    ;; Load language support
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     org-babel-load-languages)
+
+    (set-face-underline 'org-block-begin-line nil)
+    (set-face-attribute 'org-block-end-line nil :overline nil))
+
+  (use-package org-download
+    :straight t
+    :after org)
+#+END_SRC
+
+Give org a modern look.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-modern
+    :straight t
+    :config
+    (add-hook 'org-mode-hook 'org-modern-mode))
+#+END_SRC
+
+* UI
 
 * Editing
 
