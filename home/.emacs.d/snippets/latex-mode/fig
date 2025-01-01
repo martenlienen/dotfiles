@@ -4,7 +4,6 @@
 # --
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{$1}
-  \caption{$2}${3:
-  \label{fig:$4}}
+  \includegraphics{$1}
+  \caption{$2}\label{fig:$3}
 \end{figure}

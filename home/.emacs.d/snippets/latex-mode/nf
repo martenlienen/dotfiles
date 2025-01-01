@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Nice Fraction
+# key: nf
+# --
+\nicefrac{$1}{$2}$0
