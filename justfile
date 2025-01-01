@@ -12,6 +12,8 @@ dotfiles:
 packages:
   #!/bin/bash
   packages=(
+    # System
+    earlyoom
     # Tuxedo hardware control
     tuxedo-control-center-bin
     # Snapshots
@@ -36,6 +38,9 @@ packages:
     base-devel openssl zlib xz tk
   )
   yay -S --needed ${packages[@]}
+  if ! systemctl is-enabled earlyoom.service > /dev/null; then
+    sudo systemctl enable earlyoom.service
+  fi
 
 user-services:
   systemctl --user enable resticprofile-backup@profile-default.timer
