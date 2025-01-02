@@ -1,16 +1,9 @@
-# tags files
-tags
-
 # Ignore files
 .agignore
 
-# Emacs backups
+# Emacs
 .#*
-
-# Emacs local settings
 .dir-locals.el
-
-# Emacs project markers
 .projectile
 
 # Microsoft Office backups
@@ -27,15 +20,3 @@ Thumbs.db*
 
 # rope
 .ropeproject
-
-# IntelliJ files
-*.iml
-.idea
-local.properties
-
-# cquery
-compile_commands.json
-.cquery_cached_index
-
-# ccls
-.ccls-cache
