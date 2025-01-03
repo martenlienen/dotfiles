@@ -6,7 +6,7 @@ default: dotfiles tools
 
 dotfiles:
   rsync --keep-dirlinks --archive home/ "$HOME"
-  fc-cache
+  if hash fc-cache 2> /dev/null; then fc-cache; fi
   pkill -SIGUSR1 kitty || true
 
 packages:
