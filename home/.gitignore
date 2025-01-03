@@ -12,11 +12,13 @@
 # Windows files
 Thumbs.db*
 
-# Python virtualenv settings
-.python-version
+# direnv
+.envrc
 
-# ipython checkpoints
+# Python
+.python-version
 .ipynb_checkpoints
+.pixi
 
 # rope
 .ropeproject

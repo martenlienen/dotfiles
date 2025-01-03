@@ -21,7 +21,7 @@ packages:
     # Applications
     firefox chromium thunderbird evince kitty
     # Terminal & command line tools
-    zsh tmux htop just tree rsync jq
+    zsh tmux htop just tree rsync jq pixi
     # Network tools
     nmap tcpdump dnsutils nmon iftop
     networkmanager-openvpn
@@ -31,16 +31,18 @@ packages:
     git vim emacs-wayland ttf-fira-code npm
     # Latex
     texlive
+    # latexindent
     perl-yaml-tiny perl-file-homedir
     # Application containers
     flatpak
-    # pyenv dependencies to compile python
-    base-devel openssl zlib xz tk
+    # makepkg in pacman
+    base-devel
   )
   yay -S --needed ${packages[@]}
   if ! systemctl is-enabled earlyoom.service > /dev/null; then
     sudo systemctl enable earlyoom.service
   fi
+  pixi global install direnv ruff yt-dlp pipx
 
 user-services:
   systemctl --user enable resticprofile-backup@profile-default.timer
@@ -74,17 +76,14 @@ flatpak:
   flatpak install -y flathub org.zotero.Zotero
 
 tools:
-  ./git_clone_or_update.sh "$HOME/.pyenv" "https://github.com/yyuu/pyenv.git"
-  ./git_clone_or_update.sh "$HOME/.pyenv/plugins/pyenv-virtualenv" "https://github.com/yyuu/pyenv-virtualenv.git"
   ./git_clone_or_update.sh "$HOME/.antigen" "https://github.com/zsh-users/antigen.git"
 
 pipx:
-  pipx install ruff asciinema yt-dlp python-lsp-server
+  pipx install python-lsp-server
   pipx inject python-lsp-server pylsp-rope python-lsp-ruff
 
-pipx-upgrade:
+upgrade: tools rust
   pipx upgrade-all --include-injected
-
-upgrade: tools pipx-upgrade rust
+  pixi global update
   flatpak update -y
   zsh -ic "antigen update"

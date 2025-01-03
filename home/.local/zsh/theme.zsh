@@ -81,14 +81,6 @@ function get_prompt {
     git_info=" <$(git_prompt_info)>"
   fi
 
-  local pyenv_info=""
-  if whence pyenv > /dev/null; then
-    local pyenv_version="$(pyenv version-name)"
-    if [[ "${pyenv_version}" != "$(pyenv global)" ]]; then
-      pyenv_info=" %{$blue%}🐍%{$reset_color%} ${pyenv_version}"
-    fi
-  fi
-
   local conda_info=""
   if [[ -n $CONDA_DEFAULT_ENV ]]; then
     conda_info=" %{$green%}🐍%{$reset_color%} ${CONDA_DEFAULT_ENV}"
@@ -122,7 +114,7 @@ function get_prompt {
 %{$white_bold%}@\
 %{$white_no_bold%}$HOST: \
 %{$yellow_bold%}$directory%{$reset_color%}\
-$git_info$pyenv_info$conda_info$tmux_info %{$cyan%}($timestamp)%{$reset_color%}"
+$git_info$conda_info$tmux_info %{$cyan%}($timestamp)%{$reset_color%}"
 
   local prompt_char="%{$white_bold%}$prompt_symbol"
   if [[ $last_cmd_status -ne 0 ]]; then

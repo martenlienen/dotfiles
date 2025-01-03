@@ -1,15 +1,25 @@
 # Initialize rustup
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# Initialize pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-. ~/.local/zsh/pyenv.zsh
+# Initialize pixi
+export PATH="$HOME/.pixi/bin:$PATH"
 
-# Initialize mamba
-export MAMBA_ROOT="$HOME/.miniforge"
-if [[ -d $MAMBA_ROOT ]]; then
-  . ~/.local/zsh/mamba.zsh
+# Initialize direnv
+if hash direnv 2> /dev/null; then
+  # Cached output of `direnv hook zsh`
+  _direnv_hook() {
+    trap -- '' SIGINT
+    eval "$(direnv export zsh)"
+    trap - SIGINT
+  }
+  typeset -ag precmd_functions
+  if (( ! ${precmd_functions[(I)_direnv_hook]} )); then
+    precmd_functions=(_direnv_hook $precmd_functions)
+  fi
+  typeset -ag chpwd_functions
+  if (( ! ${chpwd_functions[(I)_direnv_hook]} )); then
+    chpwd_functions=(_direnv_hook $chpwd_functions)
+  fi
 fi
 
 # Make my utilities available on PATH
