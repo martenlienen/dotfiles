@@ -817,18 +817,9 @@ Configure org-mode early to ensure that no package loads the built-in version of
 before the install the upstream version.
 
 #+BEGIN_SRC emacs-lisp
-  (defun ml-open-notes-file ()
-    "Open the default org file."
-    (interactive)
-    (find-file (concat org-directory
-                       "/"
-                       org-default-notes-file)))
-
   (use-package org
     :straight t
     :custom
-    (org-directory "~/notes")
-    (org-agenda-files (list org-directory))
     (org-default-notes-file "notes.org")
     (org-crypt-key nil)
     (org-tags-exclude-from-inheritance (list "crypt"))
@@ -867,10 +858,7 @@ before the install the upstream version.
     ;; Load language support
     (org-babel-do-load-languages
      'org-babel-load-languages
-     org-babel-load-languages)
-
-    (set-face-underline 'org-block-begin-line nil)
-    (set-face-attribute 'org-block-end-line nil :overline nil))
+     org-babel-load-languages))
 
   (use-package org-download
     :straight t
