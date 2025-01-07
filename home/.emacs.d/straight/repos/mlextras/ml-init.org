@@ -135,6 +135,7 @@ My emacs config is a package so that straight precompiles it.
         '((display-buffer-reuse-window
            display-buffer-same-window)))
 
+  ;; Got this on codingfont.com as my favorite coding font via an anonymous 1v1 tournament
   (set-face-attribute
    'default nil :font (font-spec :family "Fira Code" :size 12.0))
 
