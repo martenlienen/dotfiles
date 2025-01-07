@@ -833,8 +833,7 @@ before the install the upstream version.
     (org-catch-invisible-edits 'show-and-error)
     (org-special-ctrl-a/e t)
 
-    ;; Org styling, hide markup etc.
-    (org-hide-emphasis-markers t)
+    ;; Org styling
     (org-pretty-entities t)
     (org-ellipsis "…")
 
