@@ -44,7 +44,7 @@ packages:
   if ! systemctl is-enabled earlyoom.service > /dev/null; then
     sudo systemctl enable earlyoom.service
   fi
-  pixi global install direnv ruff yt-dlp pipx exa fd-find bat ripgrep tokei viu hexyl
+  pixi global install direnv ruff yt-dlp pipx exa fd-find bat ripgrep tokei viu hexyl watchexec
 
 user-services:
   systemctl --user enable resticprofile-backup@profile-default.timer
