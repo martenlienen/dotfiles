@@ -47,6 +47,7 @@ alias px="pixi"
 alias pxg="pixi global"
 alias pxi="pixi install"
 alias pxa="pixi add"
+alias pxl="pixi list"
 
 alias py="python"
 alias ipy="ipython"

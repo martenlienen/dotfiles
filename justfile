@@ -38,11 +38,13 @@ packages:
     # makepkg in pacman
     base-devel
   )
-  yay -S --needed ${packages[@]}
+  if hash yay 2> /dev/null; then
+    yay -S --needed ${packages[@]}
+  fi
   if ! systemctl is-enabled earlyoom.service > /dev/null; then
     sudo systemctl enable earlyoom.service
   fi
-  pixi global install direnv ruff yt-dlp pipx
+  pixi global install direnv ruff yt-dlp pipx exa fd-find bat ripgrep tokei viu hexyl
 
 user-services:
   systemctl --user enable resticprofile-backup@profile-default.timer
@@ -64,7 +66,7 @@ rustup:
   rustup update
 
 rust: rustup
-  cargo install exa hexyl fd-find bat ripgrep tokei gping viu
+  cargo install gping
 
 flatpak:
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
