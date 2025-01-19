@@ -1821,29 +1821,21 @@ Put emacs into distraction-free writing mode on demand.
 ** Rust
 
 #+BEGIN_SRC emacs-lisp
-  (use-package racer :straight t)
-
   (use-package cargo :straight t)
 
   (use-package rust-mode
     :straight t
-    :config
-    (add-hook 'rust-mode-hook #'flycheck-mode)
-    (add-hook 'rust-mode-hook #'racer-mode)
-    (add-hook 'rust-mode-hook #'cargo-minor-mode))
-
-  (use-package racer
-    :straight t
-    :config
-    (add-hook 'racer-mode-hook #'eldoc-mode))
-
-  (use-package  flycheck-rust :straight t)
+    :hook
+    (rust-mode . cargo-minor-mode)
+    (rust-mode . lsp)
+    (rust-mode . flycheck-mode))
 
   (use-package flycheck
+    :straight t)
+
+  (use-package  flycheck-rust
     :straight t
-    :after flycheck-rust
-    :config
-    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+    :hook (flycheck-mode . flycheck-rust-setup))
 #+END_SRC
 
 ** lua
