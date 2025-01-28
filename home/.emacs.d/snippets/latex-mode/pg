@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Paragraph
+# key: pg
+# condition: (isnip-beginning-of-line-p)
+# --
+\paragraph{$1}$0
