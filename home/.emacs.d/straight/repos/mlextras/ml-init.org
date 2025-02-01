@@ -761,6 +761,9 @@ Load direnv environment for each buffer.
   (use-package envrc
     :straight t
     :hook (after-init . envrc-global-mode))
+
+  (use-package inheritenv
+    :straight t)
 #+END_SRC
 
 ** Terminal UI
