@@ -31,6 +31,8 @@ packages:
     git vim emacs-wayland ttf-fira-code npm
     # Latex
     texlive
+    # Spell check
+    aspell-en
     # latexindent
     perl-yaml-tiny perl-file-homedir
     # Application containers
