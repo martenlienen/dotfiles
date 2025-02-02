@@ -29,8 +29,6 @@
     "custom/paddc",
     "battery",
     "custom/paddc",
-    "custom/notification",
-    "custom/paddc",
     "clock#date",
     "custom/paddc",
     "clock#time",
@@ -167,28 +165,6 @@
   "sway/language": {
     "format": "{}",
     "format-en": "US",
-  },
-
-  "custom/notification": {
-    "tooltip": false,
-    "rotate": 0,
-    "format": "{icon}",
-    "format-icons" : {
-      "notification": "󱅫 ",
-      "none": " ",
-      "dnd-notification": "󰂛 ",
-      "dnd-none": "󰂛 ",
-      "inhibited-notification": " ",
-      "inhibited-none": " ",
-      "dnd-inhibited-notification": "󰂛 ",
-      "dnd-inhibited-none": "󰂛 ",
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click-right": "swaync-client -d -sw",
-    "on-click": "swaync-client -t -sw",
-    "escape": true
   },
 
   "custom/player": {
