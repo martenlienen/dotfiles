@@ -33,6 +33,8 @@ packages:
     grim slurp satty wl-clipboard
     # Backups
     restic resticprofile
+    # Power management
+    upower poweralertd
     # Tuxedo hardware control
     #tuxedo-control-center-bin
     # Snapshots

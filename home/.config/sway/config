@@ -241,6 +241,8 @@ exec nm-applet
 exec fnott
 # Password management
 exec keepassxc
+# Power level notifications
+exec poweralertd
 
 # Include default extras that, for example, set environment variables via systemd
 include /etc/sway/config.d/*
