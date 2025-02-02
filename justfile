@@ -35,6 +35,8 @@ packages:
     restic resticprofile
     # Power management
     upower poweralertd
+    # Redshift
+    wlsunset
     # Tuxedo hardware control
     #tuxedo-control-center-bin
     # Snapshots

@@ -243,6 +243,8 @@ exec fnott
 exec keepassxc
 # Power level notifications
 exec poweralertd
+# Redshift
+exec wlsunset -l 48.1 -L 11.5
 
 # Include default extras that, for example, set environment variables via systemd
 include /etc/sway/config.d/*
