@@ -36,19 +36,6 @@ input "type:touchpad" {
   middle_emulation enabled
 }
 
-######################
-# Idle configuration #
-######################
-
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
-         timeout 600 'swaymsg "output * power off"' \
-         resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c 000000'
-
 ##################
 # Borders & Gaps #
 ##################
@@ -111,7 +98,7 @@ for_window [title="i3-calculator"] floating enable
 bindsym $mod+Comma input "type:keyboard" xkb_switch_layout next
 
 # F row
-bindsym $mod+F12 exec swaylock
+bindsym $mod+F12 exec loginctl lock-session
 bindsym $mod+Shift+F12 exec wlogout
 
 # Screenshots (without and with region selection)
@@ -238,7 +225,11 @@ bar {
 # Other programs #
 ##################
 
+# Screen locking
+exec swayidle -w
+# NetworkManager
 exec nm-applet
+# Notifications
 exec fnott
 
 # Include default extras that, for example, set environment variables via systemd
