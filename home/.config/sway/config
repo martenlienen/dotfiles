@@ -239,6 +239,8 @@ exec swayidle -w
 exec nm-applet
 # Notifications
 exec fnott
+# Password management
+exec keepassxc
 
 # Include default extras that, for example, set environment variables via systemd
 include /etc/sway/config.d/*

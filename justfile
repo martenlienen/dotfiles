@@ -17,7 +17,7 @@ packages:
     # Display management
     greetd greetd-tuigreet
     # Compositor
-    sway swayidle swaylock swaybg
+    sway swayidle swaylock swaybg xwayland
     waybar otf-font-awesome ttf-jetbrains-mono-nerd
     # Audio
     pipewire-audio pipewire-pulse pipewire-alsa wireplumber playerctl
