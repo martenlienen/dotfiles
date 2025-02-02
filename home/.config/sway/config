@@ -110,9 +110,8 @@ mode $mode_session {
     bindsym Ctrl+g mode "default"
 }
 
-# Screenshots (without and with region selection)
-bindsym $mod+Print exec spectacle
-bindsym $mod+Shift+Print exec spectacle --region
+# Screenshots
+bindsym $mod+Print exec screenshot
 
 # Start a terminal
 bindsym $mod+Return exec kitty

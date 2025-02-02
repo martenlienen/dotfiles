@@ -29,6 +29,8 @@ packages:
     bluetui
     # Notifications
     fnott
+    # Screenshots
+    grim slurp satty wl-clipboard
     # Tuxedo hardware control
     #tuxedo-control-center-bin
     # Snapshots
