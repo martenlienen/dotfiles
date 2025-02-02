@@ -10,7 +10,7 @@
   "margin-left" :3,
 
   "modules-left": [
-    "custom/rofi",
+    "custom/fuzzel",
     "sway/workspaces",
     "custom/paddc",
     "sway/window",
@@ -42,9 +42,9 @@
     "custom/paddc",
   ],
 
-  "custom/rofi": {
-		"format": "<span color='#fbf1c7' >󰮯</span>",
-		"on-click": "rofi -show drun",
+  "custom/fuzzel": {
+		"format": "<span color='#fbf1c7'>󰮯</span>",
+		"on-click": "fuzzel",
     "on-click-right": "wlogout",
     "escape" : true,
     "tooltip" : false
@@ -53,9 +53,7 @@
   // Modules configuration
   "sway/workspaces": {
     "disable-scroll": true,
-    "active-only": false,
     "all-outputs": true,
-    "warp-on-scroll": false,
     "format": "{icon}",
     "format-icons": {
       "1": "<span color='#cc241d'>󰊠</span>",
@@ -67,13 +65,10 @@
       "7": "<span color='#fe8019'>󰊠</span>",
       "default": "<span color='#cc241d'>󰊠</span>",
     },
-    "persistent-workspaces": {
-        "*": 5
-    }
   },
 
   "sway/window": {
-    "format": "<span color='#a89884' >$</span> {app_id}: {title}",
+    "format": "<span color='#a89884'>$</span> {app_id}: {title}",
     "max-length": 35,
     "rewrite": {
       "": "<span foreground= '#458588'></span> sway",

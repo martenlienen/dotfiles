@@ -36,16 +36,14 @@ input "type:touchpad" {
 # Idle configuration #
 ######################
 
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * power off"' \
+         resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -c 000000'
 
 ##################
 # Borders & Gaps #
@@ -106,11 +104,8 @@ bindsym XF86Calculator exec emacs -q -T i3-calculator --funcall=full-calc
 for_window [title="i3-calculator"] floating enable
 
 # F row
-# The parameter values are defined here [1]. 1 2 -1 means pre-select shutdown and wait for
-# confirmation.
-#
-# [1] https://github.com/KDE/plasma-workspace/blob/c97dddf20df5702eb429b37a8c10b2c2d8199d4e/libkworkspace/kworkspace.h
-bindsym $mod+F12 exec qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout 1 2 -1
+bindsym $mod+F12 exec swaylock
+bindsym $mod+Shift+F12 exec wlogout
 
 # Screenshots (without and with region selection)
 bindsym $mod+Print exec spectacle
@@ -229,7 +224,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 bar {
   swaybar_command waybar
-  mode dock
+  mode hide
 }
 
 ##################
