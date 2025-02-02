@@ -28,7 +28,7 @@ packages:
     # BlueTooth
     bluetui
     # Notifications
-    fnott
+    dunst libnotify
     # Screenshots
     grim slurp satty wl-clipboard
     # Backups

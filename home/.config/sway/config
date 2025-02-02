@@ -238,7 +238,7 @@ exec swayidle -w
 # NetworkManager
 exec nm-applet
 # Notifications
-exec fnott
+exec dunst
 # Password management
 exec keepassxc
 # Power level notifications
