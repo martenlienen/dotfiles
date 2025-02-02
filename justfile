@@ -25,6 +25,8 @@ packages:
     brightnessctl
     # Applets
     network-manager-applet
+    # Notifications
+    fnott
     # Tuxedo hardware control
     #tuxedo-control-center-bin
     # Snapshots

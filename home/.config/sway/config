@@ -232,6 +232,7 @@ bar {
 ##################
 
 exec nm-applet
+exec fnott
 
 # Include default extras that, for example, set environment variables via systemd
 include /etc/sway/config.d/*
