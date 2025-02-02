@@ -31,6 +31,8 @@ packages:
     fnott
     # Screenshots
     grim slurp satty wl-clipboard
+    # Backups
+    restic resticprofile
     # Tuxedo hardware control
     #tuxedo-control-center-bin
     # Snapshots
