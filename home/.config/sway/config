@@ -23,6 +23,10 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # Inputs #
 ##########
 
+input "type:keyboard" {
+  xkb_layout us,de
+}
+
 input "type:touchpad" {
   drag enabled
   dwt enabled
@@ -103,6 +107,9 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86Calculator exec emacs -q -T i3-calculator --funcall=full-calc
 for_window [title="i3-calculator"] floating enable
 
+# Keyboard layout
+bindsym $mod+Comma input "type:keyboard" xkb_switch_layout next
+
 # F row
 bindsym $mod+F12 exec swaylock
 bindsym $mod+Shift+F12 exec wlogout
@@ -132,7 +139,7 @@ bindsym $mod+v split v
 # Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (tabbed, toggle split)
+# Change container layout (tabbed, toggle split)
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
