@@ -1,2 +1,2 @@
 #!/bin/sh
-flatpak run md.obsidian.Obsidian
+gio launch /var/lib/flatpak/exports/share/applications/md.obsidian.Obsidian.desktop

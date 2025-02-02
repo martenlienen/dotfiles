@@ -1,95 +1,89 @@
 #!/usr/bin/env python3
 
-import random
+import json
 import shutil
 import subprocess
-import tempfile
 from argparse import ArgumentParser
-from datetime import datetime
-from pathlib import Path
+
+I3MSG_PATH = "/usr/bin/swaymsg"
 
 
-def dbus_send(*args):
-    return subprocess.run(
-        [
-            "dbus-send",
-            "--session",
-            "--dest=org.kde.KWin",
-            "--print-reply=literal",
-            *args,
-        ],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
+def i3_layout_tree():
+    tree_cmd = [I3MSG_PATH, "-t", "get_tree"]
+    tree_result = subprocess.run(tree_cmd, stdout=subprocess.PIPE)
 
-
-def kwin_run_script(script: str):
-    script_name = "toggle_window.py-" + str(random.getrandbits(10))
-    with tempfile.TemporaryDirectory() as d:
-        script_path = Path(d) / "script.js"
-        script_path.write_text(script)
-
-        # install the script
-        install_proc = dbus_send(
-            "/Scripting",
-            "org.kde.kwin.Scripting.loadScript",
-            f"string:{script_path}",
-            f"string:{script_name}",
-        )
-        script_id = int(install_proc.stdout.strip().split(" ")[1])
-        dbus_send(f"/Scripting/Script{script_id}", "org.kde.kwin.Script.run")
-        dbus_send(f"/Scripting/Script{script_id}", "org.kde.kwin.Script.stop")
-        dbus_send(
-            "/Scripting", "org.kde.kwin.Scripting.unloadScript", f"string:{script_name}"
-        )
-
-
-def window_exists(
-    window_name: str | None, window_class: str | None, window_caption: str | None
-):
-    script = """
-let window_name = WINDOW_NAME;
-let window_class = WINDOW_CLASS;
-let window_caption = new RegExp(WINDOW_CAPTION);
-let target_window = null;
-for (let window of workspace.stackingOrder) {
-    if (window.resourceName != window_name && window.resourceClass != window_class) {
-        continue;
-    }
-    if (!window_caption.test(window.caption)) {
-        continue;
-    }
-
-    target_window = window;
-    break;
-}
-
-if (target_window !== null) {
-    console.log("WINDOW_EXISTS")
-} else {
-    console.log("WINDOW_MISSING")
-}
-"""
-
-    if window_name is None:
-        script = script.replace("WINDOW_NAME", "null")
+    if tree_result.returncode != 0:
+        raise Exception("Could not get i3's layout tree")
     else:
-        script = script.replace("WINDOW_NAME", f'"{window_name}"')
-    if window_class is None:
-        script = script.replace("WINDOW_CLASS", "null")
-    else:
-        script = script.replace("WINDOW_CLASS", f'"{window_class}"')
-    if window_caption is None:
-        script = script.replace("WINDOW_CAPTION", "")
-    else:
-        script = script.replace("WINDOW_CAPTION", f'"{window_caption}"')
+        return json.loads(tree_result.stdout)
 
-    since = datetime.now()
-    kwin_run_script(script)
-    cmd = ["journalctl", "_COMM=kwin_wayland", "-o", "cat", "--since", str(since)]
-    script_out = subprocess.run(cmd, check=True, capture_output=True, text=True)
-    return "WINDOW_EXISTS" in script_out.stdout
+
+class WorkspaceException(Exception):
+    """Yes, this is abused for a non-local return."""
+
+    def __init__(self, workspace, node):
+        self.workspace = workspace
+        self.node = node
+
+
+def find_program_workspace_and_node(window_class):
+    def search(node, workspace=None):
+        if node.get("type") == "workspace":
+            workspace = node
+
+        class_name = node.get("window_properties", {}).get("class")
+        if class_name is not None and class_name.lower() == window_class.lower():
+            raise WorkspaceException(workspace, node)
+        else:
+            if "nodes" in node:
+                for child in node["nodes"]:
+                    search(child, workspace)
+            if "floating_nodes" in node:
+                for child in node["floating_nodes"]:
+                    search(child, workspace)
+
+    try:
+        layout_tree = i3_layout_tree()
+        search(layout_tree)
+
+        raise Exception(f"{window_class} window not found in the layout tree")
+    except WorkspaceException as e:
+        return e.workspace, e.node
+
+
+def workspace_contains_focus(workspace):
+    class FoundIt(Exception):
+        pass
+
+    # Check if the workspace contains a focused window
+    def search(node):
+        is_focused = node.get("focused", False)
+        if is_focused:
+            raise FoundIt()
+
+        if "nodes" in node:
+            for child in node["nodes"]:
+                search(child)
+        if "floating_nodes" in node:
+            for child in node["floating_nodes"]:
+                search(child)
+
+    try:
+        search(workspace)
+
+        return False
+    except FoundIt:
+        return True
+
+
+def program_runs(program):
+    # We match against the process name, so that we don't match toggle_window itself.
+    # However, the process name is at most 16 null-terminated bytes [1], so we only
+    # search for the first 15 characters.
+    #
+    # [1] https://stackoverflow.com/questions/23534263/what-is-the-maximum-allowed-limit-on-the-length-of-a-process-name
+    pgrep = subprocess.run(["pgrep", program[:15]], stdout=subprocess.DEVNULL)
+    return pgrep.returncode == 0
 
 
 def start_program(program, args: list[str]):
@@ -97,116 +91,59 @@ def start_program(program, args: list[str]):
     subprocess.Popen([path] + args, start_new_session=True)
 
 
-def toggle_program(
-    window_name: str | None, window_class: str | None, window_caption: str | None
-):
-    toggle_script_template = """
-function rects_overlap(rect_a, rect_b) {
-    return !(rect_a.x + rect_a.width <= rect_b.x ||
-             rect_b.x + rect_b.width <= rect_a.x ||
-             rect_a.y + rect_a.height <= rect_b.y ||
-             rect_b.y + rect_b.height <= rect_a.y);
-}
+def program_is_on_scratchpad(workspace):
+    # The scratchpad has a workspace name of __i3_scratch
+    return "scratch" in workspace.get("name", "")
 
-function window_is_covered(window, desktop) {
-    let i = 0;
-    // Skip over all windows that are definitely below the given window
-    while (i < workspace.stackingOrder.length && workspace.stackingOrder[i] != window) {
-        i += 1;
-    }
-    i += 1
-    // Iterate over the windows that could be above
-    for (; i < workspace.stackingOrder.length; i++) {
-        let other = workspace.stackingOrder[i];
-        if (!(other.desktops.includes(desktop))) {
-            continue;
-        }
-        if (other.minimized) {
-            // Minimized windows keep their place in the stacking order even though they
-            // are not visible
-            continue;
-        }
-        if (rects_overlap(other.frameGeometry, window.frameGeometry)) {
-            return true;
-        }
-    }
-    return false;
-}
 
-let window_name = WINDOW_NAME;
-let window_class = WINDOW_CLASS;
-let window_caption = new RegExp(WINDOW_CAPTION);
-let target_window = null;
-for (let window of workspace.stackingOrder) {
-    if (window.resourceName != window_name && window.resourceClass != window_class) {
-        continue;
-    }
-    if (!window_caption.test(window.caption)) {
-        continue;
-    }
+def show_program(window_class, width=None, height=None):
+    cmd = f'[class="(?i){window_class}"] scratchpad show; floating enable; '
+    if width is not None:
+        cmd += f"resize set width {width}px; "
+    if height is not None:
+        cmd += f"resize set height {height}px; "
+    cmd += "move position center"
+    subprocess.run([I3MSG_PATH, cmd])
 
-    target_window = window;
-    break;
-}
 
-if (target_window !== null) {
-    let output_geometry = workspace.activeScreen.geometry;
-    if (rects_overlap(output_geometry, target_window.frameGeometry) && !target_window.minimized && !window_is_covered(target_window, workspace.currentDesktop)) {
-        target_window.minimized = true;
-    } else {
-        // Center the window
-        target_window.frameGeometry = {
-            x: output_geometry.x + (output_geometry.width / 2) - (target_window.width / 2),
-            y: output_geometry.y + (output_geometry.height / 2) - (target_window.height / 2),
-            width: target_window.width,
-            height: target_window.height,
-        }
-
-        target_window.desktops = workspace.currentDesktop;
-        target_window.minimized = false;
-        workspace.raiseWindow(target_window);
-    }
-}
-"""
-
-    toggle_script = toggle_script_template
-    if window_name is None:
-        toggle_script = toggle_script.replace("WINDOW_NAME", "null")
-    else:
-        toggle_script = toggle_script.replace("WINDOW_NAME", f'"{window_name}"')
-    if window_class is None:
-        toggle_script = toggle_script.replace("WINDOW_CLASS", "null")
-    else:
-        toggle_script = toggle_script.replace("WINDOW_CLASS", f'"{window_class}"')
-    if window_caption is None:
-        toggle_script = toggle_script.replace("WINDOW_CAPTION", "")
-    else:
-        toggle_script = toggle_script.replace("WINDOW_CAPTION", f'"{window_caption}"')
-    kwin_run_script(toggle_script)
+def hide_program(window_class):
+    cmd = f'[class="(?i){window_class}"] move scratchpad'
+    subprocess.run([I3MSG_PATH, cmd])
 
 
 def main():
-    parser = ArgumentParser(description="Start or toggle a program")
-    parser.add_argument("--name", dest="window_name", help="WM_NAME of the window")
+    parser = ArgumentParser(description="Toggle a window to and from the scratchpad")
     parser.add_argument("--class", dest="window_class", help="WM_CLASS of the window")
-    parser.add_argument(
-        "--caption", dest="window_caption", help="Regexp matching the window title"
-    )
+    parser.add_argument("--width", type=int, help="Resize window to this width")
+    parser.add_argument("--height", type=int, help="Resize window to this height")
     parser.add_argument("program", nargs="+", help="Program and options")
     args = parser.parse_args()
 
     program, *program_args = args.program
-    window_name = args.window_name
     window_class = args.window_class
-    window_caption = args.window_caption
+    width, height = args.width, args.height
 
-    if window_name is None:
-        window_name = program
     if window_class is None:
         window_class = program.title()
 
-    if window_exists(window_name, window_class, window_caption):
-        toggle_program(window_name, window_class, window_caption)
+    if program_runs(program):
+        workspace, node = find_program_workspace_and_node(window_class)
+
+        if workspace_contains_focus(workspace):
+            if node["focused"]:
+                hide_program(window_class)
+            else:
+                # The program is visible on the active workspace but not focused, i.e.
+                # usually behind another window. We toggle it to raise it to the front.
+                hide_program(window_class)
+                show_program(window_class, width, height)
+        elif program_is_on_scratchpad(workspace):
+            show_program(window_class, width, height)
+        else:
+            # The program is visible on a workspace other than the active one so we move
+            # it here via the scratchpad
+            hide_program(window_class)
+            show_program(window_class, width, height)
     else:
         start_program(program, program_args)
 

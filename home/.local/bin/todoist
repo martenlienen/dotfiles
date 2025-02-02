@@ -1,2 +1,2 @@
 #!/bin/sh
-kioclient exec /var/lib/flatpak/exports/share/applications/com.todoist.Todoist.desktop
+gio launch /var/lib/flatpak/exports/share/applications/com.todoist.Todoist.desktop

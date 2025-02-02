@@ -1,2 +1,2 @@
 #!/bin/sh
-kioclient exec ~/.local/share/applications/com.spotify.Client.desktop
+gio launch /var/lib/flatpak/exports/share/applications/com.spotify.Client.desktop
