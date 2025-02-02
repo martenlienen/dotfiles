@@ -14,8 +14,19 @@ packages:
   packages=(
     # System
     earlyoom
+    # Display management
+    greetd greetd-tuigreet
+    # Compositor
+    sway
+    waybar otf-font-awesome ttf-jetbrains-mono-nerd
+    # Audio
+    pipewire-audio pipewire-pulse pipewire-alsa wireplumber playerctl
+    # Screen
+    brightnessctl
+    # Applets
+    network-manager-applet
     # Tuxedo hardware control
-    tuxedo-control-center-bin
+    #tuxedo-control-center-bin
     # Snapshots
     btrfs-assistant snapper-support
     # Applications
@@ -43,9 +54,8 @@ packages:
   if hash yay 2> /dev/null; then
     yay -S --needed ${packages[@]}
   fi
-  if ! systemctl is-enabled earlyoom.service > /dev/null; then
-    sudo systemctl enable earlyoom.service
-  fi
+  sudo systemctl enable earlyoom.service
+  sudo systemctl enable greetd.service
   pixi global install direnv ruff yt-dlp pipx exa fd-find bat ripgrep tokei viu hexyl watchexec
 
 user-services:

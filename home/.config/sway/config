@@ -23,17 +23,14 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # Inputs #
 ##########
 
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+input "type:touchpad" {
+  drag enabled
+  dwt enabled
+  tap enabled
+  tap_button_map lmr
+  natural_scroll enabled
+  middle_emulation enabled
+}
 
 ######################
 # Idle configuration #
@@ -65,13 +62,6 @@ default_floating_border none
 # Use a larger font for title bars, e.g. in tabbed layout
 font pango:Noto Sans Mono 11
 
-##################
-# Extra Programs #
-##################
-
-# Enforce dynamic layouts
-exec "i3-layouts >> ~/.local/i3-layouts.log 2>&1"
-
 ################
 # Window Rules #
 ################
@@ -102,7 +92,16 @@ floating_modifier $mod
 bindsym $mod+Left move workspace to output left
 bindsym $mod+Right move workspace to output right
 
-# Media keys (plasma takes care of most of them)
+# Media keys
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_SINK@ 5%-
+bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86Calculator exec emacs -q -T i3-calculator --funcall=full-calc
 for_window [title="i3-calculator"] floating enable
 
@@ -128,7 +127,6 @@ bindsym $mod+q kill
 
 # Start a program launcher
 bindsym $mod+space exec fuzzel
-bindsym $mod+Shift+space exec rofi -show run
 
 # Split in horizontal orientation
 bindsym $mod+c split h
@@ -224,6 +222,21 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+
+#######
+# Bar #
+#######
+
+bar {
+  swaybar_command waybar
+  mode dock
+}
+
+##################
+# Other programs #
+##################
+
+exec nm-applet
 
 # Include default extras that, for example, set environment variables via systemd
 include /etc/sway/config.d/*
