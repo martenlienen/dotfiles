@@ -43,7 +43,7 @@
   ],
 
   "custom/fuzzel": {
-		"format": "<span color='#fbf1c7'>󰮯</span>",
+		"format": "󰮯",
 		"on-click": "fuzzel",
     "on-click-right": "wlogout",
     "escape" : true,
@@ -54,25 +54,29 @@
   "sway/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
-    "format": "{icon}",
+    "format": "󰊠{icon}",
     "format-icons": {
-      "1": "<span color='#cc241d'>󰊠</span>",
-      "2": "<span color='#98971a'>󰊠</span>",
-      "3": "<span color='#d79921'>󰊠</span>",
-      "4": "<span color='#458588'>󰊠</span>",
-      "5": "<span color='#b16286'>󰊠</span>",
-      "6": "<span color='#689d6a'>󰊠</span>",
-      "7": "<span color='#fe8019'>󰊠</span>",
-      "default": "<span color='#cc241d'>󰊠</span>",
+      "1": "¹",
+      "2": "²",
+      "3": "³",
+      "4": "⁴",
+      "5": "⁵",
+      "6": "⁶",
+      "7": "⁷",
+      "8": "⁸",
+      "9": "⁹",
+      "0": "⁰",
+      "default": "⁻",
     },
   },
 
   "sway/window": {
-    "format": "<span color='#a89884'>$</span> {app_id}: {title}",
+    "format": "$ {app_id}: {title}",
     "max-length": 35,
     "rewrite": {
-      "": "<span foreground= '#458588'></span> sway",
-      "~": " terminal",
+      "^\\$ emacs: emacs: (.*)": " $1",
+      "^\\$ firefox: (.*)": " $1",
+      "^\\$ : $": "sway",
     }
   },
 

@@ -53,12 +53,8 @@ tooltip {
   margin: 5px 0px;
 }
 
-#custom-rofi {
-  /* border: 2px solid #458588; */
-  /* border-radius: 5px; */
-  background: @bg-color;
-  padding: 0 6px;
-  margin: 5px 0px;
+#custom-fuzzel {
+  color: #fbf1c7;
 }
 
 /* ================================ */
@@ -69,67 +65,45 @@ tooltip {
 }
 
 #workspaces button {
-  color: #fff4d2;
   background: @bg-color;
-  /* border: 2px solid #fff4d2; */
+  border: 2px solid transparent;
+  border-radius: 12px;
   min-width: 25px;
   padding: 0 4px;
   margin: 5px 3px;
 }
 
+#workspaces button#sway-workspace-1 { color: #458588; }
+#workspaces button#sway-workspace-2 { color: #fe8019; }
+#workspaces button#sway-workspace-3 { color: #b16286; }
+#workspaces button#sway-workspace-4 { color: #689d6a; }
+#workspaces button#sway-workspace-5 { color: #d79921; }
+#workspaces button#sway-workspace-6 { color: #98971a; }
+#workspaces button#sway-workspace-7 { color: #cc241d; }
+#workspaces button { color: #689d6a; }
+
 #workspaces button:hover {
-  background: @bg-color;
-  border: 2px solid #b16286;
-  border-radius: 12px;
+  border-color: #b16286;
 }
 
 #workspaces button.visible {
-  border: 2px solid #689d6a;
-  border-radius: 12px;
-  background: @bg-color;
+  border-color: #689d6a;
 }
 
 #workspaces button.visible:hover {
-  border: 2px solid #689d6a;
-  border-radius: 12px;
-  background: @bg-color;
+  border-color: #689d6a;
 }
 
 #workspaces button.active {
-  border: 2px solid #689d6a;
-  border-radius: 12px;
-  background: @bg-color;
+  border-color: #689d6a;
 }
 
 #workspaces button.active:hover {
-  border: 2px solid #689d6a;
-  border-radius: 12px;
-  background: @bg-color;
+  border-color: #689d6a;
 }
 
 #workspaces button.urgent {
-  border: 2px solid #cc241d;
-  border-radius: 12px;
-  background: @bg-color;
-}
-
-/* ================================ */
-/*            window                 */
-/* ================================ */
-
-#window {
-  color: #a89884;
-  background: @bg-color;
-  /* border: 2px solid #d3869b; */
-}
-
-/* ================================ */
-/*            tray                 */
-/* ================================ */
-
-#tray {
-  /* padding: 0 6px; */
-  background: @bg-color;
+  border-color: #cc241d;
 }
 
 /* ================================ */
@@ -167,7 +141,6 @@ tooltip {
 /* ================================ */
 #custom-backlight {
   color: #f6c657;
-  background: @bg-color;
 }
 
 /* ================================ */
@@ -183,12 +156,10 @@ tooltip {
 /* ================================ */
 #pulseaudio {
   color: #fbf1c7;
-  background: @bg-color;
 }
 
 #pulseaudio.muted {
   color: #ea6962;
-  background: @bg-color;
 }
 
 /* ================================ */
@@ -196,43 +167,29 @@ tooltip {
 /* ================================ */
 #battery {
   color: #fbf1c7;
-  background: @bg-color;
 }
 
 #battery.critical {
   color: #cc241d;
-  background: @bg-color;
 }
 
 #battery.warning {
   color: #e78a4e;
-  background: @bg-color;
 }
+
 /* ================================ */
 /*            clock                 */
 /* ================================ */
 #clock.time {
   color: #fbf1c7;
-  background: @bg-color;
 }
 
 #clock.date {
   color: #fbf1c7;
-  background: @bg-color;
 }
 
 #custom-notification {
   color: #fbf1c7;
   font-size: 14px;
-  background: @bg-color;
   padding: 2px 2px;
-}
-
-#custom-player {
-  color: #282828;
-  border: 2px solid @bg-color;
-  border-radius: 21px;
-  background: #fbf1c7;
-  padding-left: 9px;
-  padding-right: 9px;
 }
