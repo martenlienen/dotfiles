@@ -35,6 +35,8 @@ packages:
     restic resticprofile
     # Power management
     upower poweralertd
+    # Permissions GUI
+    polkit-gnome
     # Redshift
     wlsunset
     # Tuxedo hardware control

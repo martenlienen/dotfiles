@@ -245,6 +245,8 @@ exec keepassxc
 exec poweralertd
 # Redshift
 exec wlsunset -l 48.1 -L 11.5
+# sudo for GUIs
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Include default extras that, for example, set environment variables via systemd
 include /etc/sway/config.d/*
