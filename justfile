@@ -15,7 +15,7 @@ packages:
     # System
     earlyoom
     # Display management
-    greetd greetd-tuigreet wlogout
+    greetd greetd-tuigreet
     # Compositor
     sway swayidle swaylock swaybg
     waybar otf-font-awesome ttf-jetbrains-mono-nerd

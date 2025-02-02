@@ -99,7 +99,16 @@ bindsym $mod+Comma input "type:keyboard" xkb_switch_layout next
 
 # F row
 bindsym $mod+F12 exec loginctl lock-session
-bindsym $mod+Shift+F12 exec wlogout
+set $mode_session "session: [p]oweroff [r]eboot [s]uspend [h]ibernate [l]ogout"
+bindsym $mod+Shift+F12 mode $mode_session
+mode $mode_session {
+    bindsym l exit
+    bindsym r exec systemctl reboot
+    bindsym p exec systemctl poweroff
+    bindsym s exec systemctl suspend
+    bindsym h exec systemctl hibernate
+    bindsym Ctrl+g mode "default"
+}
 
 # Screenshots (without and with region selection)
 bindsym $mod+Print exec spectacle
