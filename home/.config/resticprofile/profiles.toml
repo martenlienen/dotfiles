@@ -4,7 +4,7 @@ includes = ["repo.toml"]
 prevent-sleep = true
 
 [default]
-base-dir = "/home/ml"
+base-dir = "{{ .Env.HOME }}"
 run-after-fail = "notify-send \"restic backup failed: $ERROR_STDERR\""
 
 [default.backup]
