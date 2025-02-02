@@ -25,6 +25,8 @@ packages:
     brightnessctl
     # Applets
     network-manager-applet
+    # BlueTooth
+    bluetui
     # Notifications
     fnott
     # Tuxedo hardware control

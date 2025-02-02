@@ -27,9 +27,6 @@
     "custom/backlight",
     "sway/language",
     "custom/paddc",
-    "custom/paddc",
-    "bluetooth",
-    // "custom/paddc",
     "battery",
     "custom/paddc",
     "custom/notification",
@@ -183,29 +180,6 @@
     "interval": 1,
     "min-length": 1,
     "max-length": 12
-  },
-
-  "bluetooth": {
-    "format": "<span color='#458588'>󰂰 </span>",
-    "format-disabled": "<span color='#458588'>󰂲 </span>",
-    "format-connected": "<span color='#458588'>󰂱 </span>",
-    "format-connected-battery": "<span color='#458588'>󰂱 </span>",
-
-    "tooltip-format": 
-      "{num_connections} connected",
-    "tooltip-format-disabled": 
-      "Bluetooth Disabled",
-    "tooltip-format-connected": 
-      "{num_connections} connected\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": 
-      "{device_alias}",
-    "tooltip-format-enumerate-connected-battery": 
-      "{device_alias}: {device_battery_percentage}%",
-
-    "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh",
-    "interval": 1,
-    "min-length": 1,
-    "max-length": 10
   },
 
   "custom/notification": {
