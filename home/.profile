@@ -25,3 +25,6 @@ export MOZ_ENABLE_WAYLAND="1"
 
 # Use the ssh-agent started by systemd
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# Tell XDG that we are running sway
+export XDG_CURRENT_DESKTOP=sway

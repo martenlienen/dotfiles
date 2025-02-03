@@ -19,6 +19,9 @@ packages:
     # Compositor
     sway swayidle swaylock swaybg xwayland
     waybar otf-font-awesome ttf-jetbrains-mono-nerd
+    # Desktop portals to let flatpaks interact with other programs
+    xdg-desktop-portal-wlr # Screenshots and screensharing
+    xdg-desktop-portal-gtk # Everything else
     # Audio
     pipewire-audio pipewire-pulse pipewire-alsa wireplumber playerctl
     # Screen
