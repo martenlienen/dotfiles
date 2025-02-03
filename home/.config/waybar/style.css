@@ -9,9 +9,10 @@ window#waybar {
   font-family: JetBrainsMono Nerd Font Propo;
   font-size: 14px;
   font-weight: 400;
-  /* color: #202020; */
-  /* background: #202020; */
-  /* border-radius: 2px; */
+}
+
+window#waybar > box {
+	margin: 5px 2px;
 }
 
 tooltip {
@@ -33,24 +34,6 @@ tooltip {
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 19px;
-}
-
-#window,
-#tray,
-#disk,
-#cpu,
-#temperature,
-#temperature.critical,
-#backlight,
-#custom-memory,
-#pulseaudio,
-#pulseaudio.muted,
-#battery,
-#battery.critical,
-#battery.warning,
-#clock {
-  padding-right: 4px;
-  margin: 5px 0px;
 }
 
 #custom-fuzzel {
