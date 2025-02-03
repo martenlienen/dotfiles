@@ -111,6 +111,11 @@ def hide_program(window_class):
     subprocess.run([I3MSG_PATH, cmd])
 
 
+def focus_program(window_class):
+    cmd = f'[class="(?i){window_class}"] focus'
+    subprocess.run([I3MSG_PATH, cmd])
+
+
 def main():
     parser = ArgumentParser(description="Toggle a window to and from the scratchpad")
     parser.add_argument("--class", dest="window_class", help="WM_CLASS of the window")
@@ -129,21 +134,18 @@ def main():
     if program_runs(program):
         workspace, node = find_program_workspace_and_node(window_class)
 
-        if workspace_contains_focus(workspace):
-            if node["focused"]:
-                hide_program(window_class)
-            else:
-                # The program is visible on the active workspace but not focused, i.e.
-                # usually behind another window. We toggle it to raise it to the front.
-                hide_program(window_class)
-                show_program(window_class, width, height)
-        elif program_is_on_scratchpad(workspace):
-            show_program(window_class, width, height)
-        else:
-            # The program is visible on a workspace other than the active one so we move
-            # it here via the scratchpad
+        if workspace_contains_focus(workspace) and node["focused"]:
             hide_program(window_class)
+        else:
+            # If the program is on another workspace, move it to the scratch pad
+            if not program_is_on_scratchpad(workspace):
+                hide_program(window_class)
+
+            # Now move it from the scratchpad to the current workspace
             show_program(window_class, width, height)
+
+            # Finally, focus it to raise it to the front.
+            focus_program(window_class)
     else:
         start_program(program, program_args)
 
