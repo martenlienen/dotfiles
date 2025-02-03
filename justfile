@@ -17,7 +17,7 @@ packages:
     # Display management
     greetd greetd-tuigreet
     # Compositor
-    sway swayidle swaylock swaybg xwayland
+    sway swayidle swaylock swaybg xorg-xwayland
     waybar otf-font-awesome ttf-jetbrains-mono-nerd
     # Desktop portals to let flatpaks interact with other programs
     xdg-desktop-portal-wlr # Screenshots and screensharing
