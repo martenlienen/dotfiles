@@ -19,6 +19,7 @@ packages:
     # Compositor
     sway swayidle swaylock swaybg xorg-xwayland
     waybar otf-font-awesome ttf-jetbrains-mono-nerd
+    autotiling-rs
     # Desktop portals to let flatpaks interact with other programs
     xdg-desktop-portal-wlr # Screenshots and screensharing
     xdg-desktop-portal-gtk # Everything else
