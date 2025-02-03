@@ -68,7 +68,7 @@ get_icon() {
 
 # Backlight module and tooltip
 get_icon
-module="${icon}"
+module="${icon}$(jq -n "${current_brightness}/${max_brightness}*100|round")%"
 
 tooltip="Device Name: ${device}"
 tooltip+="\nBrightness:  ${current_brightness} / ${max_brightness}"

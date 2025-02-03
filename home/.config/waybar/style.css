@@ -36,8 +36,19 @@ tooltip {
   border-radius: 19px;
 }
 
+#window, #mode {
+  margin-left: 15px;
+}
+#tray, #pulseaudio, #custom-backlight, #language, #battery, #clock.date {
+  margin-right: 15px;
+}
+
 #custom-fuzzel {
   color: #fbf1c7;
+}
+
+#mode {
+  color: #fe8019;
 }
 
 /* ================================ */
@@ -90,48 +101,10 @@ tooltip {
 }
 
 /* ================================ */
-/*            disk                 */
-/* ================================ */
-
-#disk {
-  color: #ea6962;
-  border: 2px solid #ea6962;
-}
-
-/* ================================ */
-/*            cpu                  */
-/* ================================ */
-#cpu {
-  color: #e78a4e;
-  border: 2px solid #e78a4e;
-}
-
-/* ================================ */
-/*            temp                  */
-/* ================================ */
-#temperature {
-  color: #d8a657;
-  border: 2px solid #d8a657;
-}
-
-#temperature.critical {
-  color: #cc241d;
-  border: 2px solid #cc241d;
-}
-
-/* ================================ */
 /*            backlight             */
 /* ================================ */
 #custom-backlight {
   color: #f6c657;
-}
-
-/* ================================ */
-/*            memory                */
-/* ================================ */
-#custom-memory {
-  color: #458588;
-  border: 2px solid #458588;
 }
 
 /* ================================ */

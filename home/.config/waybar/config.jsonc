@@ -12,9 +12,7 @@
   "modules-left": [
     "custom/fuzzel",
     "sway/workspaces",
-    "custom/paddc",
     "sway/window",
-    "custom/paddc",
     "sway/mode",
   ],
 
@@ -22,17 +20,12 @@
 
   "modules-right": [
     "tray",
-    "custom/paddc",
     "pulseaudio",
     "custom/backlight",
     "sway/language",
-    "custom/paddc",
     "battery",
-    "custom/paddc",
     "clock#date",
-    "custom/paddc",
     "clock#time",
-    "custom/paddc",
   ],
 
   "custom/fuzzel": {
@@ -156,13 +149,8 @@
     "max-length": 6
   },
 
-  "custom/paddc": {
-    "format": " ",
-    "tooltip": false,
-  },
-
   "sway/language": {
-    "format": "{}",
+    "format": " {}",
     "format-en": "US",
   },
 
