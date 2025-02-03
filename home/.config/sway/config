@@ -161,27 +161,6 @@ mode $mode_sway {
     bindsym Ctrl+g mode "default"
 }
 
-set $mode_i3layouts "layouts: [v]stack [h]stack [3]columns [n]one"
-set $i3l vstack to workspace 1
-set $i3l vstack to workspace 2
-set $i3l vstack to workspace 3
-set $i3l vstack to workspace 4
-set $i3l vstack to workspace 5
-set $i3l vstack to workspace 6
-set $i3l vstack to workspace 7
-set $i3l vstack to workspace 8
-set $i3l vstack to workspace 9
-set $i3l vstack to workspace 10
-bindsym $mod+n mode $mode_i3layouts
-mode $mode_i3layouts {
-    bindsym v exec i3l vstack; mode "default"
-    bindsym h exec i3l hstack; mode "default"
-    bindsym 3 exec i3l 3columns; mode "default"
-    bindsym n exec i3l none; mode "default"
-
-    bindsym Ctrl+g mode "default"
-}
-
 ## Basic bindings
 
 # Change focus
@@ -191,10 +170,10 @@ bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
 # Move focused window
-bindsym $mod+Shift+$left exec i3l move left
-bindsym $mod+Shift+$down exec i3l move down
-bindsym $mod+Shift+$up exec i3l move up
-bindsym $mod+Shift+$right exec i3l move right
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
 # Switch to workspace
 bindsym $mod+1 workspace 1
