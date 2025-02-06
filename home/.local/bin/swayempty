@@ -5,12 +5,11 @@
 import argparse
 import json
 import re
-import sys
 from subprocess import PIPE, run
 
 
 def get_ws():
-    return json.loads(run("i3-msg -t get_workspaces".split(), stdout=PIPE).stdout)
+    return json.loads(run("swaymsg -t get_workspaces".split(), stdout=PIPE).stdout)
 
 
 def to_empty(
@@ -29,12 +28,12 @@ def to_empty(
     if current is None:
         current = [w for w in workspaces if w["focused"]][0]
 
-    numbered = re.compile("^\d+$" if strict else "^\d+|(\d+:.*)$")
+    numbered = re.compile(r"^\d+$" if strict else r"^\d+|(\d+:.*)$")
 
     ns = {
         w["num"]
         for w in workspaces
-        if numbered.match(w["name"]) != None
+        if numbered.match(w["name"]) is not None
         and (not strict or w["name"] == str(w["num"]))
     }
 
@@ -61,11 +60,11 @@ def to_empty(
             return
 
     if move:
-        s = "i3-msg move container to workspace {0}".format(new_ix)
+        s = "swaymsg move container to workspace {0}".format(new_ix)
         if follow:
             s += "; workspace {0}".format(new_ix)
     else:
-        s = "i3-msg workspace " + str(new_ix)
+        s = "swaymsg workspace " + str(new_ix)
     print(s)
     run(s.split())
 
@@ -140,8 +139,8 @@ if __name__ == "__main__":
         action="store_true",
         help="start at 1 (default: no)",
     )
-
     args = parser.parse_args()
+
     kwargs = {
         "right": args.direction.lower().strip() == "next",
         "wrap": args.wrap,
@@ -150,8 +149,8 @@ if __name__ == "__main__":
         "follow": args.follow,
         "from_left": args.from_left,
     }
+    if args.number is not None:
+        kwargs["num"] = args.number
+        kwargs["relative"] = args.rel
 
-    if type(args.number) is int:
-        to_empty_near(args.number, relative=args.rel, **kwargs)
-    else:
-        to_empty(**kwargs)
+    to_empty(**kwargs)

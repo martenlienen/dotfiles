@@ -110,6 +110,14 @@ mode $mode_session {
     bindsym Ctrl+g mode "default"
 }
 
+# Touch gestures
+bindgesture swipe:3:right workspace prev
+bindgesture swipe:3:left workspace next
+bindgesture swipe:3:up exec swayempty --move --from-left
+bindgesture swipe:3:down exec swayempty --move --from-left --follow
+bindgesture pinch:2:outward fullscreen enable
+bindgesture pinch:2:inward fullscreen disable
+
 # Screenshots
 bindsym $mod+Print exec screenshot
 
