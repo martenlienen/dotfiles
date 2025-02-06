@@ -105,8 +105,8 @@ mode $mode_session {
     bindsym l exit
     bindsym r exec systemctl reboot
     bindsym p exec systemctl poweroff
-    bindsym s exec systemctl suspend
-    bindsym h exec systemctl hibernate
+    bindsym s exec systemctl suspend; mode "default"
+    bindsym h exec systemctl hibernate; mode "default"
     bindsym Ctrl+g mode "default"
 }
 
