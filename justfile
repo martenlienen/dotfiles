@@ -19,7 +19,7 @@ packages:
     # Compositor
     sway swayidle swaylock swaybg xorg-xwayland
     waybar otf-font-awesome ttf-jetbrains-mono-nerd
-    autotiling-rs
+    autotiling-rs darkman
     # Desktop portals to let flatpaks interact with other programs
     xdg-desktop-portal-wlr # Screenshots and screensharing
     xdg-desktop-portal-gtk # Everything else
@@ -48,7 +48,7 @@ packages:
     # Snapshots
     btrfs-assistant snapper-support
     # Applications
-    firefox chromium thunderbird evince kitty
+    firefox chromium thunderbird evince kitty gimp
     # Terminal & command line tools
     zsh tmux htop just tree rsync jq pixi
     # Network tools
@@ -79,6 +79,7 @@ packages:
 user-services:
   systemctl --user enable resticprofile-backup@profile-default.timer
   systemctl --user enable --now ssh-agent.service
+  systemctl --user enable --now darkman.service
 
 emacs: dotfiles
   #!/bin/sh
