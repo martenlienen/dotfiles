@@ -1,3 +1,5 @@
 [general]
-fullscreen = true
+fullscreen = false
 early-exit = true
+copy-command = "wl-copy"
+action-on-enter = "save-to-clipboard"
