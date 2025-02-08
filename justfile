@@ -43,6 +43,8 @@ packages:
     polkit-gnome
     # Redshift
     wlsunset
+    # Clipboard
+    wl-clip-persist
     # Tuxedo hardware control
     #tuxedo-control-center-bin
     # Snapshots
