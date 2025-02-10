@@ -27,6 +27,8 @@ packages:
     pipewire-audio pipewire-pulse pipewire-alsa wireplumber playerctl
     # Screen
     brightnessctl
+    # External monitors
+    shikane
     # Applets
     network-manager-applet
     # BlueTooth

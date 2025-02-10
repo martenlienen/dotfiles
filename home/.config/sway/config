@@ -246,6 +246,8 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 exec autotiling-rs
 # Keep clipboard alive after applications close
 exec wl-clip-persist --clipboard both --all-mime-type-regex '^(?!x-kde-passwordManagerHint).+'
+# External monitors
+exec shikane
 
 # Include default extras that, for example, set environment variables via systemd
 include /etc/sway/config.d/*
