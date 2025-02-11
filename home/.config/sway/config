@@ -244,8 +244,6 @@ exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 # Dynamic tiling on shoestring budget
 exec autotiling-rs
-# Keep clipboard alive after applications close
-exec wl-clip-persist --clipboard both --all-mime-type-regex '^(?!x-kde-passwordManagerHint).+'
 # External monitors
 exec shikane
 
