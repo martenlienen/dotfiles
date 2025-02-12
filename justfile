@@ -61,7 +61,7 @@ packages:
     # Programming. npm is required by emacs-copilot
     git vim emacs-wayland ttf-fira-code npm
     # Latex
-    texlive
+    texlive texlive-langgerman
     # Spell check
     aspell-en
     # latexindent
