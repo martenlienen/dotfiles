@@ -6,7 +6,7 @@
   pager = "less -F -X"
 [user]
   name = "Marten Lienen"
-  email = "marten.lienen@gmail.com"
+  email = "m@martenlienen.com"
 [push]
   default = simple
 [pull]
