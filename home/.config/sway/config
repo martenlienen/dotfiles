@@ -159,10 +159,10 @@ bindsym $mod+Shift+f floating toggle
 bindsym $mod+Shift+n exec dolphin
 
 # Toggle background apps
-bindsym $mod+s exec toggle_window.py -- spotify --force-device-scale-factor=2
-bindsym --to-code $mod+grave exec toggle_window.py todoist
-bindsym $mod+o exec toggle_window.py --width 2300 --height 1600 obsidian
-bindsym $mod+m exec toggle_window.py --width 1800 --height 1500 --class mattermost mattermost
+bindsym $mod+s exec toggle_window.py --app-id spotify -- spotify --force-device-scale-factor=2
+bindsym --to-code $mod+grave exec toggle_window.py --class Todoist todoist
+bindsym $mod+o exec toggle_window.py --width 2300 --height 1600 --app-id obsidian obsidian
+bindsym $mod+m exec toggle_window.py --width 1800 --height 1500 --class Mattermost mattermost
 
 # Mode for managing sway itself
 set $mode_sway "sway: reload[i] [r]estart [e]xit"

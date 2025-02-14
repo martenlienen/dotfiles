@@ -4,6 +4,7 @@ import json
 import shutil
 import subprocess
 from argparse import ArgumentParser
+from dataclasses import dataclass
 
 I3MSG_PATH = "/usr/bin/swaymsg"
 
@@ -26,13 +27,34 @@ class WorkspaceException(Exception):
         self.node = node
 
 
-def find_program_workspace_and_node(window_class):
+@dataclass
+class WindowFilter:
+    app_id: str | None
+    window_class: str | None
+
+    def matches(self, node: dict):
+        if self.app_id is not None and node.get("app_id") == self.app_id:
+            return True
+        class_name = node.get("window_properties", {}).get("class")
+        if self.window_class is not None and class_name == self.window_class:
+            return True
+        return False
+
+    def __str__(self):
+        parts = []
+        if self.app_id is not None:
+            parts.append(f"app_id={self.app_id}")
+        if self.window_class is not None:
+            parts.append(f'class="(?i){self.window_class}"')
+        return ",".join(parts)
+
+
+def find_program_workspace_and_node(filter):
     def search(node, workspace=None):
         if node.get("type") == "workspace":
             workspace = node
 
-        class_name = node.get("window_properties", {}).get("class")
-        if class_name is not None and class_name.lower() == window_class.lower():
+        if filter.matches(node):
             raise WorkspaceException(workspace, node)
         else:
             if "nodes" in node:
@@ -46,7 +68,7 @@ def find_program_workspace_and_node(window_class):
         layout_tree = i3_layout_tree()
         search(layout_tree)
 
-        raise Exception(f"{window_class} window not found in the layout tree")
+        raise Exception(f"[{filter}] window not found in the layout tree")
     except WorkspaceException as e:
         return e.workspace, e.node
 
@@ -96,8 +118,8 @@ def program_is_on_scratchpad(workspace):
     return "scratch" in workspace.get("name", "")
 
 
-def show_program(window_class, width=None, height=None):
-    cmd = f'[class="(?i){window_class}"] scratchpad show; floating enable; '
+def show_program(filter, width=None, height=None):
+    cmd = f"[{filter}] scratchpad show; floating enable; "
     if width is not None:
         cmd += f"resize set width {width}px; "
     if height is not None:
@@ -106,18 +128,17 @@ def show_program(window_class, width=None, height=None):
     subprocess.run([I3MSG_PATH, cmd])
 
 
-def hide_program(window_class):
-    cmd = f'[class="(?i){window_class}"] move scratchpad'
-    subprocess.run([I3MSG_PATH, cmd])
+def hide_program(filter):
+    subprocess.run([I3MSG_PATH, f"[{filter}] move scratchpad"])
 
 
-def focus_program(window_class):
-    cmd = f'[class="(?i){window_class}"] focus'
-    subprocess.run([I3MSG_PATH, cmd])
+def focus_program(filter):
+    subprocess.run([I3MSG_PATH, f"[{filter}] focus"])
 
 
 def main():
     parser = ArgumentParser(description="Toggle a window to and from the scratchpad")
+    parser.add_argument("--app-id", help="App ID of the window")
     parser.add_argument("--class", dest="window_class", help="WM_CLASS of the window")
     parser.add_argument("--width", type=int, help="Resize window to this width")
     parser.add_argument("--height", type=int, help="Resize window to this height")
@@ -125,27 +146,31 @@ def main():
     args = parser.parse_args()
 
     program, *program_args = args.program
+    app_id = args.app_id
     window_class = args.window_class
     width, height = args.width, args.height
 
-    if window_class is None:
-        window_class = program.title()
+    if app_id is None and window_class is None:
+        print("Either --app-id or --class are required")
+        raise SystemExit()
+
+    filter = WindowFilter(app_id, window_class)
 
     if program_runs(program):
-        workspace, node = find_program_workspace_and_node(window_class)
+        workspace, node = find_program_workspace_and_node(filter)
 
         if workspace_contains_focus(workspace) and node["focused"]:
-            hide_program(window_class)
+            hide_program(filter)
         else:
             # If the program is on another workspace, move it to the scratch pad
             if not program_is_on_scratchpad(workspace):
-                hide_program(window_class)
+                hide_program(filter)
 
             # Now move it from the scratchpad to the current workspace
-            show_program(window_class, width, height)
+            show_program(filter, width, height)
 
             # Finally, focus it to raise it to the front.
-            focus_program(window_class)
+            focus_program(filter)
     else:
         start_program(program, program_args)
 
