@@ -2103,6 +2103,13 @@ them to LaTeX!
                 ("|" . nil)))
 #+END_SRC
 
+** Typst
+
+#+BEGIN_SRC emacs-lisp
+  (use-package typst-ts-mode
+    :straight (typst-ts-mode :repo "meow_king/typst-ts-mode" :host codeberg))
+#+END_SRC
+
 ** markdown
 
 #+BEGIN_SRC emacs-lisp
