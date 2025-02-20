@@ -116,9 +116,13 @@ function get_prompt {
 %{$yellow_bold%}$directory%{$reset_color%}\
 $git_info$conda_info$tmux_info %{$cyan%}($timestamp)%{$reset_color%}"
 
-  local prompt_char="%{$white_bold%}$prompt_symbol"
-  if [[ $last_cmd_status -ne 0 ]]; then
+  local prompt_char=""
+  if [[ $last_cmd_status -eq 0 ]]; then
+    prompt_char="%{$white_bold%}$prompt_symbol"
+  elif [[ $last_cmd_status -eq 1 ]]; then
     prompt_char="%{$red_bold%}!"
+  else
+    prompt_char="%{$red_bold%}${last_cmd_status}"
   fi
 
   print "$info_line\n$prompt_char%{$reset_color%} "
