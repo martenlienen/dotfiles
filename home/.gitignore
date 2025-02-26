@@ -4,7 +4,6 @@
 # Emacs
 .#*
 .dir-locals.el
-.projectile
 
 # Microsoft Office backups
 ~$*

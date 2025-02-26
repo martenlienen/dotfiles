@@ -434,7 +434,6 @@ of functions.
     :straight t
     :after hydra
     :custom
-    (consult-project-root-function #'projectile-project-root)
     (consult-narrow-key "<")
     (register-preview-delay 0)
     (register-preview-function #'consult-register-format)
@@ -637,13 +636,8 @@ of functions.
 ** Project Management
 
 #+BEGIN_SRC emacs-lisp
-  (use-package projectile
-    :straight t
-    :bind (("C-x C-f" . projectile-find-file))
-    :init
-    (setq projectile-keymap-prefix (kbd "C-x p"))
-    :config
-    (projectile-global-mode))
+  (use-package project
+    :bind (("C-x C-f" . project-find-file)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -675,10 +669,6 @@ of functions.
     :after treemacs
     :init (require 'treemacs-nerd-icons)
     :config (treemacs-load-theme "nerd-icons"))
-
-  (use-package treemacs-projectile
-    :straight t
-    :after (treemacs projectile))
 
   (use-package treemacs-perspective
     :straight t
@@ -1868,16 +1858,6 @@ Put emacs into distraction-free writing mode on demand.
     :config
     (add-hook 'c++-mode-hook #'subword-mode)
     (add-hook 'c++-mode-hook #'eglot-ensure))
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-  (use-package cquery
-    :straight t
-    :config
-    (setq cquery-project-root-function #'projectile-project-root
-          cquery-extra-init-params (list :index '(:comments 2)
-                                         :cacheFormat "msgpack"
-                                         :completion '(:detailedLabel t))))
 #+END_SRC
 
 *** Style Guide
