@@ -63,7 +63,7 @@ packages:
     # Latex
     texlive texlive-langenglish texlive-langgerman
     # Spell check
-    aspell-en
+    aspell-en words
     # latexindent
     perl-yaml-tiny perl-file-homedir
     # Application containers
