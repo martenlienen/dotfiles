@@ -1,5 +1,5 @@
 [init]
-  defaultBranch = main
+  defaultbranch = main
 [core]
   excludesfile = ~/.gitignore
   editor = vim
@@ -7,20 +7,40 @@
 [user]
   name = "Marten Lienen"
   email = "m@martenlienen.com"
+[column]
+  ui = auto
+[credential]
+  helper = store
 [push]
   default = simple
+  autosetupremote = true
+  followTags = true
 [pull]
   rebase = true
+[fetch]
+  prune = true
+  prunetags = true
+  all = true
 [rebase]
   autostash = true
-  updateRefs = true
+  autosquash = true
+  updaterefs = true
+[commit]
+  verbose = true
 [format]
   pretty = format:%C(yellow)%ar%C(reset) by %an <%C(italic)%ae%Creset> - %C(cyan italic)%h%n  %C(bold)%s
 [log]
-  abbrevCommit = true
+  abbrevcommit = true
   follow = true
-[credential]
-  helper = store
+[diff]
+  algorithm = histogram
+  colormoved = plain
+  mnemonicprefix = true
+  renames = true
+[branch]
+  sort = -committerdate
+[tag]
+  sort = version:refname
 [rerere]
   enabled = true
   autoupdate = true
