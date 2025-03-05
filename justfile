@@ -9,6 +9,9 @@ dotfiles:
   if hash fc-cache 2> /dev/null; then fc-cache; fi
   pkill -SIGUSR1 kitty || true
 
+systemfiles:
+  sudo rsync -av etc /
+
 packages:
   #!/bin/bash
   packages=(
@@ -19,7 +22,7 @@ packages:
     # Compositor
     sway swayidle chayang swaylock swaybg xorg-xwayland
     waybar otf-font-awesome ttf-jetbrains-mono-nerd
-    autotiling-rs darkman
+    autotiling-rs darkman fuzzel
     # Desktop portals to let flatpaks interact with other programs
     xdg-desktop-portal-wlr # Screenshots and screensharing
     xdg-desktop-portal-gtk # Everything else
@@ -28,7 +31,7 @@ packages:
     # Screen
     brightnessctl
     # External monitors
-    shikane
+    shikane nwg-displays
     # Applets
     network-manager-applet
     # BlueTooth
