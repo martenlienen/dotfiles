@@ -80,6 +80,10 @@ bindkey -e
 bindkey -M emacs "^P" history-substring-search-up
 bindkey -M emacs "^N" history-substring-search-down
 
+# Prepend sudo to previous or current command
+. ~/.local/zsh/sudo.zsh
+bindkey -M emacs "^[s" sudo-command-line
+
 . ~/.local/zsh/aliases.zsh
 
 # Read system-local settings
