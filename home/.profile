@@ -28,3 +28,10 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # Tell XDG that we are running sway
 export XDG_CURRENT_DESKTOP=sway
+
+# Include .bashrc if the file is being read by bash
+if [ -n "$BASH_VERSION" ]; then
+    if [ -f "$HOME/.bashrc" ]; then
+        . "$HOME/.bashrc"
+    fi
+fi
