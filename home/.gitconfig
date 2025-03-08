@@ -7,8 +7,6 @@
 [user]
   name = "Marten Lienen"
   email = "m@martenlienen.com"
-[column]
-  ui = auto
 [credential]
   helper = store
 [push]
