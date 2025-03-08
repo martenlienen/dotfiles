@@ -859,9 +859,20 @@ before the install the upstream version.
     (org-use-sub-superscripts '{})
 
     (org-src-fontify-natively t)
+    (org-attach-id-dir "attachments")
     (org-babel-load-languages '((emacs-lisp . t)
                                 (python . t)
                                 (shell . t)))
+
+    (org-startup-with-inline-images t)
+    (org-capture-templates
+     '(("p" "Project note" entry (file+headline ml/project-notes-file "Journal")
+        "* %^{Title} %^{summary}p
+  :properties:
+  :date: %t
+  :end:
+
+  %?" :jump-to-captured t :prepend t)))
     :custom-face
     (org-document-title ((t . (:height 2.0))))
     (org-level-1 ((t . (:height 1.75))))
@@ -870,7 +881,18 @@ before the install the upstream version.
     (org-level-4 ((t . (:height 1.2))))
     (org-level-5 ((t . (:height 1.1))))
     (org-level-6 ((t . (:height 1.0))))
-    :hook (org-mode . flycheck-mode)
+    :hook
+    (org-mode . flycheck-mode)
+    (before-save . org-update-all-dblocks)
+    :bind
+    ("C-c c" . org-capture)
+    :init
+    (defun ml/project-notes-file ()
+      "Find the notes file for the current project."
+      (message "yolo")
+      (if-let* ((project (project-current))
+                (root (project-root project)))
+          (f-join root "notes.org")))
     :config
     (require 'org-crypt)
     (org-crypt-use-before-save-magic)
@@ -897,6 +919,12 @@ before the install the upstream version.
     (plist-put org-latex-preview-appearance-options :page-width 0.8))
 
   (use-package org-download
+    :straight t
+    :after org
+    :custom
+    (org-download-method 'attach))
+
+  (use-package org-ql
     :straight t
     :after org)
 #+END_SRC
