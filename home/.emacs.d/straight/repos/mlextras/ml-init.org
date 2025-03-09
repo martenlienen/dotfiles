@@ -221,8 +221,9 @@ Packages are configured with the ~use-package~ macro.
     :straight t
     :custom
     (visual-fill-column-enable-sensible-window-split t)
-    :config
-    (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
+    :hook
+    (text-mode . visual-line-fill-column-mode)
+    (gptel-mode . visual-line-fill-column-mode))
 #+END_SRC
 
 ** Fonts
@@ -1494,8 +1495,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
                                             (text-mode . "Response: ")))
              (gptel-model 'gpt-4o)
              (gptel-track-media t))
-    :hook ((gptel-mode . visual-line-mode)
-           (org-mode . ml/maybe-enable-gptel-mode))
+    :hook (org-mode . ml/maybe-enable-gptel-mode)
     :bind (("C-c g" . gptel-hydra/body)
            :map gptel-mode-map
            ("C-c T" . gptel-set-topic))
@@ -1631,13 +1631,6 @@ Put emacs into distraction-free writing mode on demand.
 #+END_SRC
 
 * Programming Languages
-
-** All Text
-
-#+BEGIN_SRC emacs-lisp
-  (use-package text-mode
-    :hook (text-mode . visual-line-mode))
-#+END_SRC
 
 ** Python
 
