@@ -1,6 +1,6 @@
 #+title: init.el
 #+property: header-args :tangle yes :results silent
-#+startup: overview
+#+startup: content
 
 My emacs config is a package so that straight precompiles it.
 
@@ -245,16 +245,23 @@ Packages are configured with the ~use-package~ macro.
     (fontaine-presets
      '((regular) ; Assign the name "regular" to the defaults
        (small
-        :default-height 90)
+        :default-height 90
+        :fixed-pitch-height 90
+        :variable-pitch-height 120)
        (large
         :inherit medium
-        :default-height 150)
+        :default-height 150
+        :fixed-pitch-height 150
+        :variable-pitch-height 180)
        (presentation
         :inherit regular
-        :default-height 180)
+        :default-height 180
+        :fixed-pitch-height 180
+        :variable-pitch-height 210)
        (t
 
-        ;; Got Fira Coda on codingfont.com as my favorite coding font via an anonymous 1v1 tournament
+        ;; Got Fira Coda on codingfont.com as my favorite coding font via an anonymous 1v1
+        ;; tournament
         :default-family "Fira Code"
         :fixed-pitch-family "Fira Code"
 
@@ -262,7 +269,11 @@ Packages are configured with the ~use-package~ macro.
         :variable-pitch-family "Libertinus Serif"
 
         ;; Font size in tenths of a point
-        :default-height 120
+        :default-height 110
+        :fixed-pitch-height 110
+        ;; Libertinus is smaller than Fira, so we increase the height to make them
+        ;; comparable
+        :variable-pitch-height 140
 
         :line-spacing nil)))
     :config
@@ -848,8 +859,7 @@ Load direnv environment for each buffer.
 
 * org
 
-Configure org-mode early to ensure that no package loads the built-in version of org-mode
-before they install the upstream version.
+Configure org-mode early to ensure that no package loads the built-in version of org-mode before they install the upstream version.
 
 #+BEGIN_SRC emacs-lisp
   (defun ml/add-face-ancestor (face ancestor)
@@ -887,7 +897,8 @@ before they install the upstream version.
                    "(provide 'org-version)\n")))
                 :pin nil)
     :custom
-    (org-default-notes-file "notes.org")
+    (org-directory "~/notes")
+    (org-default-notes-file "~/notes/inbox.org")
     (org-crypt-key nil)
     (org-tags-exclude-from-inheritance (list "crypt"))
     (org-M-RET-may-split-line nil)
@@ -913,7 +924,10 @@ before they install the upstream version.
                                 (python . t)
                                 (shell . t)))
 
-    (org-startup-with-inline-images t)
+    (org-startup-with-link-previews t)
+    ;; Show everything but fold property drawers
+    (org-startup-folded 'nofold)
+
     (org-capture-templates
      '(("p" "Project note" entry (file+headline ml/project-notes-file "Journal")
         "* %^{Title} %^{summary}p
