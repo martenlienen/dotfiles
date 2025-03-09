@@ -1,6 +1,6 @@
-#+TITLE: init.el
-#+PROPERTY: header-args :tangle yes :results silent
-#+STARTUP: overview
+#+title: init.el
+#+property: header-args :tangle yes :results silent
+#+startup: overview
 
 My emacs config is a package so that straight precompiles it.
 
@@ -135,10 +135,6 @@ My emacs config is a package so that straight precompiles it.
         '((display-buffer-reuse-window
            display-buffer-same-window)))
 
-  ;; Got this on codingfont.com as my favorite coding font via an anonymous 1v1 tournament
-  (set-face-attribute
-   'default nil :font (font-spec :family "Fira Code" :size 12.0))
-
   ;; Enable S-SPC keybindings in pgtk emacs
   (setq pgtk-use-im-context-on-new-connection nil)
 #+END_SRC
@@ -227,6 +223,51 @@ Packages are configured with the ~use-package~ macro.
     (visual-fill-column-enable-sensible-window-split t)
     :config
     (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
+#+END_SRC
+
+** Fonts
+
+#+BEGIN_SRC emacs-lisp
+  (use-package fontaine
+    :straight t
+    :ensure t
+    :hook
+    ((after-init . fontaine-mode)
+     (after-init . ml/fontaine-regular-preset))
+    ;; :bind (("C-c f" . fontaine-set-preset)
+    ;;        ("C-c F" . fontaine-toggle-preset))
+    :init
+    (defun ml/fontaine-regular-preset ()
+      "Load the `regular' font preset."
+      (fontaine-set-preset 'regular))
+    :custom
+    (text-scale-remap-header-line t)
+    (fontaine-presets
+     '((regular) ; Assign the name "regular" to the defaults
+       (small
+        :default-height 90)
+       (large
+        :inherit medium
+        :default-height 150)
+       (presentation
+        :inherit regular
+        :default-height 180)
+       (t
+
+        ;; Got Fira Coda on codingfont.com as my favorite coding font via an anonymous 1v1 tournament
+        :default-family "Fira Code"
+        :fixed-pitch-family "Fira Code"
+
+        ;; I just like this one
+        :variable-pitch-family "Libertinus Serif"
+
+        ;; Font size in tenths of a point
+        :default-height 120
+
+        :line-spacing nil)))
+    :config
+    (with-eval-after-load 'beacon
+      (add-hook 'fontaine-set-preset-hook #'beacon-blink)))
 #+END_SRC
 
 ** Ligatures
@@ -808,9 +849,17 @@ Load direnv environment for each buffer.
 * org
 
 Configure org-mode early to ensure that no package loads the built-in version of org-mode
-before the install the upstream version.
+before they install the upstream version.
 
 #+BEGIN_SRC emacs-lisp
+  (defun ml/add-face-ancestor (face ancestor)
+    "Make FACE inherit from ANCESTOR."
+    (let* ((old (face-attribute face :inherit))
+           (new (cond ((or (not old) (eq old 'unspecified)) ancestor)
+                      ((symbolp old) (list ancestor old))
+                      (t (cons ancestor old)))))
+      (face-spec-set face `((t . (:inherit ,new))))))
+
   (use-package org
     ;; org with the development version of org-latex-preview
     :straight `(org
@@ -883,6 +932,7 @@ before the install the upstream version.
     (org-level-6 ((t . (:height 1.0))))
     :hook
     (org-mode . flycheck-mode)
+    (org-mode . variable-pitch-mode)
     (before-save . org-update-all-dblocks)
     :bind
     ("C-c c" . org-capture)
@@ -900,7 +950,16 @@ before the install the upstream version.
     ;; Load language support
     (org-babel-do-load-languages
      'org-babel-load-languages
-     org-babel-load-languages))
+     org-babel-load-languages)
+
+    ;; Make blocks, code and some other things fixed-pitch with variable-pitch-mode.
+    (cl-loop for face in '(org-block org-block-begin-line org-block-end-line org-code
+                                     org-document-info-keyword org-meta-line org-table
+                                     org-verbatim
+                                     ;; For the following ones, it is a matter of taste of
+                                     ;; these should be fixed pitch or not
+                                     org-link org-property-value org-special-keyword org-tag)
+             do (ml/add-face-ancestor face 'fixed-pitch)))
 
   (use-package org-latex-preview
     :custom
@@ -1371,7 +1430,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     (setq-default yas-buffer-local-condition ml-treesit-not-string-or-comment-condition)
 
     ;; Don't append newlines to snippet files
-    (add-hook 'snippet-mode (lambda () (setq require-final-newline nil)))
+    (add-hook 'snippet-mode-hook (lambda () (setq require-final-newline nil)))
 
     ;; `yas-maybe-expand' is not a function, so we cannot use :bind or bind-key and need to
     ;; load yasnippet eagerly

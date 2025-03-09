@@ -23,6 +23,8 @@ packages:
     sway swayidle chayang swaylock swaybg xorg-xwayland
     waybar otf-font-awesome ttf-jetbrains-mono-nerd
     autotiling-rs darkman fuzzel
+    # Fonts
+    otf-libertinus ttf-fira-code
     # Desktop portals to let flatpaks interact with other programs
     xdg-desktop-portal-wlr # Screenshots and screensharing
     xdg-desktop-portal-gtk # Everything else
@@ -62,7 +64,7 @@ packages:
     # Cryptography
     openssh keepassxc
     # Programming. npm is required by emacs-copilot
-    git vim emacs-wayland ttf-fira-code npm
+    git vim emacs-wayland npm
     # Latex
     texlive texlive-langenglish texlive-langgerman
     # Spell check
