@@ -166,14 +166,17 @@ Packages are configured with the ~use-package~ macro.
     :straight t
     :custom
     (hydra-hint-display-type 'posframe)
+    :config
     ;; Putting hydra in a posframe makes it so it does not mess with the window
-    ;; configuration
-    (hydra-posframe-show-params '( :poshandler posframe-poshandler-frame-bottom-center
-                                   :border-width 1
-                                   :border-color "gray50"
-                                   :alpha 80)))
+    ;; configuration. Also, this is a var, not a custom, so we need to setq it after loading
+    ;; the package.
+    (setq hydra-posframe-show-params '( :poshandler posframe-poshandler-frame-bottom-center
+                                        :border-width 1
+                                        :border-color "gray50"
+                                        :alpha 80)))
 
-  (use-package pretty-hydra :straight t)
+  (use-package pretty-hydra
+    :straight (pretty-hydra :host github :repo "martenlienen/major-mode-hydra.el" :branch "empty-line-prefix"))
 #+END_SRC
 
 * Theme
@@ -494,7 +497,6 @@ of functions.
 
   (use-package consult
     :straight t
-    :after hydra
     :custom
     (consult-narrow-key "<")
     (register-preview-delay 0)
@@ -1099,7 +1101,7 @@ The dwim commands should just be the default in modern emacs.
     :demand t
     :init
     (require 'hydra)
-    (defhydra hydra-smartparens (:hint nil)
+    (defhydra smartparens-hydra (:hint nil)
       "
    Moving^^^^                       Slurp & Barf^^   Wrapping^^            Sexp juggling^^^^               Destructive
   ------------------------------------------------------------------------------------------------------------------------
@@ -1179,7 +1181,7 @@ The dwim commands should just be the default in modern emacs.
     (sp-local-pair sp--html-modes "{%" "%}")
     (sp-local-pair sp--html-modes "{#" "#}")
 
-    :chords (("fd" . hydra-smartparens/body)))
+    :chords (("fd" . smartparens-hydra/body)))
 #+END_SRC
 
 ** Region
@@ -1212,32 +1214,28 @@ Quickly move to every word and character on screen.
 #+BEGIN_SRC emacs-lisp
   (use-package avy
     :straight t
-    :init
-    (require 'hydra)
-    (defhydra hydra-avy (:exit t :hint nil)
-      "
-   Line^^       Region^^        Goto
-  ----------------------------------------------------------
-   [_y_] yank   [_Y_] yank      [_c_] timed char  [_C_] char
-   [_m_] move   [_M_] move      [_w_] word        [_W_] any word
-   [_k_] kill   [_K_] kill      [_l_] line        [_L_] end of line"
-      ("c" avy-goto-char-timer)
-      ("C" avy-goto-char)
-      ("w" avy-goto-word-1)
-      ("W" avy-goto-word-0)
-      ("l" avy-goto-line)
-      ("L" avy-goto-end-of-line)
-      ("m" avy-move-line)
-      ("M" avy-move-region)
-      ("k" avy-kill-whole-line)
-      ("K" avy-kill-region)
-      ("y" avy-copy-line)
-      ("Y" avy-copy-region))
-    :config
-    (setq avy-timeout-seconds 0.25)
-
+    :pretty-hydra
+    ((:exit t)
+     ("Line"
+      (("y" avy-copy-line "copy")
+       ("m" avy-move-line "move")
+       ("k" avy-kill-whole-line "kill"))
+      "Region"
+      (("Y" avy-copy-region "copy")
+       ("M" avy-move-region "move")
+       ("K" avy-kill-region "kill"))
+      "Goto"
+      (("c" avy-goto-char-timer "timed char")
+       ("w" avy-goto-word-1 "word")
+       ("l" avy-goto-line "line"))
+      ""
+      (("C" avy-goto-char "char")
+       ("W" avy-goto-word-0 "any word")
+       ("L" avy-goto-end-of-line "end of line"))))
+    :custom
+    (avy-timeout-seconds 0.25)
     :bind (("M-s" . avy-goto-char-timer)
-           ("C-c a" . hydra-avy/body)))
+           ("C-c a" . avy-hydra/body)))
 #+END_SRC
 
 Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
@@ -1519,19 +1517,23 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
       (find-file file)
       (add-hook 'after-save-hook #'ml/gptel-reload-directives nil 'local)))
 
-  (defhydra gptel-hydra (:hint nil :exit t)
-    ("g" gptel "gptel")
-    ("m" gptel-menu "Menu")
-    ("s" gptel-send "Send")
-    ("a" gptel-add "Add context")
-    ("f" gptel-add-file "Add file")
-    ("r" gptel-rewrite "Rewrite/Refactor")
-    ("d" ml-create-or-edit-directive "Edit directives")
-    ("A" gptel-abort "Abort"))
-
   (use-package gptel
     :straight t
     :commands (gptel gptel-send)
+    :pretty-hydra
+    ((:exit t)
+     ("Main"
+      (("g" gptel "gptel")
+       ("m" gptel-menu "Menu"))
+      "Send"
+      (("s" gptel-send "Send")
+       ("r" gptel-rewrite "Rewrite"))
+      "Context"
+      (("a" gptel-add "Add context")
+       ("f" gptel-add-file "Add file"))
+      "Other"
+      (("d" ml-create-or-edit-directive "Edit directives")
+       ("A" gptel-abort "Abort"))))
     :custom ((gptel-default-mode #'org-mode)
              (gptel-prompt-prefix-alist '((org-mode . "*Prompt*: ")
                                           (markdown-mode . "**Prompt**: ")
@@ -2150,7 +2152,7 @@ them to LaTeX!
     :custom ((preview-scale-function #'ml-preview-scale-up)
              (preview-auto-cache-preamble t))
     :pretty-hydra
-    ((:quit-key "g" :color blue)
+    ((:quit-key "g" :exit t)
      ("preview"
       (("p" preview-at-point "at point")
        ("d" preview-document "document")
