@@ -1308,12 +1308,17 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
 #+BEGIN_SRC emacs-lisp
   (use-package lsp-mode
     :straight t
-    :custom ((lsp-auto-guess-root t)
-             (lsp-auto-configure t)
-             (lsp-signature-doc-lines 1)
-             (lsp-keymap-prefix nil)
-             (lsp-disabled-clients '(ruff)))
-    :hook ((lsp-mode . lsp-enable-which-key-integration))
+    :custom
+    (lsp-auto-guess-root t)
+    (lsp-auto-configure t)
+    (lsp-signature-doc-lines 1)
+    (lsp-keymap-prefix nil)
+    (lsp-disabled-clients '(ruff))
+    ;; corfu deals with completions
+    (lsp-completion-provider :none)
+    :hook
+    (lsp-mode . lsp-enable-which-key-integration)
+    (lsp-completion-mode . ml/lsp-mode-setup-orderless)
     :commands (lsp)
     :bind (("C-?" . lsp-describe-thing-at-point)
            ;; Extra binding for terminal UI
@@ -1321,7 +1326,12 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
            ("<f10>" . lsp-rename)
            ("S-<f10>" . lsp-execute-code-action)
            :map lsp-mode-map
-           ("C-S-SPC" . nil)))
+           ("C-S-SPC" . nil))
+    :init
+    (defun ml/lsp-mode-setup-orderless ()
+      (setf
+       (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+       '(orderless))))
 
   (use-package lsp-treemacs :straight t)
   (use-package lsp-headerline
@@ -1362,31 +1372,38 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
 ** Auto-Completion
 
 #+BEGIN_SRC emacs-lisp
-  (use-package company
+  (use-package corfu
     :straight t
-    :bind (("C-M-SPC" . company-complete)
-           :map company-active-map
-           ("<tab>" . nil))
+    :custom
+    (corfu-cycle t)
+    (corfu-on-exact-match 'insert)
+    (corfu-auto t)
+    (corfu-auto-prefix 2)
+    ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+    ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+    ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+    ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
     :init
-    (setf company-idle-delay 0
-          company-minimum-prefix-length 2
-          company-show-quick-access t
-          company-selection-wrap-around t
-          company-backends (list #'company-capf
-                                 (list #'company-dabbrev-code
-                                       #'company-keywords)
-                                 #'company-files
-                                 #'company-dabbrev)
-          company-global-modes (list 'not 'org-mode))
-    :config
-    (global-company-mode t))
+    (global-corfu-mode))
 
-  (use-package company-dabbrev
-    :straight company
+  (use-package corfu-history
+    :after corfu
     :init
-    (setf company-dabbrev-ignore-case 'keep-prefix
-          company-dabbrev-ignore-invisible t
-          company-dabbrev-downcase nil))
+    (corfu-history-mode))
+
+  (use-package corfu-indexed
+    :after corfu
+    :custom
+    (corfu-indexed-start 1)
+    :init
+    (corfu-indexed-mode))
+
+  (use-package corfu-popupinfo
+    :after corfu
+    :custom
+    (corfu-popupinfo-delay '(2.0 . 0.2))
+    :init
+    (corfu-popupinfo-mode))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
