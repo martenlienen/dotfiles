@@ -1639,7 +1639,8 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
                            (line-content (string-trim line))
                            (defaults (seq-filter (lambda (h) (and h (length> h 0))) (list word line-content))))
                       (read-string "Kagi: " nil nil defaults))))))
-    (browse-url (concat "https://kagi.com/search?q=" (url-hexify-string query))))
+    (browse-url (concat "https://kagi.com/search?q=" (url-hexify-string query)))
+    (start-process "swaymsg" nil "swaymsg" "[app_id=firefox] focus"))
 
   (global-set-key (kbd "C-c G") #'ml/kagi-search-region)
 #+END_SRC
