@@ -162,7 +162,16 @@ Packages are configured with the ~use-package~ macro.
     :config (key-chord-mode t)
     :straight t)
 
-  (use-package hydra :straight t)
+  (use-package hydra
+    :straight t
+    :custom
+    (hydra-hint-display-type 'posframe)
+    ;; Putting hydra in a posframe makes it so it does not mess with the window
+    ;; configuration
+    (hydra-posframe-show-params '( :poshandler posframe-poshandler-frame-bottom-center
+                                   :border-width 1
+                                   :border-color "gray50"
+                                   :alpha 80)))
 
   (use-package pretty-hydra :straight t)
 #+END_SRC
@@ -515,6 +524,11 @@ of functions.
     :straight t
     :config
     (which-key-mode))
+
+  (use-package which-key-posframe
+    :straight t
+    :config
+    (which-key-posframe-mode))
 
   (use-package embark
     :straight t
@@ -2136,7 +2150,7 @@ them to LaTeX!
     :custom ((preview-scale-function #'ml-preview-scale-up)
              (preview-auto-cache-preamble t))
     :pretty-hydra
-    ((:quit-key "g" :title "preview" :color blue)
+    ((:quit-key "g" :color blue)
      ("preview"
       (("p" preview-at-point "at point")
        ("d" preview-document "document")
