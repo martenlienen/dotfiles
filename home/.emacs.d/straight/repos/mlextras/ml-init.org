@@ -511,7 +511,10 @@ of functions.
     ;; This adds thin lines, sorting and hides the mode line of the window.
     (advice-add #'register-preview :override #'consult-register-window))
 
-  (use-package which-key :straight t)
+  (use-package which-key
+    :straight t
+    :config
+    (which-key-mode))
 
   (use-package embark
     :straight t
@@ -1929,9 +1932,6 @@ Put emacs into distraction-free writing mode on demand.
     (rust-mode . cargo-minor-mode)
     (rust-mode . lsp)
     (rust-mode . flycheck-mode))
-
-  (use-package flycheck
-    :straight t)
 
   (use-package  flycheck-rust
     :straight t
