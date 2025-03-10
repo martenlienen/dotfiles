@@ -1591,20 +1591,22 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     :bind ("C-c d" . dictcc))
 #+END_SRC
 
-** google
+** kagi
 
 #+BEGIN_SRC emacs-lisp
-  (defun ml/google-search-region (query)
-    "Search QUERY on google."
+  (defun ml/kagi-search-region (query)
+    "Search QUERY on kagi."
     (interactive
-     (list (cond ((use-region-p)
-                  (buffer-substring-no-properties (region-beginning) (region-end)))
-                 (current-prefix-arg (read-string "Google: "))
-                 (t (buffer-substring-no-properties (line-beginning-position)
-                                                    (line-end-position))))))
-    (browse-url (concat "https://www.google.com/search?q=" (url-hexify-string query))))
+     (list (cond ((use-region-p) (buffer-substring-no-properties (region-beginning) (region-end)))
+                 (t (let* ((word (-some-> (symbol-at-point) (symbol-name)))
+                           (line (buffer-substring-no-properties (line-beginning-position)
+                                                                 (line-end-position)))
+                           (line-content (string-trim line))
+                           (defaults (seq-filter (lambda (h) (and h (length> h 0))) (list word line-content))))
+                      (read-string "Kagi: " nil nil defaults))))))
+    (browse-url (concat "https://kagi.com/search?q=" (url-hexify-string query))))
 
-  (global-set-key (kbd "C-c G") 'ml/google-search-region)
+  (global-set-key (kbd "C-c G") #'ml/kagi-search-region)
 #+END_SRC
 
 ** Debugging
