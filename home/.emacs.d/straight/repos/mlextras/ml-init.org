@@ -709,7 +709,9 @@ of functions.
 
 #+BEGIN_SRC emacs-lisp
   (use-package project
-    :bind (("C-x C-f" . project-find-file)))
+    :bind (("C-x C-f" . project-find-file))
+    :config
+    (add-to-list 'project-switch-commands (list #'magit-project-status "Git Status" "g")))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
