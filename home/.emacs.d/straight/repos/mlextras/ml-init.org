@@ -206,10 +206,10 @@ Packages are configured with the ~use-package~ macro.
 
   (use-package circadian
     :straight t
-    :ensure t
+    :custom
+    (circadian-themes '(("8:00" . doom-tomorrow-day)
+                        ("20:00" . doom-tomorrow-night)))
     :config
-    (setq circadian-themes '(("8:00" . doom-tomorrow-day)
-                             ("20:00" . doom-tomorrow-night)))
     (circadian-setup))
 
   (use-package nord-theme
