@@ -14,6 +14,7 @@ My emacs config is a package so that straight precompiles it.
 #+END_SRC
 
 * Globals
+
 #+BEGIN_SRC emacs-lisp
   ;; In some X/WM configurations (e.g. xpra with i3) emacs only fills its assigned frame to
   ;; a multiple of the character width/height, leaving an ugly black border. This ensures
@@ -223,18 +224,6 @@ Packages are configured with the ~use-package~ macro.
         (interactive)
         (call-interactively #'all-the-icons-install-fonts)
         (call-interactively #'nerd-icons-install-fonts))))
-#+END_SRC
-
-** Display
-
-#+BEGIN_SRC emacs-lisp
-  (use-package visual-fill-column
-    :straight t
-    :custom
-    (visual-fill-column-enable-sensible-window-split t)
-    :hook
-    (text-mode . visual-line-fill-column-mode)
-    (gptel-mode . visual-line-fill-column-mode))
 #+END_SRC
 
 ** Fonts
@@ -773,9 +762,7 @@ Highlight / blink the cursor when point moves abruptly.
 
 * Utilities
 
-The ~ml~ package (conspicuously named after myself) contains a loose collection of
-utility functions and commands which is why it cannot be put easily into one of the
-existing sections.
+The ~ml~ package (conspicuously named after myself) contains a loose collection of utility functions and commands which is why it cannot be put easily into one of the existing sections.
 
 #+BEGIN_SRC emacs-lisp
   (defun ml-insert-random-seed ()
@@ -814,10 +801,7 @@ existing sections.
 
 ** PATH
 
-Teach emacs my modified ~PATH~ so that it can, for example, find local python
-installations. We have to set ~exec-path-from-shell-arguments~ to ~""~ so that
-it uses an interactive shell instead of a login one which would not read my
-~.zshenv~ file, where ~PATH~ is initialized.
+Teach emacs my modified ~PATH~ so that it can, for example, find local python installations. We have to set ~exec-path-from-shell-arguments~ to ~""~ so that it uses an interactive shell instead of a login one which would not read my ~.zshenv~ file, where ~PATH~ is initialized.
 
 #+BEGIN_SRC emacs-lisp
   (use-package exec-path-from-shell
@@ -1668,12 +1652,21 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
 Put emacs into distraction-free writing mode on demand.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package darkroom
-    :straight (darkroom :repo "joaotavora/darkroom" :host github)
-    :bind (("<f7>" . #'darkroom-mode))
+  (use-package simple
+    :hook
+    (text-mode . visual-line-mode))
 
+  (use-package olivetti
+    :straight t
+    :custom
+    (olivetti-body-width 100))
+
+  (use-package auto-olivetti
+    :straight (auto-olivetti :host sourcehut :repo "ashton314/auto-olivetti")
+    :custom
+    (auto-olivetti-threshold-fraction 1.1)
     :config
-    (setq darkroom-text-scale-increase 1.5))
+    (auto-olivetti-mode))
 
   (use-package focus
     :straight t
@@ -2017,10 +2010,7 @@ Put emacs into distraction-free writing mode on demand.
 
 ** LaTeX
 
-LaTeX tables are really horrible to create and edit for most simple
-use-cases. But ~org-mode~ comes to our rescue. Simply enabling ~org-table-mode~
-gives you automatically resizing ASCII tables everywhere and you can even export
-them to LaTeX!
+LaTeX tables are really horrible to create and edit for most simple use-cases. But ~org-mode~ comes to our rescue. Simply enabling ~org-table-mode~ gives you automatically resizing ASCII tables everywhere and you can even export them to LaTeX!
 
 #+BEGIN_SRC emacs-lisp
   (defun enable-word-wrap ()
