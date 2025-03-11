@@ -524,6 +524,10 @@ of functions.
 
   (use-package which-key
     :straight t
+    :bind
+    ( :map help-map
+      ("j" . which-key-show-full-major-mode)
+      ("J" . which-key-show-top-level))
     :config
     (which-key-mode))
 
