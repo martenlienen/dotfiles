@@ -159,8 +159,8 @@ Packages are configured with the ~use-package~ macro.
 #+BEGIN_SRC emacs-lisp
   (require 'bind-key)
   (use-package use-package-chords
-    :config (key-chord-mode t)
-    :straight t)
+    :straight t
+    :config (key-chord-mode t))
 
   (use-package hydra
     :straight t
@@ -176,7 +176,7 @@ Packages are configured with the ~use-package~ macro.
                                         :alpha 80)))
 
   (use-package pretty-hydra
-    :straight (pretty-hydra :host github :repo "martenlienen/major-mode-hydra.el" :branch "empty-line-prefix"))
+    :straight t)
 #+END_SRC
 
 * Theme
@@ -607,6 +607,8 @@ of functions.
 
 *** Cursor
 
+Highlight / blink the cursor when point moves abruptly.
+
 #+BEGIN_SRC emacs-lisp
   (use-package beacon
     :straight t
@@ -709,14 +711,7 @@ of functions.
   (use-package dired-x)
 #+END_SRC
 
-** Project Management
-
-#+BEGIN_SRC emacs-lisp
-  (use-package project
-    :bind (("C-x C-f" . project-find-file))
-    :config
-    (add-to-list 'project-switch-commands (list #'magit-project-status "Git Status" "g")))
-#+END_SRC
+** File Explorer
 
 #+BEGIN_SRC emacs-lisp
   (defun ml-treemacs-dwim ()
@@ -752,6 +747,15 @@ of functions.
     :straight t
     :after (treemacs perspective)
     :config (treemacs-set-scope-type 'Perspectives))
+#+END_SRC
+
+** Project Management
+
+#+BEGIN_SRC emacs-lisp
+  (use-package project
+    :bind (("C-x C-f" . project-find-file))
+    :config
+    (add-to-list 'project-switch-commands (list #'magit-project-status "Git Status" "g")))
 #+END_SRC
 
 * Tramp
