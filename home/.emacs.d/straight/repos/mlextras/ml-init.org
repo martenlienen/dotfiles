@@ -958,12 +958,12 @@ Configure org-mode early to ensure that no package loads the built-in version of
 
   %?" :jump-to-captured t :prepend t)))
     :custom-face
-    (org-document-title ((t . (:height 2.0))))
-    (org-level-1 ((t . (:height 1.75))))
-    (org-level-2 ((t . (:height 1.5))))
-    (org-level-3 ((t . (:height 1.33))))
-    (org-level-4 ((t . (:height 1.2))))
-    (org-level-5 ((t . (:height 1.1))))
+    (org-document-title ((t . (:height 1.2))))
+    (org-level-1 ((t . (:height 1.2))))
+    (org-level-2 ((t . (:height 1.1))))
+    (org-level-3 ((t . (:height 1.0))))
+    (org-level-4 ((t . (:height 1.0))))
+    (org-level-5 ((t . (:height 1.0))))
     (org-level-6 ((t . (:height 1.0))))
     :hook
     (org-mode . flycheck-mode)
