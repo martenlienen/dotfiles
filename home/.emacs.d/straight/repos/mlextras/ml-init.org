@@ -2191,6 +2191,24 @@ LaTeX tables are really horrible to create and edit for most simple use-cases. B
                 ("|" . nil)))
 #+END_SRC
 
+** References & Citations
+
+#+BEGIN_SRC emacs-lisp
+  (use-package citar
+    :straight t
+    :custom
+    (citar-open-entry-function #'citar-open-entry-in-zotero)
+    :hook
+    (org-mode . citar-capf-setup)
+    (LaTeX-mode . citar-capf-setup))
+
+  (use-package citar-embark
+    :straight t
+    :after citar embark
+    :config
+    (citar-embark-mode))
+#+END_SRC
+
 ** Typst
 
 #+BEGIN_SRC emacs-lisp
