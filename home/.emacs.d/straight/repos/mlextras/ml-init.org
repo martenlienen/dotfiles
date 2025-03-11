@@ -157,7 +157,6 @@ Automatically jump to origin file and line when an the point is on an error.
 Packages are configured with the ~use-package~ macro.
 
 #+BEGIN_SRC emacs-lisp
-  (require 'bind-key)
   (use-package use-package-chords
     :straight t
     :config (key-chord-mode t))
@@ -684,8 +683,10 @@ Highlight / blink the cursor when point moves abruptly.
     (interactive)
     (kill-buffer (current-buffer)))
 
-  (bind-keys ("C-x k" . ml/kill-this-buffer)
-             ("C-x C-k" . kill-buffer))
+  (use-package emacs
+    :bind
+    ("C-x k" . ml/kill-this-buffer)
+    ("C-x C-k" . kill-buffer))
 
   (use-package ibuffer
     :bind ("C-x C-b" . ibuffer))
@@ -699,10 +700,9 @@ Highlight / blink the cursor when point moves abruptly.
 
 #+BEGIN_SRC emacs-lisp
   (use-package dired
-    :config
-    (setf dired-listing-switches "-lahv")
-
-    (bind-key "M-w" #'wdired-change-to-wdired-mode dired-mode-map))
+    :bind (:map dired-mode-map ("M-w" . #'wdired-change-to-wdired-mode))
+    :custom
+    (dired-listing-switches "-lahv"))
 #+END_SRC
 
 ~dired-jump~ from ~dired-x~ is probably my most used ~dired~ command.
@@ -1061,9 +1061,11 @@ Give org a modern look.
 
 The dwim commands should just be the default in modern emacs.
 #+BEGIN_SRC emacs-lisp
-  (bind-keys ("M-u" . upcase-dwim)
-             ("M-l" . downcase-dwim)
-             ("M-c" . capitalize-dwim))
+  (use-package emacs
+    :bind
+    ("M-u" . upcase-dwim)
+    ("M-l" . downcase-dwim)
+    ("M-c" . capitalize-dwim))
 #+END_SRC
 
 ** Multiple Cursors
@@ -1162,14 +1164,8 @@ The dwim commands should just be the default in modern emacs.
 
       ("q" nil)
       ("g" nil))
-    :config
-    ;; Smartparens defines this alias for backwards compatibility but somehow it does not
-    ;; work, so I just define it myself
-    (defalias 'sp--syntax-class-to-char 'syntax-class-to-char)
-
-    (require 'smartparens-config)
-
-    (bind-keys :map smartparens-mode-map
+    :bind
+    ( :map smartparens-mode-map
       ("C-M-f" . sp-forward-sexp)
       ("C-M-b" . sp-backward-sexp)
       ("C-M-n" . sp-down-sexp)
@@ -1180,6 +1176,12 @@ The dwim commands should just be the default in modern emacs.
       ("C-M-e" . sp-end-of-sexp)
       ("C-M-k" . sp-kill-sexp)
       ("C-M-t" . sp-transpose-sexp))
+    :config
+    ;; Smartparens defines this alias for backwards compatibility but somehow it does not
+    ;; work, so I just define it myself
+    (defalias 'sp--syntax-class-to-char 'syntax-class-to-char)
+
+    (require 'smartparens-config)
 
     (smartparens-global-mode t)
     (smartparens-strict-mode t)
@@ -1501,8 +1503,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     ;; Don't append newlines to snippet files
     (add-hook 'snippet-mode-hook (lambda () (setq require-final-newline nil)))
 
-    ;; `yas-maybe-expand' is not a function, so we cannot use :bind or bind-key and need to
-    ;; load yasnippet eagerly
+    ;; `yas-maybe-expand' is not a function, so we cannot use :bind and need to load yasnippet eagerly
     (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
     ;; Bind SPC globally because otherwise the fallthrough in `yas-maybe-expand` does not
     ;; work
@@ -1930,21 +1931,23 @@ Put emacs into distraction-free writing mode on demand.
 ** Emacs Lisp
 
 #+BEGIN_SRC emacs-lisp
-  (defun ml-run-all-ert-tests ()
+  (defun ml/run-all-ert-tests ()
     "Run all ert tests defined."
     (interactive)
     (ert t))
 
   (use-package macrostep :straight t)
 
-  (use-package lisp-mode
+  (use-package elisp-mode
+    :bind
+    ( :map emacs-lisp-mode-map
+      ("C-h C-f" . #'find-function)
+      ("C-c e t" . #'ml/run-all-ert-tests)
+      ("C-c e b" . #'eval-buffer)
+      ("C-c e m" . #'macrostep-expand))
+    :hook
+    (emacs-lisp-mode . eldoc-mode)
     :config
-    (bind-key "C-h C-f" 'find-function emacs-lisp-mode-map)
-    (bind-key "C-c e t" 'ml-run-all-ert-tests emacs-lisp-mode-map)
-    (bind-key "C-c e b" 'eval-buffer emacs-lisp-mode-map)
-    (bind-key "C-c e m" 'macrostep-expand emacs-lisp-mode-map)
-
-    (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
     (with-eval-after-load 'smartparens
       (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode))
     (with-eval-after-load 'flycheck
@@ -2235,10 +2238,8 @@ them to LaTeX!
 
   (use-package rst
     :straight t
-    :config
-    (bind-key "<C-right>" #'ml-underline rst-mode-map)
-
-    (add-hook 'rst-mode-hook #'flycheck-mode))
+    :bind (:map rst-mode-map ("<C-right>" #'ml-underline))
+    :hook (rst-mode . #'flycheck-mode))
 #+END_SRC
 
 ** YAML
