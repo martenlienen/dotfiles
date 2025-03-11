@@ -567,6 +567,7 @@ of functions.
     :bind (("<f9>" . deadgrep)
            ("S-<f9>" . ml-deadgrep-here)
            :map deadgrep-mode-map
+           ("C-c M-w" . deadgrep-edit-mode)
            ("s" . deadgrep-search-term)
            ("d" . deadgrep-directory)
            ("a" . ml-deadgrep-file-type-all)
@@ -700,7 +701,7 @@ Highlight / blink the cursor when point moves abruptly.
 
 #+BEGIN_SRC emacs-lisp
   (use-package dired
-    :bind (:map dired-mode-map ("M-w" . #'wdired-change-to-wdired-mode))
+    :bind (:map dired-mode-map ("C-c M-w" . #'wdired-change-to-wdired-mode))
     :custom
     (dired-listing-switches "-lahv"))
 #+END_SRC
