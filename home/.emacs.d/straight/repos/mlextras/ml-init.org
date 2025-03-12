@@ -2,7 +2,7 @@
 #+property: header-args :tangle yes :results silent
 #+startup: content
 
-My emacs config is a package so that straight precompiles it.
+My Emacs configuration is a package so that straight precompiles it.
 
 #+BEGIN_SRC emacs-lisp
   ;;; ml-init.el --- My config as a package  -*- lexical-binding: t; -*-
@@ -1505,7 +1505,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
     (yas-global-mode t))
 #+END_SRC
 
-** ChatGPT
+** LLMs
 
 #+BEGIN_SRC emacs-lisp
   (defun ml-create-or-edit-directive ()
@@ -2247,34 +2247,6 @@ LaTeX tables are really horrible to create and edit for most simple use-cases. B
 #+BEGIN_SRC emacs-lisp
   (use-package markdown-mode
     :straight t)
-#+END_SRC
-
-** reStructuredText
-
-#+BEGIN_SRC emacs-lisp
-  (defun ml-length-of-line ()
-    "Return length of the current line."
-    (save-excursion
-      (- (progn (end-of-line) (point))
-         (progn (beginning-of-line) (point)))))
-
-  (defun ml-underline ()
-    "Repeat the character at point until it stretches the length of
-    the previous line."
-    (interactive)
-    (let* ((char (preceding-char))
-           (prev-length (save-excursion
-                          (forward-line -1)
-                          (ml-length-of-line)))
-           (curr-length (save-excursion
-                          (ml-length-of-line)))
-           (repeat-length (max 0 (- prev-length curr-length))))
-      (insert (s-repeat repeat-length (char-to-string char)))))
-
-  (use-package rst
-    :straight t
-    :bind (:map rst-mode-map ("<C-right>" #'ml-underline))
-    :hook (rst-mode . #'flycheck-mode))
 #+END_SRC
 
 ** YAML
