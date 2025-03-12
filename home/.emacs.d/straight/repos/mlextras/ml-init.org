@@ -794,27 +794,17 @@ Highlight / blink the cursor when point moves abruptly.
 The ~ml~ package (conspicuously named after myself) contains a loose collection of utility functions and commands which is why it cannot be put easily into one of the existing sections.
 
 #+BEGIN_SRC emacs-lisp
-  (defun ml-insert-random-seed ()
-    "Insert a random 64-bit integer at point (32-bit with prefix arg)."
-    (interactive)
-    (let ((seed (random (ash 1 (if current-prefix-arg 32 64)))))
-      (insert (format "%d" seed))))
-
   (use-package mlutils
     :straight (ml :local-repo "mlextras" :type nil)
-    :bind (("C-a" . ml-go-to-beginning-of-line-dwim)
-           ("M-D" . ml-duplicate-text)
-           ("C-S-k" . ml-kill-line)
-           ("C-o" . ml-open-line)
-           ("C-S-o" . ml-open-line-above)
-           ("C-S-p" . ml-move-text-up)
-           ("C-S-n" . ml-move-text-down)
-           ("C-c 0" . ml-insert-random-seed))
-    :config
-    ;; For some reason, M-S-d sends C-M-_ ? in wezterm, so just add a duplicate binding
-    (let ((keymap (make-sparse-keymap)))
-      (define-key keymap (kbd "?") #'ml-duplicate-text)
-      (define-key global-map (kbd "C-M-_") keymap)))
+    :bind (("C-a" . ml/beginning-of-line)
+           ("C-e" . ml/end-of-line)
+           ("M-D" . ml/duplicate-text)
+           ("C-S-k" . ml/kill-line)
+           ("C-o" . ml/open-line)
+           ("C-S-o" . ml/open-line-above)
+           ("C-S-p" . ml/move-text-up)
+           ("C-S-n" . ml/move-text-down)
+           ("C-c 0" . ml/insert-random-seed)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp

@@ -6,7 +6,7 @@
 
 (require 'cl-lib)
 
-(defun ml-go-to-beginning-of-line-dwim ()
+(defun ml/beginning-of-line-or-text ()
   "Toggle point between beginning of line and first non-whitespace character."
   (interactive)
   (let ((prev-pos (point)))
@@ -14,7 +14,35 @@
     (when (= prev-pos (point))
       (move-beginning-of-line nil))))
 
-(defun ml-move-text (lines)
+(defun ml/beginning-of-line ()
+  "Move to the beginning of the line.
+
+Goes by visual line except with prefix argument where it always goes to
+beginning of the logical line."
+  (interactive)
+  (if (bound-and-true-p visual-line-mode)
+      (if current-prefix-arg
+          (ml/beginning-of-line-or-text)
+        (if (= (save-excursion (beginning-of-visual-line) (point))
+               (save-excursion (beginning-of-line) (point)))
+            ;; We are in the first line of a multi-line visual line
+            (ml/beginning-of-line-or-text)
+          (beginning-of-visual-line)))
+    (ml/beginning-of-line-or-text)))
+
+(defun ml/end-of-line ()
+  "Go to the end of the line.
+
+Goes by visual line except with prefix argument where it always goes to
+the end of the logical line."
+  (interactive)
+  (if (bound-and-true-p visual-line-mode)
+      (if current-prefix-arg
+          (end-of-line)
+        (end-of-visual-line))
+    (end-of-line)))
+
+(defun ml/move-text (lines)
   "Move the current line or region LINES lines."
   (interactive "p")
   (let* ((region? (use-region-p))
@@ -44,17 +72,17 @@
         (set-mark (+ insert-start mark-offset))
         (setq deactivate-mark nil)))))
 
-(defun ml-move-text-up (lines)
+(defun ml/move-text-up (lines)
   "Move the current line or region LINES lines up."
   (interactive "p")
-  (ml-move-text (- lines)))
+  (ml/move-text (- lines)))
 
-(defun ml-move-text-down (lines)
+(defun ml/move-text-down (lines)
   "Move the current line or region LINES lines down."
   (interactive "p")
-  (ml-move-text lines))
+  (ml/move-text lines))
 
-(defun ml-duplicate-text (times)
+(defun ml/duplicate-text (times)
   "Duplicate the current line or region TIMES times.
 
 If the region is active, it duplicates from the start of the
@@ -88,13 +116,13 @@ first line of the region to the end of the last."
       (set-mark (+ 1 mark? (* times (length text))))
       (setq deactivate-mark nil))))
 
-(defun ml-open-line ()
+(defun ml/open-line ()
   "Create a new line below and put point into it."
   (interactive)
   (move-end-of-line nil)
   (newline-and-indent))
 
-(defun ml-open-line-above ()
+(defun ml/open-line-above ()
   "Create a new line above point and move point into it."
   (interactive)
   (move-beginning-of-line nil)
@@ -102,7 +130,7 @@ first line of the region to the end of the last."
   (forward-line -1)
   (indent-according-to-mode))
 
-(defun ml-kill-line ()
+(defun ml/kill-line ()
   "Kill the current line."
   (interactive)
   (let ((pos (point)))
@@ -111,6 +139,12 @@ first line of the region to the end of the last."
     (move-end-of-line nil)
     (when (< pos (point))
       (goto-char pos))))
+
+(defun ml/insert-random-seed ()
+  "Insert a random 64-bit integer at point (32-bit with prefix arg)."
+  (interactive)
+  (let ((seed (random (ash 1 (if current-prefix-arg 32 64)))))
+    (insert (format "%d" seed))))
 
 (provide 'mlutils)
 ;;; mlutils.el ends here
