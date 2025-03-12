@@ -365,7 +365,7 @@ in a condensed format.
     :bind ("C-h C-m" . discover-my-major))
 #+END_SRC
 
-~helpful~ puts a lot of extra funcionality on help pages such as the source code
+~helpful~ puts a lot of extra functionality on help pages such as the source code
 of functions.
 
 #+BEGIN_SRC emacs-lisp
@@ -806,7 +806,7 @@ The ~ml~ package (conspicuously named after myself) contains a loose collection 
 
 ** PATH
 
-Teach emacs my modified ~PATH~ so that it can, for example, find local python installations. We have to set ~exec-path-from-shell-arguments~ to ~""~ so that it uses an interactive shell instead of a login one which would not read my ~.zshenv~ file, where ~PATH~ is initialized.
+Teach Emacs my modified ~PATH~ so that it can, for example, find local python installations. We have to set ~exec-path-from-shell-arguments~ to ~""~ so that it uses an interactive shell instead of a login one which would not read my ~.zshenv~ file, where ~PATH~ is initialized.
 
 #+BEGIN_SRC emacs-lisp
   (use-package exec-path-from-shell
@@ -830,7 +830,7 @@ Load direnv environment for each buffer.
 
 ** Terminal UI
 
-~term-key~ configures emacs and the terminal to communicate arbitrary key combinations, such as C-S-o, via escape codes. Without this, it is not possible to send these key combinations to emacs running in a terminal.
+~term-key~ configures Emacs and the terminal to communicate arbitrary key combinations, such as C-S-o, via escape codes. Without this, it is not possible to send these key combinations to Emacs running in a terminal.
 
 #+BEGIN_SRC emacs-lisp
   (defun ml/want-key-p (key mods)
@@ -1049,7 +1049,7 @@ Configure org-mode early to ensure that no package loads the built-in version of
 
 ** Better Defaults
 
-The dwim commands should just be the default in modern emacs.
+The dwim commands should just be the default in modern Emacs.
 #+BEGIN_SRC emacs-lisp
   (use-package emacs
     :bind
@@ -1260,7 +1260,7 @@ Use smart beginning and end moves instead of just ~point-min~ and ~point-max~.
 
 ** Undo
 
-Undoing can be quite tricky to keep track of mentally in emacs because the undo list also
+Undoing can be quite tricky to keep track of mentally in Emacs because the undo list also
 records undos. `vundo` presents the undo list as a tree structure.
 
 #+BEGIN_SRC emacs-lisp
@@ -1270,7 +1270,7 @@ records undos. `vundo` presents the undo list as a tree structure.
     :bind (("C-c C-/" . vundo)))
 #+END_SRC
 
-Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-all default.
+Use two keys for the usual, linear undo instead of Emacs' one-key-to-rule-them-all default.
 
 #+BEGIN_SRC emacs-lisp
   (use-package undo-fu
@@ -1654,7 +1654,7 @@ Use two keys for the usual, linear undo instead of emacs' one-key-to-rule-them-a
 
 * Writing
 
-Put emacs into distraction-free writing mode on demand.
+Put Emacs into distraction-free writing mode on demand.
 
 #+BEGIN_SRC emacs-lisp
   (use-package simple
@@ -2274,3 +2274,7 @@ LaTeX tables are really horrible to create and edit for most simple use-cases. B
   (provide 'ml-init)
   ;;; ml-init.el ends here
 #+END_SRC
+
+# Local Variables:
+# jinx-local-words: "undos vundo"
+# End:
