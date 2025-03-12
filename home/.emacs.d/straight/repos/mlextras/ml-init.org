@@ -2221,8 +2221,19 @@ LaTeX tables are really horrible to create and edit for most simple use-cases. B
     :straight t
     :demand t
     :hook (after-init . global-jinx-mode)
+    :pretty-hydra
+    ((:quit-key "q")
+     ("Navigation"
+      (("n" jinx-next "next")
+       ("p" jinx-previous "previous"))
+      "Correct"
+      (("j" jinx-correct-nearest "nearest")
+       ("a" jinx-correct-all "all" :exit t))
+      "Setup"
+      (("l" jinx-languages "languages" :exit t))))
     :bind
     ("M-$" . jinx-correct-nearest)
+    ("C-c $" . jinx-hydra/body)
     ( :map jinx-repeat-map
       ("RET" . #'jinx-correct))
     :config
