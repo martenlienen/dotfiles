@@ -524,17 +524,22 @@ of functions.
     :config
     (which-key-posframe-mode))
 
+  (use-package posframe
+    :straight t)
+
   (use-package embark
     :straight t
+    :after posframe
     :bind ("M-o" . embark-act)
-    :config
-    (require 'which-key)
-    (setq embark-action-indicator
-          (lambda (map _target)
-            (which-key--show-keymap "Embark" map nil nil 'no-paging)
-            #'which-key--hide-popup-ignore-command)
-          embark-become-indicator embark-action-indicator)
+    :init
+    (defun ml/display-buffer-in-posframe (buffer alist)
+      "Display BUFFER using posframe.
 
+  Ignores ALIST."
+      (posframe-show buffer :poshandler #'posframe-poshandler-frame-center))
+    :custom
+    (embark-verbose-indicator-display-action '(ml/display-buffer-in-posframe))
+    :config
     ;; Hide the mode line of the Embark live/completions buffers
     (add-to-list 'display-buffer-alist
                  '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
