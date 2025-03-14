@@ -1001,14 +1001,13 @@ Configure org-mode early to ensure that no package loads the built-in version of
       (if-let* ((project (project-current))
                 (root (project-root project)))
           (f-join root "notes.org")))
-
+    :config
     (defun ml/find-note ()
       "Find a file in `org-directory'."
       (interactive)
       (let ((default-directory org-directory))
-        (project-find-file)))
-    :config
-    (require 'org-crypt)
+        (project-find-file)))  (require 'org-crypt)
+
     (org-crypt-use-before-save-magic)
 
     ;; Load language support
@@ -1049,7 +1048,11 @@ Configure org-mode early to ensure that no package loads the built-in version of
 
   (use-package org-ql
     :straight t
-    :after org)
+    :demand t
+    :after org
+    :config
+    ;; Load dynamic block support in org-mode
+    (require 'org-ql-search))
 
   (use-package org-modern
     :straight t
