@@ -896,6 +896,10 @@ Load direnv environment for each buffer.
 Configure org-mode early to ensure that no package loads the built-in version of org-mode before they install the upstream version.
 
 #+BEGIN_SRC emacs-lisp
+  (use-package calendar
+    :custom
+    (calendar-week-start-day 1))
+
   (defun ml/add-face-ancestor (face ancestor)
     "Make FACE inherit from ANCESTOR."
     (let* ((old (face-attribute face :inherit))
