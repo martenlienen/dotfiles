@@ -10,7 +10,7 @@
   '((?o . org-mode)
     (?t . toml-ts-mode)
     (?m . markdown-mode)
-    (?l . lisp-interaction-mode)
+    (?e . emacs-lisp-mode)
     (?p . python-mode)
     (?x . LaTeX-mode)
     (?y . yaml-mode)
