@@ -1058,7 +1058,8 @@ Configure org-mode early to ensure that no package loads the built-in version of
     :custom
     (org-modern-star 'replace)
     (org-modern-hide-stars 'leading)
-    (org-modern-replace-stars "#=~:"))
+    (org-modern-replace-stars "#=~:")
+    (org-modern-table nil))
 #+END_SRC
 
 * UI
