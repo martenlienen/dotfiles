@@ -67,6 +67,8 @@ packages:
     git vim emacs-wayland npm
     # Latex
     texlive texlive-langenglish texlive-langgerman
+    # Typst
+    typst
     # Spell check
     aspell-en words
     # latexindent
