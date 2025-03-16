@@ -995,6 +995,8 @@ Configure org-mode early to ensure that no package loads the built-in version of
     :bind
     ("C-c c" . org-capture)
     ("C-c N" . ml/find-note)
+    ( :map org-mode-map
+      ("C-c $" . nil))
     :init
     (defun ml/project-notes-file ()
       "Find the notes file for the current project."
