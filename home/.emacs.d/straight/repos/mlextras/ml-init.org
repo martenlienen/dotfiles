@@ -2267,7 +2267,10 @@ LaTeX tables are really horrible to create and edit for most simple use-cases. B
       (add-to-list 'embark-keymap-alist '(jinx jinx-repeat-map embark-general-map))
       (add-to-list 'embark-repeat-actions #'jinx-next)
       (add-to-list 'embark-repeat-actions #'jinx-previous)
-      (add-to-list 'embark-target-injection-hooks (list #'jinx-correct #'embark--ignore-target))))
+      (add-to-list 'embark-target-injection-hooks (list #'jinx-correct #'embark--ignore-target)))
+
+    ;; Only spell check comments and strings in TOML
+    (add-to-list 'jinx-include-faces '(toml-mode . conf-mode)))
 #+END_SRC
 
 ** Typst
